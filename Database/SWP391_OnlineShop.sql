@@ -18,7 +18,6 @@ INSERT INTO UserStatus VALUES (N'Unverified');
 Create table [Role](
 	[RoleID] int IDENTITY(1, 1) primary key,
 	[RoleName] nvarchar (20),
-	-- Admin, seller, customer, shipper
 );
 GO
 INSERT INTO [Role] VALUES (N'Admin');
