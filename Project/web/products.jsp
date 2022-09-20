@@ -38,11 +38,14 @@
                                             <ul class="account_selection">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.account != null}">
+                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Profile</a></li>
+                                                        <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
                                                         <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                                         </c:when>
                                                         <c:otherwise>
                                                         <li><a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
                                                         <li><a href="register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                                        <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
                                                         </c:otherwise>
                                                     </c:choose>
                                             </ul>
@@ -64,13 +67,15 @@
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
                                         <li><a href="products">shop</a></li>
+                                        <li><a href="#">blogs</a></li>
+                                        <li><a href="#">contact</a></li>
                                     </ul>
                                     <ul class="navbar_user">
                                         <li class="navbar-brand">
                                             <form action="search?index=1" method="post" class="app-search d-none d-md-block me-3">
                                                 <div class="input-group input-group-sm">
                                                     <input name="txtSearch" type="text" placeholder="Search..." class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append">&nbsp;
                                                         <button type="submit" class="btn btn-secondary">
                                                             <i class="fa fa-search"></i>
                                                         </button>
@@ -86,7 +91,9 @@
                                     </ul>&nbsp;&nbsp;&nbsp;
                                     <a style="color: #000" href="#">
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span>${sessionScope.account.fullname}</span>
+                                        <c:if test="${sessionScope.account != null}">
+                                            <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
+                                        </c:if>
                                     </a>
                                 </nav>
                             </div>
@@ -104,19 +111,78 @@
                             </ul>
                         </div>
                         <div class="sidebar">
-                            <div class="sidebar_section">
-                                <div class="sidebar_title">
-                                    <h5>Product Category</h5>
+                            <form method="GET" action="products">
+                                <input value="1" type="hidden" name="page">
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="sidebar_section">
+
+                                        <!--Category-->
+
+                                        <div class="accordion-item">
+                                            <h3>Category</h3>
+                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                <div class="accordion-body">
+                                                    <ul class="list-group-flush">
+                                                        <li class="list-group-item ps-4">
+                                                            <input class="form-check-input" type="radio" name="subcategory" id="subcategory0" value="0" ${subcategory==0?'checked':''}>
+                                                            <label class="form-check-label" for="subcategory0">
+                                                                All category 
+                                                            </label>
+                                                        </li>
+                                                        <c:forEach items="${categorys}" var="icategory">
+                                                            <li class="list-group-item"><strong>${icategory.getCategoryName()}</strong></li>
+                                                                    <c:forEach items="${subcategorys}" var="isubcategory">
+                                                                        <c:if test="${isubcategory.getCateID()==icategory.getCategoryID()}">
+                                                                    <li class="list-group-item ps-4">
+                                                                        <input class="form-check-input" type="radio" name="subcategory" id="subcategory${isubcategory.getSubCateID()}" value="${isubcategory.getSubCateID()}" ${subcategory==isubcategory.getSubCateID()?'checked':''}>
+                                                                        <label class="form-check-label" for="subcategory${isubcategory.getSubCateID()}">
+                                                                            ${isubcategory.getSubCateName()} 
+                                                                        </label>
+                                                                    </li>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div> 
+
+                                        <!-- Brand -->
+
+                                        <div class="accordion-item">
+                                            <h3>Brand</h3>
+                                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                                <div class="accordion-body">
+                                                    <ul class="list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="brand" id="brand0" value="0" ${brand==0?'checked':''}>
+                                                            <label class="form-check-label" for="brand0">
+                                                                All brand
+                                                            </label>
+                                                        </li>
+                                                        <c:forEach items="${brands}" var="ibrand">
+                                                            <li class="list-group-item">
+                                                                <input class="form-check-input" type="radio" name="brand" id="brand${ibrand.getBrandID()}" value="${ibrand.getBrandID()}" ${brand==ibrand.getBrandID()?'checked':''}>
+                                                                <label class="form-check-label" for="brand${ibrand.getBrandID()}">${ibrand.getBrandName()}</label>
+                                                            </li>
+                                                        </c:forEach>
+                                                    </ul>  
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Comment -->
+
+                                    </div>
                                 </div>
-                                <ul class="sidebar_categories">
-                                    <ul name="key">
-                                        <li><a href="products?cid=${0}">ALL</a></li>
-                                    </ul>
-                                    <c:forEach items="${requestScope.listC}" var="c">
-                                        <li><a  href="products?cid=${c.id}">${c.name}</a></li>
-                                        </c:forEach>
-                                </ul>
-                            </div>
+                                <!-- Submit -->
+                                <input value="0" type="hidden" name="sortType">
+                                <input value="0" type="hidden" name="sortMode">
+                                <div class="d-grid gap-2 my-2">
+                                    <input class="btn btn-primary-custom" type="submit" value="Find product"/>
+                                </div>
+                                <!-- Submit -->
+                            </form>
                         </div>
                         <div class="main_content">
                             <div class="products_iso">

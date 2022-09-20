@@ -22,15 +22,14 @@ public class CategoryDAO extends DBContext {
     //Lấy toàn bộ từ bàng Category
     public List<Category> getAll() {
         List<Category> list = new ArrayList<>();
-        String sql = "select * from Category_HE163615";
+        String sql = "select * from Category";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Category c = new Category();
-                c.setId(rs.getInt("id"));
-                c.setName(rs.getString("name"));
-                c.setDescribe(rs.getString("describe"));
+                c.setCategoryID(rs.getInt("CategoryID"));
+                c.setCategoryName(rs.getString("CategoryName"));
                 list.add(c);
             }
         } catch (SQLException e) {
@@ -79,9 +78,8 @@ public class CategoryDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 Category c = new Category();
-                c.setId(rs.getByte("id"));
-                c.setName(rs.getNString("name"));
-                c.setDescribe(rs.getNString("describe"));
+                c.setCategoryID(rs.getByte("CategoryID"));
+                c.setCategoryName(rs.getNString("CategoryName"));
                 return c;
             }
         } catch (SQLException e) {
