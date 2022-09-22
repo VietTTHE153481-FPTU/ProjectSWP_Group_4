@@ -21,6 +21,8 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
         <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/style.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
     </head>
     <body>
         <div class="super_container">
@@ -68,7 +70,7 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products">shop</a></li>
+                                        <li><a href="products">Product</a></li>
                                         <li><a href="#">blogs</a></li>
                                         <li><a href="#">contact</a></li>
                                     </ul>
@@ -130,17 +132,17 @@
                     <div class="row">
                         <div class="col">
                             <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                                <c:forEach items="${requestScope.listpd}" var="pd">
+                                <c:forEach items="${listpd}" var="pd">
                                     <div class="product-item">
                                         <div class="product discount product_filter">
                                             <div class="product_image">
-                                                <img src="${pd.image}"/>
+                                                <img src="resources/img/products/${pd.getUrl()}"/>
                                             </div>
                                             <div class="favorite favorite_left"></div>
                                             <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
                                             <div class="product_info">
-                                                <h6 class="product_name"><a href="products">${pd.name}</a></h6>
-                                                <div class="product_price">₫ ${pd.price}</div>
+                                                <h6 class="product_name"><a href="products">${pd.getProductName()}</a></h6>
+                                                <div class="product_price">₫ ${pd.getSellPrice()}</div>
                                             </div>
                                         </div>
                                     </div>

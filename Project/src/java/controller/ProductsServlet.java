@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Brand;
 import model.Category;
-import model.Products;
+import model.Product;
 import model.SubCategory;
 
 /**
@@ -86,7 +86,7 @@ public class ProductsServlet extends HttpServlet {
             request.setAttribute("listpd", list);
         } catch (NumberFormatException e) {
         }
-        */
+         */
         request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 

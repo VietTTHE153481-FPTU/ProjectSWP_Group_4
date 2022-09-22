@@ -20,15 +20,17 @@ public class BrandDAO extends DBContext {
 
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();
-        String sql = "select * from Brand";
+        String sql = "SELECT [BrandID]\n"
+                + "      ,[BrandName]\n"
+                + "  FROM [dbo].[Brand]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Brand c = new Brand();
-                c.setBrandID(rs.getInt("brandID"));
-                c.setBrandName(rs.getString("brandName"));
-                list.add(c);
+                Brand b = new Brand();
+                b.setBrandID(rs.getInt("BrandID"));
+                b.setBrandName(rs.getString("BrandName"));
+                list.add(b);
             }
         } catch (SQLException e) {
             System.out.println(e);

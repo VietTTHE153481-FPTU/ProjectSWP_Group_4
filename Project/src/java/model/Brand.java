@@ -4,16 +4,13 @@
  */
 package model;
 
-import java.util.Objects;
-
 /**
  *
  * @author trung
  */
 public class Brand {
-
-    int brandID;
-    String brandName;
+    int brandID ;
+    String brandName ;
 
     public Brand() {
     }
@@ -37,29 +34,5 @@ public class Brand {
 
     public void setBrandName(String brandName) {
         this.brandName = brandName;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Brand other = (Brand) obj;
-        if (this.brandID != other.brandID) {
-            return false;
-        }
-        return Objects.equals(this.brandName, other.brandName);
     }
 }

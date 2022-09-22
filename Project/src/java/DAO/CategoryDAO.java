@@ -38,37 +38,6 @@ public class CategoryDAO extends DBContext {
         return list;
     }
 
-    //Lấy toàn bộ từ bàng Products
-    public List<Products> getAllProducts() {
-        List<Products> list = new ArrayList<>();
-        String sql = "SELECT [ID]\n"
-                + "      ,[name]\n"
-                + "      ,[price]\n"
-                + "      ,[describe]\n"
-                + "      ,[materials]\n"
-                + "      ,[releaseDate]\n"
-                + "      ,[image]\n"
-                + "      ,[cid]\n"
-                + "  FROM [dbo].[Products_HE163615]";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Products p = new Products();
-                p.setId(rs.getInt("ID"));
-                p.setName(rs.getString("name"));
-                p.setPrice(rs.getDouble("price"));
-                p.setDescribe(rs.getString("describe"));
-                p.setMaterials(rs.getString("materials"));
-                p.setReleaseDate(rs.getString("releaseDate"));
-                p.setImage(rs.getString("image"));
-                list.add(p);
-            }
-        } catch (SQLException e) {
-        }
-        return list;
-    }
-
     //Lấy ra danh mục sản phẩm theo ID
     public Category getCategoryById(String id) {
         String sql = "select * from Category_HE163615 where id = ?";
@@ -131,29 +100,6 @@ public class CategoryDAO extends DBContext {
         } catch (SQLException e) {
         }
         return null;
-    }
-    
-    public List<Products> getNewProduct() {
-        List<Products> list = new ArrayList<>();
-        String sql = "select top 10 * from Products_HE163615\n"
-                + "order by releaseDate desc";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Products p = new Products();
-                p.setId(rs.getInt("Id"));
-                p.setName(rs.getString("name"));
-                p.setPrice(rs.getDouble("price"));
-                p.setDescribe(rs.getString("describe"));
-                p.setMaterials(rs.getString("materials"));
-                p.setReleaseDate(rs.getString("releaseDate"));
-                p.setImage(rs.getString("image"));
-                list.add(p);
-            }
-        } catch (SQLException e) {
-        }
-        return list;
     }
 
     //Lấy sản phẩm ra từ bảng Products theo cid

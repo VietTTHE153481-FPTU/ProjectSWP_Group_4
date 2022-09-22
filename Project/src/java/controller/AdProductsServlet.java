@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.CategoryDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Products;
+import model.Product;
 
 /**
  *
@@ -58,8 +59,8 @@ public class AdProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryDAO cd = new CategoryDAO();
-        List<Products> list = cd.getAllProducts();
+        ProductDAO cd = new ProductDAO();
+        List<Product> list = cd.getAllProducts();
         request.setAttribute("product", list);
         request.getRequestDispatcher("adproducts.jsp").forward(request, response);
     } 

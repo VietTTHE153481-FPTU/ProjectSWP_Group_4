@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.CategoryDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
-import model.Products;
+import model.Product;
 
 /**
  *
@@ -58,9 +59,9 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryDAO cd = new CategoryDAO();
+        ProductDAO pd = new ProductDAO();
         try {
-            List<Products> list = cd.getNewProduct();
+            List<Product> list = pd.getNewProducts();
             request.setAttribute("listpd", list);
         } catch (NumberFormatException e) {
         }

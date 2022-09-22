@@ -19,6 +19,8 @@
         <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="styles/categories_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/style.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
     </head>
     <body>
         <div class="super_container">
@@ -66,7 +68,7 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products">shop</a></li>
+                                        <li><a href="products">product</a></li>
                                         <li><a href="#">blogs</a></li>
                                         <li><a href="#">contact</a></li>
                                     </ul>
@@ -112,28 +114,25 @@
                         </div>
                         <div class="sidebar">
                             <form method="GET" action="products">
-                                <input value="1" type="hidden" name="page">
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="sidebar_section">
-
-                                        <!--Category-->
-
                                         <div class="accordion-item">
-                                            <h3>Category</h3>
                                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                <!--Category-->
+                                                <h3>Category</h3>
                                                 <div class="accordion-body">
                                                     <ul class="list-group-flush">
-                                                        <li class="list-group-item ps-4">
+                                                        <li class="list-group-item">
                                                             <input class="form-check-input" type="radio" name="subcategory" id="subcategory0" value="0" ${subcategory==0?'checked':''}>
                                                             <label class="form-check-label" for="subcategory0">
-                                                                All category 
+                                                                All Category 
                                                             </label>
                                                         </li>
                                                         <c:forEach items="${categorys}" var="icategory">
                                                             <li class="list-group-item"><strong>${icategory.getCategoryName()}</strong></li>
                                                                     <c:forEach items="${subcategorys}" var="isubcategory">
                                                                         <c:if test="${isubcategory.getCateID()==icategory.getCategoryID()}">
-                                                                    <li class="list-group-item ps-4">
+                                                                    <li class="list-group-item">
                                                                         <input class="form-check-input" type="radio" name="subcategory" id="subcategory${isubcategory.getSubCateID()}" value="${isubcategory.getSubCateID()}" ${subcategory==isubcategory.getSubCateID()?'checked':''}>
                                                                         <label class="form-check-label" for="subcategory${isubcategory.getSubCateID()}">
                                                                             ${isubcategory.getSubCateName()} 
@@ -144,20 +143,15 @@
                                                         </c:forEach>
                                                     </ul>
                                                 </div>
-                                            </div>
-                                        </div> 
 
-                                        <!-- Brand -->
-
-                                        <div class="accordion-item">
-                                            <h3>Brand</h3>
-                                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                                <!-- Brand -->       
+                                                <h3>Brand</h3>      
                                                 <div class="accordion-body">
                                                     <ul class="list-group-flush">
                                                         <li class="list-group-item">
                                                             <input class="form-check-input" type="radio" name="brand" id="brand0" value="0" ${brand==0?'checked':''}>
                                                             <label class="form-check-label" for="brand0">
-                                                                All brand
+                                                                All Brand
                                                             </label>
                                                         </li>
                                                         <c:forEach items="${brands}" var="ibrand">
@@ -167,12 +161,53 @@
                                                             </li>
                                                         </c:forEach>
                                                     </ul>  
+                                                </div> 
+
+                                                <!-- Price -->
+                                                <h3>Price</h3>
+
+                                                <div class="accordion-body">
+                                                    <ul class="list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" id="price0" value="0" ${price==0?'checked':''}>
+                                                            <label class="form-check-label" for="price0">
+                                                                All price range
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="1" id="price1" ${price==1?'checked':''}>
+                                                            <label class="form-check-label" for="price1">
+                                                                0đ-100,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="2" id="price2" ${price==2?'checked':''}>
+                                                            <label class="form-check-label" for="price2">
+                                                                100,000₫-500,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="3" id="price3" ${price==3?'checked':''}>
+                                                            <label class="form-check-label" for="price3">
+                                                                500,000₫-1,000,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="4" id="price4" ${price==4?'checked':''}>
+                                                            <label class="form-check-label" for="price4">
+                                                                1,000,000₫-5,000,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="5" id="price5" ${price==5?'checked':''}>
+                                                            <label class="form-check-label" for="price5">
+                                                                >5,000,000₫
+                                                            </label>
+                                                        </li>
+                                                    </ul>  
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- Comment -->
-
                                     </div>
                                 </div>
                                 <!-- Submit -->
