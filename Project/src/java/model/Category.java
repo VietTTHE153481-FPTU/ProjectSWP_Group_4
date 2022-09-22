@@ -9,46 +9,30 @@ package model;
  * @author trung
  */
 public class Category {
-    /*
-    ID [int] primary key,
-    [name] nvarchar(30) ,
-    describe nvarchar(50),
-    */
-    private int id;
-    private String name, describe;
+    int CategoryID; 
+    String CategoryName;
 
     public Category() {
     }
 
-    public Category(int id, String name, String describe) {
-        this.id = id;
-        this.name = name;
-        this.describe = describe;
+    public Category(int CategoryID, String CategoryName) {
+        this.CategoryID = CategoryID;
+        this.CategoryName = CategoryName;
     }
 
-    public int getId() {
-        return id;
+    public int getCategoryID() {
+        return CategoryID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryID(int CategoryID) {
+        this.CategoryID = CategoryID;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return CategoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String CategoryName) {
+        this.CategoryName = CategoryName;
     }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
-    }
-    
-    
 }

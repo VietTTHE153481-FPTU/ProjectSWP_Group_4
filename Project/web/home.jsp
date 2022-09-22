@@ -21,6 +21,8 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
         <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/style.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
     </head>
     <body>
         <div class="super_container">
@@ -28,7 +30,8 @@
                 <div class="top_nav">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12 text-right">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6 text-right">
                                 <div class="top_nav_right">
                                     <ul class="top_nav_menu">
                                         <li class="account">
@@ -44,11 +47,14 @@
                                             <ul class="account_selection">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.account != null}">
+                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Profile</a></li>
+                                                        <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
                                                         <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                                         </c:when>
                                                         <c:otherwise>
                                                         <li><a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
                                                         <li><a href="register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                                        <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
                                                         </c:otherwise>
                                                     </c:choose>
                                             </ul>                                            
@@ -69,14 +75,16 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products">shop</a></li>
+                                        <li><a href="products">Product</a></li>
+                                        <li><a href="#">blogs</a></li>
+                                        <li><a href="#">contact</a></li>
                                     </ul>
                                     <ul class="navbar_user">
                                         <li class="navbar-brand">
-                                            <form action="search" class="app-search d-none d-md-block me-3">
+                                            <form action="search?index=1" method="post" class="app-search d-none d-md-block me-3">
                                                 <div class="input-group input-group-sm">
                                                     <input name="txtSearch" type="text" placeholder="Search..." class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append">&nbsp;
                                                         <button type="submit" class="btn btn-secondary">
                                                             <i class="fa fa-search"></i>
                                                         </button>
@@ -89,13 +97,12 @@
                                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             </a>
                                         </li>
-                                        <div class="hamburger_container">
-                                            <i class="fa fa-bars" aria-hidden="true"></i>
-                                        </div>
                                     </ul>&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #000" class="nav-item" href="#">
+                                    <a style="color: #000" href="#">
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span>${sessionScope.account.fullname}</span>
+                                        <c:if test="${sessionScope.account != null}">
+                                            <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
+                                        </c:if>
                                     </a>
                                 </nav>
                             </div>
@@ -130,17 +137,17 @@
                     <div class="row">
                         <div class="col">
                             <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                                <c:forEach items="${requestScope.listpd}" var="pd">
+                                <c:forEach items="${listpd}" var="pd">
                                     <div class="product-item">
                                         <div class="product discount product_filter">
                                             <div class="product_image">
-                                                <img src="${pd.image}"/>
+                                                <img src="resources/img/products/${pd.getUrl()}"/>
                                             </div>
                                             <div class="favorite favorite_left"></div>
                                             <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
                                             <div class="product_info">
-                                                <h6 class="product_name"><a href="products">${pd.name}</a></h6>
-                                                <div class="product_price">₫ ${pd.price}</div>
+                                                <h6 class="product_name"><a href="products">${pd.getProductName()}</a></h6>
+                                                <div class="product_price">₫ ${pd.getSellPrice()}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -279,6 +286,7 @@
         <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
         <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
         <script src="plugins/easing/easing.js"></script>
+        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
         <script src="js/custom.js"></script>
     </body>
 </html>

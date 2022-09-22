@@ -4,7 +4,9 @@
  */
 package controller;
 
+import DAO.BrandDAO;
 import DAO.CategoryDAO;
+import DAO.SubCategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,8 +15,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Brand;
 import model.Category;
-import model.Products;
+import model.Product;
+import model.SubCategory;
 
 /**
  *
@@ -24,7 +28,8 @@ import model.Products;
 public class ProductsServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -60,18 +65,28 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDAO cd = new CategoryDAO();
-        List<Category> listC = cd.getAll();
-        request.setAttribute("listC", listC);
-        
+        CategoryDAO cdao = new CategoryDAO();
+        List<Category> categorys = cdao.getAll();
+        request.setAttribute("categorys", categorys);
+
+        SubCategoryDAO scdao = new SubCategoryDAO();
+        List<SubCategory> subcategorys = scdao.getAllSubCategory();
+        request.setAttribute("subcategorys", subcategorys);
+
+        BrandDAO bdao = new BrandDAO();
+        List<Brand> brands = bdao.getAllBrand();
+        request.setAttribute("brands", brands);
+
+        /*
         String cid_raw = request.getParameter("cid");
         int cid;
         try {
             cid = (cid_raw == null) ? 0 : Integer.parseInt(cid_raw);
-            List<Products> list = cd.getProductByCid(cid);
+            List<Products> list = cdao.getProductByCid(cid);
             request.setAttribute("listpd", list);
         } catch (NumberFormatException e) {
         }
+         */
         request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 

@@ -19,6 +19,8 @@
         <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="styles/categories_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/style.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
     </head>
     <body>
         <div class="super_container">
@@ -38,11 +40,14 @@
                                             <ul class="account_selection">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.account != null}">
+                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Profile</a></li>
+                                                        <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
                                                         <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                                         </c:when>
                                                         <c:otherwise>
                                                         <li><a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
                                                         <li><a href="register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                                        <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
                                                         </c:otherwise>
                                                     </c:choose>
                                             </ul>
@@ -63,14 +68,16 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products">shop</a></li>
+                                        <li><a href="products">product</a></li>
+                                        <li><a href="#">blogs</a></li>
+                                        <li><a href="#">contact</a></li>
                                     </ul>
                                     <ul class="navbar_user">
                                         <li class="navbar-brand">
                                             <form action="search?index=1" method="post" class="app-search d-none d-md-block me-3">
                                                 <div class="input-group input-group-sm">
                                                     <input name="txtSearch" type="text" placeholder="Search..." class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                    <div class="input-group-append">
+                                                    <div class="input-group-append">&nbsp;
                                                         <button type="submit" class="btn btn-secondary">
                                                             <i class="fa fa-search"></i>
                                                         </button>
@@ -86,7 +93,9 @@
                                     </ul>&nbsp;&nbsp;&nbsp;
                                     <a style="color: #000" href="#">
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span>${sessionScope.account.fullname}</span>
+                                        <c:if test="${sessionScope.account != null}">
+                                            <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
+                                        </c:if>
                                     </a>
                                 </nav>
                             </div>
@@ -104,19 +113,111 @@
                             </ul>
                         </div>
                         <div class="sidebar">
-                            <div class="sidebar_section">
-                                <div class="sidebar_title">
-                                    <h5>Product Category</h5>
+                            <form method="GET" action="products">
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="sidebar_section">
+                                        <div class="accordion-item">
+                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                <!--Category-->
+                                                <h3>Category</h3>
+                                                <div class="accordion-body">
+                                                    <ul class="list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="subcategory" id="subcategory0" value="0" ${subcategory==0?'checked':''}>
+                                                            <label class="form-check-label" for="subcategory0">
+                                                                All Category 
+                                                            </label>
+                                                        </li>
+                                                        <c:forEach items="${categorys}" var="icategory">
+                                                            <li class="list-group-item"><strong>${icategory.getCategoryName()}</strong></li>
+                                                                    <c:forEach items="${subcategorys}" var="isubcategory">
+                                                                        <c:if test="${isubcategory.getCateID()==icategory.getCategoryID()}">
+                                                                    <li class="list-group-item">
+                                                                        <input class="form-check-input" type="radio" name="subcategory" id="subcategory${isubcategory.getSubCateID()}" value="${isubcategory.getSubCateID()}" ${subcategory==isubcategory.getSubCateID()?'checked':''}>
+                                                                        <label class="form-check-label" for="subcategory${isubcategory.getSubCateID()}">
+                                                                            ${isubcategory.getSubCateName()} 
+                                                                        </label>
+                                                                    </li>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Brand -->       
+                                                <h3>Brand</h3>      
+                                                <div class="accordion-body">
+                                                    <ul class="list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="brand" id="brand0" value="0" ${brand==0?'checked':''}>
+                                                            <label class="form-check-label" for="brand0">
+                                                                All Brand
+                                                            </label>
+                                                        </li>
+                                                        <c:forEach items="${brands}" var="ibrand">
+                                                            <li class="list-group-item">
+                                                                <input class="form-check-input" type="radio" name="brand" id="brand${ibrand.getBrandID()}" value="${ibrand.getBrandID()}" ${brand==ibrand.getBrandID()?'checked':''}>
+                                                                <label class="form-check-label" for="brand${ibrand.getBrandID()}">${ibrand.getBrandName()}</label>
+                                                            </li>
+                                                        </c:forEach>
+                                                    </ul>  
+                                                </div> 
+
+                                                <!-- Price -->
+                                                <h3>Price</h3>
+
+                                                <div class="accordion-body">
+                                                    <ul class="list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" id="price0" value="0" ${price==0?'checked':''}>
+                                                            <label class="form-check-label" for="price0">
+                                                                All price range
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="1" id="price1" ${price==1?'checked':''}>
+                                                            <label class="form-check-label" for="price1">
+                                                                0đ-100,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="2" id="price2" ${price==2?'checked':''}>
+                                                            <label class="form-check-label" for="price2">
+                                                                100,000₫-500,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="3" id="price3" ${price==3?'checked':''}>
+                                                            <label class="form-check-label" for="price3">
+                                                                500,000₫-1,000,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="4" id="price4" ${price==4?'checked':''}>
+                                                            <label class="form-check-label" for="price4">
+                                                                1,000,000₫-5,000,000₫
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input" type="radio" name="price" value="5" id="price5" ${price==5?'checked':''}>
+                                                            <label class="form-check-label" for="price5">
+                                                                >5,000,000₫
+                                                            </label>
+                                                        </li>
+                                                    </ul>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="sidebar_categories">
-                                    <ul name="key">
-                                        <li><a href="products?cid=${0}">ALL</a></li>
-                                    </ul>
-                                    <c:forEach items="${requestScope.listC}" var="c">
-                                        <li><a  href="products?cid=${c.id}">${c.name}</a></li>
-                                        </c:forEach>
-                                </ul>
-                            </div>
+                                <!-- Submit -->
+                                <input value="0" type="hidden" name="sortType">
+                                <input value="0" type="hidden" name="sortMode">
+                                <div class="d-grid gap-2 my-2">
+                                    <input class="btn btn-primary-custom" type="submit" value="Find product"/>
+                                </div>
+                                <!-- Submit -->
+                            </form>
                         </div>
                         <div class="main_content">
                             <div class="products_iso">
