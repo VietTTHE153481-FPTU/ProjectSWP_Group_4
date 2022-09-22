@@ -32,6 +32,11 @@
                                 <div class="top_nav_right">
                                     <ul class="top_nav_menu">
                                         <li class="account">
+                                            <a href="registerseller">
+                                                Become a seller
+                                            </a>
+                                        </li>
+                                        <li class="account">
                                             <a href="#">
                                                 My Account
                                                 <i class="fa fa-angle-down"></i>
@@ -46,8 +51,8 @@
                                                         <li><a href="register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
                                                         </c:otherwise>
                                                     </c:choose>
-                                            </ul>
-                                        </li>
+                                            </ul>                                            
+                                        </li>                                      
                                     </ul>
                                 </div>
                             </div>
