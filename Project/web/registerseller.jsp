@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,12 +34,13 @@
             <div class="card-body mx-auto">
                 <h2 class="card-title mt-3 text-center">Become a seller</h2>
                 <p class="text-center" style="font-size: 22px">Get started with your information</p>
+                <h6 style="color: red">${sessionScope.mess}</h6>
                 <form action="registerseller" method="post">                        
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" name="fname" class="form-control" placeholder="Fullname">
+                        <input type="text" name="username" class="form-control" placeholder="Username">
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">

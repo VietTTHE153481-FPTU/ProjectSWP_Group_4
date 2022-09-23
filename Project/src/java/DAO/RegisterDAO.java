@@ -62,8 +62,18 @@ public class RegisterDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
-    
-    
-    
-    
+
+    public void updateseller(String username) {
+        String sql = "UPDATE Users\n"
+                + "SET RoleID = 2\n"
+                + "WHERE username = ?";                
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
 }
