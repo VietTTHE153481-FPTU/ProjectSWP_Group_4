@@ -8,7 +8,7 @@ package model;
  *
  * @author trung
  */
-public class User {
+public class Users {
     
     private String username, password, fullname, phone;
     private boolean gender;
@@ -16,10 +16,10 @@ public class User {
     private int roleId;
     private int statusId;
 
-    public User() {
+    public Users() {
     }
 
-    public User(String username, String password, String fullname, String phone, boolean gender, String email, int roleId, int statusId) {
+    public Users(String username, String password, String fullname, String phone, boolean gender, String email, int roleId, int statusId) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;

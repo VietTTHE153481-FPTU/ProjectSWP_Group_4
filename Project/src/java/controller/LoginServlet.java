@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
+import model.Users;
 
 /**
  *
@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
         response.addCookie(cr);
 
         AdminDAO d = new AdminDAO();
-        User a = d.check(u, p);
+        Users a = d.check(u, p);
         HttpSession session = request.getSession();
         if (a == null) {
             //Chưa có tài khoản

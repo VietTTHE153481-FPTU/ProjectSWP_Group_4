@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
+import model.Users;
 
 /**
  *
@@ -61,7 +61,7 @@ public class ProfileServlet extends HttpServlet {
         AdminDAO ad = new AdminDAO();
 
         String username = request.getParameter("username");
-        User a = ad.getAccount(username);
+        Users a = ad.getAccount(username);
         request.setAttribute("detail", a);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
 

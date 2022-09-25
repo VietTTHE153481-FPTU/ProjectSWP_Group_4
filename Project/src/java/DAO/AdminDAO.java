@@ -5,7 +5,7 @@
 package DAO;
 
 import context.DBContext;
-import model.User;
+import model.Users;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class AdminDAO extends DBContext {
 
-    public User check(String username, String password) {
+    public Users check(String username, String password) {
         String sql = "SELECT [username]\n"
                 + "      ,[password]\n"
                 + "      ,[fullname]\n"
@@ -35,7 +35,7 @@ public class AdminDAO extends DBContext {
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                User a = new User(rs.getString(1),
+                Users a = new Users(rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -50,14 +50,14 @@ public class AdminDAO extends DBContext {
         return null;
     }
     
-    public List<User> getAllAccount() {
-        List<User> list = new ArrayList<>();
+    public List<Users> getAllAccount() {
+        List<Users> list = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Users]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                User p = new User();
+                Users p = new Users();
                 p.setUsername(rs.getString("username"));
                 p.setPassword(rs.getString("password"));
                 p.setFullname(rs.getString("fullname"));
@@ -73,14 +73,14 @@ public class AdminDAO extends DBContext {
         return list;
     }
     
-    public User getAccount(String username) {
+    public Users getAccount(String username) {
         String sql = "select * from Users where username = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                User p = new User();
+                Users p = new Users();
                 p.setUsername(rs.getString("username"));
                 p.setPassword(rs.getString("password"));
                 p.setFullname(rs.getString("fullname"));

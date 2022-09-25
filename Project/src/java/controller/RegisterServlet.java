@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Scanner;
-import model.User;
+import model.Users;
 
 /**
  *
@@ -71,6 +71,13 @@ public class RegisterServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+     public static boolean getStringInput(String str, String regex) {
+        if (str.trim().isEmpty() || !str.matches(regex)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -84,16 +91,35 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("mail");
         RegisterDAO rd = new RegisterDAO();
         HttpSession session = request.getSession();
-        if (!password.equals(cfpassword)) {
+        
+          if (getStringInput(username, "^[a-zA-Z0-9]+$") == false) {
+            request.setAttribute("mess", "Please input corrrect information that match username");
+            response.sendRedirect("register");
+        } else if (getStringInput(password, "  ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{9,}$") == false) {
+            request.setAttribute("mess", "Please input corrrect information that match password");
+            response.sendRedirect("register");
+        } else if (getStringInput(fullname, "^[a-zA-Z ]+$") == false) {
+            request.setAttribute("mess", "Please input corrrect information that match fullname");
+            response.sendRedirect("register");
+        } else if (getStringInput(phone, "^(84|0[3|5|7|8|9])+([0-9]{8})$") == false) {
+            request.setAttribute("mess", "Please input corrrect information that match phone number");
+            response.sendRedirect("register");
+        } else if (getStringInput(sex, "^(?i)(m|f|male|female)$") == false) {
+            request.setAttribute("mess", "Please input corrrect information that match sex");
+            response.sendRedirect("register");
+        } else if (getStringInput(email, "^[a-zA-Z][a-zA-Z0-9\\-_]+@[a-zA-Z]+(\\.[a-zA-Z]+){1,3}$") == false) {
+            request.setAttribute("mess", "Please input corrrect information that match email");
+            response.sendRedirect("register");
+        } else if (!password.equals(cfpassword)) {
             session.setAttribute("mess", "The entered Password must be the same!");
             response.sendRedirect("register");
         } else {
-            User a = rd.checkAccountExist(username);
+            Users a = rd.checkAccountExist(username);
             if (a == null) {
                 //tiếp tục cho register
                 rd.create(username, password, fullname, phone, sex, email);
                 response.sendRedirect("login");
-            }else{
+            } else {
                 //đẩy về trang register
                 session.setAttribute("mess", "The Username already exist!!");
                 response.sendRedirect("register");

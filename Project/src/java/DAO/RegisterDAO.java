@@ -8,7 +8,7 @@ import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.User;
+import model.Users;
 
 /**
  *
@@ -16,7 +16,7 @@ import model.User;
  */
 public class RegisterDAO extends DBContext {
 
-    public User checkAccountExist(String username) {
+    public Users checkAccountExist(String username) {
         String sql = "SELECT [username]\n"
                 + "      ,[password]\n"
                 + "      ,[fullname]\n"
@@ -32,7 +32,7 @@ public class RegisterDAO extends DBContext {
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                User a = new User(rs.getString(1),
+                Users a = new Users(rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
