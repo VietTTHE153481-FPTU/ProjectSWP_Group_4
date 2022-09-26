@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" class="form-control" placeholder="Username">
+                        <input type="text" name="Username" class="form-control" placeholder="Username">
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
@@ -55,7 +55,7 @@
                         <input type="text" name="mail" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <button type="submit" name="sign up" class="btn btn-primary btn-block">Submit</button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
                     </div> 
                 </form>
             </div>
