@@ -75,7 +75,7 @@ public class RegisterSellerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String username = request.getParameter("Username");
         RegisterDAO rd = new RegisterDAO();
         HttpSession session = request.getSession();
             Users a = rd.checkAccountExist(username);
