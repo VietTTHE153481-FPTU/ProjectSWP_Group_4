@@ -5,9 +5,14 @@
 package DAO;
 
 import context.DBContext;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Users;
 
 /**
@@ -66,7 +71,7 @@ public class RegisterDAO extends DBContext {
     public void updateseller(String username) {
         String sql = "UPDATE Users\n"
                 + "SET RoleID = 2\n"
-                + "WHERE username = ?";                
+                + "WHERE username = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
@@ -74,6 +79,41 @@ public class RegisterDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public boolean getStringInput(String str, String regex) {
+        if (str.trim().isEmpty() || !str.matches(regex)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public String bytesToHex(String password) {
+        MessageDigest digest;
+        byte[] hash = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+            hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(RegisterDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
+    public static void main(String[] args) {
+        String password = "123";
+        RegisterDAO rd = new RegisterDAO();
+        System.out.println(rd.bytesToHex(password));
     }
 
 }

@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.AdminDAO;
+import DAO.RegisterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -73,7 +74,9 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String u = request.getParameter("user");
-        String p = request.getParameter("pass");
+        String pass = request.getParameter("pass");
+        RegisterDAO rd = new RegisterDAO();
+        String p = rd.bytesToHex(pass);
         String r = request.getParameter("rem");
         
         //tạo 3 cookie: username, password, remember
