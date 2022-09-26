@@ -25,7 +25,7 @@ public class RegisterDAO extends DBContext {
                 + "      ,[email]\n"
                 + "      ,[roleId]\n"
                 + "      ,[statusId]\n"
-                + "  FROM [dbo].[User]\n"
+                + "  FROM [dbo].[Users]\n"
                 + "  WHERE [username] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
