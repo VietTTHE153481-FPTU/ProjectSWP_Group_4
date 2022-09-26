@@ -19,8 +19,8 @@ import model.Blog;
 public class BlogDAO extends DBContext {
 
     public List<Blog> getHotBlogs() {
-        List<Blog> hotBlogList = new ArrayList<>();
-        String sql = "SELECT TOP 3 * FROM Blog ORDER BY ID DESC";
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT TOP 3 * FROM [dbo].[Blog] ORDER BY [Date] DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -28,25 +28,21 @@ public class BlogDAO extends DBContext {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
                 bg.setAuthor(rs.getString("Author"));
+                bg.setDate(rs.getString("Date"));
                 bg.setTitle(rs.getString("Title"));
                 bg.setContent(rs.getString("Content"));
-                bg.setImageLink(rs.getString("ImageLink"));
-                hotBlogList.add(bg);
+                bg.setImageLink(rs.getString("imageLink"));
+                list.add(bg);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return hotBlogList;
+        return list;
     }
 
     public List<Blog> getAllBlogs() {
-        List<Blog> blogList = new ArrayList<>();
-        String sql = "SELECT [ID]\n"
-                + "      ,[Author]\n"
-                + "      ,[Title]\n"
-                + "      ,[Content]\n"
-                + "      ,[imageLink]\n"
-                + "  FROM [dbo].[Blog]";
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT * FROM [dbo].[Blog]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -54,15 +50,16 @@ public class BlogDAO extends DBContext {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
                 bg.setAuthor(rs.getString("Author"));
+                bg.setDate(rs.getString("Date"));
                 bg.setTitle(rs.getString("Title"));
                 bg.setContent(rs.getString("Content"));
                 bg.setImageLink(rs.getString("ImageLink"));
-                blogList.add(bg);
+                list.add(bg);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return blogList;
+        return list;
     }
 
     public Blog getBlogByID(int id) {
@@ -75,6 +72,7 @@ public class BlogDAO extends DBContext {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
                 bg.setAuthor(rs.getString("Author"));
+                bg.setDate(rs.getString("Date"));
                 bg.setTitle(rs.getString("Title"));
                 bg.setContent(rs.getString("Content"));
                 bg.setImageLink(rs.getString("ImageLink"));

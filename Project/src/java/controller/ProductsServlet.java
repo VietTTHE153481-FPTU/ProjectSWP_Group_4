@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Brand;
 import model.Category;
@@ -78,23 +79,42 @@ public class ProductsServlet extends HttpServlet {
         List<Brand> brands = bdao.getAllBrand();
         request.setAttribute("brands", brands);
 
-        ProductDAO pdao = new ProductDAO();
-        
+        ProductDAO pd = new ProductDAO();
+
+        String page_raw = request.getParameter("page");
         String cid_raw = request.getParameter("cid");
-        //String sid_raw = request.getParameter("SubCategoryID");
-        //int SubCategoryID;
-        int cid;
-        try {
-            //SubCategoryID = (sid_raw == null) ? 0 : Integer.parseInt(sid_raw);
-            cid = (cid_raw == null) ? 0 : Integer.parseInt(cid_raw);
-            //List<Products> listBySid = pdao.getProductBySid(SubCategoryID);
-            List<Products> list = pdao.getProductByCid(cid);
-            //request.setAttribute("listProductBySid", listBySid);
-            request.setAttribute("listPdBycid", list);
-        } catch (NumberFormatException e) {
+        String sid_raw = request.getParameter("sid");
+        String sortType_raw = request.getParameter("sortType");
+        String sortMode_raw = request.getParameter("sortMode");
+        int page, cid, sid, sortType, sortMode;
+
+        page = (page_raw == null) ? 0 : Integer.parseInt(page_raw);
+        cid = (cid_raw == null) ? 0 : Integer.parseInt(cid_raw);
+        sid = (sid_raw == null) ? 0 : Integer.parseInt(sid_raw);
+        sortType = (sortType_raw == null) ? 0 : Integer.parseInt(sortType_raw);
+        sortMode = (sortMode_raw == null) ? 0 : Integer.parseInt(sortMode_raw);
+
+        request.setAttribute("page", page_raw);
+        request.setAttribute("cid", cid_raw);
+        request.setAttribute("sid", sid_raw);
+        request.setAttribute("sortType", sortType_raw);
+        request.setAttribute("sortMode", sortMode_raw);
+
+        List<Products> products = pd.getProductByCid(cid, sid, sortType, sortMode);
+
+        int maxProductDisplay = 12;
+        
+        int maxPage = (int) Math.ceil((products.size() * 1.0) / maxProductDisplay);
+        request.setAttribute("maxPage", maxPage);
+        List<Products> display = new ArrayList<>();
+        for (int i = maxProductDisplay * (page - 1); i < maxProductDisplay * page; i++) {
+            if (i < products.size()) {
+                display.add(products.get(i));
+            }
         }
+
+        request.setAttribute("listPdByCid", display);
         request.setAttribute("tag", cid_raw);
-        //request.setAttribute("tag1", sid_raw);
         request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 

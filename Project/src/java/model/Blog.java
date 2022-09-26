@@ -11,6 +11,7 @@ package model;
 public class Blog {
     int id;
     String author;
+    String date;
     String title;
     String content;
     String imageLink;
@@ -18,9 +19,10 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String author, String title, String content, String imageLink) {
+    public Blog(int id, String date, String author, String title, String content, String imageLink) {
         this.id = id;
         this.author = author;
+        this.date = date;
         this.title = title;
         this.content = content;
         this.imageLink = imageLink;
@@ -40,6 +42,14 @@ public class Blog {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTitle() {
@@ -65,4 +75,6 @@ public class Blog {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
+
+    
 }

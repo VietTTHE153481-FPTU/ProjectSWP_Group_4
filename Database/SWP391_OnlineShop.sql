@@ -256,19 +256,19 @@ CREATE TABLE Product (
 ) ON [PRIMARY]
 GO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO Product VALUES (N'KAKI bomber jackets - FUNK Unisex baseball shirt with youthful and dynamic quality',N'The fabric of the shirt is a genuine khaki material with a prominent border pattern, with a thick inner lining.',300000,165000,45,1,2,100,1,1);
+INSERT INTO Product VALUES (N'KAKI bomber jackets - FUNK Unisex baseball shirt',N'The fabric of the shirt is a genuine khaki material with a prominent border pattern, with a thick inner lining.',300000,165000,45,1,2,100,1,1);
 INSERT INTO Product VALUES (N'Latest fashion KAKI jacket 2019 KKN01',N'KAKI jacket is suitable for dynamic, youthful and masculine style. With raw KAKI fabric, thick, warm, durable, delicate design, solemn color.',250000,102000,59,1,2,100,1,1);
-INSERT INTO Product VALUES (N'KAKI unisex jacket for men and women, colorful personality, ulzzang style, sun protection',N'The shirt is manufactured from KAKI fabric type 1, does not ruffle, does not fade, does not cause skin irritation. Standard form, comfortable, moderate color, flattering shape, suitable for all ages.',350000,350000,0,1,2,100,1,2);
+INSERT INTO Product VALUES (N'KAKI unisex jacket Ulzzang style',N'The shirt is manufactured from KAKI fabric type 1, does not ruffle, does not fade, does not cause skin irritation. Standard form, comfortable, moderate color, flattering shape, suitable for all ages.',350000,350000,0,1,2,100,1,2);
 INSERT INTO Product VALUES (N'Baseball bomber jackets',N'Does not cause discomfort if worn in the hot season when traveling on the street, the ability to sweat to absorb sweat and leave no odor if worn for a long time, can be used well in the rainy season.',178000,178000,0,1,2,100,1,2);
-INSERT INTO Product VALUES (N'Unisex Bomber Jacket Men and Women - Ulzzang Baseball Jacket with YQ Embroidery - 2 thick layers - KAKI Button - Young Dynamic',N'High quality KAKI material with outstanding border motifs. Extremely warm double-layer khaki suitable for winter wear.',270000,179000,34,1,2,100,1,2);
-INSERT INTO Product VALUES (N'Paisley Unisex N7 Basic Jeans men and women oversize korean style ulzzang',N'High quality jean material, high quality ink does not peel off, the print is sharp, does not fade, does not harm the skin of the hands. Modern design, youthful, dynamic, easy to coordinate.',400000,400000,0,2,2,100,1,3);
+INSERT INTO Product VALUES (N'Unisex Bomber Jacket - Ulzzang Baseball Jacket',N'High quality KAKI material with outstanding border motifs. Extremely warm double-layer khaki suitable for winter wear.',270000,179000,34,1,2,100,1,2);
+INSERT INTO Product VALUES (N'Paisley Unisex N7 Basic Jeans oversize',N'High quality jean material, high quality ink does not peel off, the print is sharp, does not fade, does not harm the skin of the hands. Modern design, youthful, dynamic, easy to coordinate.',400000,400000,0,2,2,100,1,3);
 INSERT INTO Product VALUES (N'Men stretch black jeans',N'Jeans with a new design is more fashionable, bringing maximum confidence to the wearer in front of the people around. Made of high quality denim fabric, so soft and comfortable to wear.',400000,380000,5,2,2,100,1,3);
 INSERT INTO Product VALUES (N'Men smokey gray 4-way stretch jeans HD02',N'Nice seams, sturdy, slightly stretchy. The standard colors are carefully dyed, although the pants are slightly faded after a few washes, they still give a more dusty and personality jean color. 98% cotton 2% spandex, Slim fit shape.',498000,449000,10,2,2,100,1,3);
 INSERT INTO Product VALUES (N'Light gray men jeans',N'Non-fading, Fit (Slimfit), Stretch Jean Material.',280000,280000,0,2,2,100,1,2);
-INSERT INTO Product VALUES (N'High quality men jeans, all sizes, many beautiful and strange models',N'There are two front pockets and two back pockets. Men jeans material is durable, sturdy, does not fade, does not shrink when washed, suitable for all ages, body shapes, not out of fashion.',145000,145000,0,2,2,100,1,2);
+INSERT INTO Product VALUES (N'High quality men jeans',N'There are two front pockets and two back pockets. Men jeans material is durable, sturdy, does not fade, does not shrink when washed, suitable for all ages, body shapes, not out of fashion.',145000,145000,0,2,2,100,1,2);
 INSERT INTO Product VALUES (N'KAKi Soft VICERO',N'Male T-Shirt I7TSH545I',190000,133000,30,3,2,100,1, 4);
-INSERT INTO Product VALUES (N'Men body pants Men denim shorts with stretchy black and white denim shorts',N'Male T-Shirt I7TSH535I',250000,250000,0,3,2,100,1,4);
-INSERT INTO Product VALUES (N'Men jeans shorts MD Q414 silver blue',N'Female T-Shirt I9TSH553I',250000,25000,0,3,2,100,1,4);
+INSERT INTO Product VALUES (N'Men body pants with stretchy black and white',N'Male T-Shirt I7TSH535I',250000,250000,0,3,2,100,1,4);
+INSERT INTO Product VALUES (N'Men jeans shorts MD Q414 silver blue',N'Female T-Shirt I9TSH553I',250000,250000,0,3,2,100,1,4);
 INSERT INTO Product VALUES (N'Men shorts Q32 MD blue and white scratched',N'Female T-Shirt I9TSH569I',190000,190000,0,3,2,100,1,4);
 INSERT INTO Product VALUES (N'SHORT Pants for Men Summer',N'Female T-Shirt I9TSH545I',190000,57000,70,3,2,100,1,4);
 INSERT INTO Product VALUES (N'Hoodie Oversize Odin Acid',N'Hooded hood, thick winter fabric, dark gray',350000,350000,0,4,2,100,1,5);
@@ -276,14 +276,14 @@ INSERT INTO Product VALUES (N'JBAGY JL0102',N'Long white turtleneck sweater, str
 INSERT INTO Product VALUES (N'Local Brand Multi Color Jacket',N'Hoodie Logo Dragon free size, thin fabric suitable for autumn and winter wear',450000,450000,0,4,2,100,1,6);
 INSERT INTO Product VALUES (N'UNISEX DURHAM sweatshirt hoodie',N'UNISEX Durham fall and winter long sleeve shirt in black',450000,450000,0,4,2,100,1,6);
 INSERT INTO Product VALUES (N'UNISEX Plain Sweater (Multicolor)',N'Gray UNISEX Durham fall hooded hoodie',390000,312000,20,4,2,100,1,7);
-INSERT INTO Product VALUES (N'Dress - two-shoulder chiffon dress',N'Silk chiffon dress with 2 layers free size',130000,130000,0,5,2,100,1,8);
-INSERT INTO Product VALUES (N'Off-shoulder body-hugging dress',N'This is a fabric with very high color fastness, stretch resistance, and drift resistance, but its ability to resist wrinkles and absorb sweat is very poor because it contains a lot of cotton',200000,200000,0,5,2,100,1,8);
+INSERT INTO Product VALUES (N'Dress two-shoulder chiffon dress',N'Silk chiffon dress with 2 layers free size',130000,130000,0,5,2,100,1,8);
+INSERT INTO Product VALUES (N'Off Shoulder Body Hugging Dress',N'This is a fabric with very high color fastness, stretch resistance, and drift resistance, but its ability to resist wrinkles and absorb sweat is very poor because it contains a lot of cotton',200000,200000,0,5,2,100,1,8);
 INSERT INTO Product VALUES (N'Korean style flared dress',N'Free size 80cm. Elasticities',150000,150000,0,5,2,100,1,8);
 INSERT INTO Product VALUES (N'Split A-line skirt',N'Design: Short A-line skirt with front thigh split',120000,120000,0,6,2,100,1,9);
 INSERT INTO Product VALUES (N'Short A-line Jean Skirt Women High Loose',N'Women high-waisted jeans skirt with a simple design with a V7 inside, thick khaki / jean material, light stretch, extremely comfortable',131000,131000,0,6,2,100,1,9);
-INSERT INTO Product VALUES (N'[Premium] Seamless bikini, luxurious V-neck #A20208',N'Fabric from Polyester Spandex. The fabric is stretchy, well adapted to sea water and sunlight',350000,245000,30,7,2,100,1,10);
+INSERT INTO Product VALUES (N'[Premium] Seamless bikini, luxurious V-neck',N'Fabric from Polyester Spandex. The fabric is stretchy, well adapted to sea water and sunlight',350000,245000,30,7,2,100,1,10);
 INSERT INTO Product VALUES (N'Bikini 1 piece cross shoulder BK1',N'Bikini one-piece swimsuit discreet horizontal strap BK01, Korean style swimsuit is a good quality swimsuit product, with a youthful and feminine design',259000,168000,35,7,2,100,1,10);
-INSERT INTO Product VALUES (N'Swimwear - Sexy purple blue bikini #2392',N'Fabric quality from Polyester + Spandex, good elasticity, adapts to water and sunlight, highly aesthetic',300000,1850000,38,7,2,100,1,11);
+INSERT INTO Product VALUES (N'Swimwear - Sexy purple blue bikini',N'Fabric quality from Polyester + Spandex, good elasticity, adapts to water and sunlight, highly aesthetic',300000,185000,38,7,2,100,1,11);
 INSERT INTO Product VALUES (N'Korean Croptop bikini',N'Korean croptop bikinis with high-end cold t-shirts, no need to wear bras inside',190000,190000,0,7,2,100,1,11);
 INSERT INTO Product VALUES (N'ENVYLOOK Linen-Belt Skirt',N'ENVYLOOK Linen-Belt Skirt',570000,299000,47,7,2,100,1,11);
 INSERT INTO Product VALUES (N'Nike Air Zoom Winflo 7 CJ0291-005',N'Nike Air Zoom Winflo 7 CJ0291-005',2929000,2196750,25,7,2,100,1 ,12);
@@ -449,8 +449,8 @@ CREATE TABLE Notifications(
 	UserID int,
 	OrderID int,
 	Content nvarchar(1000),
-	status int,
-	time datetime,
+	[status] int,
+	[time] datetime,
 	constraint UserID_in_Users FOREIGN KEY(UserID) REFERENCES Users(userId),
 	constraint OrderID_in_Orders FOREIGN KEY(OrderID) REFERENCES Orders(ID)
 );
@@ -490,43 +490,42 @@ INSERT INTO Feedback_Replies VALUES (2, 4, N'Xin Cám Ơn!');
 INSERT INTO Feedback_Replies VALUES (3, 6, N'Xin Cám Ơn!');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create TABLE Blog(
-ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-Author nvarchar(100),
-Title nvarchar(2500),
-Content nvarchar(2500),
-imageLink nvarchar(1000),
+	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	Author nvarchar(100),
+	[Date] date NULL,
+	Title nvarchar(2500),
+	Content nvarchar(2500),
+	imageLink nvarchar(1000),
 )ON [PRIMARY]
 GO
-INSERT INTO dbo.Blog(Author,Title,Content,imageLink)VALUES(N'maintn',   N'Áo phông xám nữ, item mix đồ thời thượng',N'Áo phông xám là một item được nhiều bạn trẻ yêu thích. Khi xu hướng thời trang thế giới đang hướng đến những thứ đơn giản, tinh tế thì gam màu xám được đánh giá rất hiện đại, trẻ trung và là một trong những gam màu hot trend thời gian gần đây. 
-
+INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'maintn','2022/09/11',N'Áo phông xám nữ, item mix đồ thời thượng',N'Áo phông xám là một item được nhiều bạn trẻ yêu thích. Khi xu hướng thời trang thế giới đang hướng đến những thứ đơn giản, tinh tế thì gam màu xám được đánh giá rất hiện đại, trẻ trung và là một trong những gam màu hot trend thời gian gần đây.
 Với áo phông xám, chị em có thể biến tấu linh hoạt trong cách phối đồ, lên đồ ấn tượng mà không lo nhạt nhòa, kém nổi bật. ',N'1.jpg')
-INSERT INTO dbo.Blog(Author,Title,Content,imageLink)VALUES(N'ngoc12',   N'Áo thun oversize chuẩn phong cách, ấn tượng',N'Áo phông oversize đang là một hot item dẫn đầu xu hướng thời trang giới trẻ hiện nay. Ngày càng nhiều các bạn trẻ yêu thích, ưa chuộng và đánh giá cao kiểu áo này. 
-
+INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'ngoc12','2022/09/15', N'Áo thun oversize chuẩn phong cách, ấn tượng',N'Áo phông oversize đang là một hot item dẫn đầu xu hướng thời trang giới trẻ hiện nay. Ngày càng nhiều các bạn trẻ yêu thích, ưa chuộng và đánh giá cao kiểu áo này. 
 Một item đầy mới mẻ, phá cách và tính ứng dụng thực tiễn cao như áo phông oversize quả thực sẽ thu hút sự quan tâm của rất nhiều bạn trẻ. ',N'2.jpg')
-INSERT INTO dbo.Blog(Author,Title,Content,imageLink)VALUES(N'minh123',  N'Blazzer, xu thế thời trang 2021',N'Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.',N'3.jpg')
-INSERT INTO dbo.Blog(Author,Title,Content,imageLink)VALUES(N'author_1',   N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg')
-INSERT INTO dbo.Blog(Author,Title,Content,imageLink)VALUES(N'author_2',  N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng. Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách. ',N'5.jpg')
+INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'minh123','2022/09/17', N'Blazzer, xu thế thời trang 2021',N'Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.',N'3.jpg')
+INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'author_1','2022/09/01', N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg')
+INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'author_2','2022/09/24', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng. Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách. ',N'5.jpg')
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create table PostCategory(
-ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-CategoryName nvarchar(1000)
+	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CategoryName nvarchar(1000)
 )
 ON [PRIMARY]
 GO
 SET IDENTITY_INSERT  PostCategory ON
-INSERT [dbo].[PostCategory]([ID], [CategoryName]) VALUES(1,N'public')
-INSERT [dbo].[PostCategory]([ID], [CategoryName]) VALUES(2,N'hide')
+INSERT [dbo].[PostCategory]([ID], [CategoryName]) VALUES(1,N'Public')
+INSERT [dbo].[PostCategory]([ID], [CategoryName]) VALUES(2,N'Hide')
 SET IDENTITY_INSERT PostCategory OFF
 go
 Create TABLE Post(
-ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-Description nvarchar(2500),
-UserID int,
-date nvarchar(2500),
-CategoryID int,
-PostImgURL varchar(255),
-constraint userID_in_user_5 FOREIGN KEY(UserID) REFERENCES Users(UserID),
-constraint CategoryID_in_PostCategory FOREIGN KEY(CategoryID) REFERENCES PostCategory(ID)
+	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[Description] nvarchar(2500),
+	UserID int,
+	[date] nvarchar(2500),
+	CategoryID int,
+	PostImgURL varchar(255),
+	constraint userID_in_user_5 FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	constraint CategoryID_in_PostCategory FOREIGN KEY(CategoryID) REFERENCES PostCategory(ID)
 )ON [PRIMARY]
 go
 SET IDENTITY_INSERT Post ON
@@ -554,11 +553,11 @@ INSERT INTO dbo.CBanner(Img,Title,[desc])VALUES('chanel.jpg',  N'CHANEL',  N'I d
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 go
 CREATE TABLE Delivery(
-ID INT IDENTITY(1,1) NOT NULL,
-ShipInfoID INT,
-UserID INT,
-[Status] INT,
-FOREIGN KEY (ShipInfoID) REFERENCES dbo.ShipInfo(ID),
-FOREIGN KEY (UserID) REFERENCES dbo.Users(UserID),
+	ID INT IDENTITY(1,1) NOT NULL,
+	ShipInfoID INT,
+	UserID INT,
+	[Status] INT,
+	FOREIGN KEY (ShipInfoID) REFERENCES dbo.ShipInfo(ID),
+	FOREIGN KEY (UserID) REFERENCES dbo.Users(UserID),
 );
 go

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAO.BlogDAO;
 import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
+import model.Blog;
 import model.Category;
 import model.Products;
 
@@ -70,6 +72,10 @@ public class HomeServlet extends HttpServlet {
         ProductDAO pd = new ProductDAO();
         List<Products> list = pd.getNewProducts();
         request.setAttribute("listpd", list);
+        
+        BlogDAO bg = new BlogDAO();
+        List<Blog> listbg = bg.getHotBlogs();
+        request.setAttribute("listbg", listbg);
 
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

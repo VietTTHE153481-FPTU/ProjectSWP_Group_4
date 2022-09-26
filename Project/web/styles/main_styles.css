@@ -402,8 +402,8 @@ section
 {
     display: inline-block;
     position: relative;
-    min-width: 50px;
-    padding-left: 20px;
+    min-width: 120px;
+    padding-left: 30px;
     text-align: center;
     vertical-align: middle;
     background: #1e1e27;
@@ -415,11 +415,12 @@ section
     font-weight: 400;
     height: 50px;
     line-height: 50px;
-    font-size: 13px;
+    font-size: 14px;
+    vertical-align: middle;
 }
 .account > a > i
 {
-    margin-left: 8px;
+    margin-left: 10px;
 }
 .account:hover .account_selection
 {
@@ -431,8 +432,8 @@ section
 {
     display: block;
     position: absolute;
-    right: 0;
-    top: 120%;
+    right: -80px;
+    top: 100%;
     margin: 0;
     width: 100%;
     background: #FFFFFF;

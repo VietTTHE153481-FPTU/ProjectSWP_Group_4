@@ -9,16 +9,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shop Categories</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Shop Categories</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="styles/categories_styles.css">
-        <link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+        <link rel="stylesheet" type="text/css" href="styles/responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
     </head>
@@ -32,21 +34,38 @@
                             <div class="col-md-6 text-right">
                                 <div class="top_nav_right">
                                     <ul class="top_nav_menu">
+                                        <c:if test="${sessionScope.account.roleId != 1 && sessionScope.account.roleId != 2}">
+                                            <li class="account">
+                                                <a style="color: #ffffff" href="registerseller">
+                                                    Become a seller
+                                                </a>
+                                            </li>
+                                        </c:if>
                                         <li class="account">
-                                            <a href="registerseller">
-                                                Become a seller
-                                            </a>
-                                        </li>
-                                        <li class="account">
-                                            <a href="#">
-                                                My Account
-                                                <i class="fa fa-angle-down"></i>
+                                            <a style="color: #ffffff" href="#">
+                                                <c:if test="${sessionScope.account == null}">
+                                                    My Account
+                                                    <i class="fa fa-angle-down"></i>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account != null}">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                    <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </c:if>
                                             </a>
                                             <ul class="account_selection">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.account != null}">
-                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Profile</a></li>
-                                                        <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
+                                                        <!-- Default -->
+                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
+                                                        <!-- Admin -->
+                                                        <c:if test="${sessionScope.account.roleId == 1}">
+                                                            <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
+                                                            </c:if>
+                                                        <!-- Seller -->
+                                                        <c:if test="${sessionScope.account.roleId == 2}">
+                                                            <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
+                                                            </c:if>
                                                         <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                                         </c:when>
                                                         <c:otherwise>
@@ -73,7 +92,7 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products?cid=${1}">product</a></li>
+                                        <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">product</a></li>
                                         <li><a href="#">blogs</a></li>
                                         <li><a href="#">contact</a></li>
                                     </ul>
@@ -96,12 +115,6 @@
                                             </a>
                                         </li>
                                     </ul>&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #000" href="#">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <c:if test="${sessionScope.account != null}">
-                                            <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
-                                        </c:if>
-                                    </a>
                                 </nav>
                             </div>
                         </div>
@@ -114,7 +127,7 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li class="active"><a href="products"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
+                                <li class="active"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
                             </ul>
                         </div>
                         <div class="sidebar">
@@ -124,27 +137,25 @@
                                     <h5>Product Category</h5>
                                 </div>
                                 <ul class="sidebar_categories">
-                                    <div class="btn-group">
-                                        <ul>
-                                            <c:forEach items="${categorys}" var="icategory">
-                                                <li class="${tag == icategory.getCategoryID() ? "active":""}">
-                                                    <a href="products?cid=${icategory.getCategoryID()}">
-                                                        <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                                                            ${icategory.getCategoryName()}
-                                                    </a>
-                                                </li>
-                                                <c:forEach items="${subcategorys}" var="isubcategory">
-                                                    <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
-                                                        <li class="">
-                                                            <a class="form-check-label" href="products?cid=${icategory.getCategoryID()}&subcategoryId=${isubcategory.getSubCateID()}">
-                                                                ${isubcategory.getSubCateName()} 
-                                                            </a>
-                                                        </li>
-                                                    </c:if>
-                                                </c:forEach>
+                                    <ul>
+                                        <c:forEach items="${categorys}" var="icategory">
+                                            <li class="${tag == icategory.getCategoryID() ? "active":""}">
+                                                <a href="products?page=1&cid=${icategory.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
+                                                    <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                                                        ${icategory.getCategoryName()}
+                                                </a>
+                                            </li>
+                                            <c:forEach items="${subcategorys}" var="isubcategory">
+                                                <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
+                                                    <li class="">
+                                                        <a class="form-check-label" href="products?page=1&cid=${icategory.getCategoryID()}&sid=${isubcategory.getSubCateID()}&sortType=${0}&sortMode=${0}">
+                                                            ${isubcategory.getSubCateName()} 
+                                                        </a>
+                                                    </li>
+                                                </c:if>
                                             </c:forEach>
-                                        </ul>
-                                    </div>
+                                        </c:forEach>
+                                    </ul>
                                 </ul>
                             </div>
                         </div>
@@ -152,50 +163,80 @@
                             <div class="products_iso">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="product_sorting_container product_sorting_container_top">
-                                            <ul class="product_sorting">
-                                                <li>
-                                                    <span class="type_sorting_text">Default Sorting</span>
-                                                    <i class="fa fa-angle-down"></i>
-                                                    <ul class="sorting_type">
-                                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>
-                                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+                                        <div class="btn-group flex-wrap pb-3" role="group" aria-label="Basic example">
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==1?'active':''}" data-toggle="dropdown">
+                                                    Sort by price
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==1?'0':'1'}&sortMode=${sortType==1&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==1&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==2?'0':'1'}&sortMode=${sortType==1&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==1&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==2?'active':''}" data-toggle="dropdown">
+                                                    Sort by sale
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==1?'0':'2'}&sortMode=${sortType==2&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==2&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==2?'0':'2'}&sortMode=${sortType==2&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==2&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==3?'active':''}" data-toggle="dropdown">
+                                                    Sort by name
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==2?'0':'3'}&sortMode=${sortType==3&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==3&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==1?'0':'3'}&sortMode=${sortType==3&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==3&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div class="product-grid">
                                             <ul>
-                                                <c:forEach items="${listPdBycid}" var="p">
+                                                <c:forEach items="${listPdByCid}" var="pd">
                                                     <div class="product-item">
                                                         <div class="product discount product_filter">
                                                             <div class="product_image">
-                                                                <img src="resources/img/products/${p.getUrl()}"/>
+                                                                <img src="resources/img/products/${pd.getUrl()}" height="230px"/>
                                                             </div>
                                                             <div class="favorite favorite_left"></div>
+                                                            <c:if test="${pd.getSalePercent()>0}">
+                                                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.getSalePercent()}%</span></div>
+                                                            </c:if>
                                                             <div class="product_info">
-                                                                <h6 class="product_name"><a href="detail?id=${p.getproductID()}">${p.getProductName()}</a></h6>
-                                                                <div class="product_price">₫ ${p.getOriginalPrice()}</div>
+                                                                <h6 class="product_name"><a href="detail?id=${p.getproductID()}">${pd.getProductName()}</a></h6>
+                                                                <div class="product_price">₫ ${pd.getSellPrice()}
+                                                                    <c:if test="${pd.getSalePercent()>0}">
+                                                                        <span>₫ ${pd.getOriginalPrice()}</span>
+                                                                    </c:if>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                                                     </div>
                                                 </c:forEach>
                                             </ul>
                                         </div>
-                                        <div class="product_sorting_container product_sorting_container_bottom clearfix">
-                                            <div class="pages d-flex flex-row align-items-center">
-                                                <div class="page_current">
-                                                    <span>1</span>
-                                                    <ul class="page_selection">
-                                                        <c:forEach begin="1" end="${endPage}" var="i">
-                                                            <li><a class="${index == i ? "active" : ""}" href="search?index=${i}&txtSearch=${txt}">${i}</a></li>
-                                                            </c:forEach>
-                                                    </ul>
-                                                </div>
-                                                <div class="page_total"><span>of</span>${endPage}</div>
-                                                <div id="next_page_1" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
-                                            </div>
-                                        </div>
+                                        <nav class="my-3" aria-label="Page navigation">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item ${page>1?'':'disabled'}"><a class="page-link" href="products?page=${page-1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Previous</a></li>
+                                                    <c:if test="${page-2>0}">
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page-2}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-2}</a></li>
+                                                    </c:if>
+                                                    <c:if test="${page-1>0}">
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page-1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-1}</a></li>
+                                                    </c:if>
+                                                <li class="page-item active"><a class="page-link" href="#">${page}</a></li>
+                                                    <c:if test="${page+1<=maxPage}">
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page+1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+1}</a></li>
+                                                    </c:if>
+                                                    <c:if test="${page+2<=maxPage}">
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page+2}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+2}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${page+1<=maxPage?'':'disabled'}"><a class="page-link" href="products?page=${page+1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Next</a></li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>

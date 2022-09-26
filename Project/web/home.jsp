@@ -34,21 +34,38 @@
                             <div class="col-md-6 text-right">
                                 <div class="top_nav_right">
                                     <ul class="top_nav_menu">
+                                        <c:if test="${sessionScope.account.roleId != 1 && sessionScope.account.roleId != 2}">
+                                            <li class="account">
+                                                <a style="color: #ffffff" href="registerseller">
+                                                    Become a seller
+                                                </a>
+                                            </li>
+                                        </c:if>
                                         <li class="account">
-                                            <a href="registerseller">
-                                                Become a seller
-                                            </a>
-                                        </li>
-                                        <li class="account">
-                                            <a href="#">
-                                                My Account
-                                                <i class="fa fa-angle-down"></i>
+                                            <a style="color: #ffffff" href="#">
+                                                <c:if test="${sessionScope.account == null}">
+                                                    My Account
+                                                    <i class="fa fa-angle-down"></i>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account != null}">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                    <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </c:if>
                                             </a>
                                             <ul class="account_selection">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.account != null}">
-                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Profile</a></li>
-                                                        <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
+                                                        <!-- Default -->
+                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
+                                                        <!-- Admin -->
+                                                        <c:if test="${sessionScope.account.roleId == 1}">
+                                                            <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
+                                                            </c:if>
+                                                        <!-- Seller -->
+                                                        <c:if test="${sessionScope.account.roleId == 2}">
+                                                            <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
+                                                            </c:if>
                                                         <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                                         </c:when>
                                                         <c:otherwise>
@@ -57,8 +74,8 @@
                                                         <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
                                                         </c:otherwise>
                                                     </c:choose>
-                                            </ul>                                            
-                                        </li>                                      
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -75,7 +92,7 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products?cid=${1}">Product</a></li>
+                                        <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
                                         <li><a href="#">blogs</a></li>
                                         <li><a href="#">contact</a></li>
                                     </ul>
@@ -98,12 +115,6 @@
                                             </a>
                                         </li>
                                     </ul>&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #000" href="#">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <c:if test="${sessionScope.account != null}">
-                                            <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
-                                        </c:if>
-                                    </a>
                                 </nav>
                             </div>
                         </div>
@@ -117,7 +128,7 @@
                             <div class="main_slider_content">
                                 <h6>Collection Summer 2022</h6>
                                 <h1>Get up to 30% Off New Arrivals</h1>
-                                <div class="red_button"><a href="products">shop now</a></div>
+                                <div class="red_button"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">shop now</a></div>
                             </div>
                         </div>
                     </div>
@@ -141,7 +152,7 @@
                                             <div class="product-item">
                                                 <div class="product discount">
                                                     <div class="product_image">
-                                                        <a href="products?cid=${cate.getCategoryID()}">
+                                                        <a href="products?page=1&cid=${cate.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
                                                             <img src="resources/img/Categories/${cate.getCategoryImgURL()}" height="200px"/>
                                                         </a>
                                                     </div>
@@ -189,9 +200,6 @@
                                         </div>
                                     </c:forEach>
                                 </div>
-
-                                <!-- Slider Navigation -->
-
                                 <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
                                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                                 </div>
@@ -208,7 +216,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="deal_ofthe_week_img">
-                                <img src="images/deal_ofthe_week.jpg" alt="">
+                                <img src="resources/poster5.jpg">
                             </div>
                         </div>
                         <div class="col-lg-6 text-right deal_ofthe_week_col">
@@ -234,7 +242,7 @@
                                         <div class="timer_unit">Sec</div>
                                     </li>
                                 </ul>
-                                <div class="red_button deal_ofthe_week_button"><a href="products">shop now</a></div>
+                                <div class="red_button deal_ofthe_week_button"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">shop now</a></div>
                             </div>
                         </div>
                     </div>
@@ -282,80 +290,31 @@
                     </div>
                 </div>
             </div>
-            <!-- Blogs -->
-            <!--
             <div class="blogs">
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
                             <div class="section_title">
-                                <h2>Latest Blogs</h2>
+                                <h2>LATEST BLOGS</h2>
                             </div>
                         </div>
                     </div>
                     <div class="row blogs_container">
-            <c:forEach items="${blogList}" var="o">
-                <div class="col-lg-4 blog_item_col">
-                    <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(resources/img/Blog/${o.getImageLink()})"></div>
-                        <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                            <h4 class="blog_title">${o.getContent()}</h4>
-                            <span class="blog_meta">by ${o.getAuthor()}} | dec 01, 2017</span>
-                            <a class="blog_more" href="#">Read more</a>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-</div>
-            -->
-            <div class="blogs">
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center">
-                            <div class="section_title">
-                                <h2>Latest Blogs</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row blogs_container">
-                        <div class="col-lg-4 blog_item_col">
-                            <c:forEach items="${bList}" var="b">
+                        <c:forEach items="${listbg}" var="bg">
+                            <div class="col-lg-4 blog_item_col">
                                 <div class="blog_item">
-                                    <div class="blog_background" style="background-image:url(./resources/img/Blog/5.jpg)"></div>
+                                    <div class="blog_background" style="background-image:url(./resources/img/Blog/${bg.getImageLink()})"></div>
                                     <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                                        <h4 class="blog_title">${b.title}}</h4>
-                                        <span class="blog_meta">by ${b.getAuthor()} | dec 01, 2017</span>
+                                        <h4 class="blog_title">${bg.getTitle()}</h4>
+                                        <span class="blog_meta">by ${bg.getAuthor()} | ${bg.getDate()}</span>
                                         <a class="blog_more" href="#">Read more</a>
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </div>
-                        <div class="col-lg-4 blog_item_col">
-                            <div class="blog_item">
-                                <div class="blog_background" style="background-image:url(./resources/img/Blog/4.jpg)"></div>
-                                <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                                    <h4 class="blog_title">Here are the trends I see coming this fall</h4>
-                                    <span class="blog_meta">by admin | dec 01, 2017</span>
-                                    <a class="blog_more" href="#">Read more</a>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 blog_item_col">
-                            <div class="blog_item">
-                                <div class="blog_background" style="background-image:url(./resources/img/Blog/3.jpg)"></div>
-                                <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                                    <h4 class="blog_title">Here are the trends I see coming this fall</h4>
-                                    <span class="blog_meta">by admin | dec 01, 2017</span>
-                                    <a class="blog_more" href="#">Read more</a>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
-
             <div class="newsletter">
                 <div class="container">
                     <div class="row">
@@ -368,45 +327,46 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-                                <ul class="footer_nav">
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">FAQs</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" 
-                                                       aria-hidden="true"></i> Facebook</a></li><br/>
-                                    <li><a href="#"><i class="fa fa-instagram" 
-                                                       aria-hidden="true"></i> Instagram</a></li>
-                                </ul>
-                            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+                            <ul class="footer_nav">
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">FAQs</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="footer_nav_container">
-                                <div class="cr">©2022 Levents Shop. All Rights Reserved.</div>
-                            </div>
+                    <div class="col-lg-6">
+                        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" 
+                                                   aria-hidden="true"></i> Facebook</a></li><br/>
+                                <li><a href="#"><i class="fa fa-instagram" 
+                                                   aria-hidden="true"></i> Instagram</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </footer>
-        </div>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="styles/bootstrap4/popper.js"></script>
-        <script src="styles/bootstrap4/bootstrap.min.js"></script>
-        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-        <script src="plugins/easing/easing.js"></script>
-        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-        <script src="js/custom.js"></script>
-    </body>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_nav_container">
+                            <div class="cr">©2022 Levents Shop. All Rights Reserved.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="styles/bootstrap4/popper.js"></script>
+    <script src="styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="js/custom.js"></script>
+</body>
 </html>
