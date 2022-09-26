@@ -92,12 +92,18 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("mail");
         RegisterDAO rd = new RegisterDAO();
         HttpSession session = request.getSession();
-
+        Users a = rd.checkAccountExist(username);
         if (getStringInput(username, "^[a-zA-Z0-9]+$") == false) {
             session.setAttribute("mess", "Please input corrrect information that match username");
             response.sendRedirect("register");
+        } else if (a != null) {
+            session.setAttribute("mess", "The Username already exist!!");
+            response.sendRedirect("register");
         } else if (getStringInput(password, "  ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{9,}$") == false) {
             session.setAttribute("mess", "Please input corrrect information that match password");
+            response.sendRedirect("register");
+        } else if (!password.equals(cfpassword)) {
+            session.setAttribute("mess", "The entered Password must be the same!");
             response.sendRedirect("register");
         } else if (getStringInput(fullname, "^[a-zA-Z ]+$") == false) {
             session.setAttribute("mess", "Please input corrrect information that match fullname");
@@ -111,20 +117,10 @@ public class RegisterServlet extends HttpServlet {
         } else if (getStringInput(email, "^[a-zA-Z][a-zA-Z0-9\\-_]+@[a-zA-Z]+(\\.[a-zA-Z]+){1,3}$") == false) {
             session.setAttribute("mess", "Please input corrrect information that match email");
             response.sendRedirect("register");
-        } else if (!password.equals(cfpassword)) {
-            session.setAttribute("mess", "The entered Password must be the same!");
-            response.sendRedirect("register");
         } else {
-            Users a = rd.checkAccountExist(username);
-            if (a == null) {
-                //tiếp tục cho register
-                rd.create(username, password, fullname, phone, sex, email);
-                response.sendRedirect("login");
-            } else {
-                //đẩy về trang register
-                session.setAttribute("mess", "The Username already exist!!");
-                response.sendRedirect("register");
-            }
+            //đẩy về trang register
+            rd.create(username, password, fullname, phone, sex, email);
+            response.sendRedirect("login");
         }
     }
 
@@ -137,5 +133,4 @@ public class RegisterServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
