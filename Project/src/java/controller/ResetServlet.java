@@ -5,7 +5,6 @@
 
 package controller;
 
-import DAO.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Users;
+
 
 /**
  *
- * @author trung
+ * @author admin
  */
-@WebServlet(name="AdminServlet", urlPatterns={"/admin"})
-public class AdminServlet extends HttpServlet {
+@WebServlet(name="ResetServlet", urlPatterns={"/reset"})
+public class ResetServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +36,10 @@ public class AdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminServlet</title>");  
+            out.println("<title>Servlet ResetServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ResetServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +56,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        request.getRequestDispatcher("forgetpassword.jsp").forward(request, response);
     } 
 
     /** 
@@ -71,22 +69,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String u = request.getParameter("user");
-        String p = request.getParameter("pass");
-        
-        AdminDAO d = new AdminDAO();
-        Users a = d.check(u, p);
-        HttpSession session = request.getSession();
-        if (a == null) {
-            //Chưa có tài khoản
-            request.setAttribute("error", "Username or password incorrect!!");
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
-        } else {
-            //Tìm thấy tài khoản
-            //Tạo session
-            session.setAttribute("admin", a);
-            response.sendRedirect("dashboard.jsp");
-        }
+        processRequest(request, response);
     }
 
     /** 

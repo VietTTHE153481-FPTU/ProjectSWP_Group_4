@@ -26,7 +26,7 @@
             <div class="card-body mx-auto">
                 <h2 class="card-title mt-3 text-center">Create Account</h2>
                 <p class="text-center" style="font-size: 22px">Get started with your free account</p>
-                <h6 style="color: red">${sessionScope.mess}</h6>
+                <h6 style="color: red">${mess}</h6>
                 <form action="register" method="post">
                     <div class="form-group input-group">
                         <div class="input-group-prepend">

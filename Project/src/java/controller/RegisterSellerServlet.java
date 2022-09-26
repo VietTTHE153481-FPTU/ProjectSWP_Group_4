@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
+import model.Users;
 
 /**
  *
@@ -78,7 +78,7 @@ public class RegisterSellerServlet extends HttpServlet {
         String username = request.getParameter("username");
         RegisterDAO rd = new RegisterDAO();
         HttpSession session = request.getSession();
-            User a = rd.checkAccountExist(username);
+            Users a = rd.checkAccountExist(username);
             if (a != null) {
                 rd.updateseller(username);
                 response.sendRedirect("home");

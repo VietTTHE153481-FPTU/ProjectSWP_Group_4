@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.User;
+import model.Users;
 
 /**
  *
@@ -59,7 +59,7 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         AdminDAO ad = new AdminDAO();
-        List<User> list = ad.getAllAccount();
+        List<Users> list = ad.getAllAccount();
         request.setAttribute("ac", list);
         request.getRequestDispatcher("account.jsp").forward(request, response);
     } 

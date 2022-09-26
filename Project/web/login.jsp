@@ -54,7 +54,7 @@
                     </div>
                     <input type="submit" class="login button_login" value="LOGIN"><br/>
                 </form>
-                <a href="#"><small>Forgot Password</small></a>
+                <a href="reset"><small>Forgot Password</small></a>
                 <div class="form-item">
                     <p class="pull-left"><small>New to Levents Shop?</small>
                         <a href="register"><small>Register</small></a>
