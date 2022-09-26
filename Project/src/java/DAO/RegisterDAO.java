@@ -64,9 +64,9 @@ public class RegisterDAO extends DBContext {
     }
 
     public void updateseller(String username) {
-        String sql = "UPDATE Users\n"
-                + "SET RoleID = 2\n"
-                + "WHERE username = ?";                
+        String sql = "UPDATE dbo.[Users]\n"
+                + "SET [RoleID] = 2\n"
+                + "WHERE [username] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
