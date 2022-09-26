@@ -6,6 +6,7 @@ package controller;
 
 import DAO.BrandDAO;
 import DAO.CategoryDAO;
+import DAO.ProductDAO;
 import DAO.SubCategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Brand;
 import model.Category;
-import model.Product;
+import model.Products;
 import model.SubCategory;
 
 /**
@@ -77,16 +78,23 @@ public class ProductsServlet extends HttpServlet {
         List<Brand> brands = bdao.getAllBrand();
         request.setAttribute("brands", brands);
 
-        /*
+        ProductDAO pdao = new ProductDAO();
+        
         String cid_raw = request.getParameter("cid");
+        //String sid_raw = request.getParameter("SubCategoryID");
+        //int SubCategoryID;
         int cid;
         try {
+            //SubCategoryID = (sid_raw == null) ? 0 : Integer.parseInt(sid_raw);
             cid = (cid_raw == null) ? 0 : Integer.parseInt(cid_raw);
-            List<Products> list = cdao.getProductByCid(cid);
-            request.setAttribute("listpd", list);
+            //List<Products> listBySid = pdao.getProductBySid(SubCategoryID);
+            List<Products> list = pdao.getProductByCid(cid);
+            //request.setAttribute("listProductBySid", listBySid);
+            request.setAttribute("listPdBycid", list);
         } catch (NumberFormatException e) {
         }
-         */
+        request.setAttribute("tag", cid_raw);
+        //request.setAttribute("tag1", sid_raw);
         request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 

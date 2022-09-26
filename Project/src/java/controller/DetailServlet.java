@@ -61,6 +61,7 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         String id_raw = request.getParameter("id");
         int id;
         try {
@@ -98,6 +99,7 @@ public class DetailServlet extends HttpServlet {
             request.getRequestDispatcher("detail.jsp").forward(request, response);
         } catch (NumberFormatException e) {
         }
+        */
     }
 
     /**

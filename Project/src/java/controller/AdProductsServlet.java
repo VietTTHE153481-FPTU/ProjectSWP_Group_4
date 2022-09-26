@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Product;
+import model.Products;
 
 /**
  *
@@ -60,7 +60,7 @@ public class AdProductsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ProductDAO cd = new ProductDAO();
-        List<Product> list = cd.getAllProducts();
+        List<Products> list = cd.getAllProducts();
         request.setAttribute("product", list);
         request.getRequestDispatcher("adproducts.jsp").forward(request, response);
     } 

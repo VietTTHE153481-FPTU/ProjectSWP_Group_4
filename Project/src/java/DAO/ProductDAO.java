@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Product;
+import model.Products;
 
 /**
  *
@@ -18,21 +18,22 @@ import model.Product;
  */
 public class ProductDAO extends DBContext {
 
-    public List<Product> getAllProducts() {
-        List<Product> list = new ArrayList<>();
-        String sql = "SELECT  * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
-                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SellPrice) AS SellPrice,MIN(p.SalePercent) AS SalePercent,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.SellerID) AS SellerID,MIN(p.Amount) AS Amount,\n"
-                + "MIN(p.StatusID) AS StatusID,MIN(p.BrandID) AS BrandID,MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p\n"
-                + "JOIN  dbo.ProductImg ProI\n"
-                + "ON ProI.ProductID = p.ProductID\n"
+    public List<Products> getAllProducts() {
+        List<Products> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
+                + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
+                + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
+                + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "				   JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
                 + "GROUP BY p.ProductID ) t";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product p = new Product();
+                Products p = new Products();
                 p.setProductID(rs.getInt("ProductID"));
                 p.setProductName(rs.getString("ProductName"));
                 p.setDescription(rs.getString("Description"));
@@ -45,6 +46,7 @@ public class ProductDAO extends DBContext {
                 p.setStatusID(rs.getInt("StatusID"));
                 p.setBrandID(rs.getInt("BrandID"));
                 p.setUrl(rs.getString("ProductImgURL"));
+                p.setCategoryID(rs.getInt("CategoryID"));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -52,22 +54,23 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public List<Product> getNewProducts() {
-        List<Product> list = new ArrayList<>();
-        String sql = "SELECT top(10) * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
-                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SellPrice) AS SellPrice,MIN(p.SalePercent) AS SalePercent,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.SellerID) AS SellerID,MIN(p.Amount) AS Amount,\n"
-                + "MIN(p.StatusID) AS StatusID,MIN(p.BrandID) AS BrandID,\n"
-                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p \n"
-                + "JOIN  dbo.ProductImg ProI \n"
-                + "ON ProI.ProductID = p.ProductID \n"
-                + "GROUP BY p.ProductID ) t";
+    public List<Products> getNewProducts() {
+        List<Products> list = new ArrayList<>();
+        String sql = "SELECT TOP(15) * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
+                + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
+                + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
+                + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "				   JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                + "GROUP BY p.ProductID ) t\n"
+                + "ORDER BY t.ProductID DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product p = new Product();
+                Products p = new Products();
                 p.setProductID(rs.getInt("ProductID"));
                 p.setProductName(rs.getString("ProductName"));
                 p.setDescription(rs.getString("Description"));
@@ -80,6 +83,47 @@ public class ProductDAO extends DBContext {
                 p.setStatusID(rs.getInt("StatusID"));
                 p.setBrandID(rs.getInt("BrandID"));
                 p.setUrl(rs.getString("ProductImgURL"));
+                p.setCategoryID(rs.getInt("CategoryID"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Products> getProductByCid(int cid) {
+        List<Products> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
+                    + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
+                    + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
+                    + "MIN(Sub.CategoryID) AS CategoryID, MIN(p.SubCategoryID) AS SubCategoryID,\n"
+                    + "MIN(p.SellerID) AS SellerID, MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
+                    + "MIN(p.BrandID) AS BrandID, MIN(ProI.ProductImgURL) AS ProductImgURL FROM\n"
+                    + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                    + "			  JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                    + "WHERE 1=1 ";
+            if (cid != 0) {
+                sql += " AND Sub.CategoryID = ?" + cid;
+            }
+            sql += " GROUP BY p.ProductID ) t";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Products p = new Products();
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setDescription(rs.getString("Description"));
+                p.setOriginalPrice(rs.getDouble("OriginalPrice"));
+                p.setSellPrice(rs.getDouble("SellPrice"));
+                p.setSalePercent(rs.getDouble("SalePercent"));
+                p.setSubCategoryID(rs.getInt("SubCategoryID"));
+                p.setSellerID(rs.getInt("SellerID"));
+                p.setAmount(rs.getInt("Amount"));
+                p.setStatusID(rs.getInt("StatusID"));
+                p.setBrandID(rs.getInt("BrandID"));
+                p.setUrl(rs.getString("ProductImgURL"));
+                p.setCategoryID(rs.getInt("CategoryID"));
                 list.add(p);
             }
         } catch (SQLException e) {

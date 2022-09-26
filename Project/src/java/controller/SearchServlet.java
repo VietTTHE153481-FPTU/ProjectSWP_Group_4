@@ -33,6 +33,7 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         response.setContentType("text/html;charset=UTF-8");
         CategoryDAO cd = new CategoryDAO();
         List<Category> listC = cd.getAll();
@@ -55,6 +56,7 @@ public class SearchServlet extends HttpServlet {
         } catch (ServletException | IOException | NumberFormatException | SQLException e) {
 
         }
+        */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

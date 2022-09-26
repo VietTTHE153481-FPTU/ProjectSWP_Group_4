@@ -72,6 +72,7 @@ public class EditProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         CategoryDAO cd = new CategoryDAO();
         String id_raw = request.getParameter("id");
         String name = request.getParameter("name");
@@ -92,6 +93,7 @@ public class EditProductServlet extends HttpServlet {
         }
         response.sendRedirect("adproducts");
         request.getRequestDispatcher("adproducts.jsp").forward(request, response);
+        */
     }
 
     /**

@@ -63,7 +63,8 @@ public class NewProductServlet extends HttpServlet {
         CategoryDAO cd = new CategoryDAO();
         List<Category> categories = cd.getAll();
         request.setAttribute("categories", categories);
-
+        
+        /*
         //Lấy dữ liệu từ form
         String id_raw = request.getParameter("id");
         String name = request.getParameter("name");
@@ -91,6 +92,7 @@ public class NewProductServlet extends HttpServlet {
         } catch (NumberFormatException e) {
         }
         request.getRequestDispatcher("newproduct.jsp").forward(request, response);
+        */
     }
 
     /**

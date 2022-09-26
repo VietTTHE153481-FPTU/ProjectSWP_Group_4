@@ -56,6 +56,7 @@ public class DeleteProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        /*
         String id_raw = request.getParameter("id");
         int id;
         try {
@@ -66,6 +67,7 @@ public class DeleteProductServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
+        */
     } 
 
     /** 

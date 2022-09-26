@@ -33,7 +33,7 @@ public class LoadProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        /*
         String id_raw = request.getParameter("id");
         int id;
         CategoryDAO cd = new CategoryDAO();
@@ -46,6 +46,7 @@ public class LoadProductServlet extends HttpServlet {
             request.getRequestDispatcher("editproduct.jsp").forward(request, response);
         } catch (NumberFormatException e) {
         }
+        */
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="formWrapper" style="background-image: url(images/logo.jpg)">
+        <div id="formWrapper" style="background-image: url(resources/img/background.jpg)">
             <div id="form">
                 <div class="logo_container">
                     <i class="fa fa-shopping-bag" style="color: #ff3333" aria-hidden="true"></i>

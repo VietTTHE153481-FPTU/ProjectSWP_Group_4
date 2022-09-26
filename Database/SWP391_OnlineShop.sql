@@ -162,13 +162,17 @@ INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]
 CREATE TABLE Category (
 	CategoryID int PRIMARY KEY identity(1,1),
 	CategoryName nvarchar(1000),
+	CategoryImgURL varchar(225)
 ) ON [PRIMARY]
 GO
-INSERT INTO dbo.Category(CategoryName)VALUES(N'Hat');
-INSERT INTO dbo.Category(CategoryName)VALUES(N'Shirt');
-INSERT INTO dbo.Category(CategoryName)VALUES(N'Legwear');
-INSERT INTO dbo.Category(CategoryName)VALUES(N'Footwear');
-INSERT INTO dbo.Category(CategoryName)VALUES(N'Accessories');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Clothes','men_clothes.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Clothes','women_clothes.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Shoes','men_shoes.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Shoes','women_shoes.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Fashion Accessories','accessories.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Bags','bags.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Bags','women_bags.png');
+INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Watches','watches.png');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[SubCategory](
 	[SubCategoryID] [int] PRIMARY KEY  IDENTITY(1,1) ,
@@ -177,16 +181,31 @@ CREATE TABLE [dbo].[SubCategory](
 	constraint CategoryID FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
 	)
 GO
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Fedora',1);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Panama',1);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'T-Shirt',2);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Sweater',2);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Jean',3);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Skirt',3);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Shoe',4);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Sock',4);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Backpacks',5);
-INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Rings and Chains',5);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Jackets & Coats',1);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Jean',1);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Shorts',1);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Hoodies & Sweatshirts',1);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Dresses',2);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Skirt',2);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES(N'Bikini',2);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Sneakers',3);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Loafers',3);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Leather Shoes',3);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'High heel',4);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Boots',4);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Sneakers',4);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Rings',5);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Earrings',5);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Hats & Caps',5);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Necklaces',5);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Backpacks',6);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Wallets',6);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Crossbody & Shoulder',6);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Handbag',7);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Tote Bags',7);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Cosmetic Bags',7);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Set & Couple Watches',8);
+INSERT INTO dbo.SubCategory(SubCategoryName,CategoryID)VALUES (N'Fashion Watches',8);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ProductStatus (
 	StatusID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -237,36 +256,36 @@ CREATE TABLE Product (
 ) ON [PRIMARY]
 GO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO Product VALUES (N'Borsalino Bogart Fur Felt Fedora',N'Borsalino celebrates its deep and long-lasting connection to the world of cinema with a special hat dedicated to Humphrey Bogart, the great Hollywood actor who loved the legendary felt hats produced in Alessandria.  The Bogart by Borsalino is created in collaboration with the Humphrey Bogart Estate.  This Limited Edition fedora features a 2 1/2" brim, 4 3/4" crown with centerdent, wide 2" grosgrain hat band, Alessandria brushed felt, decorative windcord, and bow with gold logo.  The interior has a black leather band with the gold-stamped Bogart phrase - Do everything. One thing may turn out right - and grey satin-lined interior with a printed silhouette of Humphrey Bogart and the Borsalino logo.  Made by hand in Italy, in the workshop in Alessandria.',960000,740000,23,1,2,100,1,1);
-INSERT INTO Product VALUES (N'Borsalino Seta Bicolore Fedora',N'The Borsalnio Seta Bicolore Fedora is a luxurious fur felt fedora with a brushed silk finish. With a 2 3/8" brim and a 4 1/4" crown, this is truly a classic fedora shape. Trimmed with a grosgrain hat band, this hat is a stylish option for any outfit! Fully lined and finished with a grosgrain sweatband for a soft fit. Made in Italy',670000,570000,15,1,2,100,1,1);
-INSERT INTO Product VALUES (N'Bailey Tate Braided Fedora',N'The Bailey Tate Braided Fedora is a soft, flexible braided fedora with a matching band for a clean summertime look. A short 2 inch turned up brim can be snapped down in front or worn up all around, and the interior is unlined for a breezy feel. Lightweight and flattering, this hat will become part of your everyday look.',150000,150000,0,1,2,100,1,2);
-INSERT INTO Product VALUES (N'Bailey Archer Braid Fedora',N'The Bailey Archer Braid Fedora is a short brimmed trilby fedora with a teardrop crown and stingy 1 5/8" snap brim for a modern silhouette. There is a two-tone stripe around the top of the crown that matches the hat band for a unique look that is flattering and fashionable. Soft and packable, this is a perfect lightweight hat for any occasion.',170000,170000,0,1,2,100,1,2);
-INSERT INTO Product VALUES (N'Bailey Craig Braided Fedora',N'The Breed collection from Bailey of Hollywood represents the spirit of free-thinking sophistication. The Craig Braided Fedora is a great example of that notion with its spectacular Milan braid design and array of color options. Details include a center dent crown, a 2" snap brim, a comfort sweatband, and a grosgrain ribbon hatband.',170000,170000,0,1,2,100,1,2);
-INSERT INTO Product VALUES (N'Mayser Calas Panama Straw Hat',N'The Mayser Calas Panama Straw Hat is a perfect summer hat made from natural straw. This straw hat features a 3 3/4" crown, 2 3/4" brim on sides and back and 2 7/8" in front, unique rope hatband with leather tabs, cloth sweatband, and sewn logo pin. Adhesive reinforcement at the crown protects the straw from cracking. Mayser is a premier German hatmaker that we are pleased to offer to our customers. Designed in Germany, hand-woven in Ecuador, finished in Slovakia.',285000,285000,0,2,2,100,1,3);
-INSERT INTO Product VALUES (N'Mayser Piero Panama Straw Hat',N'The Mayser Piero Panama Straw Hat is a handsome downbrim hat made from genuine panama straw. This panama features a 4" crown with open weave design, 2 1/2" brim on the sides and 2 5/8" front and back, leather hatband, cloth sweatband, and sewn logo pin. Adhesive reinforcement at the crown protects the straw from cracking. Mayser is a premier German hatmaker that we are pleased to offer to our customers. Designed in Germany, hand-woven in Ecuador, finished in Slovakia.',400000,380000,5,2,2,100,1,3);
-INSERT INTO Product VALUES (N'Mayser Nizza Panama Straw Hat',N'The Mayser Nizza Panama Straw Hat is a beautiful wide-brim fedora hat with a brisa fino weave. This panama fedora features a 4" crown, 3 1/8" brim, grosgrain band, cloth sweatband, sewn logo pin at the ribbon, and UV 60 sun protection. Adhesive reinforcement at the crown protects the straw from cracking. Mayser is a premier German hatmaker that we are pleased to offer to our customers. Designed in Germany, hand-woven in Ecuador, finished in Slovakia.',550000,495000,10,2,2,100,1,3);
-INSERT INTO Product VALUES (N'Bailey Rockett Endura Telescope Crown Hat',N'The Bailey Rockett Endura Telescope Crown Hat is an exciting new hat for the summer season made from a revolutionary Endura straw- a paper straw woven with a thermosetting yarn that allows the hat to get wet and keep its shape, making it totally rainproof! The classic telescope crown and wide 3 1/8 inch brim are a timeless fashionable look, with the hand rolled edge giving it a unique twist. The braided hat band is a beautifully made finishing touch to this handsome hat. Proudly Made in the USA.',250000,250000,0,2,2,100,1,2);
-INSERT INTO Product VALUES (N'Bailey Hanson Shantung Hat',N'The Bailey Hanson Shantung Hat is a light Shantung fedora with a center dent crown and 2 1/2 inch snap brim. A crisp classic look, this hat is finished with a slim ribbon hat band and a removable feather. A smart choice for summer. Made in the USA.',295000,295000,0,2,2,100,1,2);
-INSERT INTO Product VALUES (N'Male T-Shirt I7TSH545I',N'Male T-Shirt I7TSH545I',190000,133000,30,3,2,100,1, 4);
-INSERT INTO Product VALUES (N'Male T-Shirt I7TSH535I',N'Male T-Shirt I7TSH535I',250000,250000,0,3,2,100,1,4);
-INSERT INTO Product VALUES (N'Female T-Shirt I9TSH553I',N'Female T-Shirt I9TSH553I',250000,25000,0,3,2,100,1,4);
-INSERT INTO Product VALUES (N'Female T-Shirt I9TSH569I',N'Female T-Shirt I9TSH569I',190000,190000,0,3,2,100,1,4);
-INSERT INTO Product VALUES (N'Female T-Shirt I9TSH545I',N'Female T-Shirt I9TSH545I',190000,57000 ,70,3,2,100,1,4);
-INSERT INTO Product VALUES (N'BLUE STRIPES SWEATER - WHITE',N'BLUE STRIPES SWEATER - WHITE',350000,350000,0,4,2,100,1,5);
-INSERT INTO Product VALUES (N'YELLOW STRIPES SWEATER - BLACK',N'YELLOW STRIPES SWEATER - BLACK',350000,350000,0,4,2,100,1,5);
-INSERT INTO Product VALUES (N'CLASSIC LOGO SWEATERS (NAVY)',N'CLASSIC LOGO SWEATERS (NAVY)',450000,450000,0,4,2,100,1,6);
-INSERT INTO Product VALUES (N'CLASSIC LOGO SWEATERS (SPORT GREY)',N'CLASSIC LOGO SWEATERS (SPORT GREY)',450000,450000,0,4,2,100,1,6);
-INSERT INTO Product VALUES (N'Oops_I_did_it_again_2002',N'Oops_I_did_it_again_2002',390000,312000,20,4,2,100,1,7);
-INSERT INTO Product VALUES (N'Jean Slim-fit Dark Blue W Butterfly Charms',N'Jean Slim-fit Dark Blue W Butterfly Charms',550000,275000,50,5,2,100,1,8);
-INSERT INTO Product VALUES (N'Jean Skinny Wash',N'Jean Skinny Wash',500000,400000,20,5,2,100,1,8);
-INSERT INTO Product VALUES (N'Jean Slim Dark Blue Wash W ICON DENIM Pocket',N'Jean Slim Dark Blue Wash W ICON DENIM Pocket',550000,385000,30,5,2,100,1,8);
-INSERT INTO Product VALUES (N'Black Gnu Zipper Jean',N'Black Gnu Zipper Jean',1253000,1253000,0,5,2,100,1,9);
-INSERT INTO Product VALUES (N'Black Gao Zipper Jean',N'Black Gao Zipper Jean',1253000,1253000,0,5,2,100,1,9);
-INSERT INTO Product VALUES (N'DSS Skirt D Buckle',N'DSS Skirt D Buckle',285000,285000,0,6,2,100,1,10);
-INSERT INTO Product VALUES (N'DSS Skirt Davies Label',N'DSS Skirt Davies Label',285000,285000,0,6,2,100,1,10);
-INSERT INTO Product VALUES (N'ENVYLOOK A Long Skirt',N'ENVYLOOK A Long Skirt',750000,350000,53,6,2,100,1,11);
-INSERT INTO Product VALUES (N'ENVYLOOK Eilett Skirt',N'ENVYLOOK Eilett Skirt',399000,199000,50,6,2,100,1,11);
-INSERT INTO Product VALUES (N'ENVYLOOK Linen-Belt Skirt',N'ENVYLOOK Linen-Belt Skirt',570000,299000,47,6,2,100,1,11);
+INSERT INTO Product VALUES (N'KAKI bomber jackets - FUNK Unisex baseball shirt with youthful and dynamic quality',N'The fabric of the shirt is a genuine khaki material with a prominent border pattern, with a thick inner lining.',300000,165000,45,1,2,100,1,1);
+INSERT INTO Product VALUES (N'Latest fashion KAKI jacket 2019 KKN01',N'KAKI jacket is suitable for dynamic, youthful and masculine style. With raw KAKI fabric, thick, warm, durable, delicate design, solemn color.',250000,102000,59,1,2,100,1,1);
+INSERT INTO Product VALUES (N'KAKI unisex jacket for men and women, colorful personality, ulzzang style, sun protection',N'The shirt is manufactured from KAKI fabric type 1, does not ruffle, does not fade, does not cause skin irritation. Standard form, comfortable, moderate color, flattering shape, suitable for all ages.',350000,350000,0,1,2,100,1,2);
+INSERT INTO Product VALUES (N'Baseball bomber jackets',N'Does not cause discomfort if worn in the hot season when traveling on the street, the ability to sweat to absorb sweat and leave no odor if worn for a long time, can be used well in the rainy season.',178000,178000,0,1,2,100,1,2);
+INSERT INTO Product VALUES (N'Unisex Bomber Jacket Men and Women - Ulzzang Baseball Jacket with YQ Embroidery - 2 thick layers - KAKI Button - Young Dynamic',N'High quality KAKI material with outstanding border motifs. Extremely warm double-layer khaki suitable for winter wear.',270000,179000,34,1,2,100,1,2);
+INSERT INTO Product VALUES (N'Paisley Unisex N7 Basic Jeans men and women oversize korean style ulzzang',N'High quality jean material, high quality ink does not peel off, the print is sharp, does not fade, does not harm the skin of the hands. Modern design, youthful, dynamic, easy to coordinate.',400000,400000,0,2,2,100,1,3);
+INSERT INTO Product VALUES (N'Men stretch black jeans',N'Jeans with a new design is more fashionable, bringing maximum confidence to the wearer in front of the people around. Made of high quality denim fabric, so soft and comfortable to wear.',400000,380000,5,2,2,100,1,3);
+INSERT INTO Product VALUES (N'Men smokey gray 4-way stretch jeans HD02',N'Nice seams, sturdy, slightly stretchy. The standard colors are carefully dyed, although the pants are slightly faded after a few washes, they still give a more dusty and personality jean color. 98% cotton 2% spandex, Slim fit shape.',498000,449000,10,2,2,100,1,3);
+INSERT INTO Product VALUES (N'Light gray men jeans',N'Non-fading, Fit (Slimfit), Stretch Jean Material.',280000,280000,0,2,2,100,1,2);
+INSERT INTO Product VALUES (N'High quality men jeans, all sizes, many beautiful and strange models',N'There are two front pockets and two back pockets. Men jeans material is durable, sturdy, does not fade, does not shrink when washed, suitable for all ages, body shapes, not out of fashion.',145000,145000,0,2,2,100,1,2);
+INSERT INTO Product VALUES (N'KAKi Soft VICERO',N'Male T-Shirt I7TSH545I',190000,133000,30,3,2,100,1, 4);
+INSERT INTO Product VALUES (N'Men body pants Men denim shorts with stretchy black and white denim shorts',N'Male T-Shirt I7TSH535I',250000,250000,0,3,2,100,1,4);
+INSERT INTO Product VALUES (N'Men jeans shorts MD Q414 silver blue',N'Female T-Shirt I9TSH553I',250000,25000,0,3,2,100,1,4);
+INSERT INTO Product VALUES (N'Men shorts Q32 MD blue and white scratched',N'Female T-Shirt I9TSH569I',190000,190000,0,3,2,100,1,4);
+INSERT INTO Product VALUES (N'SHORT Pants for Men Summer',N'Female T-Shirt I9TSH545I',190000,57000,70,3,2,100,1,4);
+INSERT INTO Product VALUES (N'Hoodie Oversize Odin Acid',N'Hooded hood, thick winter fabric, dark gray',350000,350000,0,4,2,100,1,5);
+INSERT INTO Product VALUES (N'JBAGY JL0102',N'Long white turtleneck sweater, stretch fabric material, very warm in winter',350000,350000,0,4,2,100,1,5);
+INSERT INTO Product VALUES (N'Local Brand Multi Color Jacket',N'Hoodie Logo Dragon free size, thin fabric suitable for autumn and winter wear',450000,450000,0,4,2,100,1,6);
+INSERT INTO Product VALUES (N'UNISEX DURHAM sweatshirt hoodie',N'UNISEX Durham fall and winter long sleeve shirt in black',450000,450000,0,4,2,100,1,6);
+INSERT INTO Product VALUES (N'UNISEX Plain Sweater (Multicolor)',N'Gray UNISEX Durham fall hooded hoodie',390000,312000,20,4,2,100,1,7);
+INSERT INTO Product VALUES (N'Dress - two-shoulder chiffon dress',N'Silk chiffon dress with 2 layers free size',130000,130000,0,5,2,100,1,8);
+INSERT INTO Product VALUES (N'Off-shoulder body-hugging dress',N'This is a fabric with very high color fastness, stretch resistance, and drift resistance, but its ability to resist wrinkles and absorb sweat is very poor because it contains a lot of cotton',200000,200000,0,5,2,100,1,8);
+INSERT INTO Product VALUES (N'Korean style flared dress',N'Free size 80cm. Elasticities',150000,150000,0,5,2,100,1,8);
+INSERT INTO Product VALUES (N'Split A-line skirt',N'Design: Short A-line skirt with front thigh split',120000,120000,0,6,2,100,1,9);
+INSERT INTO Product VALUES (N'Short A-line Jean Skirt Women High Loose',N'Women high-waisted jeans skirt with a simple design with a V7 inside, thick khaki / jean material, light stretch, extremely comfortable',131000,131000,0,6,2,100,1,9);
+INSERT INTO Product VALUES (N'[Premium] Seamless bikini, luxurious V-neck #A20208',N'Fabric from Polyester Spandex. The fabric is stretchy, well adapted to sea water and sunlight',350000,245000,30,7,2,100,1,10);
+INSERT INTO Product VALUES (N'Bikini 1 piece cross shoulder BK1',N'Bikini one-piece swimsuit discreet horizontal strap BK01, Korean style swimsuit is a good quality swimsuit product, with a youthful and feminine design',259000,168000,35,7,2,100,1,10);
+INSERT INTO Product VALUES (N'Swimwear - Sexy purple blue bikini #2392',N'Fabric quality from Polyester + Spandex, good elasticity, adapts to water and sunlight, highly aesthetic',300000,1850000,38,7,2,100,1,11);
+INSERT INTO Product VALUES (N'Korean Croptop bikini',N'Korean croptop bikinis with high-end cold t-shirts, no need to wear bras inside',190000,190000,0,7,2,100,1,11);
+INSERT INTO Product VALUES (N'ENVYLOOK Linen-Belt Skirt',N'ENVYLOOK Linen-Belt Skirt',570000,299000,47,7,2,100,1,11);
 INSERT INTO Product VALUES (N'Nike Air Zoom Winflo 7 CJ0291-005',N'Nike Air Zoom Winflo 7 CJ0291-005',2929000,2196750,25,7,2,100,1 ,12);
 INSERT INTO Product VALUES (N'Nike Benassi Slip Shoe 882410-010',N'Nike Benassi Slip Shoe 882410-010',1923000,961500,50,7,2,100,1,12);
 INSERT INTO Product VALUES (N'Nike Benassi Slp 882410-008',N'Nike Benassi Slp 882410-008',1569000,784500,50,7,2,100,1,12);
@@ -291,96 +310,39 @@ INSERT INTO Product VALUES (N'FLAANS 925 NewMoon N',N'FLAANS 925 NewMoon N',3560
 CREATE TABLE [dbo].[ProductImg](
 	[ProductID] [int]  ,
 	[ProductImgURL] [varchar](255) ,
-	constraint ProductImg_ID FOREIGN KEY([ProductID])
-REFERENCES [dbo].[Product] ([ProductID])
-	)
-	go
-INSERT INTO dbo.ProductImg VALUES (1,'Borsalino-Bogart.jpg');
-INSERT INTO dbo.ProductImg VALUES (2,'390310-Brosalino-Hats-Brown.jpg');
-INSERT INTO dbo.ProductImg VALUES (3,'81711BH-Bailey-Latte.jpg');
-INSERT INTO dbo.ProductImg VALUES (3,'81711BH-Bailey-LtGrey.jpg');
-INSERT INTO dbo.ProductImg VALUES (3,'81711BH-Bailey-White.jpg');
-INSERT INTO dbo.ProductImg VALUES (4,'81802-Bailey-Hats-Smoke.jpg');
-INSERT INTO dbo.ProductImg VALUES (4,'81802-Bailey-Hats-Coffee.jpg');
-INSERT INTO dbo.ProductImg VALUES (5,'81717BHGRAPHITE.jpg');
-INSERT INTO dbo.ProductImg VALUES (5,'81717BHWHITE.jpg');
-INSERT INTO dbo.ProductImg VALUES (5,'81717BHBLACK.jpg');
-INSERT INTO dbo.ProductImg VALUES (6,'1270891-MayserCalas-2.jpg');
-INSERT INTO dbo.ProductImg VALUES (7,'1230091-MayserPiero.jpg');
-INSERT INTO dbo.ProductImg VALUES (8,'1212551-Nizza.jpg');
-INSERT INTO dbo.ProductImg VALUES (8,'HatBox.jpg');
-INSERT INTO dbo.ProductImg VALUES (9,'5000BH_TAN.jpg');
-INSERT INTO dbo.ProductImg VALUES (10,'63112-Bailey-Hats-Black.jpg');
-INSERT INTO dbo.ProductImg VALUES (10,'63112-NATURALPEACOCK.jpg');
-INSERT INTO dbo.ProductImg VALUES (10,'63112-Bailey-Hats-Cloud.jpg');
-INSERT INTO dbo.ProductImg VALUES (11,'_o_t-shirt_nam_c_tr_n_i7tsh545i_ghi_m-xanh_ng_c_190000.jpg');
-INSERT INTO dbo.ProductImg VALUES (11,'_o_t-shirt_nam_c_tr_n_i7tsh545i_t_m_than-ghi_190000.jpg');
-INSERT INTO dbo.ProductImg VALUES (12,'_o_t-shirt_nam_c_tr_n_i7tsh535i_xanh_r_u_250000.jpg.jpg');
-INSERT INTO dbo.ProductImg VALUES (12,'_o_t-shirt_nam_c_tr_n_i7tsh535i_xanh_c_v_t_250000.jpg');
-INSERT INTO dbo.ProductImg VALUES (13,'_o_t_shirt_n_c_tr_n_i9tsh553i_en_b_c_250k.jpg');
-INSERT INTO dbo.ProductImg VALUES (14,'_o_t_shirt_n_c_tr_n_i9tsh569i_en_190k.jpg');
-INSERT INTO dbo.ProductImg VALUES (15,'_o_t-shirt_n_c_tr_n_tay_xo_n_i9tsh545i_k_cam_190000.jpg');
-INSERT INTO dbo.ProductImg VALUES (16,'dosiin-zombie-blue-stripes-sweater-white-109071109071.jpg');
-INSERT INTO dbo.ProductImg VALUES (17,'dosiin-zombie-yellow-stripes-sweater-black-109091109091.jpg');
-INSERT INTO dbo.ProductImg VALUES (18,'dosiin-freakers-classic-logo-sweatersnavy-223758223758.jpg');
-INSERT INTO dbo.ProductImg VALUES (19,'dosiin-freakers-classic-logo-sweaterssport-grey-223763223763.jpg');
-INSERT INTO dbo.ProductImg VALUES (20,'dosiin-karihada-oops-i-did-it-again-115992115992.jpg');
-INSERT INTO dbo.ProductImg VALUES (20,'dosiin-karihada-oops-i-did-it-again-115995115995.jpg');
-INSERT INTO dbo.ProductImg VALUES (21,'dosiin-icon-denim-quan-jean-slim-fit-dark-blue-wbutterfly-charms-143605143605.jpg');
-INSERT INTO dbo.ProductImg VALUES (21,'dosiin-icon-denim-quan-jean-slim-fit-dark-blue-wbutterfly-charms-143607143607.jpg');
-INSERT INTO dbo.ProductImg VALUES (22,'dosiin-icon-denim-quan-jean-skinny-wash-tron-143621143621.jpg');
-INSERT INTO dbo.ProductImg VALUES (22,'dosiin-icon-denim-quan-jean-skinny-wash-tron-143622143622.jpg');
-INSERT INTO dbo.ProductImg VALUES (23,'dosiin-icon-denim-quan-jean-slim-dark-blue-wash-w-icon-denim-pocket-143645143645.jpg');
-INSERT INTO dbo.ProductImg VALUES (23,'dosiin-icon-denim-quan-jean-slim-dark-blue-wash-w-icon-denim-pocket-143646143646.jpg');
-INSERT INTO dbo.ProductImg VALUES (24,'dosiin-hyperdenim-vn-black-gnu-zipper-jean-202558202558.jpg');
-INSERT INTO dbo.ProductImg VALUES (24,'dosiin-hyperdenim-vn-black-gnu-zipper-jean-202559202559.jpg');
-INSERT INTO dbo.ProductImg VALUES (25,'dosiin-hyperdenim-vn-black-gao-zipper-jean-202799202799.jpg');
-INSERT INTO dbo.ProductImg VALUES (25,'dosiin-hyperdenim-vn-black-gao-zipper-jean-202800202800.jpg');
-INSERT INTO dbo.ProductImg VALUES (26,'dosiin-davies-dss-skirt-d-buckle-103410103410.jpeg');
-INSERT INTO dbo.ProductImg VALUES (26,'dosiin-davies-dss-skirt-d-buckle-103411103411.jpeg');
-INSERT INTO dbo.ProductImg VALUES (27,'dosiin-davies-dss-skirt-davies-label-103403103403.jpeg');
-INSERT INTO dbo.ProductImg VALUES (27,'dosiin-davies-dss-skirt-davies-label-103405103405.jpeg');
-INSERT INTO dbo.ProductImg VALUES (28,'dosiin-envylook-chan-vay-dai-arong-mau-mustard-envylook-a-long-skirt-8968989689.jpg');
-INSERT INTO dbo.ProductImg VALUES (28,'dosiin-envylook-chan-vay-dai-arong-mau-navy-envylook-a-long-skirtclone-8967689676.jpg');
-INSERT INTO dbo.ProductImg VALUES (29,'dosiin-envylook-chan-vay-cotton-dai-chun-co-dan-mau-black-envylook-eilett-skirt-8957789577.jpg');
-INSERT INTO dbo.ProductImg VALUES (29,'dosiin-envylook-chan-vay-cotton-dai-chun-co-dan-mau-black-envylook-eilett-skirt-8957889578.jpg');
-INSERT INTO dbo.ProductImg VALUES (30,'dosiin-envylook-quan-vay-vai-lanh-that-lung-mau-beige-envylook-linen-belt-skirtclone-7705877058.jpg');
-INSERT INTO dbo.ProductImg VALUES (30,'dosiin-envylook-quan-vay-vai-lanh-that-lung-mau-beige-envylook-linen-belt-skirtclone-7706277062.jpg');
-INSERT INTO dbo.ProductImg VALUES (31,'dosiin-nike-giay-chay-nam-nike-nike-air-zoom-winflo-cj-216832216832.jpg');
-INSERT INTO dbo.ProductImg VALUES (31,'dosiin-nike-giay-chay-nam-nike-nike-air-zoom-winflo-cj-216833216833.jpg');
-INSERT INTO dbo.ProductImg VALUES (32,'dosiin-nike-giay-nam-nike-benassi-slip-shoe-215487215487.jpg');
-INSERT INTO dbo.ProductImg VALUES (32,'dosiin-nike-giay-nam-nike-benassi-slip-shoe-215488215488.jpg');
-INSERT INTO dbo.ProductImg VALUES (33,'dosiin-nike-giay-nam-nike-benassi-slp-215474215474.jpg');
-INSERT INTO dbo.ProductImg VALUES (33,'dosiin-nike-giay-nam-nike-benassi-slp-215475215475.jpg');
-INSERT INTO dbo.ProductImg VALUES (34,'dosiin-vans-vans-slip-on-label-mix-209123209123.jpg');
-INSERT INTO dbo.ProductImg VALUES (34,'dosiin-vans-vans-slip-on-label-mix-209124209124.jpg');
-INSERT INTO dbo.ProductImg VALUES (35,'dosiin-vans-vans-skhi-208636208636.jpg');
-INSERT INTO dbo.ProductImg VALUES (35,'dosiin-vans-vans-skhi-208637208637.jpg');
-INSERT INTO dbo.ProductImg VALUES (36,'t_t_ch_n_nam_c_ng_n_pack_3_i7sok201h_mixed_freesize_50k_1.jpg');
-INSERT INTO dbo.ProductImg VALUES (37,'t_t_ch_n_nam_c_trung_17sok213_-_50k_2.jpg');
-INSERT INTO dbo.ProductImg VALUES (38,'t_t_ch_n_nam_c_ng_n_17sok217e-40k_2.jpg');
-INSERT INTO dbo.ProductImg VALUES (39,'t_t_ch_n_n_c_trung_-_19sok015e_-_35k_2.jpg');
-INSERT INTO dbo.ProductImg VALUES (40,'t_t_ch_n_n_c_ng_n_19sok222e-30k_2.jpg');
-INSERT INTO dbo.ProductImg VALUES (41,'img_8595.jpg');
-INSERT INTO dbo.ProductImg VALUES (41,'ba_l_ch_ng_g_m_vai_v8bpk302i_45x28x17_-_v_ng_-_690.000_3_.jpg');
-INSERT INTO dbo.ProductImg VALUES (42,'img_8597.jpg');
-INSERT INTO dbo.ProductImg VALUES (42,'ba_l_ch_ng_g_m_vai_v8bpk300i_36x25x10_en_-_590.000_2_.jpg');
-INSERT INTO dbo.ProductImg VALUES (43,'ba_l_ch_ng_s_c_ch_ng_th_m_n_c_i7bpk003i-001_29.14.43_-_en_-_590.000_.jpg');
-INSERT INTO dbo.ProductImg VALUES (43,'ba_l_ch_ng_s_c_ch_ng_th_m_n_c_i7bpk003i-001_29.14.43_-_en_-_590.000_2_.jpg');
-INSERT INTO dbo.ProductImg VALUES (44,'dosiin-adidas-ba-lo-tap-luyen-unisex-adidasathlts-id-bp-fj-152063152063.jpg');
-INSERT INTO dbo.ProductImg VALUES (44,'dosiin-adidas-ba-lo-tap-luyen-unisex-adidasathlts-id-bp-fj-152065152065.jpg');
-INSERT INTO dbo.ProductImg VALUES (45,'dosiin-adidas-ba-lo-tap-luyen-unisex-adidas-clas-bp-fabric-gl-220622220622.jpg');
-INSERT INTO dbo.ProductImg VALUES (45,'dosiin-adidas-ba-lo-tap-luyen-unisex-adidas-clas-bp-fabric-gl-220624220624.jpg');
-INSERT INTO dbo.ProductImg VALUES (46,'dosiin-flaans-day-chuyen-flaans-sharpstar-n-9458094580.jpg');
-INSERT INTO dbo.ProductImg VALUES (46,'dosiin-flaans-day-chuyen-flaans-sharpstar-n-9458194581.jpg');
-INSERT INTO dbo.ProductImg VALUES (47,'dosiin-flaans-nhan-flaans-bauli-r-124297124297.jpg');
-INSERT INTO dbo.ProductImg VALUES (47,'dosiin-flaans-nhan-flaans-bauli-r-124298124298.jpg');
-INSERT INTO dbo.ProductImg VALUES (48,'dosiin-flaans-nhan-flaans-vin-bold-r-126742126742.jpg');
-INSERT INTO dbo.ProductImg VALUES (48,'dosiin-flaans-nhan-flaans-vin-bold-r-126743126743.jpg');
-INSERT INTO dbo.ProductImg VALUES (49,'dosiin-flaans-day-chuyen-flaans-chainbz-n-124335124335.jpg');
-INSERT INTO dbo.ProductImg VALUES (49,'dosiin-flaans-day-chuyen-flaans-chainbz-n-124336124336.jpg');
-INSERT INTO dbo.ProductImg VALUES (50,'dosiin-flaans-day-chuyen-flaans-newmoon-n-9457494574.jpg');
-INSERT INTO dbo.ProductImg VALUES (50,'dosiin-flaans-day-chuyen-flaans-newmoon-n-9457594575.jpg');
+	constraint ProductImg_ID FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
+) ON [PRIMARY]
+GO
+INSERT INTO dbo.ProductImg VALUES (1,'KAKI-bomber-jackets.png');
+INSERT INTO dbo.ProductImg VALUES (2,'KAKI-jacket-2019-KKN01.png');
+INSERT INTO dbo.ProductImg VALUES (3,'KAKI-unisex-jacket.png');
+INSERT INTO dbo.ProductImg VALUES (4,'Baseball-bomber-jacket.png');
+INSERT INTO dbo.ProductImg VALUES (5,'Unisex-Bomber-Jacket-Ulzzang.png');
+INSERT INTO dbo.ProductImg VALUES (6,'Paisley-Unisex-N7-Basic-Jeans.png');
+INSERT INTO dbo.ProductImg VALUES (7,'Men-stretch-black-jeans.png');
+INSERT INTO dbo.ProductImg VALUES (8,'Men-smokey-gray-4-way-stretch-jeans-HD02.png');
+INSERT INTO dbo.ProductImg VALUES (9,'Light-gray-men-jeans.png');
+INSERT INTO dbo.ProductImg VALUES (10,'High-quality-men-jeans.png');
+INSERT INTO dbo.ProductImg VALUES (11,'KAKI-Shorts-Soft-VICERO.png');
+INSERT INTO dbo.ProductImg VALUES (12,'Men-body-pants.png');
+INSERT INTO dbo.ProductImg VALUES (13,'Men-jeans-shorts-MD-Q414.png');
+INSERT INTO dbo.ProductImg VALUES (14,'Men-shorts-Q32-MD.png');
+INSERT INTO dbo.ProductImg VALUES (15,'SHORT-Pants-for-Men-Summer.png');
+INSERT INTO dbo.ProductImg VALUES (16,'Hoodie-Oversize-Odin-Acid.png');
+INSERT INTO dbo.ProductImg VALUES (17,'JBAGY-JL0102.png');
+INSERT INTO dbo.ProductImg VALUES (18,'Local-Brand-Multi-Color-Jacket.png');
+INSERT INTO dbo.ProductImg VALUES (19,'UNISEX-DURHAM-sweatshirt-hoodie.png');
+INSERT INTO dbo.ProductImg VALUES (20,'UNISEX-Plain-Sweater.png');
+INSERT INTO dbo.ProductImg VALUES (21,'Dress-two-shoulder-chiffon-dress.png');
+INSERT INTO dbo.ProductImg VALUES (22,'Off-shoulderbody-huggingdress.png');
+INSERT INTO dbo.ProductImg VALUES (23,'Korean-style-flared-dress.png');
+INSERT INTO dbo.ProductImg VALUES (24,'Split-A-line-skirt.png');
+INSERT INTO dbo.ProductImg VALUES (25,'High-waisted-A-line-short-jean-skirt.png');
+INSERT INTO dbo.ProductImg VALUES (26,'Luxurious-V-neck_A20208.png');
+INSERT INTO dbo.ProductImg VALUES (27,'Bikini-1-piece-cross-shoulder-BK1.png');
+INSERT INTO dbo.ProductImg VALUES (28,'Swimwear-Sexy-purple-blue-bikini_2392.png');
+INSERT INTO dbo.ProductImg VALUES (29,'Korean-Croptop-bikini.png');
+INSERT INTO dbo.ProductImg VALUES (30,'dosiin-karihada-oops-i-did-it-again-115992115992.jpg');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Cart (
 	UserID int,

@@ -9,91 +9,140 @@ package model;
  * @author trung
  */
 public class Products {
-    private int id;
-    private String name;
-    private double price;
-    private String describe;
-    private String materials;
-    private String releaseDate;
-    private String image;
-    private int quantity;
+    int productID;
+    String productName; 
+    String Description;
+    double OriginalPrice; 
+    double SellPrice; 
+    double SalePercent;
+    int SubCategoryID; 
+    int SellerID; 
+    int Amount; 
+    int StatusID; 
+    int BrandID;
+    String url;
+    int CategoryID;
 
     public Products() {
     }
 
-    public Products(int id, String name, double price, String describe, String materials, String releaseDate, String image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.describe = describe;
-        this.materials = materials;
-        this.releaseDate = releaseDate;
-        this.image = image;
+    public Products(int productID, String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent, int SubCategoryID, int SellerID, int Amount, int StatusID, int BrandID, String url, int CategoryID) {
+        this.productID = productID;
+        this.productName = productName;
+        this.Description = Description;
+        this.OriginalPrice = OriginalPrice;
+        this.SellPrice = SellPrice;
+        this.SalePercent = SalePercent;
+        this.SubCategoryID = SubCategoryID;
+        this.SellerID = SellerID;
+        this.Amount = Amount;
+        this.StatusID = StatusID;
+        this.BrandID = BrandID;
+        this.url = url;
+        this.CategoryID = CategoryID;
     }
 
-    public int getId() {
-        return id;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public double getPrice() {
-        return price;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
-    public String getDescribe() {
-        return describe;
+    public double getOriginalPrice() {
+        return OriginalPrice;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setOriginalPrice(double OriginalPrice) {
+        this.OriginalPrice = OriginalPrice;
     }
 
-    public String getMaterials() {
-        return materials;
+    public double getSellPrice() {
+        return SellPrice;
     }
 
-    public void setMaterials(String materials) {
-        this.materials = materials;
+    public void setSellPrice(double SellPrice) {
+        this.SellPrice = SellPrice;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public double getSalePercent() {
+        return SalePercent;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setSalePercent(double SalePercent) {
+        this.SalePercent = SalePercent;
     }
 
-    public String getImage() {
-        return image;
+    public int getSubCategoryID() {
+        return SubCategoryID;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSubCategoryID(int SubCategoryID) {
+        this.SubCategoryID = SubCategoryID;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getSellerID() {
+        return SellerID;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setSellerID(int SellerID) {
+        this.SellerID = SellerID;
     }
-    
-    
+
+    public int getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(int Amount) {
+        this.Amount = Amount;
+    }
+
+    public int getStatusID() {
+        return StatusID;
+    }
+
+    public void setStatusID(int StatusID) {
+        this.StatusID = StatusID;
+    }
+
+    public int getBrandID() {
+        return BrandID;
+    }
+
+    public void setBrandID(int BrandID) {
+        this.BrandID = BrandID;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getCategoryID() {
+        return CategoryID;
+    }
+
+    public void setCategoryID(int CategoryID) {
+        this.CategoryID = CategoryID;
+    }
 }

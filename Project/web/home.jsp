@@ -75,7 +75,7 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products">Product</a></li>
+                                        <li><a href="products?cid=${1}">Product</a></li>
                                         <li><a href="#">blogs</a></li>
                                         <li><a href="#">contact</a></li>
                                     </ul>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </header>
-            <div class="main_slider" style="background-image:url(images/banner.jpg)">
+            <div class="main_slider" style="background-image:url(resources/img/banner/gucci.png)">
                 <div class="container fill_height">
                     <div class="row align-items-center fill_height">
                         <div class="col">
@@ -123,35 +123,81 @@
                     </div>
                 </div>
             </div>
-            <div class="new_arrivals">
+            <div class="best_sellers">
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
                             <div class="section_title new_arrivals_title">
-                                <div class="fa fa-fire" style="color: red">
-                                    <h2>New Product !!</h2>
-                                </div>
+                                <h2>CATEGORIES</h2>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                                <c:forEach items="${listpd}" var="pd">
-                                    <div class="product-item">
-                                        <div class="product discount product_filter">
-                                            <div class="product_image">
-                                                <img src="resources/img/products/${pd.getUrl()}"/>
-                                            </div>
-                                            <div class="favorite favorite_left"></div>
-                                            <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="products">${pd.getProductName()}</a></h6>
-                                                <div class="product_price">₫ ${pd.getSellPrice()}</div>
+                            <div class="product_slider_container">
+                                <div class="owl-carousel owl-theme product_slider">
+                                    <c:forEach items="${categories}" var="cate">
+                                        <div class="owl-item product_slider_item">
+                                            <div class="product-item">
+                                                <div class="product discount">
+                                                    <div class="product_image">
+                                                        <a href="products?cid=${cate.getCategoryID()}">
+                                                            <img src="resources/img/Categories/${cate.getCategoryImgURL()}" height="200px"/>
+                                                        </a>
+                                                    </div>
+                                                    <div class="product_info">
+                                                        <h6 class="product_name"><a href="products">${cate.getCategoryName()}</a></h6>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </c:forEach>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="best_sellers">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title new_arrivals_title">
+                                <h2>BEST SELLERS</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="product_slider_container">
+                                <div class="owl-carousel owl-theme product_slider">
+                                    <c:forEach items="${listpd}" var="pd">
+                                        <div class="owl-item product_slider_item">
+                                            <div class="product-item">
+                                                <div class="product discount">
+                                                    <div class="product_image">
+                                                        <img src="resources/img/products/${pd.getUrl()}" height="230px"/>
+                                                    </div>
+                                                    <div class="favorite favorite_left"></div>
+                                                    <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+                                                    <div class="product_info">
+                                                        <h6 class="product_name"><a href="products">${pd.getProductName()}</a></h6>
+                                                        <div class="product_price">₫ ${pd.getSellPrice()}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+
+                                <!-- Slider Navigation -->
+
+                                <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </div>
+                                <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -236,6 +282,80 @@
                     </div>
                 </div>
             </div>
+            <!-- Blogs -->
+            <!--
+            <div class="blogs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title">
+                                <h2>Latest Blogs</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row blogs_container">
+            <c:forEach items="${blogList}" var="o">
+                <div class="col-lg-4 blog_item_col">
+                    <div class="blog_item">
+                        <div class="blog_background" style="background-image:url(resources/img/Blog/${o.getImageLink()})"></div>
+                        <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+                            <h4 class="blog_title">${o.getContent()}</h4>
+                            <span class="blog_meta">by ${o.getAuthor()}} | dec 01, 2017</span>
+                            <a class="blog_more" href="#">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</div>
+            -->
+            <div class="blogs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="section_title">
+                                <h2>Latest Blogs</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row blogs_container">
+                        <div class="col-lg-4 blog_item_col">
+                            <c:forEach items="${bList}" var="b">
+                                <div class="blog_item">
+                                    <div class="blog_background" style="background-image:url(./resources/img/Blog/5.jpg)"></div>
+                                    <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+                                        <h4 class="blog_title">${b.title}}</h4>
+                                        <span class="blog_meta">by ${b.getAuthor()} | dec 01, 2017</span>
+                                        <a class="blog_more" href="#">Read more</a>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="col-lg-4 blog_item_col">
+                            <div class="blog_item">
+                                <div class="blog_background" style="background-image:url(./resources/img/Blog/4.jpg)"></div>
+                                <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+                                    <h4 class="blog_title">Here are the trends I see coming this fall</h4>
+                                    <span class="blog_meta">by admin | dec 01, 2017</span>
+                                    <a class="blog_more" href="#">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 blog_item_col">
+                            <div class="blog_item">
+                                <div class="blog_background" style="background-image:url(./resources/img/Blog/3.jpg)"></div>
+                                <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+                                    <h4 class="blog_title">Here are the trends I see coming this fall</h4>
+                                    <span class="blog_meta">by admin | dec 01, 2017</span>
+                                    <a class="blog_more" href="#">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="newsletter">
                 <div class="container">
                     <div class="row">

@@ -33,6 +33,11 @@
                                 <div class="top_nav_right">
                                     <ul class="top_nav_menu">
                                         <li class="account">
+                                            <a href="registerseller">
+                                                Become a seller
+                                            </a>
+                                        </li>
+                                        <li class="account">
                                             <a href="#">
                                                 My Account
                                                 <i class="fa fa-angle-down"></i>
@@ -68,7 +73,7 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="products">product</a></li>
+                                        <li><a href="products?cid=${1}">product</a></li>
                                         <li><a href="#">blogs</a></li>
                                         <li><a href="#">contact</a></li>
                                     </ul>
@@ -113,111 +118,35 @@
                             </ul>
                         </div>
                         <div class="sidebar">
-                            <form method="GET" action="products">
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="sidebar_section">
-                                        <div class="accordion-item">
-                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                                <!--Category-->
-                                                <h3>Category</h3>
-                                                <div class="accordion-body">
-                                                    <ul class="list-group-flush">
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="subcategory" id="subcategory0" value="0" ${subcategory==0?'checked':''}>
-                                                            <label class="form-check-label" for="subcategory0">
-                                                                All Category 
-                                                            </label>
+                            <div class="sidebar_section">
+                                <!--Category-->
+                                <div class="sidebar_title">
+                                    <h5>Product Category</h5>
+                                </div>
+                                <ul class="sidebar_categories">
+                                    <div class="btn-group">
+                                        <ul>
+                                            <c:forEach items="${categorys}" var="icategory">
+                                                <li class="${tag == icategory.getCategoryID() ? "active":""}">
+                                                    <a href="products?cid=${icategory.getCategoryID()}">
+                                                        <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                                                            ${icategory.getCategoryName()}
+                                                    </a>
+                                                </li>
+                                                <c:forEach items="${subcategorys}" var="isubcategory">
+                                                    <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
+                                                        <li class="">
+                                                            <a class="form-check-label" href="products?cid=${icategory.getCategoryID()}&subcategoryId=${isubcategory.getSubCateID()}">
+                                                                ${isubcategory.getSubCateName()} 
+                                                            </a>
                                                         </li>
-                                                        <c:forEach items="${categorys}" var="icategory">
-                                                            <li class="list-group-item"><strong>${icategory.getCategoryName()}</strong></li>
-                                                                    <c:forEach items="${subcategorys}" var="isubcategory">
-                                                                        <c:if test="${isubcategory.getCateID()==icategory.getCategoryID()}">
-                                                                    <li class="list-group-item">
-                                                                        <input class="form-check-input" type="radio" name="subcategory" id="subcategory${isubcategory.getSubCateID()}" value="${isubcategory.getSubCateID()}" ${subcategory==isubcategory.getSubCateID()?'checked':''}>
-                                                                        <label class="form-check-label" for="subcategory${isubcategory.getSubCateID()}">
-                                                                            ${isubcategory.getSubCateName()} 
-                                                                        </label>
-                                                                    </li>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                    </ul>
-                                                </div>
-
-                                                <!-- Brand -->       
-                                                <h3>Brand</h3>      
-                                                <div class="accordion-body">
-                                                    <ul class="list-group-flush">
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="brand" id="brand0" value="0" ${brand==0?'checked':''}>
-                                                            <label class="form-check-label" for="brand0">
-                                                                All Brand
-                                                            </label>
-                                                        </li>
-                                                        <c:forEach items="${brands}" var="ibrand">
-                                                            <li class="list-group-item">
-                                                                <input class="form-check-input" type="radio" name="brand" id="brand${ibrand.getBrandID()}" value="${ibrand.getBrandID()}" ${brand==ibrand.getBrandID()?'checked':''}>
-                                                                <label class="form-check-label" for="brand${ibrand.getBrandID()}">${ibrand.getBrandName()}</label>
-                                                            </li>
-                                                        </c:forEach>
-                                                    </ul>  
-                                                </div> 
-
-                                                <!-- Price -->
-                                                <h3>Price</h3>
-
-                                                <div class="accordion-body">
-                                                    <ul class="list-group-flush">
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="price" id="price0" value="0" ${price==0?'checked':''}>
-                                                            <label class="form-check-label" for="price0">
-                                                                All price range
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="price" value="1" id="price1" ${price==1?'checked':''}>
-                                                            <label class="form-check-label" for="price1">
-                                                                0đ-100,000₫
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="price" value="2" id="price2" ${price==2?'checked':''}>
-                                                            <label class="form-check-label" for="price2">
-                                                                100,000₫-500,000₫
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="price" value="3" id="price3" ${price==3?'checked':''}>
-                                                            <label class="form-check-label" for="price3">
-                                                                500,000₫-1,000,000₫
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="price" value="4" id="price4" ${price==4?'checked':''}>
-                                                            <label class="form-check-label" for="price4">
-                                                                1,000,000₫-5,000,000₫
-                                                            </label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <input class="form-check-input" type="radio" name="price" value="5" id="price5" ${price==5?'checked':''}>
-                                                            <label class="form-check-label" for="price5">
-                                                                >5,000,000₫
-                                                            </label>
-                                                        </li>
-                                                    </ul>  
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                        </ul>
                                     </div>
-                                </div>
-                                <!-- Submit -->
-                                <input value="0" type="hidden" name="sortType">
-                                <input value="0" type="hidden" name="sortMode">
-                                <div class="d-grid gap-2 my-2">
-                                    <input class="btn btn-primary-custom" type="submit" value="Find product"/>
-                                </div>
-                                <!-- Submit -->
-                            </form>
+                                </ul>
+                            </div>
                         </div>
                         <div class="main_content">
                             <div class="products_iso">
@@ -237,21 +166,19 @@
                                         </div>
                                         <div class="product-grid">
                                             <ul>
-                                                <c:forEach items="${requestScope.listpd}" var="p">
-                                                    <li>
-                                                        <div class="product-item">
-                                                            <div class="product discount product_filter">
-                                                                <div class="product_image">
-                                                                    <img src="${p.image}"/>
-                                                                </div>
-                                                                <div class="favorite favorite_left"></div>
-                                                                <div class="product_info">
-                                                                    <h6 class="product_name"><a href="detail?id=${p.id}">${p.name}</a></h6>
-                                                                    <div class="product_price">₫ ${p.price}</div>
-                                                                </div>
+                                                <c:forEach items="${listPdBycid}" var="p">
+                                                    <div class="product-item">
+                                                        <div class="product discount product_filter">
+                                                            <div class="product_image">
+                                                                <img src="resources/img/products/${p.getUrl()}"/>
+                                                            </div>
+                                                            <div class="favorite favorite_left"></div>
+                                                            <div class="product_info">
+                                                                <h6 class="product_name"><a href="detail?id=${p.getproductID()}">${p.getProductName()}</a></h6>
+                                                                <div class="product_price">₫ ${p.getOriginalPrice()}</div>
                                                             </div>
                                                         </div>
-                                                    </li>
+                                                    </div>
                                                 </c:forEach>
                                             </ul>
                                         </div>
