@@ -74,11 +74,16 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String u = request.getParameter("user");
-        String pass = request.getParameter("pass");
         RegisterDAO rd = new RegisterDAO();
-        String p = rd.bytesToHex(pass);
+        String p = "";
         String r = request.getParameter("rem");
-        
+        AdminDAO ad = new AdminDAO();
+        if(ad.getAccount(u).getRoleId() != 1){
+             p = rd.bytesToHex(request.getParameter("pass"));
+        }
+        else{
+            p = request.getParameter("pass");
+        }
         //tạo 3 cookie: username, password, remember
         Cookie cu = new Cookie("cuser", u);
         Cookie cp = new Cookie("cpass", p);
