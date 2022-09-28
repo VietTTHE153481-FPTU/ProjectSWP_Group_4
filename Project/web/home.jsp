@@ -57,7 +57,7 @@
                                                 <c:choose>
                                                     <c:when test="${sessionScope.account != null}">
                                                         <!-- Default -->
-                                                        <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
+                                                        <li><a href="profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
                                                         <!-- Admin -->
                                                         <c:if test="${sessionScope.account.roleId == 1}">
                                                             <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>

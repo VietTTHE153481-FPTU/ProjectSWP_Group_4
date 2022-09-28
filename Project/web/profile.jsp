@@ -104,38 +104,38 @@
                                         <div class="user-content">
                                             <a href="javascript:void(0)"><img src="images/logo_admin.png"
                                                                               class="thumb-lg img-circle" alt="img"></a>
-                                            <h4 class="text-white mt-2">${detail.fullname}</h4>
-                                            <h5 class="text-white mt-2">${detail.email}</h5>
+                                            <h4 class="text-white mt-2">${account.fullname}</h4>
+                                            <h5 class="text-white mt-2">${account.email}</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <c:set var="p" value="${requestScope.ac}"/>
+                        <%--<c:set var="p" value="${requestScope.ac}"/>--%>
                         <div class="col-lg-8 col-xlg-9 col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <form class="form-horizontal form-material">
                                         <div class="form-group mb-4">
                                             <div class="col-md-12 border-bottom p-0">Full Name
-                                                <input value="${detail.fullname}" type="text" name="fullname" class="form-control validate" readonly required/>
+                                                <input value="${account.fullname}" type="text" name="fullname" class="form-control validate" readonly required/>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="col-md-12 border-bottom p-0">Phone Number
-                                                <input value="${detail.phone}" type="text" name="phone" class="form-control validate" readonly required/>
+                                                <input value="${account.phone}" type="text" name="phone" class="form-control validate" readonly required/>
                                             </div>
                                         </div>
                                         <div>Gender
                                             <br/>
                                             <br/>
-                                            <input type="radio" name="gender" checked value="${detail.gender}"> Male &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="gender" value="${detail.gender}"> Female
+                                            <input type="radio" name="gender" checked value="${account.gender}"> Male &nbsp;&nbsp;&nbsp;
+                                            <input type="radio" name="gender" value="${account.gender}"> Female
                                         </div>
                                         <br/>
                                         <div class="form-group mb-4">
                                             <div class="col-md-12 border-bottom p-0">Email
-                                                <input value="${detail.email}" type="email" class="form-control p-0 border-0" name="email" readonly required>
+                                                <input value="${account.email}" type="email" class="form-control p-0 border-0" name="email" readonly required>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
