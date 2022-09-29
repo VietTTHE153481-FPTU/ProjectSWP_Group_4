@@ -22,7 +22,8 @@ import model.Users;
 public class RegisterDAO extends DBContext {
 
     public Users checkAccountExist(String username) {
-        String sql = "SELECT [username]\n"
+        String sql = "SELECT [userID]\n"
+                + "      ,[username]\n"
                 + "      ,[password]\n"
                 + "      ,[fullname]\n"
                 + "      ,[phone]\n"
@@ -37,14 +38,15 @@ public class RegisterDAO extends DBContext {
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Users a = new Users(rs.getString(1),
+                Users a = new Users(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getBoolean(5),
-                        rs.getString(6),
-                        rs.getInt(7),
-                        rs.getInt(8));
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9));
                 return a;
             }
         } catch (SQLException e) {

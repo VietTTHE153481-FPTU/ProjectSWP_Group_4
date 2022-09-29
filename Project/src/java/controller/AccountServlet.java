@@ -62,7 +62,7 @@ public class AccountServlet extends HttpServlet {
     throws ServletException, IOException {
         AdminDAO ad = new AdminDAO();
         List<Users> list = ad.getAllAccount();
-        request.setAttribute("ac", list);
+        request.setAttribute("listac", list);
         request.getRequestDispatcher("account.jsp").forward(request, response);
     } 
 

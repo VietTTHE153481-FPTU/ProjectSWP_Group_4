@@ -62,10 +62,11 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         AdminDAO ad = new AdminDAO();
         HttpSession session = request.getSession();
+        
         String username = request.getParameter("username");
-//        Users a = ad.getAccount(username);
+        Users a = ad.getAccount(username);
 //        Users b = session.getAttribute(account);
-//        request.setAttribute("user", a);
+        request.setAttribute("account", a);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
 
     }

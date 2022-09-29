@@ -40,8 +40,8 @@
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
                             <li>
                                 <a class="profile-pic" href="#">
-                                    <img src="images/logo_admin.png" alt="user-img" width="36"
-                                         class="img-circle"><span class="text-white font-medium">${sessionScope.admin.username}</span></a>
+                                    <img src="resources/img/logo_admin.jpg" alt="user-img" width="36"
+                                         class="img-circle"><span class="text-white font-medium">${sessionScope.account.fullname}</span></a>
                             </li>
                         </ul>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="scroll-sidebar">
                     <nav class="sidebar-nav">
                         <c:choose>
-                            <c:when test="${sessionScope.admin != null}">
+                            <c:when test="${sessionScope.account != null}">
                                 <ul id="sidebarnav">
                                     <li class="sidebar-item pt-2">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.jsp"
@@ -64,21 +64,14 @@
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
-                                            <span class="hide-menu">Profile</span>
+                                            <span class="hide-menu">Account Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adproducts"
-                                           aria-expanded="false">
-                                            <i class="fa fa-product-hunt" aria-hidden="true"></i>
-                                            <span class="hide-menu">Products</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adlogout"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="home"
                                            aria-expanded="false">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>   
-                                            <span class="hide-menu">Logout</span>
+                                            <span class="hide-menu">Back To Shop</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -102,7 +95,7 @@
                                 <div class="user-bg">
                                     <div class="overlay-box">
                                         <div class="user-content">
-                                            <a href="javascript:void(0)"><img src="images/logo_admin.png"
+                                            <a href="javascript:void(0)"><img src="resources/img/logo_admin.jpg"
                                                                               class="thumb-lg img-circle" alt="img"></a>
                                             <h4 class="text-white mt-2">${account.fullname}</h4>
                                             <h5 class="text-white mt-2">${account.email}</h5>

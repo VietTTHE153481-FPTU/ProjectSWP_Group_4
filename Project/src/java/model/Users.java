@@ -9,7 +9,8 @@ package model;
  * @author trung
  */
 public class Users {
-    
+
+    private int userID;
     private String username, password, fullname, phone;
     private boolean gender;
     private String email;
@@ -19,7 +20,8 @@ public class Users {
     public Users() {
     }
 
-    public Users(String username, String password, String fullname, String phone, boolean gender, String email, int roleId, int statusId) {
+    public Users(int userID, String username, String password, String fullname, String phone, boolean gender, String email, int roleId, int statusId) {
+        this.userID = userID;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -28,6 +30,14 @@ public class Users {
         this.email = email;
         this.roleId = roleId;
         this.statusId = statusId;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -102,6 +112,5 @@ public class Users {
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
-    
-    
+
 }
