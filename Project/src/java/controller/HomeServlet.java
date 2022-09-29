@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAO.BannerDAO;
 import DAO.BlogDAO;
 import DAO.CategoryDAO;
 import DAO.ProductDAO;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
+import model.Banner;
 import model.Blog;
 import model.Category;
 import model.Products;
@@ -76,7 +78,10 @@ public class HomeServlet extends HttpServlet {
         BlogDAO bg = new BlogDAO();
         List<Blog> listbg = bg.getHotBlogs();
         request.setAttribute("listbg", listbg);
-
+        
+        BannerDAO bn = new BannerDAO();
+        List<Banner> listBanner = bn.getAllBrand();
+        request.setAttribute("listbanner", listBanner);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

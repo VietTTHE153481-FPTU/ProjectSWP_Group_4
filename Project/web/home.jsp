@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="styles/responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
         <div class="super_container">
@@ -121,7 +122,7 @@
                     </div>
                 </div>
             </header>
-            <div class="main_slider" style="background-image:url(resources/img/banner/gucci.png)">
+            <div class="main_slider" style="background-image:url(resources/img/banner/slide-01.jpg)">
                 <div class="container fill_height">
                     <div class="row align-items-center fill_height">
                         <div class="col">
