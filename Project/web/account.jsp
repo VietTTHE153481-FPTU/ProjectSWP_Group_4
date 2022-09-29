@@ -38,8 +38,9 @@
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
                             <li>
                                 <a class="profile-pic" href="#">
-                                    <img src="images/logo_admin.png" alt="user-img" width="36"
-                                         class="img-circle"><span class="text-white font-medium">${sessionScope.admin.username}</span></a>
+                                    <img src="resources/img/logo_admin.jpg" alt="user-img" class="img-circle" width="36">
+                                    <span class="text-white font-medium">${sessionScope.account.fullname}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -49,7 +50,7 @@
                 <div class="scroll-sidebar">
                     <nav class="sidebar-nav">
                         <c:choose>
-                            <c:when test="${sessionScope.admin != null}">
+                            <c:when test="${sessionScope.account != null}">
                                 <ul id="sidebarnav">
                                     <li class="sidebar-item pt-2">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.jsp"
@@ -62,21 +63,14 @@
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
-                                            <span class="hide-menu">Profile</span>
+                                            <span class="hide-menu">Account Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adproducts"
-                                           aria-expanded="false">
-                                            <i class="fa fa-product-hunt" aria-hidden="true"></i>
-                                            <span class="hide-menu">Products</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adlogout"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="home"
                                            aria-expanded="false">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>   
-                                            <span class="hide-menu">Logout</span>
+                                            <span class="hide-menu">Back To Shop</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -107,16 +101,16 @@
                                         <th>PERMISSION</th>
                                         <th>DETAIL</th>
                                     </tr>
-                                    <c:forEach items="${requestScope.ac}" var="p">
+                                    <c:forEach items="${listac}" var="ac">
                                         <tr>
-                                            <td>${p.username}</td>
-                                            <td>${p.fullname}</td>
-                                            <td>${p.phone}</td>
-                                            <td>${p.gender?'Female':'Male'}</td>
-                                            <td>${p.email}</td>
-                                            <td>${p.roleId}</td>
+                                            <td>${ac.username}</td>
+                                            <td>${ac.fullname}</td>
+                                            <td>${ac.phone}</td>
+                                            <td>${ac.gender?'Female':'Male'}</td>
+                                            <td>${ac.email}</td>
+                                            <td>${ac.roleId}</td>
                                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a href="profile?username=${p.username}"><i class="fa fa-user-md"></i></a>
+                                                <a href="profile?userID=${ac.getUsername()}"><i class="fa fa-user-md"></i></a>
                                             </td>
                                         </tr>
                                     </c:forEach>

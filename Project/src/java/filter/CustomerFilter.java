@@ -37,7 +37,7 @@ public class CustomerFilter implements Filter {
  
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
  
-        if (path.startsWith("/admin/")) {
+        if (path.startsWith("/home/")) {
             chain.doFilter(request, response);
             return;
         }
