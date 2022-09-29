@@ -5,6 +5,7 @@
 
 package controller;
 
+import DAO.AccountDAO;
 import DAO.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Users;
 
@@ -74,7 +76,17 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Users acc = (Users) session.getAttribute("acc");
+        String pass_new = request.getParameter("pass_new");
+        PrintWriter out = response.getWriter();
+        out.println(pass_new);
+        
+        AccountDAO ad = new AccountDAO();
+        ad.changePass(acc, pass_new);
+        acc.setPassword(pass_new);
+        session.setAttribute("acc", acc);
+        response.sendRedirect("home");
     }
 
     /** 
