@@ -77,6 +77,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         String cfpassword = request.getParameter("cfpass");
@@ -103,8 +104,11 @@ public class RegisterServlet extends HttpServlet {
         } else if (!password.equals(cfpassword)) {
             session.setAttribute("mess", "The entered Password must be the same!");
             response.sendRedirect("register");
-            //fullname chi co chu cai in thuong , in hoa va dau cach
-        } else if (rd.getStringInput(fullname, "^[a-zA-Z ]+$") == false) {
+            //fullname chi co chu cai in thuong , in hoa va dau cach va ki tu tieng Viet
+        } else if (rd.getStringInput(fullname, "^[a-zA-Z"
+                + "_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơ"
+                + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊ"
+                + "ỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\ ]+$") == false) {
             session.setAttribute("mess", "Please input corrrect information that match fullname");
             response.sendRedirect("register");
             // so dien thoai luon bat dau bang so 84 hoac 0 tiep theo la 1 chu so la 3 hoac 5 hoac 7 hoac 8 hoac 9 va tiep theo la 8 chu so

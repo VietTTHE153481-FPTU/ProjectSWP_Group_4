@@ -119,27 +119,27 @@
                                                 <input value="${account.phone}" type="text" name="phone" class="form-control validate" readonly required/>
                                             </div>
                                         </div>
-                                            <div class="form-group mb-4">
+                                        <div class="form-group mb-4">
                                             <div class="col-md-12 border-bottom p-0">Password
-                                                <input value="${account.password}" type="text" name="fullname" class="form-control validate" readonly required/>
+                                                <input value="${account.password}" type="password" name="password" class="form-control validate" readonly required/>
                                                 <button onclick="change()">Đổi mật khẩu</button> <br>
                                             </div>
                                         </div>
-                                                <div class="col-md-6" style="display: none;" id="change_pass">
-                <form action="account" method="post" onsubmit="return check()">
-                    <input type="password" id="pass_old1" value="${sessionScope.acc.pass}" hidden>
-                    <h3>Nhập lại mật khẩu cũ*</h3>
-                    <input type="password" id="pass_old2" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$" >            
-                    <br>
-                    <h3>Nhập mật khẩu mới*</h3>
-                    <input type="password" id="pass_new1" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$"> <br>
-                    <h3>Nhập lại mật khẩu mới*</h3>
-                    <input type="password" id="pass_new2" name="pass_new" required placeholder="Phải giống MK mới ở trên"> 
-                    <br><br>
-                    <span id="message" style="color: red;"></span> <br>
-                    <input type="submit" value="Xác nhận"> 
-                </form>
-            </div>  
+                                        <div class="col-md-6" style="display: none;" id="change_pass">
+                                            <form action="account" method="post" onsubmit="return check()">
+                                                <input type="password" id="pass_old1" value="${sessionScope.acc.pass}" hidden>
+                                                <h3>Nhập lại mật khẩu cũ*</h3>
+                                                <input type="password" id="pass_old2" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$" >            
+                                                <br>
+                                                <h3>Nhập mật khẩu mới*</h3>
+                                                <input type="password" id="pass_new1" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$"> <br>
+                                                <h3>Nhập lại mật khẩu mới*</h3>
+                                                <input type="password" id="pass_new2" name="pass_new" required placeholder="Phải giống MK mới ở trên"> 
+                                                <br><br>
+                                                <span id="message" style="color: red;"></span> <br>
+                                                <input type="submit" value="Xác nhận"> 
+                                            </form>
+                                        </div>  
                                         <div>Gender
                                             <br/>
                                             <br/>
@@ -154,7 +154,7 @@
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="col-sm-12">
-                                                <a href="account" class="btn btn-success">Back</a>
+                                                <a href="home" class="btn btn-success">Back</a>
                                             </div>
                                         </div>
                                     </form>
@@ -165,7 +165,7 @@
                 </div>
             </div>
         </div>
-                                            <script>
+        <script>
             function change() {
                 var x = document.getElementById("change_pass");
                 x.style.display = "block";

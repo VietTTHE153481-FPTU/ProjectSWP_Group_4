@@ -56,7 +56,7 @@ public class AccountDAO extends DBContext {
             st.setString(1, user);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Users(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
+                return new Users(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9));
             }
         } catch (SQLException e) {
         }
