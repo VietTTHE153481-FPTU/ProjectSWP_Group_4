@@ -110,10 +110,10 @@ public class RouterFilter implements Filter {
         httpRequest = (HttpServletRequest) request;
         httpResponse = (HttpServletResponse) response;
         String url = httpRequest.getServletPath();
-        if (url.endsWith(".jsp")) {
-            httpResponse.sendRedirect("home");
-            return;
-        }
+//        if (url.endsWith(".jsp")) {;
+//            httpResponse.sendRedirect("home");
+//            return;
+//        }
         HttpSession session = httpRequest.getSession(false);
         Users a = null;
         if (session != null) {
