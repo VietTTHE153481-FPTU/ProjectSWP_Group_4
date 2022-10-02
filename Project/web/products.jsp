@@ -112,7 +112,7 @@
                                                                 <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.getSalePercent()}%</span></div>
                                                             </c:if>
                                                             <div class="product_info">
-                                                                <h6 class="product_name"><a href="detail?id=${p.getproductID()}">${pd.getProductName()}</a></h6>
+                                                                <h6 class="product_name"><a href="detail?id=${pd.getProductID()}">${pd.getProductName()}</a></h6>
                                                                 <div class="product_price">₫ ${pd.getSellPrice()}
                                                                     <c:if test="${pd.getSalePercent()>0}">
                                                                         <span>₫ ${pd.getOriginalPrice()}</span>
