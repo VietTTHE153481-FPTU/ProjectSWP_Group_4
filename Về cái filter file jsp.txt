@@ -1,0 +1,2 @@
+mọi người làm nếu cần access file jsp trực tiếp thì vô cái routerFilter disable cái dòng 
+lọc file jsp ra là access trực tiếp được nhé chứ dừng xoá cả file =>>
