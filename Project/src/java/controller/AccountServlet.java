@@ -84,7 +84,7 @@ public class AccountServlet extends HttpServlet {
         
         AccountDAO ad = new AccountDAO();
         ad.changePass(acc, pass_new);
-        acc.setPassword(pass_new);
+        acc.setPassword(ad.bytesToHex(pass_new));
         session.setAttribute("acc", acc);
         response.sendRedirect("home");
     }
