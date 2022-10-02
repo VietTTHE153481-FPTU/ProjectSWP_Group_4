@@ -5,6 +5,7 @@
 package controller;
 
 import DAO.CategoryDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -61,10 +62,11 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
+        
         String id_raw = request.getParameter("id");
         int id;
         try {
+            /*
             CategoryDAO cd = new CategoryDAO();
             Cookie arr[] = request.getCookies();
             List<Products> list = new ArrayList<>();
@@ -79,7 +81,7 @@ public class DetailServlet extends HttpServlet {
             for (int i = 0; i < list.size(); i++) {
                 int count = 1;
                 for (int j = i + 1; j < list.size(); j++) {
-                    if (list.get(i).getId() == list.get(j).getId()) {
+                    if (list.get(i).getProductID() == list.get(j).getProductID()) {
                         count++;
                         list.remove(j);
                         j--;
@@ -96,10 +98,15 @@ public class DetailServlet extends HttpServlet {
             id = Integer.parseInt(id_raw);
             Products p = cd.getProductsById(id);
             request.setAttribute("detail", p);
+            */
+            id = Integer.parseInt(id_raw);
+            ProductDAO pd= new ProductDAO();
+            Products p= pd.getProductById(id);
+            request.setAttribute("detail", p);
             request.getRequestDispatcher("detail.jsp").forward(request, response);
         } catch (NumberFormatException e) {
         }
-        */
+        
     }
 
     /**

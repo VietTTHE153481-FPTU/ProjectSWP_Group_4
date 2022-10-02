@@ -154,4 +154,45 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
+
+    public Products getProductById(int id) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
+                + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
+                + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
+                + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                + "GROUP BY p.ProductID ) t where t.ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Products(rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SellPrice"),
+                        rs.getDouble("SalePercent"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("SellerID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("StatusID"),
+                        rs.getInt("BrandID"),
+                        rs.getString("ProductImgURL"),
+                        rs.getInt("CategoryID")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    public static void main(String[] args) {
+        ProductDAO pd= new ProductDAO();
+        Products p= pd.getProductById(1);
+        System.out.println(p.getProductName());
+    }
 }
