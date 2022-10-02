@@ -11,7 +11,9 @@ package model;
 public class Blog {
     int id;
     String author;
-    String date;
+    int day;
+    String month;
+    int year;
     String title;
     String content;
     String imageLink;
@@ -19,10 +21,12 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String date, String author, String title, String content, String imageLink) {
+    public Blog(int id, String author, int day, String month, int year, String title, String content, String imageLink) {
         this.id = id;
         this.author = author;
-        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
         this.title = title;
         this.content = content;
         this.imageLink = imageLink;
@@ -44,12 +48,28 @@ public class Blog {
         this.author = author;
     }
 
-    public String getDate() {
-        return date;
+    public int getDay() {
+        return day;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getTitle() {

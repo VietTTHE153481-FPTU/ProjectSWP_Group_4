@@ -20,7 +20,8 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getHotBlogs() {
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT TOP 3 * FROM [dbo].[Blog] ORDER BY [Date] DESC";
+        String sql = "SELECT TOP 3 * FROM [dbo].[Blog] \n"
+                + "ORDER BY [Day] DESC, [Month] DESC, [Year] DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -28,7 +29,9 @@ public class BlogDAO extends DBContext {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
                 bg.setAuthor(rs.getString("Author"));
-                bg.setDate(rs.getString("Date"));
+                bg.setDay(rs.getInt("Day"));
+                bg.setMonth(rs.getString("Month"));
+                bg.setYear(rs.getInt("Year"));
                 bg.setTitle(rs.getString("Title"));
                 bg.setContent(rs.getString("Content"));
                 bg.setImageLink(rs.getString("imageLink"));
@@ -42,7 +45,15 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getAllBlogs() {
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT * FROM [dbo].[Blog]";
+        String sql = "SELECT [ID]\n"
+                + "      ,[Author]\n"
+                + "      ,[Day]\n"
+                + "      ,[Month]\n"
+                + "      ,[Year]\n"
+                + "      ,[Title]\n"
+                + "      ,[Content]\n"
+                + "      ,[imageLink]\n"
+                + "  FROM [dbo].[Blog]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -50,37 +61,17 @@ public class BlogDAO extends DBContext {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
                 bg.setAuthor(rs.getString("Author"));
-                bg.setDate(rs.getString("Date"));
+                bg.setDay(rs.getInt("Day"));
+                bg.setMonth(rs.getString("Month"));
+                bg.setYear(rs.getInt("Year"));
                 bg.setTitle(rs.getString("Title"));
                 bg.setContent(rs.getString("Content"));
-                bg.setImageLink(rs.getString("ImageLink"));
+                bg.setImageLink(rs.getString("imageLink"));
                 list.add(bg);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
-    }
-
-    public Blog getBlogByID(int id) {
-        String sql = "SELECT * FROM Blog WHERE ID = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Blog bg = new Blog();
-                bg.setId(rs.getInt("ID"));
-                bg.setAuthor(rs.getString("Author"));
-                bg.setDate(rs.getString("Date"));
-                bg.setTitle(rs.getString("Title"));
-                bg.setContent(rs.getString("Content"));
-                bg.setImageLink(rs.getString("ImageLink"));
-                return bg;
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
     }
 }

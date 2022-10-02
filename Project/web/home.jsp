@@ -23,105 +23,11 @@
         <link rel="stylesheet" type="text/css" href="styles/responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/main.css">
     </head>
     <body>
         <div class="super_container">
-            <header class="header trans_300">
-                <div class="top_nav">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-6 text-right">
-                                <div class="top_nav_right">
-                                    <ul class="top_nav_menu">
-                                        <c:if test="${sessionScope.account.roleId != 1 && sessionScope.account.roleId != 2}">
-                                            <li class="account">
-                                                <a style="color: #ffffff" href="registerseller">
-                                                    Become a seller
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                        <li class="account">
-                                            <a style="color: #ffffff" href="#">
-                                                <c:if test="${sessionScope.account == null}">
-                                                    My Account
-                                                    <i class="fa fa-angle-down"></i>
-                                                </c:if>
-                                                <c:if test="${sessionScope.account != null}">
-                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                    <span>&nbsp;Hello, ${sessionScope.account.fullname}</span>
-                                                    <i class="fa fa-angle-down"></i>
-                                                </c:if>
-                                            </a>
-                                            <ul class="account_selection">
-                                                <c:choose>
-                                                    <c:when test="${sessionScope.account != null}">
-                                                        <!-- Default -->
-                                                        <li><a href="profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
-                                                        <!-- Admin -->
-                                                        <c:if test="${sessionScope.account.roleId == 1}">
-                                                            <li><a href="dashboard.jsp"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
-                                                            </c:if>
-                                                        <!-- Seller -->
-                                                        <c:if test="${sessionScope.account.roleId == 2}">
-                                                            <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
-                                                            </c:if>
-                                                        <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                        <li><a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                                        <li><a href="register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-                                                        <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_nav_container">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-right">
-                                <div class="logo_container">
-                                    <a href="home">Levents<span>shop</span></a>
-                                </div>
-                                <nav class="navbar">
-                                    <ul class="navbar_menu">
-                                        <li><a href="home">home</a></li>
-                                        <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
-                                        <li><a href="#">blogs</a></li>
-                                        <li><a href="#">contact</a></li>
-                                    </ul>
-                                    <ul class="navbar_user">
-                                        <li class="navbar-brand">
-                                            <form action="search?index=1" method="post" class="app-search d-none d-md-block me-3">
-                                                <div class="input-group input-group-sm">
-                                                    <input name="txtSearch" type="text" placeholder="Search..." class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                    <div class="input-group-append">&nbsp;
-                                                        <button type="submit" class="btn btn-secondary">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </li>
-                                        <li class="checkout">
-                                            <a href="show">
-                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>&nbsp;&nbsp;&nbsp;
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <%@include file = "Header.jsp" %>
             <div class="main_slider" style="background-image:url(resources/img/banner/slide-01.jpg)">
                 <div class="container fill_height">
                     <div class="row align-items-center fill_height">
@@ -175,7 +81,7 @@
                     <div class="row">
                         <div class="col text-center">
                             <div class="section_title new_arrivals_title">
-                                <h2>BEST SELLERS</h2>
+                                <h2>NEW PRODUCTS</h2>
                             </div>
                         </div>
                     </div>
@@ -307,7 +213,7 @@
                                     <div class="blog_background" style="background-image:url(./resources/img/Blog/${bg.getImageLink()})"></div>
                                     <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                                         <h4 class="blog_title">${bg.getTitle()}</h4>
-                                        <span class="blog_meta">by ${bg.getAuthor()} | ${bg.getDate()}</span>
+                                        <span class="blog_meta">by ${bg.getAuthor()} |&nbsp; ${bg.getDay()} ${bg.getMonth()} ${bg.getYear()}</span>
                                         <a class="blog_more" href="#">Read more</a>
                                     </div>
                                 </div>
@@ -316,58 +222,15 @@
                     </div>
                 </div>
             </div>
-            <div class="newsletter">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-                                <h4>Newsletter</h4>
-                                <p>Subscribe to our newsletter and get 20% off your first purchase</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%@include file = "Footer.jsp" %>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-                            <ul class="footer_nav">
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">FAQs</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" 
-                                                   aria-hidden="true"></i> Facebook</a></li><br/>
-                                <li><a href="#"><i class="fa fa-instagram" 
-                                                   aria-hidden="true"></i> Instagram</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer_nav_container">
-                            <div class="cr">©2022 Levents Shop. All Rights Reserved.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="styles/bootstrap4/popper.js"></script>
-    <script src="styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="plugins/easing/easing.js"></script>
-    <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-    <script src="js/custom.js"></script>
-</body>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="styles/bootstrap4/popper.js"></script>
+        <script src="styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="plugins/easing/easing.js"></script>
+        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script src="js/custom.js"></script>
+    </body>
 </html>
