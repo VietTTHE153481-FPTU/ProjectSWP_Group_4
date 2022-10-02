@@ -19,26 +19,58 @@
         <script src="js/jquery.min_1.js"></script>
         <title>Forget Password</title>
         <meta charset="UTF-8">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                background-image: url(resources/img/background.jpg); 
+            }
+            .card{
+                background-image: url(resources/img/background.jpg); 
+                width: 100%;
+                height: 100vh;
+                align-items: center;
+                padding-top: 10%;
+                padding-bottom: 10%;
+                margin: 0;
+            }
+            .card-body{
+                border-radius: 15px;
+                border: solid rgba(255,253,253,0.9);
+                background-color: rgba(255,253,253,0.9);
+                display: flex;
+                width: 40%;
+                margin: 0 auto;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+            }
+        </style>
     </head>
     <body>
-        <div class="card">
-            <div class="card-body mx-auto">
-                <h2 class="card-title mt-3 text-center">Reset your password</h2>
-                <p class="text-center" style="font-size: 22px">Please enter your login email, we will send a new random password to your inbox:</p>
-                <h6 style="color: red">${sessionScope.mess}</h6>
-                <form id="resetForm" action="reset" method="post">               
-                    <div class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-envelope"></i></span>
+        <div class="body">
+            <div class="card">
+                <div class="card-body mx-auto">
+                    <h2 class="card-title mt-3 text-center">Reset your password</h2>
+                    <p class="text-center" style="font-size: 22px">Please enter your login email, we will send a new random password to your inbox:</p>
+                    <h6 style="color: red">${sessionScope.mess}</h6>
+                    <form id="resetForm" action="reset" method="post">               
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i></span>
+                            </div>
+                            <input required type="email" name="mail" class="form-control" placeholder="Email">
                         </div>
-                        <input type="text" name="mail" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" name="reset" class="btn btn-primary btn-block">Send Email</button>
-                    </div> 
-                    <p class="text-left"><a href="login">Go back log in page</a></p>                                                             
-                </form>
-            </div>
+                        <div class="form-group">
+                            <button type="submit" name="reset" class="btn btn-primary btn-block">Send Email</button>
+                        </div> 
+                        <p class="text-left"><a href="login">Go back log in page</a></p>                                                             
+                    </form>
+                </div>
+            </div>    
         </div>
+        
     </body>
 </html>
