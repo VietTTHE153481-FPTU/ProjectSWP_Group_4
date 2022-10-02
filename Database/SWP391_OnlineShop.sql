@@ -506,6 +506,43 @@ INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'minh123','20
 INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'author_1','2022/09/01', N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg')
 INSERT INTO dbo.Blog(Author,[Date],Title,Content,imageLink)VALUES(N'author_2','2022/09/24', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng. Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách. ',N'5.jpg')
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Create Table BlogDetail (
+	BlogDetailID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	Title nvarchar(2500),
+	Content nvarchar(2500),
+	imgBlogDetail nvarchar(1000),
+	BlogID int,
+	constraint BlogID FOREIGN KEY(BlogID) REFERENCES Blog(ID),
+)ON [PRIMARY]
+GO
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo phông xám phù hợp với ai?', N'Không phải tất cả màu sắc đều phù hợp với tất cả mọi người. Tuy nhiên, gam màu xám lại là một trong những ngoại lệ bên cạnh gam màu hot trend đen, trắng.
+Là những gam màu trung tính, tinh tế và hiện đại, không khó để những gam màu này là gam màu được ưa chuộng nhất hiện nay. Xu hướng thời trang hiện nay đang đề cao những gam màu đơn giản, trung tính nhưng có hiệu quả thời trang cao', N'aophongxam1.jpg',1)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo phông xám phối với quần màu đen', N'Cặp đôi xám-đen chắc chắn là sự kết hợp an toàn mà phong cách “được lòng” nhiều bạn trẻ. Đều là gam màu trung tính nên độ ăn ý, 
+phối áo phông xám với quần màu đen mang đến cho bạn vẻ ngoài hiện đại, tinh tế, pha chút hồi cổ nhưng vẫn rất trẻ trung, tươi mới.', N'aophongxam.jpg',1)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo phông Oversize là gì?', N'Oversize Tee ( Áo quá khổ ) là loại áo có kích thước khá lớn, được phóng to vừa phải làm sao cho cân xứng ở phần ngực áo, ống tay áo và phần eo của người sử dụng.
+Mục đích của việc tạo ra những kiểu áo thế nào giúp cho một số người che đi các khuyết điểm trên cơ thể và làm cho họ tự tin hơn khi ra ngoài.', N'aophongoversize.jpg',2)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Các loại vải sử dụng để may áo oversize tay lỡ', N'Chắc bạn cũng đã biết đến một số loại vải phổ biến như 100% Cotton, vải CVC 65/35. Vải Tici hay là vải Kate.
+Mỗi doanh nghiệp sản xuất đều dựa trên đối tượng khách hàng của mình để tạo ra những mẫu áo với chất liệu phù hợp nhất.', N'aophongoversize1.jpg',2)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Blazer là gì và cách phối CỰC ĐẸP cho nam và nữ chuẩn phong cách Hàn Quốc', N'Áo Blazer là một loại áo khoác dáng dài, nó giống với áo khoác vest nhất nhưng đường cắt may tạo kiểu ngẫu nhiên hơn.
+Được thiết kế dựa trên khoác suit có thể mặc phối với nhiều mẫu quần áo và trong nhiều hoàn cảnh khác nhau. Nếu chọn mua cho mình một chiếc áo Blazer thì nam hay nữ đều rất chuộng áo Blazer đen, Blazer màu be và áo Blazer nữ caro nhất.', N'blazer1.png',3)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Lịch sử ra đời của áo Blazer', N'Blazer ra đời và thịnh hành từ những năm giữa thế kỷ 20. Những chiếc Blazer đầu tiên được thiết kế gần giống chiếc áo gió hiện đại.', N'blazer2.png',3)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Các chất liệu thường thấy của áo Blazer', N'Không những đa dạng trong thiết kế mà chất liệu để may áo cũng hết sức phong phú. Có đến 7 loại chất liệu có thể được sử dụng trong thiết kế áo blazer:
+Len hỗn hợp, vải flannel, vải dệt fresco, len cashmere, vải lanh, vải sẹc và vải thô', N'blazer3.png',3)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Xu hướng áo Blazer nữ hiện nay', N'Hiện nay có rất nhiều loại áo blazer nữ thời thượng và sang chảnh, vừa thể hiện được sự cá tính, mạnh mẽ và phong cách hiện đại. Không chỉ mang lại cho phái nữ một vẻ đẹp quyến rũ
+mà còn đôn lên dáng vẻ thanh lịch cho người mặc.', N'blazer4.png',3)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Các cách phối đồ đi chơi mùa hè cho nữ cực chất', N'Hè đến cũng là quãng thời gian đầy năng động với rất nhiều những hoạt động ngoài trời. Những cô nàng trót yêu sự cá tính và phong cách hãy cùng dành chút thời gian
+đọc những góp ý dưới đây để có những cách mĩ match đẹp “thần sầu” cho mùa hè bốc lửa', N'mixdomuahe.jpg',4)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Combo mix 1 chiếc váy ngắn cộng với đôi Sneaker', N'Combo hoàn hảo nhất cho mùa hè trẻ trung, xinh xắn và năng động có lẽ là chân váy ngắn cùng giày sneaker. Dù bạn muốn phối đồ đi chơi mùa hè cho nữ hay phối đồ mùa hè đi học.
+Set đồ này cũng sẽ không khiến bạn thất vọng. Chân váy ngắn rất đa dạng như chân váy hoa nhí, chân váy chữ A, chân váy xếp ly ngắn, chân váy ôm,… Và bạn có thể thoải mái mix chân váy ngắn cùng áo thun, áo kiểu, áo sơ mi, áo trễ vai, áo hai dây tùy bạn thích.', N'vayngansneaker.jpg',4)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Combo Áo thun với 1 chiếc quần short hoặc quần jean', N'Một công thức phối đồ đi chơi mùa hè cho nữ cơ bản đến không thể cơ bản hơn. Và thật may là set đồ này phù hợp với hầu hết mọi vóc dáng.
+Những chiếc áo phông được may từ chất liệu thấm hút mồ hôi sẽ giúp nàng thật thoải mái suốt ngày dài năng động.', N'aothunvoiquanjean.jpg',4)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Combo Áo trễ vai với chiếc quần jean baggy', N'Trong khi baggy jean là chiêc quần “hack” dáng thần thánh và che khuyết điểm đôi chân tuyệt vời. Chiếc áo trễ vai lại khéo léo tôn lên bờ vai mảnh khảnh cùng xương quai xanh quyến rũ của bạn.',
+N'aotrevai.jpg',4)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Những chiếc áo sơ mi có màu nổi', N'Trong trường hợp chị em không để ý, thì áo sơ mi màu nổi chính là xu hướng của mùa hè năm nay. Không khó để bắt gặp hội sành điệu xúng xính mẫu áo rực rỡ này.
+Các gam màu thật nổi không chỉ giúp vẻ ngoài của người diện trở thành tâm điểm giữa đám đông, mà còn hack tuổi cực siêu.',N'aosomi.jpg',5)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo sơ mi kẻ sọc', N'Không phải là một kiểu sơ mi quá mới, tuy nhiên sức hút của áo sơ mi kẻ vẫn chưa bao giờ thuyên giảm. Điểm đáng chú ý của áo sơ mi kẻ là món thời trang này rất thanh lịch, trang nhã và vẫn có sự nổi bật nhất định.',N'aosomi1.jpg',5)
+INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo sơ mi cộc tay', N'Hot hơn cả áo sơ mi màu nổi chính là sơ mi cộc tay. Món thời trang này phảng phất nét retro, nhưng cũng rất trẻ trung, ngọt ngào.',N'aosomi2.jpg',5)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create table PostCategory(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	CategoryName nvarchar(1000)
