@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="col-md-6" style="display: none;" id="change_pass">
                                             <form action="account" method="post" onsubmit="return check()">
-                                                <input type="password" id="pass_old1" value="${sessionScope.account.pass}" hidden>
+                                                <input type="password" id="pass_old1" value="${sessionScope.account.password}" hidden>
                                                 <h3>Nhập lại mật khẩu cũ*</h3>
                                                 <input type="password" id="pass_old2" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$" >            
                                                 <br>
