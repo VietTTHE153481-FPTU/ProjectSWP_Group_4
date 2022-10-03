@@ -108,7 +108,7 @@
                         <div class="col-lg-8 col-xlg-9 col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form-horizontal form-material">
+                                    <div class="form-horizontal form-material">
                                         <div class="form-group mb-4">
                                             <div class="col-md-12 border-bottom p-0">Full Name
                                                 <input value="${account.fullname}" type="text" name="fullname" class="form-control validate" readonly required/>
@@ -127,12 +127,12 @@
                                         </div>
                                         <div class="col-md-6" style="display: none;" id="change_pass">
                                             <form action="account" method="post" onsubmit="return check()">
-                                                <input type="password" id="pass_old1" value="${sessionScope.account.password}" hidden>
+                                                <input type="password" id="pass_old1" value="${account.password}" hidden>
                                                 <h3>Nhập lại mật khẩu cũ*</h3>
-                                                <input type="password" id="pass_old2" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$" >            
+                                                <input type="password" id="pass_old2" required placeholder="Có 1 đến 20 kí tự" pattern="^.{1,20}$" >            
                                                 <br>
                                                 <h3>Nhập mật khẩu mới*</h3>
-                                                <input type="password" id="pass_new1" required placeholder="Có 6 đến 20 kí tự" pattern="^.{6,20}$"> <br>
+                                                <input type="password" id="pass_new1" required placeholder="Có 1 đến 20 kí tự" pattern="^.{1,20}$"> <br>
                                                 <h3>Nhập lại mật khẩu mới*</h3>
                                                 <input type="password" id="pass_new2" name="pass_new" required placeholder="Phải giống MK mới ở trên"> 
                                                 <br><br>
@@ -157,7 +157,7 @@
                                                 <a href="home" class="btn btn-success">Back</a>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

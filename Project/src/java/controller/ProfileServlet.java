@@ -61,7 +61,7 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AdminDAO ad = new AdminDAO();
-        HttpSession session = request.getSession();
+       // HttpSession session = request.getSession();
         
        String username = request.getParameter("username");
         Users a = ad.getAccount(username);
