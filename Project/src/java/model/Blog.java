@@ -14,21 +14,21 @@ public class Blog {
     int day;
     String month;
     int year;
-    String title;
-    String content;
+    String BlogTitle;
+    String BlogContent;
     String imageLink;
 
     public Blog() {
     }
 
-    public Blog(int id, String author, int day, String month, int year, String title, String content, String imageLink) {
+    public Blog(int id, String author, int day, String month, int year, String BlogTitle, String BlogContent, String imageLink) {
         this.id = id;
         this.author = author;
         this.day = day;
         this.month = month;
         this.year = year;
-        this.title = title;
-        this.content = content;
+        this.BlogTitle = BlogTitle;
+        this.BlogContent = BlogContent;
         this.imageLink = imageLink;
     }
 
@@ -72,20 +72,20 @@ public class Blog {
         this.year = year;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBlogTitle() {
+        return BlogTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBlogTitle(String BlogTitle) {
+        this.BlogTitle = BlogTitle;
     }
 
-    public String getContent() {
-        return content;
+    public String getBlogContent() {
+        return BlogContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setBlogContent(String BlogContent) {
+        this.BlogContent = BlogContent;
     }
 
     public String getImageLink() {
@@ -95,6 +95,4 @@ public class Blog {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
-
-    
 }

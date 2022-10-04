@@ -66,12 +66,13 @@
                                                 <span class="cl12 m-l-4 m-r-6">|</span>
                                             </span>
                                         </span>
-                                        <h4 class="ltext-109 cl2 p-b-28">
-                                            8 Inspiring Ways to Wear Dresses in the Winter
-                                        </h4>
-                                        <p class="stext-117 cl6 p-b-26">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
-                                        </p>
+                                        <c:forEach items="${detail}" var="bd">
+                                            <img src="resources/img/Blog/${bd.getImgBlogDetail()}">
+                                            <h4 class="ltext-109 cl2 p-b-28">${bd.getTitle()}</h4>
+                                            <p class="stext-117 cl6 p-b-26">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
+                                            </p>
+                                        </c:forEach>
                                     </div>
                                     <div class="p-t-40">
                                         <h5 class="mtext-113 cl2 p-b-12">
@@ -85,10 +86,10 @@
                                                 <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
                                             </div>
                                             <div class="bor19 size-218 m-b-20">
-                                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Enter your name">
+                                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Enter your name *">
                                             </div>
                                             <div class="bor19 size-218 m-b-20">
-                                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Enter your email">
+                                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Enter your email *">
                                             </div>
                                             <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
                                                 Post Comment

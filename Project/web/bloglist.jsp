@@ -52,18 +52,18 @@
                                         </div>
                                         <div class="p-t-32">
                                             <h4 class="p-b-15">
-                                                <a href="blogdetail" class="ltext-108 cl2 hov-cl1 trans-04">
-                                                    ${bl.getTitle()}
+                                                <a href="blogdetail?id=${bl.getId()}" class="ltext-108 cl2 hov-cl1 trans-04">
+                                                    ${bl.getBlogTitle()}
                                                 </a>
                                             </h4>
-                                            <p class="stext-117 cl6">${bl.getContent()}</p>
+                                            <p class="stext-117 cl6">${bl.getBlogContent()}</p>
                                             <div class="flex-w flex-sb-m p-t-18">
                                                 <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
                                                     <h5>
                                                         <span class="cl4">By |</span> ${bl.getAuthor()}
                                                     </h5>
                                                 </span>
-                                                <a href="blogdetail" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                                <a href="blogdetail?id=${bl.getId()}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                                     Continue Reading
                                                     <i class="fa fa-long-arrow-right m-l-9"></i>
                                                 </a>

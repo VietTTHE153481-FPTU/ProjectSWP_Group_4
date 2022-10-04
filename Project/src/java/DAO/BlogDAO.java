@@ -32,8 +32,8 @@ public class BlogDAO extends DBContext {
                 bg.setDay(rs.getInt("Day"));
                 bg.setMonth(rs.getString("Month"));
                 bg.setYear(rs.getInt("Year"));
-                bg.setTitle(rs.getString("Title"));
-                bg.setContent(rs.getString("Content"));
+                bg.setBlogTitle(rs.getString("BlogTitle"));
+                bg.setBlogContent(rs.getString("BlogContent"));
                 bg.setImageLink(rs.getString("imageLink"));
                 list.add(bg);
             }
@@ -50,8 +50,8 @@ public class BlogDAO extends DBContext {
                 + "      ,[Day]\n"
                 + "      ,[Month]\n"
                 + "      ,[Year]\n"
-                + "      ,[Title]\n"
-                + "      ,[Content]\n"
+                + "      ,[BlogTitle]\n"
+                + "      ,[BlogContent]\n"
                 + "      ,[imageLink]\n"
                 + "  FROM [dbo].[Blog]";
         try {
@@ -64,8 +64,8 @@ public class BlogDAO extends DBContext {
                 bg.setDay(rs.getInt("Day"));
                 bg.setMonth(rs.getString("Month"));
                 bg.setYear(rs.getInt("Year"));
-                bg.setTitle(rs.getString("Title"));
-                bg.setContent(rs.getString("Content"));
+                bg.setBlogTitle(rs.getString("BlogTitle"));
+                bg.setBlogContent(rs.getString("BlogContent"));
                 bg.setImageLink(rs.getString("imageLink"));
                 list.add(bg);
             }

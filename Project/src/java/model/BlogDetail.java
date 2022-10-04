@@ -14,6 +14,7 @@ public class BlogDetail {
     String Content;
     String imgBlogDetail;
     int BlogID;
+    
 
     public BlogDetail() {
     }
@@ -65,4 +66,5 @@ public class BlogDetail {
     public void setBlogID(int BlogID) {
         this.BlogID = BlogID;
     }
+    
 }

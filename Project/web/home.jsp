@@ -212,9 +212,9 @@
                                 <div class="blog_item">
                                     <div class="blog_background" style="background-image:url(./resources/img/Blog/${bg.getImageLink()})"></div>
                                     <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                                        <h4 class="blog_title">${bg.getTitle()}</h4>
+                                        <h4 class="blog_title">${bg.getBlogTitle()}</h4>
                                         <span class="blog_meta">by ${bg.getAuthor()} |&nbsp; ${bg.getDay()} ${bg.getMonth()} ${bg.getYear()}</span>
-                                        <a class="blog_more" href="blogdetail">Read more</a>
+                                        <a class="blog_more" href="blogdetail?id=${bg.getId()}">Read more</a>
                                     </div>
                                 </div>
                             </div>
