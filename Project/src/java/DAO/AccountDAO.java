@@ -6,6 +6,9 @@
 package DAO;
 
 import context.DBContext;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +17,8 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Users;
 
 
@@ -115,6 +120,27 @@ public class AccountDAO extends DBContext {
         } catch (SQLException e) {
         }
         return 0;
+    }
+    
+    public String bytesToHex(String password) {
+        MessageDigest digest;
+        byte[] hash = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+            hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(RegisterDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     

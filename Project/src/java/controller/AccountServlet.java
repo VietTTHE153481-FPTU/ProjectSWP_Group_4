@@ -77,15 +77,15 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Users acc = (Users) session.getAttribute("acc");
+        Users acc = (Users) session.getAttribute("account");
         String pass_new = request.getParameter("pass_new");
         PrintWriter out = response.getWriter();
         out.println(pass_new);
         
         AccountDAO ad = new AccountDAO();
         ad.changePass(acc, pass_new);
-        acc.setPassword(pass_new);
-        session.setAttribute("acc", acc);
+        acc.setPassword(ad.bytesToHex(pass_new));
+        session.setAttribute("account", acc);
         response.sendRedirect("home");
     }
 
