@@ -60,6 +60,7 @@
                                             <span class="hide-menu">Dashboard</span>
                                         </a>
                                     </li>
+                                    <c:if test="${account.roleId==1}">
                                     <li class="sidebar-item">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
                                            aria-expanded="false">
@@ -67,6 +68,7 @@
                                             <span class="hide-menu">Account Management</span>
                                         </a>
                                     </li>
+                                    </c:if>
                                     <li class="sidebar-item">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="home"
                                            aria-expanded="false">
@@ -155,6 +157,7 @@
                                         <div class="form-group mb-4">
                                             <div class="col-sm-12">
                                                 <a href="home" class="btn btn-success">Back</a>
+                                                <a href="profileupdate" class="btn btn-success">Update Profile</a>
                                             </div>
                                         </div>
                                     </form>
