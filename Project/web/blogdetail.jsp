@@ -26,6 +26,7 @@
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
     </head>
     <body>
+        <c:set value="${blogdetail}" var="bd" />
         <div class="super_container">
             <%@include file = "Header.jsp" %>
             <div class="container product_section_container">
@@ -42,10 +43,10 @@
                             <div class="col-md-8 col-lg-9 p-b-80">
                                 <div class="p-r-45 p-r-0-lg">
                                     <h6 class="ltext-109 cl2 p-b-28">
-                                        8 Inspiring Ways to Wear Dresses in the Winter
+                                        ${bd.title}
                                     </h6>
                                     <div class="wrap-pic-w how-pos5-parent">
-                                        <img src="resources/img/Blog/1.jpg">
+                                        <img src="resources/img/Blog/${bd.getImgBlogDetail()}">
                                         <div class="flex-col-c-m size-123 bg9 how-pos5">
                                             <span class="ltext-107 cl2 txt-center">
                                                 22
@@ -67,10 +68,10 @@
                                             </span>
                                         </span>
                                         <h4 class="ltext-109 cl2 p-b-28">
-                                            8 Inspiring Ways to Wear Dresses in the Winter
+                                            ${bd.title}
                                         </h4>
                                         <p class="stext-117 cl6 p-b-26">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
+                                            ${bd.content}
                                         </p>
                                     </div>
                                     <div class="p-t-40">

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.BlogDetail;
 
 /**
  *
@@ -73,5 +74,27 @@ public class BlogDAO extends DBContext {
             System.out.println(e);
         }
         return list;
+    }
+    
+    public BlogDetail getBlogDetailById(int id){
+        String sql = "select * from BlogDetail, Blog where BlogDetail.BlogDetailID = Blog.ID and Blog.ID = ? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                BlogDetail bd = new BlogDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
+                return bd;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public static void main(String[] args) {
+        BlogDAO b = new BlogDAO();
+        BlogDetail bd = b.getBlogDetailById(1);
+        System.out.println(bd);
     }
 }

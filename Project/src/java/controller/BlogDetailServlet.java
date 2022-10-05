@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Blog;
+import model.BlogDetail;
 
 /**
  *
@@ -60,9 +61,10 @@ public class BlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO bd = new BlogDAO();
-        List<Blog> bg = bd.getAllBlogs();
-        request.setAttribute("bloglist", bg);
+        BlogDAO b = new BlogDAO();
+        int bid = Integer.parseInt(request.getParameter("bId"));
+        BlogDetail bd = b.getBlogDetailById(bid);
+        request.setAttribute("blogdetail", bd);
         
         request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
     }
