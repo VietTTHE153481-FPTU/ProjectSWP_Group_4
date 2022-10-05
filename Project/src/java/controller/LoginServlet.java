@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
         AdminDAO ad = new AdminDAO();
         Users b  = new Users();
         b = ad.getAccount(u);
-        if(b!=null){
+        if(b==null){
             request.getRequestDispatcher("home").forward(request, response);
             return;
         }
