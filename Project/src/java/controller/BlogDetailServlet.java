@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.BlogDetail;
 
 /**
@@ -61,7 +62,7 @@ public class BlogDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         BlogDAO b = new BlogDAO();
         int bid = Integer.parseInt(request.getParameter("bId"));
-        BlogDetail bd = b.getBlogDetailById(bid);
+        List<BlogDetail> bd = b.getBlogDetailById(bid);
         request.setAttribute("blogdetail", bd);
         
         request.getRequestDispatcher("blogdetail.jsp").forward(request, response);

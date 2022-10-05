@@ -26,7 +26,6 @@
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
     </head>
     <body>
-        <c:set value="${blogdetail}" var="bd" />
         <div class="super_container">
             <%@include file = "Header.jsp" %>
             <div class="container product_section_container">
@@ -37,6 +36,7 @@
                         <li><a href="blogdetail"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
+                <c:forEach items="${blogdetail}" var="bd">
                 <section class="bg0 p-t-1 p-b-20">
                     <div class="container">
                         <div class="row">
@@ -74,7 +74,24 @@
                                             ${bd.content}
                                         </p>
                                     </div>
-                                    <div class="p-t-40">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-3 p-b-80">
+                                <div class="side-menu">
+                                    <div class="bor17 of-hidden pos-relative">
+                                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                                        <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+                                            <i class="zmdi zmdi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </c:forEach>
+                <div class="p-t-40">
                                         <h5 class="mtext-113 cl2 p-b-12">
                                             Leave a Comment
                                         </h5>
@@ -96,21 +113,6 @@
                                             </button>
                                         </form>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-lg-3 p-b-80">
-                                <div class="side-menu">
-                                    <div class="bor17 of-hidden pos-relative">
-                                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-                                        <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-                                            <i class="zmdi zmdi-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
             <%@include file = "Footer.jsp" %>
         </div>

@@ -51,8 +51,8 @@ public class BlogDAO extends DBContext {
                 + "      ,[Day]\n"
                 + "      ,[Month]\n"
                 + "      ,[Year]\n"
-                + "      ,[BlogTitle]\n"
-                + "      ,[BlogContent]\n"
+                + "      ,[Title]\n"
+                + "      ,[Content]\n"
                 + "      ,[imageLink]\n"
                 + "  FROM [dbo].[Blog]";
         try {
@@ -65,8 +65,8 @@ public class BlogDAO extends DBContext {
                 bg.setDay(rs.getInt("Day"));
                 bg.setMonth(rs.getString("Month"));
                 bg.setYear(rs.getInt("Year"));
-                bg.setTitle(rs.getString("BlogTitle"));
-                bg.setContent(rs.getString("BlogContent"));
+                bg.setTitle(rs.getString("Title"));
+                bg.setContent(rs.getString("Content"));
                 bg.setImageLink(rs.getString("imageLink"));
                 list.add(bg);
             }
@@ -76,25 +76,29 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
-    public BlogDetail getBlogDetailById(int id) {
-        String sql = "select * from BlogDetail, Blog where BlogDetail.BlogID = Blog.ID and Blog.ID = ? ";
+       public List<BlogDetail> getBlogDetailById(int id){
+        List<BlogDetail> list = new ArrayList<>();
+        String sql = "select * from BlogDetail, Blog where BlogDetail.BlogID = Blog.ID and Blog.ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                BlogDetail bd = new BlogDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
-                return bd;
+            while(rs.next()){
+                list.add(new BlogDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return null;
+        return list;
     }
 
     public static void main(String[] args) {
         BlogDAO b = new BlogDAO();
-        BlogDetail bd = b.getBlogDetailById(1);
-        System.out.println(bd);
+        List<Blog> bl = b.getAllBlogs();
+        for (Blog blog : bl) {
+            System.out.println(bl);
+        }
+//        ListBlogDetail bd = b.getBlogDetailById(1);
+//        System.out.println(bd);
     }
 }
