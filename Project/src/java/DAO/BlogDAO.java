@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.BlogDetail;
 
 /**
  *
@@ -32,8 +33,8 @@ public class BlogDAO extends DBContext {
                 bg.setDay(rs.getInt("Day"));
                 bg.setMonth(rs.getString("Month"));
                 bg.setYear(rs.getInt("Year"));
-                bg.setTitle(rs.getString("Title"));
-                bg.setContent(rs.getString("Content"));
+                bg.setTitle(rs.getString("BlogTitle"));
+                bg.setContent(rs.getString("BlogContent"));
                 bg.setImageLink(rs.getString("imageLink"));
                 list.add(bg);
             }
@@ -73,5 +74,31 @@ public class BlogDAO extends DBContext {
             System.out.println(e);
         }
         return list;
+    }
+
+       public List<BlogDetail> getBlogDetailById(int id){
+        List<BlogDetail> list = new ArrayList<>();
+        String sql = "select * from BlogDetail, Blog where BlogDetail.BlogID = Blog.ID and Blog.ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new BlogDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        BlogDAO b = new BlogDAO();
+        List<Blog> bl = b.getAllBlogs();
+        for (Blog blog : bl) {
+            System.out.println(bl);
+        }
+//        ListBlogDetail bd = b.getBlogDetailById(1);
+//        System.out.println(bd);
     }
 }
