@@ -78,6 +78,12 @@ public class LoginServlet extends HttpServlet {
         String p = "";
         String r = request.getParameter("rem");
         AdminDAO ad = new AdminDAO();
+        Users b  = new Users();
+        b = ad.getAccount(u);
+        if(b!=null){
+            request.getRequestDispatcher("home").forward(request, response);
+            return;
+        }
         if(ad.getAccount(u).getRoleId() != 1){
              p = rd.bytesToHex(request.getParameter("pass"));
         }
