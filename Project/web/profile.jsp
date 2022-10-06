@@ -60,13 +60,15 @@
                                             <span class="hide-menu">Dashboard</span>
                                         </a>
                                     </li>
-                                    <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
-                                           aria-expanded="false">
-                                            <i class="fa fa-user" aria-hidden="true"></i>
-                                            <span class="hide-menu">Account Management</span>
-                                        </a>
-                                    </li>
+                                    <c:if test="${account.roleId==1}">
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
+                                               aria-expanded="false">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                <span class="hide-menu">Account Management</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
                                     <li class="sidebar-item">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="home"
                                            aria-expanded="false">
@@ -134,7 +136,7 @@
                                                 <h3>Nhập mật khẩu mới*</h3>
                                                 <input type="password" id="pass_new1" required placeholder="Có 1 đến 20 kí tự" pattern="^.{1,20}$"> <br>
                                                 <h3>Nhập lại mật khẩu mới*</h3>
-                                                <input type="password" id="pass_new2" name="pass_new" required placeholder="Phải giống MK mới ở trên"> 
+                                                <input type="password" id="pass_new2" name="pass_new" required placeholder="Phải giống với password mới nhập ở trên"> 
                                                 <br><br>
                                                 <span id="message" style="color: red;"></span> <br>
                                                 <input type="submit" value="Xác nhận"> 
@@ -155,6 +157,7 @@
                                         <div class="form-group mb-4">
                                             <div class="col-sm-12">
                                                 <a href="home" class="btn btn-success">Back</a>
+                                                <a href="profileupdate" class="btn btn-success">Update Profile</a>
                                             </div>
                                         </div>
                                     </div>

@@ -96,5 +96,8 @@ public class Blog {
         this.imageLink = imageLink;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Blog{" + "id=" + id + ", author=" + author + ", day=" + day + ", month=" + month + ", year=" + year + ", title=" + title + ", content=" + content + ", imageLink=" + imageLink + '}';
+    }
 }

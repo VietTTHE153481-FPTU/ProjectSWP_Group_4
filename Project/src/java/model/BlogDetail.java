@@ -65,4 +65,11 @@ public class BlogDetail {
     public void setBlogID(int BlogID) {
         this.BlogID = BlogID;
     }
+
+    @Override
+    public String toString() {
+        return "BlogDetail{" + "BlogDetailID=" + BlogDetailID + ", Title=" + Title + ", Content=" + Content + ", imgBlogDetail=" + imgBlogDetail + ", BlogID=" + BlogID + '}';
+    }
+    
+    
 }
