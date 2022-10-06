@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.EmailUtility;
+import java.util.Random;
 
 
 /**
@@ -78,7 +80,41 @@ public class ResetServlet extends HttpServlet {
             session.setAttribute("mess", "Invalid email! Please try again!");
             request.getRequestDispatcher("forgetpassword.jsp").forward(request, response);
         }else{
-            
+            String host = "smtp.gmail.com";
+            String port = "587";
+            String senderName = "Lavender Shop";
+            String senderEmail = "thailshe160614@fpt.edu.vn";
+            String senderPassword = "sntblzdurhldbaby";
+            String subject = "Your Password has been reset";
+
+            String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+            String specialCharacters = "!@#$";
+            String numbers = "1234567890";
+            String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
+            Random random = new Random();
+            String newPassword ="";
+            for (int i = 0; i < 8; i++) {
+                newPassword += combinedChars.charAt(random.nextInt(combinedChars.length()));
+            }
+
+            String content = "Hi, this is your new password: '" + newPassword + "'";
+            content += "\nNote: for security reason, "
+                    + "you must change your password after logging in.";
+
+            String message = "";
+
+            try {
+                EmailUtility.sendEmail(host, port, senderEmail, senderName, senderPassword,
+                        email, subject, content);
+                message = "Your password has been reset. Please check your e-mail.";
+                ad.changePass(ad.getAccByEmail(email), newPassword);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                message = "There were an error: " + ex.getMessage();
+            }
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("message.jsp").forward(request, response);
         }
     }
 
