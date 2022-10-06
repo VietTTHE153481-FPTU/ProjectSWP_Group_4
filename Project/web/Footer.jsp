@@ -34,7 +34,7 @@
                 <h5 class="text-uppercase mb-4" style="color: #FFFFFF">
                     <i class="fa fa-shopping-bag"></i>&nbsp;About shop
                 </h5>
-                <a href="#" style="color: #FFFFFF">
+                <a href="introduction" style="color: #FFFFFF">
                     <span>About US</span>
                 </a>
             </div>
