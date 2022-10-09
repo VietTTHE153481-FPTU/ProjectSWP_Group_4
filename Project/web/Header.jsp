@@ -51,7 +51,7 @@
                                             <c:otherwise>
                                             <li><a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
                                             <li><a href="register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-                                            <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
+                                            <li><a href="introduction"><i class="fa fa-info-circle" aria-hidden="true"></i>About US</a></li>
                                             </c:otherwise>
                                         </c:choose>
                                 </ul>
