@@ -107,7 +107,39 @@ public class BlogDAO extends DBContext {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new BlogDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+                BlogDetail bd = BlogDetail.builder()
+                        .BlogDetailID(rs.getInt(1)).
+                        Title(rs.getString(2)).
+                        Content(rs.getString(3)).
+                        imgBlogDetail(rs.getString(4)).
+                        BlogID(rs.getInt(5))
+                        .build();
+                list.add(bd);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<BlogDetail> getBlogDetailBySearch(String key, int bid) {
+        List<BlogDetail> list = new ArrayList<>();
+        String sql = "select * from BlogDetail bd where bd.BlogID = ? and (bd.Title like ? or bd.Content like ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, bid);
+            ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BlogDetail bd = BlogDetail.builder()
+                        .BlogDetailID(rs.getInt(1)).
+                        Title(rs.getString(2)).
+                        Content(rs.getString(3)).
+                        imgBlogDetail(rs.getString(4)).
+                        BlogID(rs.getInt(5))
+                        .build();
+                list.add(bd);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -118,9 +150,13 @@ public class BlogDAO extends DBContext {
     public static void main(String[] args) {
         BlogDAO b = new BlogDAO();
         List<Blog> bl = b.getAllBlogs();
-        for (Blog blog : bl) {
-            System.out.println(bl);
+        List<BlogDetail> bd = b.getBlogDetailBySearch("ao", 1);
+        for (BlogDetail be : bd) {
+            System.out.println(be);
         }
+//        for (Blog blog : bl) {
+//            System.out.println(bl);
+//        }
 //        ListBlogDetail bd = b.getBlogDetailById(1);
 //        System.out.println(bd);
     }

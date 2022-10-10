@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
 import model.BlogDetail;
@@ -63,7 +64,14 @@ public class BlogDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         BlogDAO b = new BlogDAO();
         int id = Integer.parseInt(request.getParameter("id"));
-        List<BlogDetail> bd = b.getBlogDetailById(id);
+        String key = request.getParameter("key");
+        List<BlogDetail> bd = new ArrayList<>();
+        if(key.equals("1")){
+         bd = b.getBlogDetailById(id);
+        }
+        else{
+            bd = b.getBlogDetailBySearch(key, id);
+        }
         Blog bg = b.getBlogs(id);
         
         request.setAttribute("blogdetail", bd);

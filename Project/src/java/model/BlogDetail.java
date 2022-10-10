@@ -4,72 +4,24 @@
  */
 package model;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  *
  * @author trung
  */
+@Getter
+@Setter
+@ToString
+@Builder
 public class BlogDetail {
-    int BlogDetailID;
-    String Title;
-    String Content;
-    String imgBlogDetail;
-    int BlogID;
+    private int BlogDetailID;
+    private String Title;
+    private String Content;
+    private String imgBlogDetail;
+    private int BlogID;
 
-    public BlogDetail() {
-    }
-
-    public BlogDetail(int BlogDetailID, String Title, String Content, String imgBlogDetail, int BlogID) {
-        this.BlogDetailID = BlogDetailID;
-        this.Title = Title;
-        this.Content = Content;
-        this.imgBlogDetail = imgBlogDetail;
-        this.BlogID = BlogID;
-    }
-
-    public int getBlogDetailID() {
-        return BlogDetailID;
-    }
-
-    public void setBlogDetailID(int BlogDetailID) {
-        this.BlogDetailID = BlogDetailID;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String Title) {
-        this.Title = Title;
-    }
-
-    public String getContent() {
-        return Content;
-    }
-
-    public void setContent(String Content) {
-        this.Content = Content;
-    }
-
-    public String getImgBlogDetail() {
-        return imgBlogDetail;
-    }
-
-    public void setImgBlogDetail(String imgBlogDetail) {
-        this.imgBlogDetail = imgBlogDetail;
-    }
-
-    public int getBlogID() {
-        return BlogID;
-    }
-
-    public void setBlogID(int BlogID) {
-        this.BlogID = BlogID;
-    }
-
-    @Override
-    public String toString() {
-        return "BlogDetail{" + "BlogDetailID=" + BlogDetailID + ", Title=" + Title + ", Content=" + Content + ", imgBlogDetail=" + imgBlogDetail + ", BlogID=" + BlogID + '}';
-    }
-    
-    
 }

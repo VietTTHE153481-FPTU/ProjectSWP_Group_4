@@ -44,7 +44,7 @@
                                     <h6 class="ltext-109 cl2 p-b-28">
                                         ${blog.title}
                                     </h6>
-                                        <p class="stext-117 cl6 p-b-26" style="color: #000">${blog.content}</p>
+                                    <p class="stext-117 cl6 p-b-26" style="color: #000">${blog.content}</p>
                                     <div class="wrap-pic-w how-pos5-parent">
                                         <img src="resources/img/Blog/${blog.getImageLink()}">
                                         <div class="flex-col-c-m size-123 bg9 how-pos5">
@@ -84,12 +84,15 @@
                             </div>
                             <div class="col-md-4 col-lg-3 p-b-80">
                                 <div class="side-menu">
-                                    <div class="bor17 of-hidden pos-relative">
-                                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-                                        <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-                                            <i class="zmdi zmdi-search"></i>
-                                        </button>
-                                    </div>
+                                    <form action="blogdetail">
+                                        <div class="bor17 of-hidden pos-relative">
+                                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="key" placeholder="Search"/>
+                                            <input type="hidden" name="id" value="${blog.id}"/>
+                                            <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+                                                <i class="zmdi zmdi-search"></i>
+                                            </button>
+                                        </div>
+                                    </form> 
                                 </div>
                             </div>
                         </div>
