@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
 
@@ -58,10 +59,18 @@ public class BlogListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         BlogDAO bd = new BlogDAO();
-        List<Blog> blogs = bd.getAllBlogs();
+        String key = request.getParameter("key");
+        List<Blog> blogs = new ArrayList<>();
+        if(key.equals("")){
+         blogs = bd.getAllBlogs();
+        }
+        else{
+            blogs = bd.getBlogBySearch(key);
+        }
         request.setAttribute("bloglist", blogs);
-        
+        request.setAttribute("search", key);
         request.getRequestDispatcher("bloglist.jsp").forward(request, response);
     } 
 

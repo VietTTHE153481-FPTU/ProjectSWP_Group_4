@@ -73,7 +73,7 @@
                         <ul class="navbar_menu">
                             <li><a href="home">home</a></li>
                             <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
-                            <li><a href="bloglist">blogs</a></li>
+                            <li><a href="bloglist?key=">blogs</a></li>
                             <li><a href="#">contact</a></li>
                         </ul>
                         <ul class="navbar_user">

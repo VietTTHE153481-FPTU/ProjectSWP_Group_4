@@ -85,48 +85,65 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String sex = request.getParameter("sex");
         String email = request.getParameter("mail");
+        
         RegisterDAO rd = new RegisterDAO();
         HttpSession session = request.getSession();
         Users a = rd.checkAccountExist(username);
+        
+        request.setAttribute("username", username);
+        request.setAttribute("password", password);
+        request.setAttribute("repassword", cfpassword);
+        request.setAttribute("fullname", fullname);
+        request.setAttribute("phone", phone);
+        request.setAttribute("gender", sex);
+        request.setAttribute("email", email);
         //username chi co chu cai in thuong, in hoa hoac chu so
         if (rd.getStringInput(username, "^[a-zA-Z0-9]+$") == false) {
             session.setAttribute("mess", "Username cannot have special character or space");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
             // check xem username co trung voi username co san khong
         } else if (a != null) {
             session.setAttribute("mess", "The Username already exist!!");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
             //password phai co it nhat 1 chu so, 1 chu cai in thuong, 1 chu cai in hoa, 1 ki tu dac biet va it nhat tu 5 ki tu tro len 
         } else if (rd.getStringInput(password, "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{5,}$") == false) {
             session.setAttribute("mess", "Password must have at least 1 number, 1 uppercase character, 1 lowercase character, 1 special character and 5 character up and above");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
             //check xem mat khau nhap lan 2 co trung voi password lan 1 khong
         } else if (!password.equals(cfpassword)) {
             session.setAttribute("mess", "The entered Password must be the same!");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
             //fullname chi co chu cai in thuong , in hoa va dau cach va ki tu tieng Viet
         } else if (rd.getStringInput(fullname, "^[a-zA-Z"
                 + "_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơ"
                 + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊ"
                 + "ỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\ ]+$") == false) {
             session.setAttribute("mess", "Full name must be a string of character or Vietnamese character");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
             // so dien thoai luon bat dau bang so 84 hoac 0 tiep theo la 1 chu so la 3 hoac 5 hoac 7 hoac 8 hoac 9 va tiep theo la 8 chu so
         } else if (rd.getStringInput(phone, "^(84|0[3|5|7|8|9])+([0-9]{8})$") == false) {
             session.setAttribute("mess", "Phone number must match format of Vietnamese phone number format");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
             //email ki tu dau tien la chu cai tiep theo 
 //            la 1 loat ki tu bao gom chu cai hoac chu so tiep theo la dau @ 
 //            di cung voi 1 loat ki tu la chu cai di cung voi dau cham theo sau la 
 //            1 chuoi ki tu la chu cai chi tu 1 den 3 ki tu
         } else if (rd.getStringInput(email, "^[a-zA-Z][a-zA-Z0-9\\-_]+@[a-zA-Z]+(\\.[a-zA-Z]+){1,3}$") == false) {
             session.setAttribute("mess", "Please input correctly email format");
-            response.sendRedirect("register");
+//            response.sendRedirect("register");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         } else {
             //đẩy về trang register sau khi thoa man cac dieu kien
             rd.create(username, rd.bytesToHex(password), fullname, phone, sex, email);
             response.sendRedirect("login");
         }
+        
     }
 
     /**

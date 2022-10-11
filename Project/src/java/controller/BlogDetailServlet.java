@@ -74,6 +74,7 @@ public class BlogDetailServlet extends HttpServlet {
         }
         Blog bg = b.getBlogs(id);
         
+        request.setAttribute("key", key);
         request.setAttribute("blogdetail", bd);
         request.setAttribute("blog", bg);
         request.getRequestDispatcher("blogdetail.jsp").forward(request, response);

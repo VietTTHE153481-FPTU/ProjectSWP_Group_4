@@ -32,48 +32,61 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" name="user" class="form-control" placeholder="Username">
+                        <input value="${username}" type="text" name="user" class="form-control" placeholder="Username">
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i></span>
                         </div>
-                        <input type="password" name="pass" class="form-control" placeholder="Password">
+                        <input value="${password}" type="password" name="pass" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i></span>
                         </div>
-                        <input type="password" name="cfpass" class="form-control" placeholder="Repeat password">
+                        <input value="${repassword}" type="password" name="cfpass" class="form-control" placeholder="Repeat password">
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" name="fname" class="form-control" placeholder="Fullname">
+                        <input value="${fullname}" type="text" name="fname" class="form-control" placeholder="Fullname">
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-phone"></i></span>
                         </div>
-                        <input type="text" name="phone" class="form-control" placeholder="Phone">
+                        <input value="${phone}" type="text" name="phone" class="form-control" placeholder="Phone">
                     </div>
                     <center>
-                        <div class="form-check form-check-inline mb-0">
-                            <input class="form-check-input" type="radio" name="sex" checked value="0" />
-                            <label class="form-check-label">Male</label>
-                        </div>
-                        <div class="form-check form-check-inline mb-0 me-4">
-                            <input class="form-check-input" type="radio" name="sex" value="1" />
-                            <label class="form-check-label">Female</label>
-                        </div>
+                        <c:if test="${gender==0}" >
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="sex" checked value="0" />
+                                <label class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="sex" value="1" />
+                                <label class="form-check-label">Female</label>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${gender==1}" >
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="sex" value="0" />
+                                <label class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-0 me-4">
+                                <input class="form-check-input" type="radio" name="sex" checked value="1" />
+                                <label class="form-check-label">Female</label>
+                            </div>
+                        </c:if>
                     </center>
                     <br/>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i></span>
                         </div>
-                        <input type="text" name="mail" class="form-control" placeholder="Email">
+                        <input value="${email}" type="text" name="mail" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <button type="submit" name="sign up" class="btn btn-primary btn-block">Create Account</button>

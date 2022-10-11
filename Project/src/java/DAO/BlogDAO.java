@@ -147,11 +147,38 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getBlogBySearch(String key) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog b where b.BlogTitle like ? or b.BlogContent like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ps.setString(2, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Blog bd = Blog.builder()
+                        .id(rs.getInt(1)).
+                        author(rs.getString(2)).
+                        day(rs.getInt(3)).
+                        month(rs.getString(4)).
+                        year(rs.getInt(5)).
+                        title(rs.getString(6)).
+                        content(rs.getString(7)).
+                        imageLink(rs.getString(8))
+                        .build();
+                list.add(bd);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public static void main(String[] args) {
         BlogDAO b = new BlogDAO();
         List<Blog> bl = b.getAllBlogs();
-        List<BlogDetail> bd = b.getBlogDetailBySearch("ao", 1);
-        for (BlogDetail be : bd) {
+        List<Blog> bd = b.getBlogBySearch("ao");
+        for (Blog be : bd) {
             System.out.println(be);
         }
 //        for (Blog blog : bl) {
