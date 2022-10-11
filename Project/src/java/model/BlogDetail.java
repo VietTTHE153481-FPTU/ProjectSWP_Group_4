@@ -4,6 +4,7 @@
  */
 package model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
+@AllArgsConstructor
 public class BlogDetail {
     private int BlogDetailID;
     private String Title;

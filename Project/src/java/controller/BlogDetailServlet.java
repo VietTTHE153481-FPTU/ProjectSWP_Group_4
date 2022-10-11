@@ -66,7 +66,7 @@ public class BlogDetailServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String key = request.getParameter("key");
         List<BlogDetail> bd = new ArrayList<>();
-        if(key.equals("1")){
+        if(key.equals("")){
          bd = b.getBlogDetailById(id);
         }
         else{
