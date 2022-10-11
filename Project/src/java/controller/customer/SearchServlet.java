@@ -2,22 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.customer;
 
+import DAO.CategoryDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import model.Category;
+import model.Products;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
-public class CartServlet extends HttpServlet {
+@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
+public class SearchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,26 +33,30 @@ public class CartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
-        Cookie arr[] = request.getCookies();
-        String txt = "";
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                txt = txt + o.getValue();
-                o.setMaxAge(0);
-                response.addCookie(o);
+        CategoryDAO cd = new CategoryDAO();
+        List<Category> listC = cd.getAll();
+        request.setAttribute("listC", listC);
+        try {
+            String txt = request.getParameter("txtSearch");
+            int index = Integer.parseInt(request.getParameter("index"));
+
+            int count = cd.count(txt);
+            int size = 8;
+            int endPage = count / size;
+            if (count % size != 0) {
+                endPage++;
             }
+            List<Products> list = cd.search(txt, index);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("listpd", list);
+            request.setAttribute("txt", txt);
+            request.getRequestDispatcher("products.jsp").forward(request, response);
+        } catch (ServletException | IOException | NumberFormatException | SQLException e) {
+
         }
-        if (txt.isEmpty()) {
-            txt = id;
-        } else {
-            txt = txt + "," + id;
-        }
-        Cookie c = new Cookie("id", txt);
-        c.setMaxAge(60 * 60 * 24);
-        response.addCookie(c);
-        response.sendRedirect("show");
+        */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

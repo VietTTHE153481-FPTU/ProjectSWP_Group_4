@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="super_container">
-            <%@include file = "Header.jsp" %>
+            <%@include file = "layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="row">
                     <div class="col product_section clearfix">
@@ -151,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <%@include file = "Footer.jsp" %>
+            <%@include file = "layout/Footer.jsp" %>
         </div>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="styles/bootstrap4/popper.js"></script>

@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="super_container">
-            <%@include file = "Header.jsp" %>
+            <%@include file = "layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="container">
                     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('resources/img/Blog/bg-02.jpg');">
@@ -90,7 +90,7 @@
                     </section>
                 </div>
             </div>
-            <%@include file = "Footer.jsp" %>
+            <%@include file = "layout/Footer.jsp" %>
         </div>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="styles/bootstrap4/popper.js"></script>

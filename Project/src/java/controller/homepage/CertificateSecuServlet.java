@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.homepage;
 
-import DAO.AccountDAO;
-import DAO.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Users;
 
 /**
  *
- * @author trung
+ * @author Admin
  */
-@WebServlet(name="AccountServlet", urlPatterns={"/account"})
-public class AccountServlet extends HttpServlet {
+@WebServlet(name="CertificateSecuServlet", urlPatterns={"/certificateSecu"})
+public class CertificateSecuServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +35,10 @@ public class AccountServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountServlet</title>");  
+            out.println("<title>Servlet CertificateSecuServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AccountServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CertificateSecuServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,10 +55,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        AdminDAO ad = new AdminDAO();
-        List<Users> list = ad.getAllAccount();
-        request.setAttribute("listac", list);
-        request.getRequestDispatcher("account.jsp").forward(request, response);
+        request.getRequestDispatcher("certificateSecu.jsp").forward(request, response);
     } 
 
     /** 
@@ -76,17 +68,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Users acc = (Users) session.getAttribute("account");
-        String pass_new = request.getParameter("pass_new");
-        PrintWriter out = response.getWriter();
-        out.println(pass_new);
-        
-        AccountDAO ad = new AccountDAO();
-        ad.changePass(acc, pass_new);
-        acc.setPassword(ad.bytesToHex(pass_new));
-        session.setAttribute("account", acc);
-        response.sendRedirect("home");
+        processRequest(request, response);
     }
 
     /** 

@@ -67,28 +67,18 @@
             <div class="row">
                 <div class="col-lg-12 text-right">
                     <div class="logo_container">
-                        <a href="home">Levents<span>shop</span></a>
+                        <nav class="navbar">
+                            <a href="home">Levents<span>shop</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ul class="navbar_menu">
+                                <li><a href="home">home</a></li>
+                                <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
+                                <li><a href="bloglist?key=">blogs</a></li>
+                                <li><a href="#">contact</a></li>
+                            </ul>
+                        </nav>
                     </div>
                     <nav class="navbar">
-                        <ul class="navbar_menu">
-                            <li><a href="home">home</a></li>
-                            <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
-                            <li><a href="bloglist?key=">blogs</a></li>
-                            <li><a href="#">contact</a></li>
-                        </ul>
                         <ul class="navbar_user">
-                            <li class="navbar-brand">
-                                <form action="search?index=1" method="post" class="app-search d-none d-md-block me-3">
-                                    <div class="input-group input-group-sm">
-                                        <input name="txtSearch" type="text" placeholder="Search..." class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                        <div class="input-group-append">&nbsp;
-                                            <button type="submit" class="btn btn-secondary">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </li>
                             <li class="checkout">
                                 <a href="show">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>

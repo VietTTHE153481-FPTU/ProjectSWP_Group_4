@@ -24,18 +24,31 @@
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/search.css"/>
     </head>
     <body>
         <div class="super_container">
-            <%@include file = "Header.jsp" %>
+            <%@include file = "layout/Header.jsp" %>
             <div class="main_slider" style="background-image:url(resources/img/banner/slide-01.jpg)">
                 <div class="container fill_height">
                     <div class="row align-items-center fill_height">
                         <div class="col">
-                            <div class="main_slider_content">
-                                <h6>Collection Summer 2022</h6>
-                                <h1>Get up to 30% Off New Arrivals</h1>
-                                <div class="red_button"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">shop now</a></div>
+                            <div class="s005">
+                                <form>
+                                    <fieldset>
+                                        <legend>WHAT ARE YOU LOOKING FOR?</legend>
+                                        <div class="inner-form">
+                                            <div class="input-field">
+                                                <input class="form-control" id="choices-text-preset-values" type="text" placeholder="Type to search..." />
+                                                <button class="btn-search" type="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24">
+                                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -222,7 +235,7 @@
                     </div>
                 </div>
             </div>
-            <%@include file = "Footer.jsp" %>
+            <%@include file = "layout/Footer.jsp" %>
         </div>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="styles/bootstrap4/popper.js"></script>

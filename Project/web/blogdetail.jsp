@@ -27,12 +27,12 @@
     </head>
     <body>
         <div class="super_container">
-            <%@include file = "Header.jsp" %>
+            <%@include file = "layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="home">Home</a></li>
-                        <li><a href="bloglist"><i class="fa fa-angle-right" aria-hidden="true"></i>Blogs</a></li>
+                        <li><a href="bloglist?key="><i class="fa fa-angle-right" aria-hidden="true"></i>Blogs</a></li>
                         <li class="active"><a href="blogdetail"><i class="fa fa-angle-right" aria-hidden="true"></i>${blog.title}</a></li>
                     </ul>
                 </div>
@@ -121,7 +121,7 @@
                     </form>
                 </div>
             </div>
-            <%@include file = "Footer.jsp" %>
+            <%@include file = "layout/Footer.jsp" %>
         </div>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="styles/bootstrap4/popper.js"></script>

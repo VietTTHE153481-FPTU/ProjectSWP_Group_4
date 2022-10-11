@@ -3,27 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.admin;
 
+import DAO.AccountDAO;
 import DAO.AdminDAO;
-import DAO.RegisterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Users;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name="AccountServlet", urlPatterns={"/account"})
+public class AccountServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +40,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet AccountServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AccountServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +60,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        AdminDAO ad = new AdminDAO();
+        List<Users> list = ad.getAllAccount();
+        request.setAttribute("listac", list);
+        request.getRequestDispatcher("admin/account.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,55 +76,17 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String u = request.getParameter("user");
-        RegisterDAO rd = new RegisterDAO();
-        String p = "";
-        String r = request.getParameter("rem");
-        AdminDAO ad = new AdminDAO();
-        Users b  = new Users();
-        b = ad.getAccount(u);
-        if(b==null){
-            request.getRequestDispatcher("home").forward(request, response);
-            return;
-        }
-        if(ad.getAccount(u).getRoleId() != 1){
-             p = rd.bytesToHex(request.getParameter("pass"));
-        }
-        else{
-            p = request.getParameter("pass");
-        }
-        //tạo 3 cookie: username, password, remember
-        Cookie cu = new Cookie("cuser", u);
-        Cookie cp = new Cookie("cpass", p);
-        Cookie cr = new Cookie("crem", r);
-        if (r != null) {
-            //có chọn, muốn lưu lại
-            cu.setMaxAge(60 * 60 * 24 * 7); // 7 ngày
-            cp.setMaxAge(60 * 60 * 24 * 7);
-            cr.setMaxAge(60 * 60 * 24 * 7);
-        } else {
-            //Kh muốn lưu lại, xóa đi
-            cu.setMaxAge(0);
-            cp.setMaxAge(0);
-            cr.setMaxAge(0);
-        }
-        response.addCookie(cu);
-        response.addCookie(cp);
-        response.addCookie(cr);
-
-        AdminDAO d = new AdminDAO();
-        Users a = d.check(u, p);
         HttpSession session = request.getSession();
-        if (a == null) {
-            //Chưa có tài khoản
-            request.setAttribute("error", "Username or password incorrect!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            //Tìm thấy tài khoản
-            //Tạo session
-            session.setAttribute("account", a);
-            response.sendRedirect("home");
-        }
+        Users acc = (Users) session.getAttribute("account");
+        String pass_new = request.getParameter("pass_new");
+        PrintWriter out = response.getWriter();
+        out.println(pass_new);
+        
+        AccountDAO ad = new AccountDAO();
+        ad.changePass(acc, pass_new);
+        acc.setPassword(ad.bytesToHex(pass_new));
+        session.setAttribute("account", acc);
+        response.sendRedirect("home");
     }
 
     /** 

@@ -2,27 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.admin;
 
-import DAO.CategoryDAO;
+import DAO.AdminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Products;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
+import model.Users;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "ShowCartServlet", urlPatterns = {"/show"})
-public class ShowCartServlet extends HttpServlet {
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
+public class ProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +39,10 @@ public class ShowCartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowCartServlet</title>");
+            out.println("<title>Servlet ProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowCartServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ProfileServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,40 +60,15 @@ public class ShowCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
-        Cookie arr[] = request.getCookies();
-        List<Products> list = new ArrayList<>();
-        CategoryDAO dao = new CategoryDAO();
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                String txt[] = o.getValue().split(",");
-                for (String s : txt) {
-                    list.add(dao.getProducts(s));
-                }
-            }
-        }
-        for (int i = 0; i < list.size(); i++) {
-            int count = 1;
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getId() == list.get(j).getId()) {
-                    count++;
-                    list.remove(j);
-                    j--;
-                    list.get(i).setQuantity(count);
-                }
-            }
-        }
-        double total = 0;
-        for (Products o : list) {
-            total = total + o.getQuantity() * o.getPrice();
-        }
+        AdminDAO ad = new AdminDAO();
+       // HttpSession session = request.getSession();
+        
+       String username = request.getParameter("username");
+        Users a = ad.getAccount(username);
+//        Users b = session.getAttribute("account");
+        request.setAttribute("account", a);
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
 
-        int n = list.size();
-        request.setAttribute("size", n);
-        request.setAttribute("list", list);
-        request.setAttribute("total", total);
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
-        */
     }
 
     /**
