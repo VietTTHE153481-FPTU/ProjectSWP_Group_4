@@ -37,9 +37,11 @@
                     </ul>
                 </div>
                <div class="container" style="margin-bottom: 1%; margin-top: 1%;">
-            <p style="font-size: large;color: black "> Subject : SWP391 Project : Online Shop <br>              
-          The 4.0 revolution is approaching, that's why today information technology has played a huge role, and it will be a challenge when an organization or any field in life lacks a system. computer. Online shopping is a trend that provides all detailed information about customers, products, orders, etc. Specifically, this online shopping system is a form of online store where sellers can sell products or services that customers can buy. Selling online is easier, faster or more convenient than traditional selling.. We have developed this small project Online Shopping System on Java, JSP, SQL, Boostrap 5.0 framework, CSS and All HTML codes will follow HTML 5.0 standard and the project will run on Apache Tomcat server 10.0.20. In the event that something bad happens, including a system error or negative feedback, the admin will be able to maintain and modify the site. This system supports the following types of users…
-            And this is our shop (on the google map)</p>
+            <p style="font-size: large;color: black "> WELCOME TO OUR SHOP <br>              
+            Leventshop là trang thương mại điện tử mua sắm, nó được lập ra bởi tập đoàn SEA của Forrest Li ở Singapore vào năm 2015. Nó chính là một cái chợ Online, là trung gian kết nối giữa người mua và người bán, giúp hoạt động kinh doanh online trở nên dễ dàng hơn. Ở đó người bán đăng tải các thông tin về sản phẩm và dịch vụ mà không cần người tư vấn hay vận chuyển, đồng thời người mua cũng tiếp cận được các thông tin ấy một cách trực quan mà không cần đến cửa hàng. 
+
+            Leventshop hiện nay đã có mặt tại 7 quốc gia ở khu vực châu Á đó là: Singapore, Malaysia, Indonesia, Đài Loan, Philippines và đặc biệt ngày 8/8/2016, Leventshop đã chính thức ra mắt tại Việt Nam.
+            Và các bạn có thể định vị rõ ràng hơn vị trí của chúng tôi thông qua google map như dưới đây.</p>
             </div>
             <div>
                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4854095316095!2d105.52487561472437!3d21.013254993683844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b465a4e65fb%3A0xaae6040cfabe8fe!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1665079686459!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

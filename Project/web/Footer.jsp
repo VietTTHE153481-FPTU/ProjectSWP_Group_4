@@ -36,7 +36,11 @@
                 </h5>
                 <a href="introduction" style="color: #FFFFFF">
                     <span>About US</span>
+                </a><br>
+                <a href="certificateSecu" style="color: #FFFFFF">
+                    <span>Chính sách bảo mật</span>
                 </a>
+                
             </div>
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h5 class="text-uppercase mb-4" style="color: #FFFFFF">
