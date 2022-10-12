@@ -32,15 +32,25 @@
         <div class="row">
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h5 class="text-uppercase mb-4" style="color: #FFFFFF">
-                    <i class="fa fa-shopping-bag"></i>&nbsp;About shop
+                    <i class="fa fa-shopping-bag"></i>&nbsp;&nbsp;About shop
                 </h5>
-                <a href="introduction" style="color: #FFFFFF">
-                    <span>About US</span>
-                </a><br>
-                <a href="certificateSecu" style="color: #FFFFFF">
-                    <span>Chính sách bảo mật</span>
-                </a>
-                
+                <ul class="fa-ul" style="margin-left: 1.80em;">
+                    <li class="mb-3">
+                        <a href="introduction" style="color: #FFFFFF">
+                            <span>About US</span>
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="certificateSecu" style="color: #FFFFFF">
+                            <span>Privacy Policy</span>
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="helpcenter" style="color: #FFFFFF">
+                            <span>Support Center</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h5 class="text-uppercase mb-4" style="color: #FFFFFF">

@@ -545,39 +545,39 @@ Các gam màu thật nổi không chỉ giúp vẻ ngoài của người diện 
 INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo sơ mi kẻ sọc', N'Không phải là một kiểu sơ mi quá mới, tuy nhiên sức hút của áo sơ mi kẻ vẫn chưa bao giờ thuyên giảm. Điểm đáng chú ý của áo sơ mi kẻ là món thời trang này rất thanh lịch, trang nhã và vẫn có sự nổi bật nhất định.',N'aosomi1.jpg',5)
 INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo sơ mi cộc tay', N'Hot hơn cả áo sơ mi màu nổi chính là sơ mi cộc tay. Món thời trang này phảng phất nét retro, nhưng cũng rất trẻ trung, ngọt ngào.',N'aosomi2.jpg',5)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Create table PostCategory(
+Create table HelpCategory(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CategoryName nvarchar(1000)
+	CategoryName nvarchar(1000),
+	[Image] varchar(225)
 )
 ON [PRIMARY]
 GO
-SET IDENTITY_INSERT  PostCategory ON
-INSERT [dbo].[PostCategory]([ID], [CategoryName]) VALUES(1,N'Public')
-INSERT [dbo].[PostCategory]([ID], [CategoryName]) VALUES(2,N'Hide')
-SET IDENTITY_INSERT PostCategory OFF
+SET IDENTITY_INSERT HelpCategory ON
+INSERT [dbo].HelpCategory([ID], [CategoryName], [Image]) VALUES(1,N'Mua sắm cùng LeventShop',N'helpcenter.png')
+INSERT [dbo].HelpCategory([ID], [CategoryName], [Image]) VALUES(2,N'Khuyến mãi & Ưu đãi',N'helpcenter1.png')
+INSERT [dbo].HelpCategory([ID], [CategoryName], [Image]) VALUES(3,N'Thanh toán',N'helpcenter2.png')
+INSERT [dbo].HelpCategory([ID], [CategoryName], [Image]) VALUES(4,N'Đơn hàng & vận chuyển',N'helpcenter3.png')
+SET IDENTITY_INSERT HelpCategory OFF
 go
-Create TABLE Post(
+Create TABLE HelpDetail(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	[Description] nvarchar(2500),
+	[Title] nvarchar(2500),
 	UserID int,
-	[date] nvarchar(2500),
 	CategoryID int,
-	PostImgURL varchar(255),
 	constraint userID_in_user_5 FOREIGN KEY(UserID) REFERENCES Users(UserID),
-	constraint CategoryID_in_PostCategory FOREIGN KEY(CategoryID) REFERENCES PostCategory(ID)
+	constraint CategoryID_in_PostCategory FOREIGN KEY(CategoryID) REFERENCES HelpCategory(ID)
 )ON [PRIMARY]
 go
-SET IDENTITY_INSERT Post ON
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (1, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster1.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (2, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster2.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (3, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 2, N'Poster3.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (4, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 2, N'poster4.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (5, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster5.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (6, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster6.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (7, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster7.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (8, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster8.jpg')
-INSERT [dbo].[Post] ([ID], [Description], [UserID], [date], [CategoryID], [PostImgURL]) VALUES (9, N' QUẦN JEAN MỚI VỀ ĐẸP KHÔNG THỂ CƯỠNG LẠI ĐƯỢC!” Bạn sẽ có khả năng sở hữu mẫu quần jean siêu đẹp này chỉ với giá 1xxk/ hàng hóa. Chất liệu co dãn, thấm hút mồ hôi, tôn dáng, giúp người mặc trông thon gọn hơn.Đặc biệt khuyến mãi ưu đãi vào những dịp lễ lớn', 1, N'11/03/2021', 1, N'poster9.jpg')
-SET IDENTITY_INSERT Post OFF
+SET IDENTITY_INSERT HelpDetail ON
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (1, N'Người dùng mới', 1, 1)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (2, N'Thao tác', 1, 1)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (3, N'Tính nắng', 1, 1)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (4, N'Chương trình khuyến mãi', 1, 2)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (5, N'Phương thức thanh toán', 1, 3)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (6, N'Thông tin vận chuyển', 1, 4)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (7, N'Đơn hàng', 1, 4)
+INSERT [dbo].[HelpDetail] ([ID], [Title], [UserID], [CategoryID]) VALUES (8, N'Đánh giá và bình luận', 1, 4)
+SET IDENTITY_INSERT HelpDetail OFF
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE CBanner
 (
