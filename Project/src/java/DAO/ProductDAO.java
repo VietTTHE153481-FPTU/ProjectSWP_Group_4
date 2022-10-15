@@ -24,7 +24,7 @@ public class ProductDAO extends DBContext {
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
-                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
                 + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
@@ -44,7 +44,6 @@ public class ProductDAO extends DBContext {
                 p.setSellerID(rs.getInt("SellerID"));
                 p.setAmount(rs.getInt("Amount"));
                 p.setStatusID(rs.getInt("StatusID"));
-                p.setBrandID(rs.getInt("BrandID"));
                 p.setUrl(rs.getString("ProductImgURL"));
                 p.setCategoryID(rs.getInt("CategoryID"));
                 list.add(p);
@@ -60,7 +59,7 @@ public class ProductDAO extends DBContext {
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
-                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
                 + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
@@ -81,7 +80,6 @@ public class ProductDAO extends DBContext {
                 p.setSellerID(rs.getInt("SellerID"));
                 p.setAmount(rs.getInt("Amount"));
                 p.setStatusID(rs.getInt("StatusID"));
-                p.setBrandID(rs.getInt("BrandID"));
                 p.setUrl(rs.getString("ProductImgURL"));
                 p.setCategoryID(rs.getInt("CategoryID"));
                 list.add(p);
@@ -97,7 +95,7 @@ public class ProductDAO extends DBContext {
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
-                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
                 + "	              JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
@@ -145,7 +143,6 @@ public class ProductDAO extends DBContext {
                 p.setSellerID(rs.getInt("SellerID"));
                 p.setAmount(rs.getInt("Amount"));
                 p.setStatusID(rs.getInt("StatusID"));
-                p.setBrandID(rs.getInt("BrandID"));
                 p.setUrl(rs.getString("ProductImgURL"));
                 p.setCategoryID(rs.getInt("CategoryID"));
                 list.add(p);
@@ -160,7 +157,7 @@ public class ProductDAO extends DBContext {
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
-                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID, MIN(p.BrandID) AS BrandID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
                 + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
@@ -180,7 +177,6 @@ public class ProductDAO extends DBContext {
                         rs.getInt("SellerID"),
                         rs.getInt("Amount"),
                         rs.getInt("StatusID"),
-                        rs.getInt("BrandID"),
                         rs.getString("ProductImgURL"),
                         rs.getInt("CategoryID")
                 );

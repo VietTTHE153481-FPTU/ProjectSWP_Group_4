@@ -5,6 +5,7 @@
 
 package controller.homepage;
 
+import DAO.HelpDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.HelpCenter;
 
 /**
  *
@@ -55,7 +58,11 @@ public class HelpCenterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("helpcenter.jsp").forward(request, response);
+        HelpDAO hd = new HelpDAO();
+        List<HelpCenter> help = hd.getAllHelpCenter();
+        request.setAttribute("category", help);
+        
+        request.getRequestDispatcher("service.jsp").forward(request, response);
     } 
 
     /** 
@@ -68,7 +75,7 @@ public class HelpCenterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("helpcenter.jsp").forward(request, response);
     }
 
     /** 
