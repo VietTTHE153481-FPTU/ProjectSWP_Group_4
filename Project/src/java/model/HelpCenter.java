@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 
 public class HelpCenter {
-    private int ID;
+    private int CategoryID;
     private String CategoryName;
     private String Image;
 }

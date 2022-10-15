@@ -79,6 +79,12 @@
             .active-menu:hover{
                 color: #ff3300
             }
+            .content{
+                font-size: 20px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px dotted #999999;
+            }
         </style>
     </head>
     <body>
@@ -106,36 +112,41 @@
                                     <li>
                                         <div class="text-left">
                                             <h5 style="padding-top: 10px; padding-bottom: 10px;">
-                                                <button class="active-menu" type="button" data-toggle="collapse" data-target="#${cate.getID()}" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                                <button class="active-menu" type="button" data-toggle="collapse" data-target="#${cate.getCategoryID()}" aria-expanded="false" aria-controls="multiCollapseExample1">
                                                     <strong>${cate.getCategoryName()}</strong>
                                                 </button>
                                             </h5>
                                         </div>
                                     </li>
-                                    <ul class="collapse multi-collapse" id="${cate.getID()}">
+                                    <div class="${tag1 == cate.getCategoryID() ? "show":""} collapse" id="${cate.getCategoryID()}">
                                         <c:forEach items="${listservice}" var="list">
-                                            <c:if test="${list.getCategoryID() == cate.getID()}">
-                                                <li>
-                                                    <a href="servicecategories?seid=${cate.getID()}&stid=${list.getID()}">
-                                                        <div class="text-left">
-                                                            <span>&nbsp;&nbsp;&nbsp;${list.getTitle()}</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
+                                            <c:if test="${list.getCategoryID() == cate.getCategoryID()}">
+                                                <ul>
+                                                    <li class="${tag2 == list.getTitleID() ? "active":""}">
+                                                        <a href="servicecategories?seid=${cate.getCategoryID()}&stid=${list.getTitleID()}">
+                                                            <span class="active">&nbsp;&nbsp;&nbsp;${list.getTitle()}</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </c:if>
                                         </c:forEach>
-                                    </ul>
+                                    </div>
                                 </c:forEach>
                             </ul>
                         </div>
-                        <div class="col-md-3">
-                            <h3 style="padding-bottom: 10px;">Người dùng mới</h3>
-                            <ul>
-                                <li>first</li>
-                                <li>second</li>
-                                <li>third</li>
-                            </ul>
-
+                        <div class="col-md-6">
+                            <h3 style="padding-bottom: 10px; border-bottom: 1px dotted #999999">${title.getTitle()}</h3>
+                            <c:forEach items="${listContentByStId}" var="lcontent">
+                                <div class="content">
+                                    <ul class="list-group">
+                                        <li class="list-group-item-light">
+                                            <a style="color: #000000" href="#">
+                                                ${lcontent.getContent()}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

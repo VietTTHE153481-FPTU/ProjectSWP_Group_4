@@ -28,7 +28,7 @@ public class HelpDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 HelpCenter hc = HelpCenter.builder().
-                        ID(rs.getInt("ID")).
+                        CategoryID(rs.getInt("CategoryID")).
                         CategoryName(rs.getString("CategoryName")).
                         Image(rs.getString("Image")).build();
                 list.add(hc);
@@ -47,7 +47,7 @@ public class HelpDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 HelpTitle hc = HelpTitle.builder().
-                        ID(rs.getInt("ID")).
+                        TitleID(rs.getInt("TitleID")).
                         Title(rs.getString("Title")).
                         UserID(rs.getInt("UserID")).
                         CategoryID(rs.getInt("CategoryID")).build();
@@ -60,13 +60,13 @@ public class HelpDAO extends DBContext {
     }
     
     public HelpTitle getHelpTitle(int stid) {
-        String sql = "SELECT * FROM [HelpTitle] WHERE ID = ?";
+        String sql = "SELECT * FROM [HelpTitle] WHERE TitleID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, stid);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new HelpTitle(rs.getInt("ID"),
+                return new HelpTitle(rs.getInt("TitleID"),
                         rs.getString("Title"),
                         rs.getInt("UserID"),
                         rs.getInt("CategoryID")
@@ -80,24 +80,24 @@ public class HelpDAO extends DBContext {
 
     public List<HelpContent> getHelpContentByID(int seid, int stid) {
         List<HelpContent> list = new ArrayList<>();
-        String sql = "SELECT * FROM (SELECT co.ID, MIN(co.Content) AS Content,\n"
+        String sql = "SELECT * FROM (SELECT co.ContentID, MIN(co.Content) AS Content,\n"
                 + "MIN(co.TitleID) AS TitleID, MIN(ht.Title) AS Title, MIN(ht.CategoryID) AS CategoryID\n"
-                + "FROM HelpContent co JOIN HelpTitle ht ON co.TitleID = ht.ID\n";
+                + "FROM HelpContent co JOIN HelpTitle ht ON co.TitleID = ht.TitleID\n";
         if (seid != 0) {
-            sql += "AND ht.CategoryID=" + seid;
+            sql += " AND ht.CategoryID= " + seid;
         }
         if (stid != 0) {
-            sql += "AND co.TitleID=" + stid;
+            sql += " AND ht.TitleID= " + stid;
         }
-        sql += "GROUP BY co.ID) t";
+        sql += " GROUP BY co.ContentID) t";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 HelpContent hc = HelpContent.builder().
-                        ID(rs.getInt("ID")).
+                        ContentID(rs.getInt("ContentID")).
                         Content(rs.getString("Content")).
-                        TitlteID(rs.getInt("TitlteID")).build();
+                        TitlteID(rs.getInt("TitleID")).build();
                 list.add(hc);
             }
         } catch (SQLException e) {

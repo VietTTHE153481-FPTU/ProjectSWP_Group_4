@@ -4,56 +4,36 @@
  */
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  *
  * @author trung
  */
-public class Banner {
+@Getter
+@Setter
+@ToString
+@Builder
 
-    public int id;
-    public String img;
-    public String title;
-    public String desc;
+public class Banner {
+    private int ID;
+    private String Img;
+    private String Title;
+    private String desc;
 
     public Banner() {
     }
 
-    public Banner(int id, String img, String title, String desc) {
-        this.id = id;
-        this.img = img;
-        this.title = title;
+    public Banner(int ID, String Img, String Title, String desc) {
+        this.ID = ID;
+        this.Img = Img;
+        this.Title = Title;
         this.desc = desc;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+    
+    
 }

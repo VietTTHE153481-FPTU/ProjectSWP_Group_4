@@ -122,7 +122,7 @@
                                 <div class="row mt-4 g-1 px-4 mb-5">
                                     <c:forEach items="${category}" var="cate">
                                         <div class="col-md-3">
-                                            <a href="servicecategories?seid=${cate.getID()}" style="color: black">
+                                            <a href="servicecategories?seid=${cate.getCategoryID()}&stid=${0}" style="color: black">
                                                 <div class="card-inner p-3 d-flex flex-column align-items-center">
                                                     <img src="resources/img/Categories/${cate.getImage()}" width="50">
                                                     <div class="text-center mg-text">

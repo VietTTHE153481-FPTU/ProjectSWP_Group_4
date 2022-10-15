@@ -22,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 
 public class HelpTitle {
-    private int ID;
+    private int TitleID;
     private String Title;
     private int UserID;
     private int CategoryID;

@@ -79,9 +79,10 @@ public class HomeServlet extends HttpServlet {
         List<Blog> listbg = bg.getHotBlogs();
         request.setAttribute("listbg", listbg);
         
-        BannerDAO bn = new BannerDAO();
-        List<Banner> listBanner = bn.getAllBrand();
-        request.setAttribute("listbanner", listBanner);
+        BannerDAO bd = new BannerDAO();
+        List<Banner> listbn = bd.getAllBanner();
+        request.setAttribute("listbn", listbn);
+        
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

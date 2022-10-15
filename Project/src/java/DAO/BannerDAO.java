@@ -18,27 +18,27 @@ import model.Banner;
  */
 public class BannerDAO extends DBContext {
 
-    public List<Banner> getAllBrand() {
-        List<Banner> listBanner = new ArrayList<>();
+    public List<Banner> getAllBanner() {
+        List<Banner> list = new ArrayList<>();
         String sql = "SELECT [ID]\n"
                 + "      ,[Img]\n"
                 + "      ,[Title]\n"
                 + "      ,[desc]\n"
-                + "  FROM [dbo].[CBanner]";
+                + "  FROM [dbo].[Banner]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Banner bn = new Banner();
-                bn.setId(rs.getInt("ID"));
+                bn.setID(rs.getInt("ID"));
                 bn.setImg(rs.getString("Img"));
                 bn.setTitle(rs.getString("Title"));
-                bn.setDesc(rs.getString("desc"));
-                listBanner.add(bn);
+                bn.setDesc(rs.getString("Desc"));
+                list.add(bn);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return listBanner;
+        return list;
     }
 }

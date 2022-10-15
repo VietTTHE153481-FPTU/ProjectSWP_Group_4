@@ -522,69 +522,69 @@ INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo s
 INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(N'Áo sơ mi cộc tay', N'Hot hơn cả áo sơ mi màu nổi chính là sơ mi cộc tay. Món thời trang này phảng phất nét retro, nhưng cũng rất trẻ trung, ngọt ngào.',N'aosomi2.jpg',5)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create table HelpCategory(
-	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CategoryID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	CategoryName nvarchar(1000),
 	[Image] varchar(225)
 )
 ON [PRIMARY]
 GO
 SET IDENTITY_INSERT HelpCategory ON
-INSERT [dbo].HelpCategory ([ID], [CategoryName], [Image]) VALUES(1, N'Mua sắm cùng LeventShop',N'helpcenter.png')
-INSERT [dbo].HelpCategory ([ID], [CategoryName], [Image]) VALUES(2, N'Khuyến mãi & Ưu đãi',N'helpcenter1.png')
-INSERT [dbo].HelpCategory ([ID], [CategoryName], [Image]) VALUES(3, N'Thanh toán',N'helpcenter2.png')
-INSERT [dbo].HelpCategory ([ID], [CategoryName], [Image]) VALUES(4, N'Đơn hàng & vận chuyển',N'helpcenter3.png')
-INSERT [dbo].HelpCategory ([ID], [CategoryName], [Image]) VALUES(5, N'Thông tin chung',N'helpcenter4.png')
+INSERT [dbo].HelpCategory ([CategoryID], [CategoryName], [Image]) VALUES(1, N'Mua sắm cùng LeventShop',N'helpcenter.png')
+INSERT [dbo].HelpCategory ([CategoryID], [CategoryName], [Image]) VALUES(2, N'Khuyến mãi & Ưu đãi',N'helpcenter1.png')
+INSERT [dbo].HelpCategory ([CategoryID], [CategoryName], [Image]) VALUES(3, N'Thanh toán',N'helpcenter2.png')
+INSERT [dbo].HelpCategory ([CategoryID], [CategoryName], [Image]) VALUES(4, N'Đơn hàng & vận chuyển',N'helpcenter3.png')
+INSERT [dbo].HelpCategory ([CategoryID], [CategoryName], [Image]) VALUES(5, N'Thông tin chung',N'helpcenter4.png')
 SET IDENTITY_INSERT HelpCategory OFF
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 GO
 Create TABLE HelpTitle(
-	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	TitleID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	[Title] nvarchar(2500),
 	UserID int,
 	CategoryID int,
 	constraint userID_in_user_5 FOREIGN KEY(UserID) REFERENCES Users(UserID),
-	constraint CategoryID_in_HelpTitle FOREIGN KEY(CategoryID) REFERENCES HelpCategory(ID)
+	constraint CategoryID_in_HelpTitle FOREIGN KEY(CategoryID) REFERENCES HelpCategory(CategoryID)
 )ON [PRIMARY]
 go
 SET IDENTITY_INSERT HelpTitle ON
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (1, N'Người dùng mới', 1, 1)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (2, N'Thao tác', 1, 1)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (3, N'Tính nắng', 1, 1)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (4, N'Chương trình khuyến mãi', 1, 2)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (5, N'Phương thức thanh toán', 1, 3)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (6, N'Thông tin vận chuyển', 1, 4)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (7, N'Đơn hàng', 1, 4)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (8, N'Đánh giá và bình luận', 1, 4)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (9, N'Tài khoản LeventShop', 1, 5)
-INSERT [dbo].[HelpTitle] ([ID], [Title], [UserID], [CategoryID]) VALUES (10, N'Hướng dẫn chung', 1, 5)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (1, N'Người dùng mới', 1, 1)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (2, N'Thao tác', 1, 1)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (3, N'Tính năng', 1, 1)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (4, N'Chương trình khuyến mãi', 1, 2)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (5, N'Phương thức thanh toán', 1, 3)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (6, N'Thông tin vận chuyển', 1, 4)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (7, N'Đơn hàng', 1, 4)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (8, N'Đánh giá và bình luận', 1, 4)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (9, N'Tài khoản LeventShop', 1, 5)
+INSERT [dbo].[HelpTitle] ([TitleID], [Title], [UserID], [CategoryID]) VALUES (10, N'Hướng dẫn chung', 1, 5)
 SET IDENTITY_INSERT HelpTitle OFF
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE HelpContent(
-	ID int NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	ContentID int NOT NULL IDENTITY (1,1) PRIMARY KEY,
 	Content nvarchar(2500),
 	TitleID int,
-	constraint TitleID FOREIGN KEY(TitleID) REFERENCES HelpTitle(ID),
+	constraint TitleID FOREIGN KEY(TitleID) REFERENCES HelpTitle(TitleID),
 )ON [PRIMARY]
 GO
 SET IDENTITY_INSERT HelpContent ON
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (1, N'[Thành viên mới] Cách đăng nhập/ đăng ký tài khoản mới',1)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (2, N'[Thành viên mới] Làm sao để mua hàng/ đặt hàng trên Shop',1)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (3, N'[Thành viên mới] Tính năng "Yêu thích sản phẩm"',1)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (4, N'[Chat] Hướng dẫn nhắn tin với Người bán',2)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (5, N'[Thành viên mới] Hướng dẫn đăng xuất tài khoản LeventShop',2)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (6, N'Tôi có thể hủy đơn hàng sau khi đặt hàng không?',3)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (7, N'Thêm sản phẩm vào danh sách yêu thích',3)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (8, N'Coming soon....',4)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (9, N'Coming soon....',5)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (10, N'[Vận chuyển] Trạng thái giao hàng của Đơn hàng',6)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (11, N'Thời gian giao hàng ước tính',6)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (12, N'Theo dõi tình trạng vận chuyển của đơn hàng',7)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (13, N'Cách kiểm tra lịch sử mua hàng',7)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (14, N'Hướng dẫn đánh giá sản phẩm',8)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (15, N'Xóa/ chỉnh sửa đánh giá sản phẩm của mình trên LeventShop',8)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (16, N'[Tài khoản LeventShop] Hướng dẫn lấy lại mật khẩu đăng nhập khi quên mật khẩu',9)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (17, N'[Tài khoản LeventShop] Hướng dẫn thay đổi mật khẩu tài khoản đăng nhập',9)
-INSERT INTO [dbo].[HelpContent] ([ID], [Content], [TitleID]) VALUES (18, N'Coming soon....',10)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (1, N'[Thành viên mới] Cách đăng nhập/ đăng ký tài khoản mới',1)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (2, N'[Thành viên mới] Làm sao để mua hàng/ đặt hàng trên Shop',1)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (3, N'[Thành viên mới] Tính năng "Yêu thích sản phẩm"',1)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (4, N'[Chat] Hướng dẫn nhắn tin với Người bán',2)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (5, N'[Thành viên mới] Hướng dẫn đăng xuất tài khoản LeventShop',2)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (6, N'Tôi có thể hủy đơn hàng sau khi đặt hàng không?',3)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (7, N'Thêm sản phẩm vào danh sách yêu thích',3)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (8, N'Coming soon....',4)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (9, N'Coming soon....',5)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (10, N'[Vận chuyển] Trạng thái giao hàng của Đơn hàng',6)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (11, N'Thời gian giao hàng ước tính',6)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (12, N'Theo dõi tình trạng vận chuyển của đơn hàng',7)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (13, N'Cách kiểm tra lịch sử mua hàng',7)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (14, N'Hướng dẫn đánh giá sản phẩm',8)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (15, N'Xóa/ chỉnh sửa đánh giá sản phẩm của mình trên LeventShop',8)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (16, N'[Tài khoản LeventShop] Hướng dẫn lấy lại mật khẩu đăng nhập khi quên mật khẩu',9)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (17, N'[Tài khoản LeventShop] Hướng dẫn thay đổi mật khẩu tài khoản đăng nhập',9)
+INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (18, N'Coming soon....',10)
 SET IDENTITY_INSERT HelpContent OFF
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
@@ -592,6 +592,18 @@ CREATE TABLE HelpContentDetail(
 	ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 
 )*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Banner
+(
+	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	Img VARCHAR(2500),
+	Title NVARCHAR(2500),
+	[desc] NVARCHAR(2500)
+)
+INSERT INTO dbo.Banner(Img,Title,[desc])VALUES('slide-01.jpg',  N'Women Collection 2022',  N'New Season')
+INSERT INTO dbo.Banner(Img,Title,[desc])VALUES('slide-02.jpg',  N'Men New-Season',  N'Jackets & Coats')
+INSERT INTO dbo.Banner(Img,Title,[desc])VALUES('slide-03.jpg',  N'Men Collection 2022',  N'New Arrivals')
+INSERT INTO dbo.Banner(Img,Title,[desc])VALUES('slide-04.jpg',  N'Women Collection 2022',  N'New Season')
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 GO
 CREATE TABLE Delivery(
