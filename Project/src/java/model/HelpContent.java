@@ -18,22 +18,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
+@AllArgsConstructor
 
-public class Banner {
-    private int ID;
-    private String Img;
-    private String Title;
-    private String desc;
-
-    public Banner() {
-    }
-
-    public Banner(int ID, String Img, String Title, String desc) {
-        this.ID = ID;
-        this.Img = Img;
-        this.Title = Title;
-        this.desc = desc;
-    }
-    
-    
+public class HelpContent {
+    private int ContentID;
+    private String Content;
+    private int TitlteID;
 }

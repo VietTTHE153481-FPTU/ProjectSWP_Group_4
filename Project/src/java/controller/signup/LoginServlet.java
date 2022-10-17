@@ -83,8 +83,14 @@ public class LoginServlet extends HttpServlet {
         AdminDAO ad = new AdminDAO();
         Users b = new Users();
         b = ad.getAccount(u);
+<<<<<<< HEAD
         if (b == null) {
             request.getRequestDispatcher("login").forward(request, response);
+=======
+        if(b==null){
+            request.setAttribute("error", "Username or password incorrect!!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+>>>>>>> 1a9ed0f40c291aeb27a22026766132849e1b6269
             return;
         }
         if (ad.getAccount(u).getRoleId() != 1) {

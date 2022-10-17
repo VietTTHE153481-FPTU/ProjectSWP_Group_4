@@ -14,26 +14,16 @@ import lombok.ToString;
  *
  * @author trung
  */
+
 @Getter
 @Setter
 @ToString
 @Builder
+@AllArgsConstructor
 
-public class Banner {
-    private int ID;
-    private String Img;
+public class HelpTitle {
+    private int TitleID;
     private String Title;
-    private String desc;
-
-    public Banner() {
-    }
-
-    public Banner(int ID, String Img, String Title, String desc) {
-        this.ID = ID;
-        this.Img = Img;
-        this.Title = Title;
-        this.desc = desc;
-    }
-    
-    
+    private int UserID;
+    private int CategoryID;
 }

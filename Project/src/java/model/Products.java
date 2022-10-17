@@ -18,15 +18,14 @@ public class Products {
     int SubCategoryID; 
     int SellerID; 
     int Amount; 
-    int StatusID; 
-    int BrandID;
+    int StatusID;
     String url;
     int CategoryID;
 
     public Products() {
     }
 
-    public Products(int productID, String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent, int SubCategoryID, int SellerID, int Amount, int StatusID, int BrandID, String url, int CategoryID) {
+    public Products(int productID, String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent, int SubCategoryID, int SellerID, int Amount, int StatusID, String url, int CategoryID) {
         this.productID = productID;
         this.productName = productName;
         this.Description = Description;
@@ -37,7 +36,6 @@ public class Products {
         this.SellerID = SellerID;
         this.Amount = Amount;
         this.StatusID = StatusID;
-        this.BrandID = BrandID;
         this.url = url;
         this.CategoryID = CategoryID;
     }
@@ -120,14 +118,6 @@ public class Products {
 
     public void setStatusID(int StatusID) {
         this.StatusID = StatusID;
-    }
-
-    public int getBrandID() {
-        return BrandID;
-    }
-
-    public void setBrandID(int BrandID) {
-        this.BrandID = BrandID;
     }
 
     public String getUrl() {

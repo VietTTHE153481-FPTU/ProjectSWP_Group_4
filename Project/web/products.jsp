@@ -39,30 +39,33 @@
                         </div>
                         <div class="sidebar">
                             <div class="sidebar_section">
+                                <div class="form-floating mb-2">
+                                    <div class="input-append span12">
+                                        <input type="text" class="form-control" placeholder="Search here...">
+                                    </div>
+                                </div>
                                 <!--Category-->
                                 <div class="sidebar_title">
                                     <h5>Product Category</h5>
                                 </div>
                                 <ul class="sidebar_categories">
-                                    <ul>
-                                        <c:forEach items="${categorys}" var="icategory">
-                                            <li class="${tag == icategory.getCategoryID() ? "active":""}">
-                                                <a href="products?page=1&cid=${icategory.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
-                                                    <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                                                        ${icategory.getCategoryName()}
-                                                </a>
-                                            </li>
-                                            <c:forEach items="${subcategorys}" var="isubcategory">
-                                                <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
-                                                    <li class="">
-                                                        <a class="form-check-label" href="products?page=1&cid=${icategory.getCategoryID()}&sid=${isubcategory.getSubCateID()}&sortType=${0}&sortMode=${0}">
-                                                            ${isubcategory.getSubCateName()} 
-                                                        </a>
-                                                    </li>
-                                                </c:if>
-                                            </c:forEach>
+                                    <c:forEach items="${categorys}" var="icategory">
+                                        <li class="${tag == icategory.getCategoryID() ? "active":""}">
+                                            <a href="products?page=1&cid=${icategory.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
+                                                <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                                                    ${icategory.getCategoryName()}
+                                            </a>
+                                        </li>
+                                        <c:forEach items="${subcategorys}" var="isubcategory">
+                                            <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
+                                                <li>
+                                                    <a class="form-check-label" href="products?page=1&cid=${icategory.getCategoryID()}&sid=${isubcategory.getSubCateID()}&sortType=${0}&sortMode=${0}">
+                                                        ${isubcategory.getSubCateName()} 
+                                                    </a>
+                                                </li>
+                                            </c:if>
                                         </c:forEach>
-                                    </ul>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>

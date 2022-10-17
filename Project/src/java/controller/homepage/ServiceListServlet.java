@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.customer;
+package controller.homepage;
 
-import DAO.BlogDAO;
+import DAO.HelpDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +14,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.Blog;
-import model.BlogDetail;
+import model.HelpCenter;
+import model.HelpContent;
+import model.HelpTitle;
 
 /**
  *
- * @author Minhm
+ * @author trung
  */
-@WebServlet(name = "BlogDetailServlet", urlPatterns = {"/blogdetail"})
-public class BlogDetailServlet extends HttpServlet {
+@WebServlet(name = "ServiceListServlet", urlPatterns = {"/servicecategories"})
+public class ServiceListServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +42,10 @@ public class BlogDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogDetailServlet</title>");
+            out.println("<title>Servlet ServiceListServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServiceListServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,22 +63,50 @@ public class BlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO b = new BlogDAO();
-        int id = Integer.parseInt(request.getParameter("id"));
-        String key = request.getParameter("key");
-        List<BlogDetail> bd = new ArrayList<>();
-        if(key.equals("")){
-         bd = b.getBlogDetailById(id);
-        }
-        else{
-            bd = b.getBlogDetailBySearch(key, id);
-        }
-        Blog bg = b.getBlogs(id);
+        HelpDAO hd = new HelpDAO();
+        List<HelpCenter> help = hd.getAllHelpCenter();
+        request.setAttribute("category", help);
+
+        List<HelpTitle> title = hd.getAllHelpTitle();
+        request.setAttribute("listservice", title);
+
+        //String page_raw = request.getParameter("page");
+        String seid_raw = request.getParameter("seid");
+        String stid_raw = request.getParameter("stid");
+        int seid, stid;
+
+        //page = (page_raw == null) ? 0 : Integer.parseInt(page_raw);
+        seid = (seid_raw == null) ? 0 : Integer.parseInt(seid_raw);
+        stid = (stid_raw == null) ? 0 : Integer.parseInt(stid_raw);
+
+        //request.setAttribute("page", page_raw);
+        request.setAttribute("seid", seid_raw);
+        request.setAttribute("stid", stid_raw);
+
+        List<HelpContent> content = hd.getHelpContentByID(seid, stid);
         
-        request.setAttribute("key", key);
-        request.setAttribute("blogdetail", bd);
-        request.setAttribute("blog", bg);
-        request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
+        /*
+        int maxContentDisplay = 12;
+
+        int maxPage = (int) Math.ceil((content.size() * 1.0) / maxContentDisplay);
+        request.setAttribute("maxPage", maxPage);
+
+        List<HelpContent> display = new ArrayList<>();
+
+        for (int i = maxContentDisplay * (page - 1); i < maxContentDisplay * page; i++) {
+            if (i < content.size()) {
+                display.add(content.get(i));
+            }
+        }
+        */
+        
+        HelpTitle ht = hd.getHelpTitle(stid);
+
+        request.setAttribute("listContentByStId", content);
+        request.setAttribute("title", ht);
+        request.setAttribute("tag1", seid_raw);
+        request.setAttribute("tag2", stid_raw);
+        request.getRequestDispatcher("listservice.jsp").forward(request, response);
     }
 
     /**
@@ -91,7 +120,7 @@ public class BlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
+        request.getRequestDispatcher("listservice.jsp").forward(request, response);
     }
 
     /**

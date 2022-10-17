@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.customer;
+package controller.homepage;
 
-import DAO.HelpDAO;
+import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
-import model.HelpCenter;
+import model.Blog;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="HelpCenterServlet", urlPatterns={"/helpcenter"})
-public class HelpCenterServlet extends HttpServlet {
+@WebServlet(name="BlogListServlet", urlPatterns={"/bloglist"})
+public class BlogListServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +39,10 @@ public class HelpCenterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelpCenterServlet</title>");  
+            out.println("<title>Servlet BlogListServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HelpCenterServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet BlogListServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +59,19 @@ public class HelpCenterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HelpDAO hd = new HelpDAO();
-        List<HelpCenter> help = hd.getAllHelpCenter();
-        request.setAttribute("category", help);
-        
-        request.getRequestDispatcher("helpcenter.jsp").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+        BlogDAO bd = new BlogDAO();
+        String key = request.getParameter("key");
+        List<Blog> blogs = new ArrayList<>();
+        if(key.equals("")){
+         blogs = bd.getAllBlogs();
+        }
+        else{
+            blogs = bd.getBlogBySearch(key);
+        }
+        request.setAttribute("bloglist", blogs);
+        request.setAttribute("search", key);
+        request.getRequestDispatcher("bloglist.jsp").forward(request, response);
     } 
 
     /** 
@@ -75,7 +84,7 @@ public class HelpCenterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("helpcenter.jsp").forward(request, response);
+        request.getRequestDispatcher("bloglist.jsp").forward(request, response);
     }
 
     /** 

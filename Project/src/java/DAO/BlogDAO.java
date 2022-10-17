@@ -149,11 +149,12 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getBlogBySearch(String key) {
         List<Blog> list = new ArrayList<>();
-        String sql = "select * from Blog b where b.BlogTitle like ? or b.BlogContent like ?";
+        String sql = "select * from Blog b where b.BlogTitle like ? or b.BlogContent like ? or b.Author like ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + key + "%");
             ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Blog bd = Blog.builder()
