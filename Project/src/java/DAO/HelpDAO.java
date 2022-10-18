@@ -58,7 +58,7 @@ public class HelpDAO extends DBContext {
         }
         return listAll;
     }
-    
+
     public HelpTitle getHelpTitle(int stid) {
         String sql = "SELECT * FROM [HelpTitle] WHERE TitleID = ?";
         try {
@@ -104,5 +104,36 @@ public class HelpDAO extends DBContext {
             System.out.println(e);
         }
         return list;
+    }
+
+    public List<HelpContent> getHelpContentBySearch(int seid, int stid, String key) {
+        List<HelpContent> list = new ArrayList<>();
+        String sql = "select hc.* from HelpContent hc, HelpTitle ht where hc.TitleID = ht.TitleID and ht.TitleID = ?\n"
+                + "and ht.CategoryID = ? and hc.Content like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, stid);
+            ps.setInt(2, seid);
+            ps.setString(3, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HelpContent hc = HelpContent.builder().
+                        ContentID(rs.getInt(1)).
+                        Content(rs.getString(2)).
+                        TitlteID(rs.getInt(3)).build();
+                list.add(hc);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        HelpDAO hd = new HelpDAO();
+        List<HelpContent> list = hd.getHelpContentBySearch(1, 2, "đăng");
+        for (HelpContent hc : list) {
+            System.out.println(hc);
+        }
     }
 }

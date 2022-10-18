@@ -63,6 +63,7 @@ public class ServiceListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HelpDAO hd = new HelpDAO();
         List<HelpCenter> help = hd.getAllHelpCenter();
         request.setAttribute("category", help);
@@ -83,7 +84,14 @@ public class ServiceListServlet extends HttpServlet {
         request.setAttribute("seid", seid_raw);
         request.setAttribute("stid", stid_raw);
 
-        List<HelpContent> content = hd.getHelpContentByID(seid, stid);
+        String key = request.getParameter("key");
+        List<HelpContent> content = new ArrayList<>();
+        if(key.equals("")){
+         content = hd.getHelpContentByID(seid, stid);
+        }
+        else{
+            content = hd.getHelpContentBySearch(seid, stid, key);
+        }
         
         /*
         int maxContentDisplay = 12;
