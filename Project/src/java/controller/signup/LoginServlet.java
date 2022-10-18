@@ -84,14 +84,11 @@ public class LoginServlet extends HttpServlet {
         Users b = new Users();
         b = ad.getAccount(u);
 
-
-        if(b==null){
+        if (b == null) {
             request.setAttribute("error", "Username or password incorrect!!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-            
-        
         if (ad.getAccount(u).getRoleId() != 1) {
             p = rd.bytesToHex(request.getParameter("pass"));
         } else {
