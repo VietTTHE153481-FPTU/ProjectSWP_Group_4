@@ -44,7 +44,7 @@ public class CustomerFilter implements Filter {
  
         HttpSession session = httpRequest.getSession(false);
  
-        boolean isLoggedIn = (session != null && session.getAttribute("customerUser") != null);
+        boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
  
         String loginURI = httpRequest.getContextPath() + "/login";
         boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);

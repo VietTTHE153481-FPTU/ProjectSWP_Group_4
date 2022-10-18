@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.signup;
 
 import DAO.AdminDAO;
@@ -22,36 +21,39 @@ import model.Users;
  *
  * @author trung
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet LoginServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -59,12 +61,13 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         request.getRequestDispatcher("login.jsp").forward(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -72,23 +75,23 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         String u = request.getParameter("user");
         RegisterDAO rd = new RegisterDAO();
         String p = "";
         String r = request.getParameter("rem");
         AdminDAO ad = new AdminDAO();
-        Users b  = new Users();
+        Users b = new Users();
         b = ad.getAccount(u);
-        if(b==null){
+
+        if (b == null) {
             request.setAttribute("error", "Username or password incorrect!!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-        if(ad.getAccount(u).getRoleId() != 1){
-             p = rd.bytesToHex(request.getParameter("pass"));
-        }
-        else{
+        if (ad.getAccount(u).getRoleId() != 1) {
+            p = rd.bytesToHex(request.getParameter("pass"));
+        } else {
             p = request.getParameter("pass");
         }
         //tạo 3 cookie: username, password, remember
@@ -110,8 +113,7 @@ public class LoginServlet extends HttpServlet {
         response.addCookie(cp);
         response.addCookie(cr);
 
-        AdminDAO d = new AdminDAO();
-        Users a = d.check(u, p);
+        Users a = ad.check(u, p);
         HttpSession session = request.getSession();
         if (a == null) {
             //Chưa có tài khoản
@@ -125,8 +127,9 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

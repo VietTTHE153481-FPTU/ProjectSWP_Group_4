@@ -117,7 +117,7 @@ public class RouterFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
         Users a = null;
         if (session != null) {
-            a = (Users) session.getAttribute("customerUser");
+            a = (Users) session.getAttribute("account");
         }
         boolean isAdmin=false;
         if(a!=null){
