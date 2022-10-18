@@ -32,6 +32,10 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.homepage.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCartServlet</servlet-name>
+        <servlet-class>controller.customer.ViewCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -43,6 +47,10 @@
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ViewCartServlet</servlet-name>
+        <url-pattern>/ViewCartServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
