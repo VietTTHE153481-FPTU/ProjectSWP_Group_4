@@ -27,6 +27,36 @@ public class Cart {
         }
         return null;
     }
+    public List<item> getListItem(){
+        return this.hold;
+    }
+    public void addItem(item a){
+        if(search(a)!=null){
+            item mid = search(a);
+            mid.setNumO(a.getNumO()+mid.getNumO());
+        }else {
+            hold.add(a);
+        }
+    }
+    public void remove(int id) {
+        for (item i : hold) {
+            if (i.getItem_product().getProductID() == id) {
+                hold.remove(i);
+                return;
+            }
+        }
+    }
+    public double totalmoney() {
+        double t = 0;
+        for (item i : hold) {
+            double a = i.getNumO()* i.getItem_product().getSellPrice();
+            t += (double) a;
+        }
+        return t;
+    }
+    public int Size(){
+        return this.hold.size();
+    }
 }
 
 class item {
