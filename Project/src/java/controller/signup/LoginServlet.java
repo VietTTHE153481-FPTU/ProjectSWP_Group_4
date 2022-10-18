@@ -83,51 +83,50 @@ public class LoginServlet extends HttpServlet {
         AdminDAO ad = new AdminDAO();
         Users b = new Users();
         b = ad.getAccount(u);
-<<<<<<< HEAD
         if (b == null) {
             request.getRequestDispatcher("login").forward(request, response);
-=======
-        if(b==null){
-            request.setAttribute("error", "Username or password incorrect!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
->>>>>>> 1a9ed0f40c291aeb27a22026766132849e1b6269
-            return;
-        }
-        if (ad.getAccount(u).getRoleId() != 1) {
-            p = rd.bytesToHex(request.getParameter("pass"));
-        } else {
-            p = request.getParameter("pass");
-        }
-        //tạo 3 cookie: username, password, remember
-        Cookie cu = new Cookie("cuser", u);
-        Cookie cp = new Cookie("cpass", p);
-        Cookie cr = new Cookie("crem", r);
-        if (r != null) {
-            //có chọn, muốn lưu lại
-            cu.setMaxAge(60 * 60 * 24 * 7); // 7 ngày
-            cp.setMaxAge(60 * 60 * 24 * 7);
-            cr.setMaxAge(60 * 60 * 24 * 7);
-        } else {
-            //Kh muốn lưu lại, xóa đi
-            cu.setMaxAge(0);
-            cp.setMaxAge(0);
-            cr.setMaxAge(0);
-        }
-        response.addCookie(cu);
-        response.addCookie(cp);
-        response.addCookie(cr);
 
-        Users a = ad.check(u, p);
-        HttpSession session = request.getSession();
-        if (a == null) {
-            //Chưa có tài khoản
-            request.setAttribute("error", "Username or password incorrect!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            //Tìm thấy tài khoản
-            //Tạo session
-            session.setAttribute("account", a);
-            response.sendRedirect("home");
+            if (b == null) {
+                request.setAttribute("error", "Username or password incorrect!!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+            if (ad.getAccount(u).getRoleId() != 1) {
+                p = rd.bytesToHex(request.getParameter("pass"));
+            } else {
+                p = request.getParameter("pass");
+            }
+            //tạo 3 cookie: username, password, remember
+            Cookie cu = new Cookie("cuser", u);
+            Cookie cp = new Cookie("cpass", p);
+            Cookie cr = new Cookie("crem", r);
+            if (r != null) {
+                //có chọn, muốn lưu lại
+                cu.setMaxAge(60 * 60 * 24 * 7); // 7 ngày
+                cp.setMaxAge(60 * 60 * 24 * 7);
+                cr.setMaxAge(60 * 60 * 24 * 7);
+            } else {
+                //Kh muốn lưu lại, xóa đi
+                cu.setMaxAge(0);
+                cp.setMaxAge(0);
+                cr.setMaxAge(0);
+            }
+            response.addCookie(cu);
+            response.addCookie(cp);
+            response.addCookie(cr);
+
+            Users a = ad.check(u, p);
+            HttpSession session = request.getSession();
+            if (a == null) {
+                //Chưa có tài khoản
+                request.setAttribute("error", "Username or password incorrect!!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                //Tìm thấy tài khoản
+                //Tạo session
+                session.setAttribute("account", a);
+                response.sendRedirect("home");
+            }
         }
     }
 
