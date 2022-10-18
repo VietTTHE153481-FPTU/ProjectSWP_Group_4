@@ -113,12 +113,14 @@
                         <div class="col-md-9">
                             <div class="card p-4 mt-3">
                                 <h3 class="heading mt-5 text-center">Hi! How can we help You?</h3>
+                                <form method="get" name="helpcenter">
                                 <div class="d-flex justify-content-center px-5">
                                     <div class="search">
-                                        <input type="text" class="search-input" placeholder="Search..." name="">
-                                        <a href="#" class="search-icon"><i class="fa fa-search"></i></a>
+                                        <input type="text" class="search-input" placeholder="Search..." name="key">
+                                        <button class="search-icon"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
+                                </form>
                                 <div class="row mt-4 g-1 px-4 mb-5">
                                     <c:forEach items="${category}" var="cate">
                                         <div class="col-md-3">
