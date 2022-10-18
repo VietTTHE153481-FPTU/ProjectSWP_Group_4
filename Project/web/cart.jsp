@@ -9,17 +9,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shopping Cart</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Cart</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="styles/css/all.min.css.css">
-        <link rel="stylesheet" type="text/css" href="styles/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+        <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/style.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/search.css"/>
     </head>
+    <%@include file = "layout/Header.jsp" %>
     <body>
         <section class="pt-5 pb-5">
             <div class="container">
@@ -72,7 +79,7 @@
                         <a href="#" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
                     </div>
                     <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-                        <a href="products">
+                        <a href="home">
                             <i class="fa fa-arrow-left mr-2"></i>Continue Shopping</a>
                     </div>
                 </div>

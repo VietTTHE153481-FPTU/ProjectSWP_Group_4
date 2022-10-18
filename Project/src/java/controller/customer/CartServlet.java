@@ -48,7 +48,7 @@ public class CartServlet extends HttpServlet {
         Cookie c = new Cookie("id", txt);
         c.setMaxAge(60 * 60 * 24);
         response.addCookie(c);
-        response.sendRedirect("show");
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
