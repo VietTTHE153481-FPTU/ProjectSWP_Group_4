@@ -96,12 +96,16 @@
                         <div class="col-md-9">
                             <div class="card p-4 mt-3">
                                 <h3 class="heading mt-5 text-center">Hi! How can we help You?</h3>
-                                <div class="d-flex justify-content-center px-5">
-                                    <div class="search">
-                                        <input type="text" class="search-input" placeholder="Search..." name="">
-                                        <a href="#" class="search-icon"><i class="fa fa-search"></i></a>
+                                <form method="get" name="servicecategories">
+                                    <div class="d-flex justify-content-center px-5">
+                                        <div class="search">
+                                            <input type="text" class="search-input" placeholder="Search..." name="key">
+                                            <input type="hidden" name="seid" value="${seid}"/>
+                                            <input type="hidden" name="stid" value="${stid}"/>
+                                            <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -123,7 +127,7 @@
                                             <c:if test="${list.getCategoryID() == cate.getCategoryID()}">
                                                 <ul>
                                                     <li class="${tag2 == list.getTitleID() ? "active":""}">
-                                                        <a href="servicecategories?seid=${cate.getCategoryID()}&stid=${list.getTitleID()}">
+                                                        <a href="servicecategories?seid=${cate.getCategoryID()}&stid=${list.getTitleID()}&key=">
                                                             <span class="active">&nbsp;&nbsp;&nbsp;${list.getTitle()}</span>
                                                         </a>
                                                     </li>

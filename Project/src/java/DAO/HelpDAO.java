@@ -58,7 +58,7 @@ public class HelpDAO extends DBContext {
         }
         return listAll;
     }
-    
+
     public HelpTitle getHelpTitle(int stid) {
         String sql = "SELECT * FROM [HelpTitle] WHERE TitleID = ?";
         try {
@@ -104,5 +104,61 @@ public class HelpDAO extends DBContext {
             System.out.println(e);
         }
         return list;
+    }
+
+    public List<HelpContent> getHelpContentBySearch(int seid, int stid, String key) {
+        List<HelpContent> list = new ArrayList<>();
+        String sql = "select hc.* from HelpContent hc, HelpTitle ht where hc.TitleID = ht.TitleID and hc.Content like ? ";
+        if (seid != 0) {
+            sql += " AND ht.CategoryID= " + seid;
+        }
+        if (stid != 0) {
+            sql += " AND ht.TitleID= " + stid;
+        }
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HelpContent hc = HelpContent.builder().
+                        ContentID(rs.getInt(1)).
+                        Content(rs.getString(2)).
+                        TitlteID(rs.getInt(3)).build();
+                list.add(hc);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public List<HelpCenter> getHelpCenterBySearch(String key){
+        List<HelpCenter> list = new ArrayList<>();
+        String sql = "select hc.* from HelpCategory hc where hc.CategoryName like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                HelpCenter hc = HelpCenter.builder().
+                        CategoryID(rs.getInt(1)).
+                        CategoryName(rs.getString(2)).
+                        Image(rs.getString(3)).
+                        build();
+                list.add(hc);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        HelpDAO hd = new HelpDAO();
+//        List<HelpContent> list = hd.getHelpContentBySearch(1, 2, "đăng");
+List<HelpCenter> list = hd.getHelpCenterBySearch("thanh");
+        for (HelpCenter hc : list) {
+            System.out.println(hc);
+        }
     }
 }
