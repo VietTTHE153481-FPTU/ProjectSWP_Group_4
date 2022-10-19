@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cart
-    Created on : Jul 19, 2022, 1:09:10 AM
+    Document   : yourcart
+    Created on : Oct 20, 2022, 5:29:00 AM
     Author     : trung
 --%>
 
@@ -19,73 +19,88 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+        <link rel="stylesheet" type="text/css" href="styles/cart_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
-        <link rel="stylesheet" type="text/css" href="styles/css/search.css"/>
     </head>
-    <%@include file = "layout/Header.jsp" %>
     <body>
-        <section class="pt-5 pb-5">
-            <div class="container">
-                <div class="row w-100">
-                    <div class="col-lg-12 col-md-12 col-12">
-                        <h3 class="display-5 mb-2 text-center">Shopping Cart</h3>
-                        <p class="mb-5 text-center">
-                            <i class="text-info font-weight-bold">${sessionScope.cart.Size()}</i> items in your cart</p>
-                        <table id="shoppingCart" class="table table-condensed table-responsive">
-                            <tr>
-                                <th style="width:50%">Product</th>
-                                <th style="width:12%">Price</th>
-                                <th style="width:10%">Quantity</th>
-                                <th style="width:10%"></th>
-                            </tr>
-                            ${sessionScope.test}
-                            <c:forEach items="${sessionScope.cart.getListItem()}" var="i">
-                                <tr>
-                                    <td data-th="Product">
-                                        <div class="row">
-                                            <div class="col-md-3 text-left">
-                                                <img src="resources/img/products/${i.item_product.url}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                            </div>
-                                            <div class="col-md-9 text-left mt-sm-2">
-                                                <h4>${i.item_product.productName}</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td data-th="Price">₫ ${i.item_product.sellPrice}</td>
-                                    <td data-th="Quantity">${i.numO}</td>
-                                    <td class="actions" data-th="">
-                                        <div class="text-right">
-                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                                <a href="#">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                        <div class="float-right text-right">
-                            <h4>Subtotal:</h4>
-                            <h1>₫ ${sessionScope.cart.totalmoney()}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4 d-flex align-items-center">
-                    <div class="col-sm-6 order-md-2 text-right">
-                        <a href="#" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-                        <a href="home">
-                            <i class="fa fa-arrow-left mr-2"></i>Continue Shopping</a>
+        <div class="super_container">
+            <%@include file="layout/Header.jsp" %>
+            <div class="container product_section_container">
+                <div class="pt-5 pb-5">
+                    <div class="container">
+                        <c:if test="${sessionScope.cart.Size() == null}">
+                            <div class="text-center">
+                                <img src="resources/img/shopping.png" class="rounded" width="350" height="350">
+                                <p class="mb-5">Your shopping cart is empty</p>
+                                <div class="red_button deal_ofthe_week_button" style="padding-left: 5px; padding-right: 5px">
+                                    <a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">go shopping now !!</a>
+                                </div>
+                            </div>
+                        </c:if>
+                        <c:if test="${sessionScope.cart.Size() > 0}">
+                            <div class="row w-100">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <h3 class="display-5 mb-2 text-center">Shopping Cart</h3>
+                                    <p class="mb-5 text-center">
+                                        <i class="text-info font-weight-bold">${sessionScope.cart.Size()}</i>&nbsp;&nbsp; items in your cart
+                                    </p>
+                                    <table id="shoppingCart" class="table table-condensed table-responsive">
+                                        <tr>
+                                            <th style="width:50%">Product</th>
+                                            <th style="width:12%">Price</th>
+                                            <th style="width:10%">Quantity</th>
+                                            <th style="width:10%"></th>
+                                        </tr>
+                                        <c:forEach items="${sessionScope.cart.getListItem()}" var="i">
+                                            <tr>
+                                                <td data-th="Product">
+                                                    <div class="row">
+                                                        <div class="col-md-3 text-left">
+                                                            <img src="resources/img/products/${i.item_product.url}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                                        </div>
+                                                        <div class="col-md-9 text-left mt-sm-2">
+                                                            <h4>${i.item_product.productName}</h4>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td data-th="Price">${i.item_product.sellPrice} ₫</td>
+                                                <td data-th="Quantity">${i.numO}</td>
+                                                <td class="actions" data-th="">
+                                                    <div class="text-right">
+                                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                            <a href="#">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                    <div class="float-right text-right">
+                                        <h4>Total Amount:</h4>&nbsp;
+                                        <h4 style="color: #ff3333">${sessionScope.cart.totalmoney()} ₫</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4 d-flex align-items-center">
+                                <div class="col-sm-6 order-md-2 text-right">
+                                    <a href="#" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                                    <a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">
+                                        <i class="fa fa-arrow-left mr-2"></i>Continue Shopping</a>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
-        </section>
+            <%@include file="layout/Footer.jsp" %>
+        </div>
         <script src="js/cart/jquery-3.3.1.slim.min.js"></script>
         <script src="js/cart/popper.min.js"></script>
         <script src="js/cart/bootstrap.min.js"></script>

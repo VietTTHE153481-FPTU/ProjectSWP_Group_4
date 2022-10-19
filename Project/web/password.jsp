@@ -1,6 +1,6 @@
 <%-- 
-    Document   : userprofile
-    Created on : Oct 6, 2022, 10:28:30 AM
+    Document   : password
+    Created on : Oct 20, 2022, 2:33:06 AM
     Author     : trung
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Profile</title>
+        <title>Change Password</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="super_container">
-            <%@include file ="layout/Header.jsp" %>
+            <%@include file="layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="row">
                     <div class="col product_section clearfix">
@@ -39,35 +39,28 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5 border-right">
-                                    <!-- cập nhật profile thành công 
+                                    <!-- cập nhật pass thành công 
                                     <div class="text-center"; style="color: #00cc00">
-                                        <span>Update Successful</span>
+                                        <span>Change Password Successful</span>
                                         &nbsp;
                                         <i class="fa fa-check-circle"></i>
                                     </div>
                                     -->
                                     <div class="p-3 py-5">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="text-right">Your Profile</h4>
+                                        <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
+                                            <h4 class="text-left" style="padding-bottom: 15px;">Change your password</h4>
+                                            <h6>For your account's security, do not share your password with anyone else.</h6>
                                         </div>
                                         <div class="row mt-3">
-                                            <div class="col-md-12"><label class="labels">Full Name</label><input value="${account.fullname}" type="text" name="fullname" class="form-control">
+                                            <div class="col-md-12"><label class="labels">Current Password</label><input value="" type="password" name="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
                                             </div>
-                                            <div class="col-md-12"><label class="labels">PhoneNumber</label><input value="${account.phone}" type="text" name="phone" class="form-control">
+                                            <div class="col-md-12"><label class="labels">New Password</label><input value="" type="password" name="newpass" class="form-control" placeholder="Nhập mật khẩu mới (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
                                             </div>
-                                            <div class="col-md-12"><label class="labels">Email</label><input value="${account.email}" type="text" name="email" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-2">
-                                            <div class="col-md-6"><label class="labels">Gender</label>
-                                                <input type="radio" name="gender" checked value="${account.gender}"> Male
-                                                <input type="radio" name="gender" value="${account.gender}"> Female
+                                            <div class="col-md-12"><label class="labels">Confirm Password</label><input value="" type="password" name="cfpass" class="form-control" placeholder="Xác nhận mật khẩu mới">
                                             </div>
                                         </div>
-                                        <div class="mt-5 text-center">
-                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
-                                            &nbsp;&nbsp;&nbsp;
-                                            <a class="btn btn-primary profile-button" href="password">Change Password</a>
+                                        <div class="mt-5 text-left">
+                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Confirm</button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,28 +69,8 @@
                     </div>
                 </div>
             </div>
-            <%@include file ="layout/Footer.jsp" %>
+            <%@include file="layout/Footer.jsp" %>
         </div>
-        <script>
-            function change() {
-                var x = document.getElementById("change_pass");
-                x.style.display = "block";
-            }
-            function check() {
-                var o1 = document.getElementById("pass_old1");
-                var o2 = document.getElementById("pass_old2");
-                var n1 = document.getElementById("pass_new1");
-                var n2 = document.getElementById("pass_new2");
-                if (o1.value != o2.value) {
-                    document.getElementById("message").innerHTML = "** Phải nhập đúng mật khẩu cũ";
-                    return false;
-                } else if (n1.value != n2.value) {
-                    document.getElementById("message").innerHTML = "** Phải nhập lại đúng mật khẩu mới";
-                    return false;
-                }
-                return true;
-            }
-        </script>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="styles/bootstrap4/popper.js"></script>
         <script src="styles/bootstrap4/bootstrap.min.js"></script>

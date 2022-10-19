@@ -76,7 +76,6 @@ public class cartServlet extends HttpServlet {
         session.setAttribute("test", numO);
         session.setAttribute("cart", a);
         request.getRequestDispatcher("cart.jsp").forward(request, response);
-        return;
     } 
 
     /** 

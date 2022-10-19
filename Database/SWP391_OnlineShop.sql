@@ -42,25 +42,25 @@ GO
 INSERT INTO Users VALUES(N'admin','123456','Admin','0123445566',0,'admin@fpt.edu.vn',1,1);
 INSERT INTO Users VALUES(N'hieu','hieu',N'Hiếu','0123456789',0,'hieuNTHE160326@fpt.edu.vn',1,1);
 INSERT INTO Users VALUES(N'vha','vha',N'Hoàng Anh','0987654321',0,'anhvhhe163109@fpt.edu.vn',1,1);
-INSERT INTO Users VALUES(N'minh','minh',N'Minh','0147258369',0,'minhtche161354@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'thai','thai',N'Thái','0963852741',0,'thailshe160614@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'viet','viet',N'Việt','0142753896',0,'viettthe153481@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'mkt','mkt',N'Seller','0369147852',1,'mkt@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'shipper','12345',N'Shipper','0789123654',0,'shipper@fpt.edu.vn',4,1);
-INSERT INTO Users VALUES('cus1','cus1',N'Customer1','0112233445',1,'customer1@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus2','cus2',N'Customer2','0123456777',1,'customer2@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus3','cus3',N'Customer3','0123456888',0,'customer3@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus4','cus4',N'Customer4','0123456999',1,'customer4@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus5','cus5',N'Customer5','0111123456',1,'customer5@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus6','cus6',N'Customer6','0122223456',1,'customer6@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus7','cus7',N'Customer7','0123333456',1,'customer7@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus8','cus8',N'Customer8','0123444456',0,'customer8@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus9','cus9',N'Customer9','0123455556',1,'customer9@gmail.com', 3, 1);
-INSERT INTO Users VALUES('abc','123',N'Shipper','0946312458',1,'abc456@gmail.com', 4, 1);
-INSERT INTO Users VALUES('xyz','456',N'Shipper','0145326849',0,'xyz123@gmail.com', 4, 1);
-INSERT INTO Users VALUES('html','789',N'Shipper','0222356777',0,'html5@gmail.com', 4, 1);
-INSERT INTO Users VALUES('css','2222',N'Khách VIP','0155234789',1,'khachvip01@gmail.com', 3, 1);
-INSERT INTO Users VALUES('java','4444',N'Shipper','0196478532',0,'java8@gmail.com', 4, 1);
+INSERT INTO Users VALUES(N'minh','Minh1@',N'Minh','0147258369',0,'minhtche161354@fpt.edu.vn',2,1);
+INSERT INTO Users VALUES(N'thai','Thai1@',N'Thái','0963852741',0,'thailshe160614@fpt.edu.vn',2,1);
+INSERT INTO Users VALUES(N'viet','Viet1@',N'Việt','0142753896',0,'viettthe153481@fpt.edu.vn',2,1);
+INSERT INTO Users VALUES(N'mkt','Seller1@',N'Seller','0369147852',1,'mkt@fpt.edu.vn',2,1);
+INSERT INTO Users VALUES(N'shipper','Ship1@',N'Shipper1','0789123654',0,'shipper@fpt.edu.vn',4,1);
+INSERT INTO Users VALUES('cus1','Custom1@',N'Customer1','0937235111',1,'customer1@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus2','Cus2@',N'Customer2','0123456777',1,'customer2@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus3','Cus3@',N'Customer3','0123456888',0,'customer3@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus4','Cus4@',N'Customer4','0123456999',1,'customer4@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus5','Cus5@',N'Customer5','0111123456',1,'customer5@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus6','Cus6@',N'Customer6','0122223456',1,'customer6@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus7','Cus7@',N'Customer7','0123333456',1,'customer7@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus8','Cus8@',N'Customer8','0123444456',0,'customer8@gmail.com', 3, 1);
+INSERT INTO Users VALUES('cus9','Cus9@',N'Customer9','0123455556',1,'customer9@gmail.com', 3, 1);
+INSERT INTO Users VALUES('ship1','Ship2@',N'Shipper2','0946312458',1,'ship1@gmail.com', 4, 1);
+INSERT INTO Users VALUES('ship2','Ship3@',N'Shipper3','0145326849',0,'ship2@gmail.com', 4, 1);
+INSERT INTO Users VALUES('ship3','Ship4@',N'Shipper4','0222356777',0,'ship3@gmail.com', 4, 1);
+INSERT INTO Users VALUES('cusvip','Vip1@',N'Khách VIP','0155234789',1,'khachvip01@gmail.com', 3, 1);
+INSERT INTO Users VALUES('ship5','Ship5@',N'Shipper5','0196478532',0,'ship5@gmail.com', 4, 1);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Ship (
 	id int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
@@ -219,8 +219,8 @@ CREATE TABLE Product (
 	ProductID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	ProductName nvarchar(1000),
 	[Description] nvarchar(2000),
-	OriginalPrice [money], 
-	SellPrice [money],	
+	OriginalPrice [money],
+	SellPrice [money],
 	SalePercent int CHECK (SalePercent>=0 AND SalePercent<=100),
 	SubCategoryID int,
 	SellerID int,

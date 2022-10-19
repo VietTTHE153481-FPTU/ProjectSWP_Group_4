@@ -69,18 +69,17 @@
                             <c:if test="${detail.getSalePercent()>0}">
                                 <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                             </c:if>
-
-                                <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                                    <span>Quantity:</span>
-                                    <div class="quantity_selector">
-                                        <span class="minus"><i class="fa fa-minus" aria-hidden="true"><a href="sub?id=${detail.getProductID()}"></a></i></span>
-                                        <span id="quantity_value">1</span>
-                                        <input hidden id="numO" name="numO" type="number" value="1" />
-                                        <input hidden id="ProID" name="id" type="text" value="1" />
-                                        <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
-                                    </div>
-                                    <a onclick="func();"><div id="button1" class="red_button add_to_cart_button" >add to cart</div></a>
+                            <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                                <span>Quantity:</span>
+                                <div class="quantity_selector">
+                                    <span class="minus"><i class="fa fa-minus" aria-hidden="true"><a href="sub?id=${detail.getProductID()}"></a></i></span>
+                                    <span id="quantity_value">1</span>
+                                    <input hidden id="numO" name="numO" type="number" value="1" />
+                                    <input hidden id="ProID" name="id" type="text" value="1" />
+                                    <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
                                 </div>
+                                <a onclick="func();"><button id="button1" class="red_button add_to_cart_button" >ADD TO CART</button></a>
+                            </div>
                         </div>
                     </div>       
                 </div>
@@ -104,6 +103,7 @@
                                     <div class="col-lg-5 desc_col">
                                         <div class="tab_title">
                                             <h4>Description</h4>
+                                            <p>${detail.getDescription()}</p>
                                         </div>
                                     </div>
                                 </div>
