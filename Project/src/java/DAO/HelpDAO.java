@@ -126,20 +126,20 @@ public class HelpDAO extends DBContext {
                         TitlteID(rs.getInt(3)).build();
                 list.add(hc);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
     }
-    
-    public List<HelpCenter> getHelpCenterBySearch(String key){
+
+    public List<HelpCenter> getHelpCenterBySearch(String key) {
         List<HelpCenter> list = new ArrayList<>();
         String sql = "select hc.* from HelpCategory hc where hc.CategoryName like ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + key + "%");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 HelpCenter hc = HelpCenter.builder().
                         CategoryID(rs.getInt(1)).
                         CategoryName(rs.getString(2)).
@@ -155,9 +155,9 @@ public class HelpDAO extends DBContext {
 
     public static void main(String[] args) {
         HelpDAO hd = new HelpDAO();
-//        List<HelpContent> list = hd.getHelpContentBySearch(1, 2, "đăng");
-List<HelpCenter> list = hd.getHelpCenterBySearch("thanh");
-        for (HelpCenter hc : list) {
+        List<HelpContent> list = hd.getHelpContentBySearch(1, 2, "đăng");
+        //List<HelpCenter> list = hd.getHelpCenterBySearch("thanh");
+        for (HelpContent hc : list) {
             System.out.println(hc);
         }
     }

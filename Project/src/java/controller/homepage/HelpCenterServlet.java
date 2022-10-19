@@ -63,13 +63,15 @@ public class HelpCenterServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HelpDAO hd = new HelpDAO();
-        String key = request.getParameter("key");
-        List<HelpCenter> help = new ArrayList<>();
+        //String key = request.getParameter("key");
+        List<HelpCenter> help = hd.getAllHelpCenter();
+        /*
         if (key.equals("")) {
             help = hd.getAllHelpCenter();
         } else {
-              help = hd.getHelpCenterBySearch(key);
+            help = hd.getHelpCenterBySearch(key);
         }
+        */
         request.setAttribute("category", help);
 
         request.getRequestDispatcher("service.jsp").forward(request, response);
@@ -86,7 +88,7 @@ public class HelpCenterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("helpcenter.jsp").forward(request, response);
+        request.getRequestDispatcher("service.jsp").forward(request, response);
     }
 
     /**
