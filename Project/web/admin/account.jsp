@@ -52,18 +52,18 @@
                         <c:choose>
                             <c:when test="${sessionScope.account != null}">
                                 <ul id="sidebarnav">
-                                    <li class="sidebar-item pt-2">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard"
-                                           aria-expanded="false">
-                                            <i class="fa fa-dashboard" aria-hidden="true"></i>
-                                            <span class="hide-menu">Dashboard</span>
-                                        </a>
-                                    </li>
                                     <li class="sidebar-item">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item pt-2">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="service"
+                                           aria-expanded="false">
+                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                            <span class="hide-menu">Service Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
@@ -99,7 +99,7 @@
                                         <th>GENDER</th>
                                         <th>EMAIL</th>
                                         <th>PERMISSION</th>
-                                        <th>DETAIL</th>
+                                        <th>ACTION</th>
                                     </tr>
                                     <c:forEach items="${listac}" var="ac">
                                         <tr>
@@ -109,8 +109,10 @@
                                             <td>${ac.gender?'Female':'Male'}</td>
                                             <td>${ac.email}</td>
                                             <td>${ac.roleId}</td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <td>
                                                 <a href="profile?userID=${ac.getUsername()}"><i class="fa fa-user-md"></i></a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a href="#"><i class="fa fa-close"></i></a>
                                             </td>
                                         </tr>
                                     </c:forEach>

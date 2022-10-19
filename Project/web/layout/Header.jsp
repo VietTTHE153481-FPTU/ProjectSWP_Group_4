@@ -40,7 +40,7 @@
                                             <li><a href="userprofile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
                                             <!-- Admin -->
                                             <c:if test="${sessionScope.account.roleId == 1}">
-                                                <li><a href="dashboard"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
+                                                <li><a href="service"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
                                                 </c:if>
                                             <!-- Seller -->
                                             <c:if test="${sessionScope.account.roleId == 2}">

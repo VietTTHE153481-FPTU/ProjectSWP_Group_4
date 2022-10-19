@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author trung
  */
-@WebServlet(name="AdminDashboardServlet", urlPatterns={"/dashboard"})
-public class AdminDashboardServlet extends HttpServlet {
+@WebServlet(name="ServiceManagementServlet", urlPatterns={"/service"})
+public class ServiceManagementServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class AdminDashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminDashboardServlet</title>");  
+            out.println("<title>Servlet ServiceManagementServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminDashboardServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ServiceManagementServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +55,7 @@ public class AdminDashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/servicemanagement.jsp").forward(request, response);
     } 
 
     /** 

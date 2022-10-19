@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Levents Dashboard</title>
+        <title>Service Management</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -56,18 +56,18 @@
                         <c:choose>
                             <c:when test="${sessionScope.account != null}">
                                 <ul id="sidebarnav">
-                                    <li class="sidebar-item pt-2">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="dashboard"
-                                           aria-expanded="false">
-                                            <i class="fa fa-dashboard" aria-hidden="true"></i>
-                                            <span class="hide-menu">Dashboard</span>
-                                        </a>
-                                    </li>
                                     <li class="sidebar-item">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account"
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item pt-2">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="service"
+                                           aria-expanded="false">
+                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                            <span class="hide-menu">Service Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
@@ -87,7 +87,7 @@
                 <div class="page-breadcrumb bg-white">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">Dashboard</h4>
+                            <h4 class="page-title">Service Management</h4>
                         </div>
                     </div>
                 </div>
