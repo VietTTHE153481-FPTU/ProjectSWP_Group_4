@@ -34,7 +34,7 @@
                     <div class="col-lg-12 col-md-12 col-12">
                         <h3 class="display-5 mb-2 text-center">Shopping Cart</h3>
                         <p class="mb-5 text-center">
-                            <i class="text-info font-weight-bold">${requestScope.size}</i> items in your cart</p>
+                            <i class="text-info font-weight-bold">${sessionScope.cart.Size()}</i> items in your cart</p>
                         <table id="shoppingCart" class="table table-condensed table-responsive">
                             <tr>
                                 <th style="width:50%">Product</th>
@@ -42,20 +42,21 @@
                                 <th style="width:10%">Quantity</th>
                                 <th style="width:10%"></th>
                             </tr>
-                            <c:forEach items="${list}" var="i">
+                            ${sessionScope.test}
+                            <c:forEach items="${sessionScope.cart.getListItem()}" var="i">
                                 <tr>
                                     <td data-th="Product">
                                         <div class="row">
                                             <div class="col-md-3 text-left">
-                                                <img src="${i.image}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                                <img src="resources/img/products/${i.item_product.url}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                             </div>
                                             <div class="col-md-9 text-left mt-sm-2">
-                                                <h4>${i.name}</h4>
+                                                <h4>${i.item_product.productName}</h4>
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-th="Price">₫ ${i.price}</td>
-                                    <td data-th="Quantity">${i.quantity}</td>
+                                    <td data-th="Price">₫ ${i.item_product.sellPrice}</td>
+                                    <td data-th="Quantity">${i.numO}</td>
                                     <td class="actions" data-th="">
                                         <div class="text-right">
                                             <button class="btn btn-white border-secondary bg-white btn-md mb-2">
@@ -70,7 +71,7 @@
                         </table>
                         <div class="float-right text-right">
                             <h4>Subtotal:</h4>
-                            <h1>₫ ${requestScope.total}</h1>
+                            <h1>₫ ${sessionScope.cart.totalmoney()}</h1>
                         </div>
                     </div>
                 </div>
