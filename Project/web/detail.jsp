@@ -69,15 +69,21 @@
                             <c:if test="${detail.getSalePercent()>0}">
                                 <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                             </c:if>
-                            <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                                <span>Quantity:</span>
-                                <div class="quantity_selector">
-                                    <span class="minus"><i class="fa fa-minus" aria-hidden="true"><a href="sub?id=${detail.getProductID()}"></a></i></span>
-                                    <span id="quantity_value">${detail.getAmount()}</span>
-                                    <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
+                                
+                            <form action="cart">
+                                <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                                    <span>Quantity:</span>
+                                    <div class="quantity_selector">
+                                        <span class="minus"><i class="fa fa-minus" aria-hidden="true"><a href="sub?id=${detail.getProductID()}"></a></i></span>
+                                        <span id="quantity_value">1</span>
+                                        <input hidden id="numO" name="numO" type="number" value="1" />
+                                        <input hidden id="ProID" name="id" type="text" value="1" />
+                                        <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
+                                    </div>
+                                        <div id="button1" class="red_button add_to_cart_button" ><a href="cart?id=${detail.getProductID()}&numO=1">add to cart</a></div>
                                 </div>
-                                <div class="red_button add_to_cart_button"><a href="cart?id=${detail.getProductID()}">add to cart</a></div>
-                            </div>
+                            </form>
+
                         </div>
                     </div>       
                 </div>
@@ -165,6 +171,9 @@
         </div>
         <%@include file="layout/Footer.jsp" %>
     </div>
+    <script type="text/javascript"><!--
+        
+    </script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="styles/bootstrap4/popper.js"></script>
     <script src="styles/bootstrap4/bootstrap.min.js"></script>

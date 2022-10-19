@@ -49,7 +49,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int proID = Integer.parseInt(request.getParameter("proID"));
+        int proID = Integer.parseInt(request.getParameter("id"));
         int numO = Integer.parseInt(request.getParameter("numO"));
         Products toAdd = lmao.getProductById(proID);
         HttpSession session = request.getSession();
