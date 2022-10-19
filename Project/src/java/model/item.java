@@ -9,7 +9,8 @@ package model;
  * @author Minhm
  */
 public class item {
-     public Products item_product;
+
+    public Products item_product;
     public int numO;
 
     public item() {

@@ -20,14 +20,11 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
         <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="styles/categories_styles.css">
-        <link rel="stylesheet" type="text/css" href="styles/responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
         <link rel="stylesheet" type="text/css" href="styles/detail_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/detail_responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
-        <link rel="stylesheet" type="text/css" href="styles/css/search.css"/>
     </head>
     <body>
         <div class="super_container">
@@ -59,16 +56,19 @@
                     <div class="col-lg-5">
                         <div class="product_details">
                             <div class="product_details_title">
-                                <h1>${detail.getProductName()}</h1>
+                                <h2>${detail.getProductName()}</h2>
                                 <dt>Description</dt>
                                 <p>${detail.getDescription()}</p>
                             </div>
-                            <div class="product_price">${detail.getSellPrice()}₫
+                            <div class="original_price">
                                 <c:if test="${detail.getSalePercent()>0}">
                                     <span>${detail.getOriginalPrice()}₫ </span>
-                                    <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                                 </c:if>
                             </div>
+                            <div class="product_price">${detail.getSellPrice()}₫</div>&nbsp;&nbsp;&nbsp;
+                            <c:if test="${detail.getSalePercent()>0}">
+                                <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
+                            </c:if>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                                 <span>Quantity:</span>
                                 <div class="quantity_selector">
@@ -76,25 +76,102 @@
                                     <span id="quantity_value">${detail.getAmount()}</span>
                                     <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
                                 </div>
+                                <div class="red_button add_to_cart_button"><a href="cart?id=${detail.getProductID()}">add to cart</a></div>
                             </div>
-                            <br/>
-                            <div class="red_button add_to_cart_button"><a href="cart?id=${detail.getProductID()}">add to cart</a></div>
                         </div>
                     </div>       
                 </div>
-                <div>
-                    
-                </div>      
             </div>
-            <%@include file="layout/Footer.jsp" %>
+            <div class="tabs_section_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="tabs_container">
+                                <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+                                    <li class="tab active" data-active-tab="tab_1"><span>Description</span></li>
+                                    <li class="tab" data-active-tab="tab_2"><span>Reviews</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="tab_1" class="tab_container active">
+                                <div class="row">
+                                    <div class="col-lg-5 desc_col">
+                                        <div class="tab_title">
+                                            <h4>Description</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_2" class="tab_container">
+                                <div class="row">
+                                    <div class="col-lg-6 reviews_col">
+                                        <div class="tab_title reviews_title">
+                                            <h4>Reviews</h4>
+                                        </div>
+                                        <div class="user_review_container d-flex flex-column flex-sm-row">
+                                            <div class="user">
+                                                <div class="user_pic"></div>
+                                                <div class="user_rating">
+                                                    <ul class="star_rating">
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review">
+                                                <div class="review_date">19 Oct 2022</div>
+                                                <div class="user_name">Customer name</div>
+                                                <p>Customer reviews</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 add_review_col">
+                                        <div class="add_review">
+                                            <form id="review_form">
+                                                <div>
+                                                    <h1>Add Review</h1>
+                                                    <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
+                                                    <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
+                                                </div>
+                                                <div>
+                                                    <h1>Your Rating:</h1>
+                                                    <ul class="user_star_rating">
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                    </ul>
+                                                    <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+                                                </div>
+                                                <div class="text-left text-sm-right">
+                                                    <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>     
         </div>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="styles/bootstrap4/popper.js"></script>
-        <script src="styles/bootstrap4/bootstrap.min.js"></script>
-        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-        <script src="plugins/easing/easing.js"></script>
-        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-        <script src="js/detail_custom.js"></script>
-    </body>
+        <%@include file="layout/Footer.jsp" %>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="styles/bootstrap4/popper.js"></script>
+    <script src="styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="js/detail_custom.js"></script>
+</body>
 </html>

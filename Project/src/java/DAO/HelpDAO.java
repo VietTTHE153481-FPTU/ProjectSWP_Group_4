@@ -147,7 +147,7 @@ public class HelpDAO extends DBContext {
                         build();
                 list.add(hc);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
