@@ -125,7 +125,7 @@
                                                                 </div>
                                                             </a>
                                                         </div>
-                                                        <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                                                        <div class="red_button add_to_cart_button"><a href="cart?id=${pd.getProductID()}&numO=1">add to cart</a></div>
                                                     </div>
                                                 </c:forEach>
                                             </ul>

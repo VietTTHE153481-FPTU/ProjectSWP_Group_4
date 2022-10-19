@@ -35,6 +35,7 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,8 +59,11 @@ public class CartServlet extends HttpServlet {
             a = new Cart(); 
         }
         a.addItem(new item(toAdd, numO));
+        session.setAttribute("test", numO);
+        session.removeAttribute("cart");
         session.setAttribute("cart", a);
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        response.sendRedirect("ViewCartServlet");
+        return;
     }
 
     /**

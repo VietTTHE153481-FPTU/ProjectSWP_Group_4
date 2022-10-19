@@ -42,6 +42,7 @@
                                 <th style="width:10%">Quantity</th>
                                 <th style="width:10%"></th>
                             </tr>
+                            ${sessionScope.test}
                             <c:forEach items="${sessionScope.cart.getListItem()}" var="i">
                                 <tr>
                                     <td data-th="Product">

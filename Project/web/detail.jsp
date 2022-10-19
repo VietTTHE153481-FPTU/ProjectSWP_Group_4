@@ -69,8 +69,7 @@
                             <c:if test="${detail.getSalePercent()>0}">
                                 <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                             </c:if>
-                                
-                            <form action="cart">
+
                                 <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                                     <span>Quantity:</span>
                                     <div class="quantity_selector">
@@ -80,10 +79,8 @@
                                         <input hidden id="ProID" name="id" type="text" value="1" />
                                         <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
                                     </div>
-                                        <div id="button1" class="red_button add_to_cart_button" ><a href="cart?id=${detail.getProductID()}&numO=1">add to cart</a></div>
+                                    <a onclick="func();"><div id="button1" class="red_button add_to_cart_button" >add to cart</div></a>
                                 </div>
-                            </form>
-
                         </div>
                     </div>       
                 </div>
@@ -171,16 +168,21 @@
         </div>
         <%@include file="layout/Footer.jsp" %>
     </div>
-    <script type="text/javascript"><!--
-        
-    </script>
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="styles/bootstrap4/popper.js"></script>
-    <script src="styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="plugins/easing/easing.js"></script>
-    <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-    <script src="js/detail_custom.js"></script>
-</body>
+        <script type="text/javascript"><!--
+            function func() {
+                var numO = document.getElementById('quantity_value').innerHTML;
+                //href="cart?id=${detail.getProductID()}&numO=(int)document.getElementById('quantity_value').innerHTML"
+                window.location.href = "cart?id=${detail.getProductID()}&numO=" + numO;
+                window.alert(numO);
+            }
+        </script>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="styles/bootstrap4/popper.js"></script>
+        <script src="styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="plugins/easing/easing.js"></script>
+        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script src="js/detail_custom.js"></script>
+    </body>
 </html>
