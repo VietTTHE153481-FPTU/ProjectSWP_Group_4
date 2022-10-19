@@ -81,7 +81,7 @@
                     <nav class="navbar">
                         <ul class="navbar_user">
                             <li class="checkout">
-                                <a href="cart">
+                                <a href="ViewCartServlet">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 </a>
                             </li>

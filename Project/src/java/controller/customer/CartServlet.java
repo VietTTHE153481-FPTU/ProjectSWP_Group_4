@@ -11,14 +11,18 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
+import model.Cart;
+import DAO.ProductDAO;
+import model.Products;
+import model.item;
 /**
  *
  * @author trung
  */
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
-
+    ProductDAO lmao = new ProductDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -30,25 +34,7 @@ public class CartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
-        Cookie arr[] = request.getCookies();
-        String txt = "";
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                txt = txt + o.getValue();
-                o.setMaxAge(0);
-                response.addCookie(o);
-            }
-        }
-        if (txt.isEmpty()) {
-            txt = id;
-        } else {
-            txt = txt + "," + id;
-        }
-        Cookie c = new Cookie("id", txt);
-        c.setMaxAge(60 * 60 * 24);
-        response.addCookie(c);
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +49,17 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int proID = Integer.parseInt(request.getParameter("proID"));
+        int numO = Integer.parseInt(request.getParameter("numO"));
+        Products toAdd = lmao.getProductById(proID);
+        HttpSession session = request.getSession();
+        Cart a = (Cart)session.getAttribute("cart");
+        if(a==null){
+            a = new Cart(); 
+        }
+        a.addItem(new item(toAdd, numO));
+        session.setAttribute("cart", a);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     /**

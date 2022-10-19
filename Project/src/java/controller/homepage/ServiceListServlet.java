@@ -86,13 +86,12 @@ public class ServiceListServlet extends HttpServlet {
 
         String key = request.getParameter("key");
         List<HelpContent> content = new ArrayList<>();
-        if(key.equals("")){
-         content = hd.getHelpContentByID(seid, stid);
-        }
-        else{
+        if (key.equals("")) {
+            content = hd.getHelpContentByID(seid, stid);
+        } else {
             content = hd.getHelpContentBySearch(seid, stid, key);
         }
-        
+
         /*
         int maxContentDisplay = 12;
 
@@ -106,8 +105,7 @@ public class ServiceListServlet extends HttpServlet {
                 display.add(content.get(i));
             }
         }
-        */
-        
+         */
         HelpTitle ht = hd.getHelpTitle(stid);
 
         request.setAttribute("listContentByStId", content);

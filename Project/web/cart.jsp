@@ -59,7 +59,7 @@
                                     <td class="actions" data-th="">
                                         <div class="text-right">
                                             <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                                <a href="remove?id=${i.id}">
+                                                <a href="#">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </button>
