@@ -56,9 +56,7 @@
                     <div class="col-lg-5">
                         <div class="product_details">
                             <div class="product_details_title">
-                                <h2>${detail.getProductName()}</h2>
-                                <dt>Description</dt>
-                                <p>${detail.getDescription()}</p>
+                                <h3>${detail.getProductName()}</h3>
                             </div>
                             <div class="original_price">
                                 <c:if test="${detail.getSalePercent()>0}">
@@ -69,6 +67,13 @@
                             <c:if test="${detail.getSalePercent()>0}">
                                 <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                             </c:if>
+                            <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                                <span>Shipping:</span>
+                                <div style="padding-left: 25px">
+                                    <i class="fa fa-truck"></i>&nbsp;
+                                    <span style="padding-right: 50px">Shipping To</span>
+                                </div>
+                            </div>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                                 <span>Quantity:</span>
                                 <div class="quantity_selector">

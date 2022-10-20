@@ -30,38 +30,39 @@
             <%@include file="layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="row">
-                    <div class="col product_section clearfix">
-                        <div class="container rounded bg-white mt-5 mb-5">
-                            <div class="row">
-                                <div class="col-md-5 border-right">
-                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <img class="img-thumbnail" src="resources/img/user_no-frame.png"><span class="font-weight-bold">${account.fullname}</span><span class="text-black-50">${account.email}</span><span> </span>
-                                    </div>
+                    <div class="container rounded bg-white mt-5 mb-5">
+                        <div class="row">
+                            <div class="col-md-5 border-right">
+                                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                    <img class="img-thumbnail" src="resources/img/user_no-frame.png"><span class="font-weight-bold">${account.fullname}</span><span class="text-black-50">${account.email}</span><span> </span>
                                 </div>
-                                <div class="col-md-5 border-right">
-                                    <!-- cập nhật pass thành công 
-                                    <div class="text-center"; style="color: #00cc00">
-                                        <span>Change Password Successful</span>
-                                        &nbsp;
-                                        <i class="fa fa-check-circle"></i>
+                            </div>
+                            <div class="col-md-5 border-right">
+                                <!-- cập nhật pass thành công 
+                                <div class="text-center"; style="color: #00cc00">
+                                    <span>Change Password Successful</span>
+                                    &nbsp;
+                                    <i class="fa fa-check-circle"></i>
+                                </div>
+                                -->
+                                <div class="p-3 py-5">
+                                    <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
+                                        <h4 class="text-left" style="padding-bottom: 15px;">Change your password</h4>
+                                        <h6>For your account's security, do not share your password with anyone else.</h6>
                                     </div>
-                                    -->
-                                    <div class="p-3 py-5">
-                                        <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
-                                            <h4 class="text-left" style="padding-bottom: 15px;">Change your password</h4>
-                                            <h6>For your account's security, do not share your password with anyone else.</h6>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12"><label class="labels">Current Password</label><input value="" type="password" name="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12"><label class="labels">Current Password</label><input value="" type="password" name="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
-                                            </div>
-                                            <div class="col-md-12"><label class="labels">New Password</label><input value="" type="password" name="newpass" class="form-control" placeholder="Nhập mật khẩu mới (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
-                                            </div>
-                                            <div class="col-md-12"><label class="labels">Confirm Password</label><input value="" type="password" name="cfpass" class="form-control" placeholder="Xác nhận mật khẩu mới">
-                                            </div>
+                                        <div class="col-md-12"><label class="labels">New Password</label><input value="" type="password" name="newpass" class="form-control" placeholder="Nhập mật khẩu mới (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
                                         </div>
-                                        <div class="mt-5 text-left">
-                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Confirm</button>
+                                        <div class="col-md-12"><label class="labels">Confirm Password</label><input value="" type="password" name="cfpass" class="form-control" placeholder="Xác nhận mật khẩu mới">
                                         </div>
+                                    </div>
+                                    <div class="mt-5 text-left">
+                                        <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Confirm</button>
+                                    </div>
+                                    <div class="mt-2 text-left">
+                                        <a class="btn btn-primary profile-button" href="userprofile">View Profile</a>
                                     </div>
                                 </div>
                             </div>
