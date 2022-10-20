@@ -1,4 +1,5 @@
 ﻿USE master
+alter database [SWP391_OnlineShop] set single_user with rollback immediate
 DROP DATABASE IF EXISTS SWP391_OnlineShop
 CREATE DATABASE SWP391_OnlineShop;
 GO

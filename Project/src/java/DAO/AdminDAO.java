@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.input.KeyCode;
 
 /**
  *
@@ -51,7 +52,7 @@ public class AdminDAO extends DBContext {
         }
         return null;
     }
-    
+
     public List<Users> getAllAccount() {
         List<Users> list = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Users]";
@@ -75,7 +76,7 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Users getAccount(String username) {
         String sql = "select * from Users where username = ?";
         try {
@@ -96,7 +97,29 @@ public class AdminDAO extends DBContext {
                 return p;
             }
         } catch (SQLException e) {
+            System.out.println(e);
         }
         return null;
+    }
+
+    public void updateUserProfile(int id, String fullname, String phone, String email, int gender) {
+        String sql = "update Users set fullname = ?, phone = ?, email = ?, gender = ? where UserID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, fullname);
+            ps.setString(2, phone);
+            ps.setString(3, email);
+            ps.setInt(4, gender);
+            ps.setInt(5, id);
+            
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public static void main(String[] args) {
+        AdminDAO ad = new AdminDAO();
+//        ad.updateUserProfile(23, "hieu", "0913475037", "hieu1234@gmail.com", 1);
     }
 }
