@@ -25,7 +25,7 @@ import model.Users;
 public class AccountDAO extends DBContext {
 
     public boolean isAccountValid(Users acc) {
-        String sql = "  select * from Accounts where Username=? or Email=? ";
+        String sql = "  select * from Users where Username=? or Email=? ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, acc.getUsername());
@@ -40,7 +40,7 @@ public class AccountDAO extends DBContext {
     }
 
     public void addAccount(Users acc) {
-        String sql = "insert into Users values(?, ?, ? ,? ,?, ?, 3, 1)";
+        String sql = "insert into Users values(?, ?, ? ,? ,?, ?, 3, NULL, 1)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, acc.getUsername());
@@ -61,7 +61,7 @@ public class AccountDAO extends DBContext {
             st.setString(1, user);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Users(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9));
+                return new Users(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
             }
         } catch (SQLException e) {
         }
@@ -74,7 +74,7 @@ public class AccountDAO extends DBContext {
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Users(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9));
+                return new Users(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
             }
         } catch (SQLException e) {
         }

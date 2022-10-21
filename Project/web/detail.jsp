@@ -89,8 +89,30 @@
                     </div>       
                 </div>
             </div>
-            <div class="tabs_section_container">
+            <div class="tabs_section_container" style="padding-top: 10px">
                 <div class="container">
+                    <div class="card">
+                        <div class="row card-body">
+                            <div class="col-sm-4" style="border-right: 1px dotted #cccccc">
+                                <span class="card-title">${detail.getShopName()}</span>
+                                <p class="card-text">Some example text. Some example text.</p>
+                                <a href="#" class="card-link">Chat with Seller</a>
+                                <a href="#" class="card-link">View Shop</a>
+                            </div>
+                            <div class="col-sm-8 text-center">
+                                <div class="row" style="padding-bottom: 40px">
+                                    <div class="col-sm-4">Products</div>
+                                    <div class="col-sm-4">Rattings</div>
+                                    <div class="col-sm-4">View</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">Products</div>
+                                    <div class="col-sm-4">Rattings</div>
+                                    <div class="col-sm-4">View</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="tabs_container">

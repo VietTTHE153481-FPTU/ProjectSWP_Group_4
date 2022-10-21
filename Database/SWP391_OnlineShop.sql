@@ -5,6 +5,16 @@ GO
 USE [SWP391_OnlineShop]
 GO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Shop (
+	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	ShopName nvarchar(1000)
+) ON [PRIMARY]
+GO
+INSERT INTO Shop VALUES (N'TcMinh');
+INSERT INTO Shop VALUES (N'LsThai');
+INSERT INTO Shop VALUES (N'TtViet');
+INSERT INTO Shop VALUES (N'Best Seller');
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE UserStatus (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	StatusName nvarchar(1000)
@@ -16,7 +26,7 @@ INSERT INTO UserStatus VALUES (N'Gmail Login');
 INSERT INTO UserStatus VALUES (N'Unverified');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create table [Role](
-	[RoleID] int IDENTITY(1, 1) primary key,
+	[ID] int IDENTITY(1, 1) primary key,
 	[RoleName] nvarchar (20),
 );
 GO
@@ -34,37 +44,39 @@ CREATE TABLE [Users] (
 	[gender] [bit],
 	email nvarchar(1000),
 	[RoleID] int,
+	ShopID int,
 	StatusID int,
 	constraint Status_ID_in_Status FOREIGN KEY(StatusID) REFERENCES UserStatus(ID),
-	constraint role_in_Role FOREIGN KEY(RoleID) REFERENCES [Role]([RoleID])
+	constraint ShopID FOREIGN KEY(ShopID) REFERENCES Shop(ID),
+	constraint role_in_Role FOREIGN KEY(RoleID) REFERENCES [Role]([ID])
 );
 GO
-INSERT INTO Users VALUES(N'admin','123456','Admin','0123445566',0,'admin@fpt.edu.vn',1,1);
-INSERT INTO Users VALUES(N'hieu','hieu',N'Hiếu','0123456789',0,'hieuNTHE160326@fpt.edu.vn',1,1);
-INSERT INTO Users VALUES(N'vha','vha',N'Hoàng Anh','0987654321',0,'anhvhhe163109@fpt.edu.vn',1,1);
-INSERT INTO Users VALUES(N'minh','Minh1@',N'Minh','0147258369',0,'minhtche161354@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'thai','Thai1@',N'Thái','0963852741',0,'thailshe160614@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'viet','Viet1@',N'Việt','0142753896',0,'viettthe153481@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'mkt','Seller1@',N'Seller','0369147852',1,'mkt@fpt.edu.vn',2,1);
-INSERT INTO Users VALUES(N'shipper','Ship1@',N'Shipper1','0789123654',0,'shipper@fpt.edu.vn',4,1);
-INSERT INTO Users VALUES('cus1','Custom1@',N'Customer1','0937235111',1,'customer1@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus2','Cus2@',N'Customer2','0123456777',1,'customer2@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus3','Cus3@',N'Customer3','0123456888',0,'customer3@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus4','Cus4@',N'Customer4','0123456999',1,'customer4@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus5','Cus5@',N'Customer5','0111123456',1,'customer5@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus6','Cus6@',N'Customer6','0122223456',1,'customer6@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus7','Cus7@',N'Customer7','0123333456',1,'customer7@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus8','Cus8@',N'Customer8','0123444456',0,'customer8@gmail.com', 3, 1);
-INSERT INTO Users VALUES('cus9','Cus9@',N'Customer9','0123455556',1,'customer9@gmail.com', 3, 1);
-INSERT INTO Users VALUES('ship1','Ship2@',N'Shipper2','0946312458',1,'ship1@gmail.com', 4, 1);
-INSERT INTO Users VALUES('ship2','Ship3@',N'Shipper3','0145326849',0,'ship2@gmail.com', 4, 1);
-INSERT INTO Users VALUES('ship3','Ship4@',N'Shipper4','0222356777',0,'ship3@gmail.com', 4, 1);
-INSERT INTO Users VALUES('cusvip','Vip1@',N'Khách VIP','0155234789',1,'khachvip01@gmail.com', 3, 1);
-INSERT INTO Users VALUES('ship5','Ship5@',N'Shipper5','0196478532',0,'ship5@gmail.com', 4, 1);
+INSERT INTO Users VALUES(N'admin','123456','Admin','0123445566',0,'admin@fpt.edu.vn',1,NULL,1);
+INSERT INTO Users VALUES(N'hieu','hieu',N'Hiếu','0123456789',0,'hieuNTHE160326@fpt.edu.vn',1,NULL,1);
+INSERT INTO Users VALUES(N'vha','vha',N'Hoàng Anh','0987654321',0,'anhvhhe163109@fpt.edu.vn',1,NULL,1);
+INSERT INTO Users VALUES(N'minh','Minh1@',N'Minh','0147258369',0,'minhtche161354@fpt.edu.vn',2,1,1);
+INSERT INTO Users VALUES(N'thai','Thai1@',N'Thái','0963852741',0,'thailshe160614@fpt.edu.vn',2,2,1);
+INSERT INTO Users VALUES(N'viet','Viet1@',N'Việt','0142753896',0,'viettthe153481@fpt.edu.vn',2,3,1);
+INSERT INTO Users VALUES(N'mkt','Seller1@',N'Seller','0369147852',1,'mkt@fpt.edu.vn',2,4,1);
+INSERT INTO Users VALUES(N'shipper','Ship1@',N'Shipper1','0789123654',0,'shipper@fpt.edu.vn',4,NULL,1);
+INSERT INTO Users VALUES('cus1','Custom1@',N'Customer1','0937235111',1,'customer1@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus2','Cus2@',N'Customer2','0123456777',1,'customer2@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus3','Cus3@',N'Customer3','0123456888',0,'customer3@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus4','Cus4@',N'Customer4','0123456999',1,'customer4@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus5','Cus5@',N'Customer5','0111123456',1,'customer5@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus6','Cus6@',N'Customer6','0122223456',1,'customer6@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus7','Cus7@',N'Customer7','0123333456',1,'customer7@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus8','Cus8@',N'Customer8','0123444456',0,'customer8@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('cus9','Cus9@',N'Customer9','0123455556',1,'customer9@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('ship1','Ship2@',N'Shipper2','0946312458',1,'ship1@gmail.com',4,NULL,1);
+INSERT INTO Users VALUES('ship2','Ship3@',N'Shipper3','0145326849',0,'ship2@gmail.com',4,NULL,1);
+INSERT INTO Users VALUES('ship3','Ship4@',N'Shipper4','0222356777',0,'ship3@gmail.com',4,NULL,1);
+INSERT INTO Users VALUES('cusvip','Vip1@',N'Khách VIP','0155234789',1,'khachvip01@gmail.com',3,NULL,1);
+INSERT INTO Users VALUES('ship5','Ship5@',N'Shipper5','0196478532',0,'ship5@gmail.com',4,NULL,1);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Ship (
 	id int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CityName nvarchar(1000) ,
+	CityName nvarchar(1000),
 	ShipPrice int
 ) ON [PRIMARY]
 GO
@@ -147,7 +159,6 @@ INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]
 INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (2, 'Shellysheldon', '80 Homewood Pass', 45);
 INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (3, 'Joletta', '180 Evergreen Circle', 61);
 INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (4, 'Tammi', '920 Melby Trail', 1);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID],[PhoneNum]) values (5, N'Bạch Ngọc Minh Châu', N'Đại Học FPT', 24,'0123456789');
 INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (6, 'Eba', '0 Dovetail Park', 38);
 INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (7, 'Farica', '39269 Calypso Place', 20);
 INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (8, 'Vevay', '730 Walton Crossing', 6);
@@ -223,25 +234,25 @@ CREATE TABLE Product (
 	SellPrice [money],
 	SalePercent int CHECK (SalePercent>=0 AND SalePercent<=100),
 	SubCategoryID int,
-	SellerID int,
+	ShopID int,
 	Amount int,
 	StatusID int,
 	constraint product_in_subCategory FOREIGN KEY(SubCategoryID) REFERENCES SubCategory(SubCategoryID),
-	constraint SellerID_in_Users FOREIGN KEY(SellerID) REFERENCES Users(UserID),
+	constraint ShopID_in_Shop FOREIGN KEY(ShopID) REFERENCES Users(UserID),
 	constraint StatusID_in_Status FOREIGN KEY(StatusID) REFERENCES ProductStatus(StatusID)
 ) ON [PRIMARY]
 GO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO Product VALUES (N'KAKI bomber jackets - FUNK Unisex baseball shirt',N'The fabric of the shirt is a genuine khaki material with a prominent border pattern, with a thick inner lining.',300000,165000,45,1,2,100,1);
-INSERT INTO Product VALUES (N'Latest fashion KAKI jacket 2019 KKN01',N'KAKI jacket is suitable for dynamic, youthful and masculine style. With raw KAKI fabric, thick, warm, durable, delicate design, solemn color.',250000,102000,59,1,2,100,1);
-INSERT INTO Product VALUES (N'KAKI unisex jacket Ulzzang style',N'The shirt is manufactured from KAKI fabric type 1, does not ruffle, does not fade, does not cause skin irritation. Standard form, comfortable, moderate color, flattering shape, suitable for all ages.',350000,350000,0,1,2,100,1);
-INSERT INTO Product VALUES (N'Baseball bomber jackets',N'Does not cause discomfort if worn in the hot season when traveling on the street, the ability to sweat to absorb sweat and leave no odor if worn for a long time, can be used well in the rainy season.',178000,178000,0,1,2,100,1);
-INSERT INTO Product VALUES (N'Unisex Bomber Jacket - Ulzzang Baseball Jacket',N'High quality KAKI material with outstanding border motifs. Extremely warm double-layer khaki suitable for winter wear.',270000,179000,34,1,2,100,1);
-INSERT INTO Product VALUES (N'Paisley Unisex N7 Basic Jeans oversize',N'High quality jean material, high quality ink does not peel off, the print is sharp, does not fade, does not harm the skin of the hands. Modern design, youthful, dynamic, easy to coordinate.',400000,400000,0,2,2,100,1);
-INSERT INTO Product VALUES (N'Men stretch black jeans',N'Jeans with a new design is more fashionable, bringing maximum confidence to the wearer in front of the people around. Made of high quality denim fabric, so soft and comfortable to wear.',400000,380000,5,2,2,100,1);
-INSERT INTO Product VALUES (N'Men smokey gray 4-way stretch jeans HD02',N'Nice seams, sturdy, slightly stretchy. The standard colors are carefully dyed, although the pants are slightly faded after a few washes, they still give a more dusty and personality jean color. 98% cotton 2% spandex, Slim fit shape.',498000,449000,10,2,2,100,1);
-INSERT INTO Product VALUES (N'Light gray men jeans',N'Non-fading, Fit (Slimfit), Stretch Jean Material.',280000,280000,0,2,2,100,1);
-INSERT INTO Product VALUES (N'High quality men jeans',N'There are two front pockets and two back pockets. Men jeans material is durable, sturdy, does not fade, does not shrink when washed, suitable for all ages, body shapes, not out of fashion.',145000,145000,0,2,2,100,1);
+INSERT INTO Product VALUES (N'KAKI bomber jackets - FUNK Unisex baseball shirt',N'The fabric of the shirt is a genuine khaki material with a prominent border pattern, with a thick inner lining.',300000,165000,45,1,1,100,1);
+INSERT INTO Product VALUES (N'Latest fashion KAKI jacket 2019 KKN01',N'KAKI jacket is suitable for dynamic, youthful and masculine style. With raw KAKI fabric, thick, warm, durable, delicate design, solemn color.',250000,102000,59,1,1,100,1);
+INSERT INTO Product VALUES (N'KAKI unisex jacket Ulzzang style',N'The shirt is manufactured from KAKI fabric type 1, does not ruffle, does not fade, does not cause skin irritation. Standard form, comfortable, moderate color, flattering shape, suitable for all ages.',350000,350000,0,1,1,100,1);
+INSERT INTO Product VALUES (N'Baseball bomber jackets',N'Does not cause discomfort if worn in the hot season when traveling on the street, the ability to sweat to absorb sweat and leave no odor if worn for a long time, can be used well in the rainy season.',178000,178000,0,1,1,100,1);
+INSERT INTO Product VALUES (N'Unisex Bomber Jacket - Ulzzang Baseball Jacket',N'High quality KAKI material with outstanding border motifs. Extremely warm double-layer khaki suitable for winter wear.',270000,179000,34,1,1,100,1);
+INSERT INTO Product VALUES (N'Paisley Unisex N7 Basic Jeans oversize',N'High quality jean material, high quality ink does not peel off, the print is sharp, does not fade, does not harm the skin of the hands. Modern design, youthful, dynamic, easy to coordinate.',400000,400000,0,2,1,100,1);
+INSERT INTO Product VALUES (N'Men stretch black jeans',N'Jeans with a new design is more fashionable, bringing maximum confidence to the wearer in front of the people around. Made of high quality denim fabric, so soft and comfortable to wear.',400000,380000,5,2,1,100,1);
+INSERT INTO Product VALUES (N'Men smokey gray 4-way stretch jeans HD02',N'Nice seams, sturdy, slightly stretchy. The standard colors are carefully dyed, although the pants are slightly faded after a few washes, they still give a more dusty and personality jean color. 98% cotton 2% spandex, Slim fit shape.',498000,449000,10,2,1,100,1);
+INSERT INTO Product VALUES (N'Light gray men jeans',N'Non-fading, Fit (Slimfit), Stretch Jean Material.',280000,280000,0,2,1,100,1);
+INSERT INTO Product VALUES (N'High quality men jeans',N'There are two front pockets and two back pockets. Men jeans material is durable, sturdy, does not fade, does not shrink when washed, suitable for all ages, body shapes, not out of fashion.',145000,145000,0,2,1,100,1);
 INSERT INTO Product VALUES (N'KAKi Soft VICERO',N'Male T-Shirt I7TSH545I',190000,133000,30,3,2,100,1);
 INSERT INTO Product VALUES (N'Men body pants with stretchy black and white',N'Male T-Shirt I7TSH535I',250000,250000,0,3,2,100,1);
 INSERT INTO Product VALUES (N'Men jeans shorts MD Q414 silver blue',N'Female T-Shirt I9TSH553I',250000,250000,0,3,2,100,1);
@@ -252,36 +263,36 @@ INSERT INTO Product VALUES (N'JBAGY JL0102',N'Long white turtleneck sweater, str
 INSERT INTO Product VALUES (N'Local Brand Multi Color Jacket',N'Hoodie Logo Dragon free size, thin fabric suitable for autumn and winter wear',450000,450000,0,4,2,100,1);
 INSERT INTO Product VALUES (N'UNISEX DURHAM sweatshirt hoodie',N'UNISEX Durham fall and winter long sleeve shirt in black',450000,450000,0,4,2,100,1);
 INSERT INTO Product VALUES (N'UNISEX Plain Sweater (Multicolor)',N'Gray UNISEX Durham fall hooded hoodie',390000,312000,20,4,2,100,1);
-INSERT INTO Product VALUES (N'Dress two-shoulder chiffon dress',N'Silk chiffon dress with 2 layers free size',130000,130000,0,5,2,100,1);
-INSERT INTO Product VALUES (N'Off Shoulder Body Hugging Dress',N'This is a fabric with very high color fastness, stretch resistance, and drift resistance, but its ability to resist wrinkles and absorb sweat is very poor because it contains a lot of cotton',200000,200000,0,5,2,100,1);
-INSERT INTO Product VALUES (N'Korean style flared dress',N'Free size 80cm. Elasticities',150000,150000,0,5,2,100,1);
-INSERT INTO Product VALUES (N'Split A-line skirt',N'Design: Short A-line skirt with front thigh split',120000,120000,0,6,2,100,1);
-INSERT INTO Product VALUES (N'Short A-line Jean Skirt Women High Loose',N'Women high-waisted jeans skirt with a simple design with a V7 inside, thick khaki / jean material, light stretch, extremely comfortable',131000,131000,0,6,2,100,1);
-INSERT INTO Product VALUES (N'[Premium] Seamless bikini, luxurious V-neck',N'Fabric from Polyester Spandex. The fabric is stretchy, well adapted to sea water and sunlight',350000,245000,30,7,2,100,1);
-INSERT INTO Product VALUES (N'Bikini 1 piece cross shoulder BK1',N'Bikini one-piece swimsuit discreet horizontal strap BK01, Korean style swimsuit is a good quality swimsuit product, with a youthful and feminine design',259000,168000,35,7,2,100,1);
-INSERT INTO Product VALUES (N'Swimwear - Sexy purple blue bikini',N'Fabric quality from Polyester + Spandex, good elasticity, adapts to water and sunlight, highly aesthetic',300000,185000,38,7,2,100,1);
-INSERT INTO Product VALUES (N'Korean Croptop bikini',N'Korean croptop bikinis with high-end cold t-shirts, no need to wear bras inside',190000,190000,0,7,2,100,1);
-INSERT INTO Product VALUES (N'ENVYLOOK Linen-Belt Skirt',N'ENVYLOOK Linen-Belt Skirt',570000,299000,47,7,2,100,1);
-INSERT INTO Product VALUES (N'Nike Air Zoom Winflo 7 CJ0291-005',N'Nike Air Zoom Winflo 7 CJ0291-005',2929000,2196750,25,7,2,100,1);
-INSERT INTO Product VALUES (N'Nike Benassi Slip Shoe 882410-010',N'Nike Benassi Slip Shoe 882410-010',1923000,961500,50,7,2,100,1);
-INSERT INTO Product VALUES (N'Nike Benassi Slp 882410-008',N'Nike Benassi Slp 882410-008',1569000,784500,50,7,2,100,1);
-INSERT INTO Product VALUES (N'Vans Slip-On Label Mix',N'Vans Slip-On Label Mix',145000,145000,0,7,2,100,1);
-INSERT INTO Product VALUES (N'Vans Sk8-Hi',N'Vans Sk8-Hi',185000,185000,0,7,2,100,1);
-INSERT INTO Product VALUES (N'Male Sock Pack 3 I7SOK201H',N'Male Sock Pack 3 I7SOK201H',50000,50000,0,8,2,100,1);
-INSERT INTO Product VALUES (N'Male Sock I7SOK213E',N'Male Sock I7SOK213E',150000,150000,0,8,2,100,1);
-INSERT INTO Product VALUES (N'Male Sock I7SOK217E',N'Male Sock I7SOK217E',150000,150000,0,8,2,100,1);
-INSERT INTO Product VALUES (N'Female Sock I9SOK015E',N'Female Sock I9SOK015E',150000,150000,0,8,2,100,1);
-INSERT INTO Product VALUES (N'Female Sock I9SOK222E',N'Female Sock I9SOK222E',150000,150000,0,8,2,100,1);
-INSERT INTO Product VALUES (N'Backpack V8BPK302I',N'Backpack V8BPK302I',690000,690000,0,9,2,100,1);
-INSERT INTO Product VALUES (N'Backpack V8BPK300I',N'Backpack V8BPK300I',590000,590000,0,9,2,100,1);
+INSERT INTO Product VALUES (N'Dress two-shoulder chiffon dress',N'Silk chiffon dress with 2 layers free size',130000,130000,0,5,3,100,1);
+INSERT INTO Product VALUES (N'Off Shoulder Body Hugging Dress',N'This is a fabric with very high color fastness, stretch resistance, and drift resistance, but its ability to resist wrinkles and absorb sweat is very poor because it contains a lot of cotton',200000,200000,0,5,3,100,1);
+INSERT INTO Product VALUES (N'Korean style flared dress',N'Free size 80cm. Elasticities',150000,150000,0,5,3,100,1);
+INSERT INTO Product VALUES (N'Split A-line skirt',N'Design: Short A-line skirt with front thigh split',120000,120000,0,6,3,100,1);
+INSERT INTO Product VALUES (N'Short A-line Jean Skirt Women High Loose',N'Women high-waisted jeans skirt with a simple design with a V7 inside, thick khaki / jean material, light stretch, extremely comfortable',131000,131000,0,6,3,100,1);
+INSERT INTO Product VALUES (N'[Premium] Seamless bikini, luxurious V-neck',N'Fabric from Polyester Spandex. The fabric is stretchy, well adapted to sea water and sunlight',350000,245000,30,7,3,100,1);
+INSERT INTO Product VALUES (N'Bikini 1 piece cross shoulder BK1',N'Bikini one-piece swimsuit discreet horizontal strap BK01, Korean style swimsuit is a good quality swimsuit product, with a youthful and feminine design',259000,168000,35,7,3,100,1);
+INSERT INTO Product VALUES (N'Swimwear - Sexy purple blue bikini',N'Fabric quality from Polyester + Spandex, good elasticity, adapts to water and sunlight, highly aesthetic',300000,185000,38,7,3,100,1);
+INSERT INTO Product VALUES (N'Korean Croptop bikini',N'Korean croptop bikinis with high-end cold t-shirts, no need to wear bras inside',190000,190000,0,7,3,100,1);
+INSERT INTO Product VALUES (N'ENVYLOOK Linen-Belt Skirt',N'ENVYLOOK Linen-Belt Skirt',570000,299000,47,7,3,100,1);
+INSERT INTO Product VALUES (N'Nike Air Zoom Winflo 7 CJ0291-005',N'Nike Air Zoom Winflo 7 CJ0291-005',2929000,2196750,25,7,4,100,1);
+INSERT INTO Product VALUES (N'Nike Benassi Slip Shoe 882410-010',N'Nike Benassi Slip Shoe 882410-010',1923000,961500,50,7,4,100,1);
+INSERT INTO Product VALUES (N'Nike Benassi Slp 882410-008',N'Nike Benassi Slp 882410-008',1569000,784500,50,7,4,100,1);
+INSERT INTO Product VALUES (N'Vans Slip-On Label Mix',N'Vans Slip-On Label Mix',145000,145000,0,7,4,100,1);
+INSERT INTO Product VALUES (N'Vans Sk8-Hi',N'Vans Sk8-Hi',185000,185000,0,7,4,100,1);
+INSERT INTO Product VALUES (N'Male Sock Pack 3 I7SOK201H',N'Male Sock Pack 3 I7SOK201H',50000,50000,0,8,4,100,1);
+INSERT INTO Product VALUES (N'Male Sock I7SOK213E',N'Male Sock I7SOK213E',150000,150000,0,8,4,100,1);
+INSERT INTO Product VALUES (N'Male Sock I7SOK217E',N'Male Sock I7SOK217E',150000,150000,0,8,4,100,1);
+INSERT INTO Product VALUES (N'Female Sock I9SOK015E',N'Female Sock I9SOK015E',150000,150000,0,8,4,100,1);
+INSERT INTO Product VALUES (N'Female Sock I9SOK222E',N'Female Sock I9SOK222E',150000,150000,0,8,4,100,1);
+INSERT INTO Product VALUES (N'Backpack V8BPK302I',N'Backpack V8BPK302I',690000,690000,0,9,1,100,1);
+INSERT INTO Product VALUES (N'Backpack V8BPK300I',N'Backpack V8BPK300I',590000,590000,0,9,1,100,1);
 INSERT INTO Product VALUES (N'Waterproof Backpack I7BPK003I',N'Waterproof Backpack I7BPK003I',399000,399000,0,9,2,100,1);
 INSERT INTO Product VALUES (N'Unisex Adidas 4Athlts Id Bp FJ3924',N'Unisex Adidas 4Athlts Id Bp FJ3924',1200000,780000,35,9,2,100,1);
-INSERT INTO Product VALUES (N'Unisex Adidas Clas Bp Fabric GL0890',N'Unisex Adidas Clas Bp Fabric GL0890',700000,700000,0,9,2,100,1);
-INSERT INTO Product VALUES (N'FLAANS 925 SharpStar N',N'FLAANS 925 SharpStar N',356000,356000,0,10,2,100,1);
-INSERT INTO Product VALUES (N'FLAANS Bauli R',N'FLAANS Bauli R',156000,156000,0,10,2,100,1);
-INSERT INTO Product VALUES (N'FLAANS Vin Bold R',N'FLAANS Vin Bold R',156000,156000,0,10,2,100,1);
-INSERT INTO Product VALUES (N'FLAANS ChainBZ_N',N'FLAANS ChainBZ_N',516000,516000,0,10,2,100,1);
-INSERT INTO Product VALUES (N'FLAANS 925 NewMoon N',N'FLAANS 925 NewMoon N',356000,356000,0,10,2,100,1);
+INSERT INTO Product VALUES (N'Unisex Adidas Clas Bp Fabric GL0890',N'Unisex Adidas Clas Bp Fabric GL0890',700000,700000,0,9,3,100,1);
+INSERT INTO Product VALUES (N'FLAANS 925 SharpStar N',N'FLAANS 925 SharpStar N',356000,356000,0,10,3,100,1);
+INSERT INTO Product VALUES (N'FLAANS Bauli R',N'FLAANS Bauli R',156000,156000,0,10,4,100,1);
+INSERT INTO Product VALUES (N'FLAANS Vin Bold R',N'FLAANS Vin Bold R',156000,156000,0,10,4,100,1);
+INSERT INTO Product VALUES (N'FLAANS ChainBZ_N',N'FLAANS ChainBZ_N',516000,516000,0,10,4,100,1);
+INSERT INTO Product VALUES (N'FLAANS 925 NewMoon N',N'FLAANS 925 NewMoon N',356000,356000,0,10,4,100,1);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[ProductImg](
 	[ProductID] [int]  ,

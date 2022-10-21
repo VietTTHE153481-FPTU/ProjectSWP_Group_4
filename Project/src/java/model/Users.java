@@ -15,12 +15,13 @@ public class Users {
     private boolean gender;
     private String email;
     private int roleId;
+    private int shopId;
     private int statusId;
 
     public Users() {
     }
 
-    public Users(int userID, String username, String password, String fullname, String phone, boolean gender, String email, int roleId, int statusId) {
+    public Users(int userID, String username, String password, String fullname, String phone, boolean gender, String email, int roleId, int shopId, int statusId) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -29,6 +30,7 @@ public class Users {
         this.gender = gender;
         this.email = email;
         this.roleId = roleId;
+        this.shopId = shopId;
         this.statusId = statusId;
     }
 
@@ -92,8 +94,29 @@ public class Users {
         return roleId;
     }
 
+    public String getRoleName() {
+        switch (roleId) {
+            case 1:
+                return "Admin";
+            case 2:
+                return "Seller";
+            case 3:
+                return "Customer";
+            default:
+                return "Shipper";
+        }
+    }
+
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
     public String getStatusID() {

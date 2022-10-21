@@ -22,17 +22,7 @@ import model.Users;
 public class RegisterDAO extends DBContext {
 
     public Users checkAccountExist(String username) {
-        String sql = "SELECT [userID]\n"
-                + "      ,[username]\n"
-                + "      ,[password]\n"
-                + "      ,[fullname]\n"
-                + "      ,[phone]\n"
-                + "      ,[gender]\n"
-                + "      ,[email]\n"
-                + "      ,[roleId]\n"
-                + "      ,[statusId]\n"
-                + "  FROM [dbo].[Users]\n"
-                + "  WHERE [username] = ?";
+        String sql = "SELECT * FROM [dbo].[Users] WHERE [username] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
@@ -46,7 +36,8 @@ public class RegisterDAO extends DBContext {
                         rs.getBoolean(6),
                         rs.getString(7),
                         rs.getInt(8),
-                        rs.getInt(9));
+                        rs.getInt(9),
+                        rs.getInt(10));
                 return a;
             }
         } catch (SQLException e) {
@@ -56,7 +47,7 @@ public class RegisterDAO extends DBContext {
 
     public void create(String username, String password, String fullname,
             String phone, String sex, String Email) {
-        String sql = "insert into Users values(?, ?, ? ,? ,?, ?, 3, 1)";
+        String sql = "insert into Users values(?, ?, ? ,? ,?, ?, 3, NULL, 1)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);

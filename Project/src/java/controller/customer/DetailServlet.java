@@ -4,12 +4,11 @@
  */
 package controller.customer;
 
-import DAO.CategoryDAO;
 import DAO.ProductDAO;
+import DAO.ShopDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Products;
+import model.Shop;
 
 /**
  *
@@ -64,16 +64,12 @@ public class DetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id_raw = request.getParameter("id");
-        int id;
-        try {
-            id = Integer.parseInt(id_raw);
-            ProductDAO pd = new ProductDAO();
-            Products p = pd.getProductById(id);
-            request.setAttribute("detail", p);
-            request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        ProductDAO pd = new ProductDAO();
+        Products p = pd.getProductById(id);
+        
+        request.setAttribute("detail", p);
+        request.getRequestDispatcher("detail.jsp").forward(request, response);
 
     }
 

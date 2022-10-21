@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Role;
 
 /**
  *
@@ -19,17 +20,7 @@ import java.util.List;
 public class AdminDAO extends DBContext {
 
     public Users check(String username, String password) {
-        String sql = "SELECT [userID]"
-                + "      ,[username]\n"
-                + "      ,[password]\n"
-                + "      ,[fullname]\n"
-                + "      ,[phone]\n"
-                + "      ,[gender]\n"
-                + "      ,[email]\n"
-                + "      ,[roleId]\n"
-                + "      ,[statusId]\n"
-                + "  FROM [dbo].[Users]\n"
-                + "  WHERE [username] = ? and [password] = ?";
+        String sql = "SELECT * FROM [dbo].[Users] WHERE [username] = ? and [password] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
@@ -44,14 +35,15 @@ public class AdminDAO extends DBContext {
                         rs.getBoolean(6),
                         rs.getString(7),
                         rs.getInt(8),
-                        rs.getInt(9));
+                        rs.getInt(9),
+                        rs.getInt(10));
                 return a;
             }
         } catch (SQLException e) {
         }
         return null;
     }
-    
+
     public List<Users> getAllAccount() {
         List<Users> list = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Users]";
@@ -68,6 +60,7 @@ public class AdminDAO extends DBContext {
                 p.setGender(rs.getBoolean("gender"));
                 p.setEmail(rs.getString("email"));
                 p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
                 p.setStatusId(rs.getInt("statusId"));
                 list.add(p);
             }
@@ -75,7 +68,7 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Users getAccount(String username) {
         String sql = "select * from Users where username = ?";
         try {
@@ -92,11 +85,29 @@ public class AdminDAO extends DBContext {
                 p.setGender(rs.getBoolean("gender"));
                 p.setEmail(rs.getString("email"));
                 p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
                 p.setStatusId(rs.getInt("statusId"));
                 return p;
             }
         } catch (SQLException e) {
         }
         return null;
+    }
+
+    public List<Role> getRole() {
+        List<Role> list = new ArrayList<>();
+        String sql = "SELECT * FROM [dbo].[Role]";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Role p = new Role();
+                p.setID(rs.getInt("ID"));
+                p.setRoleName(rs.getString("RoleName"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
     }
 }

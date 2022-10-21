@@ -68,7 +68,7 @@ public class UserProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("userprofile").forward(request, response);
+        request.getRequestDispatcher("userprofile.jsp").forward(request, response);
     }
 
     /** 

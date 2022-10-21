@@ -23,7 +23,7 @@ public class ProductDAO extends DBContext {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.ShopID) AS ShopID,\n"
                 + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
@@ -41,7 +41,7 @@ public class ProductDAO extends DBContext {
                 p.setSellPrice(rs.getDouble("SellPrice"));
                 p.setSalePercent(rs.getDouble("SalePercent"));
                 p.setSubCategoryID(rs.getInt("SubCategoryID"));
-                p.setSellerID(rs.getInt("SellerID"));
+                p.setShopID(rs.getInt("ShopID"));
                 p.setAmount(rs.getInt("Amount"));
                 p.setStatusID(rs.getInt("StatusID"));
                 p.setUrl(rs.getString("ProductImgURL"));
@@ -58,7 +58,7 @@ public class ProductDAO extends DBContext {
         String sql = "SELECT TOP(15) * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.ShopID) AS ShopID,\n"
                 + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
@@ -77,7 +77,7 @@ public class ProductDAO extends DBContext {
                 p.setSellPrice(rs.getDouble("SellPrice"));
                 p.setSalePercent(rs.getDouble("SalePercent"));
                 p.setSubCategoryID(rs.getInt("SubCategoryID"));
-                p.setSellerID(rs.getInt("SellerID"));
+                p.setShopID(rs.getInt("ShopID"));
                 p.setAmount(rs.getInt("Amount"));
                 p.setStatusID(rs.getInt("StatusID"));
                 p.setUrl(rs.getString("ProductImgURL"));
@@ -94,7 +94,7 @@ public class ProductDAO extends DBContext {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.ShopID) AS ShopID,\n"
                 + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
@@ -140,7 +140,7 @@ public class ProductDAO extends DBContext {
                 p.setSellPrice(rs.getDouble("SellPrice"));
                 p.setSalePercent(rs.getDouble("SalePercent"));
                 p.setSubCategoryID(rs.getInt("SubCategoryID"));
-                p.setSellerID(rs.getInt("SellerID"));
+                p.setShopID(rs.getInt("ShopID"));
                 p.setAmount(rs.getInt("Amount"));
                 p.setStatusID(rs.getInt("StatusID"));
                 p.setUrl(rs.getString("ProductImgURL"));
@@ -156,11 +156,12 @@ public class ProductDAO extends DBContext {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
                 + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.SellerID) AS SellerID,\n"
-                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.ShopID) AS ShopID,\n"
+                + "MIN(s.ShopName) as ShopName, MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
                 + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                + "			  JOIN dbo.Shop s ON s.ID = p.ShopID\n"
                 + "GROUP BY p.ProductID ) t where t.ProductID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -174,7 +175,8 @@ public class ProductDAO extends DBContext {
                         rs.getDouble("SellPrice"),
                         rs.getDouble("SalePercent"),
                         rs.getInt("SubCategoryID"),
-                        rs.getInt("SellerID"),
+                        rs.getInt("ShopID"),
+                        rs.getString("ShopName"),
                         rs.getInt("Amount"),
                         rs.getInt("StatusID"),
                         rs.getString("ProductImgURL"),
@@ -186,9 +188,10 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
+
     public static void main(String[] args) {
-        ProductDAO pd= new ProductDAO();
-        Products p= pd.getProductById(1);
+        ProductDAO pd = new ProductDAO();
+        Products p = pd.getProductById(1);
         System.out.println(p.getProductName());
     }
 }

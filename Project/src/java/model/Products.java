@@ -8,16 +8,18 @@ package model;
  *
  * @author trung
  */
-public class Products {
+public class Products extends Shop {
+
     int productID;
-    String productName; 
+    String productName;
     String Description;
-    double OriginalPrice; 
-    double SellPrice; 
+    double OriginalPrice;
+    double SellPrice;
     double SalePercent;
-    int SubCategoryID; 
-    int SellerID; 
-    int Amount; 
+    int SubCategoryID;
+    int ShopID;
+    String ShopName;
+    int Amount;
     int StatusID;
     String url;
     int CategoryID;
@@ -25,7 +27,7 @@ public class Products {
     public Products() {
     }
 
-    public Products(int productID, String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent, int SubCategoryID, int SellerID, int Amount, int StatusID, String url, int CategoryID) {
+    public Products(int productID, String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent, int SubCategoryID, int ShopID, String ShopName, int Amount, int StatusID, String url, int CategoryID) {
         this.productID = productID;
         this.productName = productName;
         this.Description = Description;
@@ -33,7 +35,8 @@ public class Products {
         this.SellPrice = SellPrice;
         this.SalePercent = SalePercent;
         this.SubCategoryID = SubCategoryID;
-        this.SellerID = SellerID;
+        this.ShopID = ShopID;
+        this.ShopName = ShopName;
         this.Amount = Amount;
         this.StatusID = StatusID;
         this.url = url;
@@ -96,12 +99,22 @@ public class Products {
         this.SubCategoryID = SubCategoryID;
     }
 
-    public int getSellerID() {
-        return SellerID;
+    public int getShopID() {
+        return ShopID;
     }
 
-    public void setSellerID(int SellerID) {
-        this.SellerID = SellerID;
+    public void setShopID(int ShopID) {
+        this.ShopID = ShopID;
+    }
+
+    @Override
+    public String getShopName() {
+        return ShopName;
+    }
+
+    @Override
+    public void setShopName(String ShopName) {
+        this.ShopName = ShopName;
     }
 
     public int getAmount() {

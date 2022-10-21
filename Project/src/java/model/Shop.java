@@ -8,16 +8,17 @@ package model;
  *
  * @author trung
  */
-public class Role {
-    private int ID;
-    private String RoleName;
+public class Shop {
 
-    public Role() {
+    private int ID;
+    String ShopName;
+
+    public Shop() {
     }
 
-    public Role(int ID, String RoleName) {
+    public Shop(int ID, String ShopName) {
         this.ID = ID;
-        this.RoleName = RoleName;
+        this.ShopName = ShopName;
     }
 
     public int getID() {
@@ -28,11 +29,11 @@ public class Role {
         this.ID = ID;
     }
 
-    public String getRoleName() {
-        return RoleName;
+    public String getShopName() {
+        return ShopName;
     }
 
-    public void setRoleName(String RoleName) {
-        this.RoleName = RoleName;
+    public void setShopName(String ShopName) {
+        this.ShopName = ShopName;
     }
 }

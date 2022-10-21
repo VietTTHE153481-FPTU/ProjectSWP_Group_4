@@ -108,7 +108,7 @@
                                             <td>${ac.phone}</td>
                                             <td>${ac.gender?'Female':'Male'}</td>
                                             <td>${ac.email}</td>
-                                            <td>${ac.roleId}</td>
+                                            <td>${ac.getRoleName()}</td>
                                             <td>
                                                 <a href="profile?userID=${ac.getUsername()}"><i class="fa fa-user-md"></i></a>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;
