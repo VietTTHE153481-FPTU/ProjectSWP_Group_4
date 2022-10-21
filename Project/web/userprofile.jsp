@@ -45,38 +45,46 @@
                                     <i class="fa fa-check-circle"></i>
                                 </div>
                                 -->
-                                <div class="p-3 py-5">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">Your Profile</h4>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12"><label class="labels">Full Name</label><input value="${account.fullname}" type="text" name="fullname" class="form-control">
+                                <form method="post" action="userprofile">
+                                    <div class="p-3 py-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-right">Your Profile</h4>
+                                            <h6 style="color: red">${mes}</h6>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <label class="labels">Full Name</label>
+                                                <input value="${account.fullname}" type="text" name="fullname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12"><label class="labels">PhoneNumber</label><input value="${account.phone}" type="text" name="phone" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12"><label class="labels">Email</label><input value="${account.email}" type="text" name="email" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <label class="labels">Gender</label>
+                                            <c:if test="${account.gender==true}">
+                                                <input type="radio" name="gender" checked value="1"> Male
+                                                <input type="radio" name="gender"  value="0"> Female
+                                            </c:if>
+
+                                            <c:if test="${account.gender==false}">
+                                                <input type="radio" name="gender" value="1"> Male
+                                                <input type="radio" name="gender" checked  value="0"> Female
+                                            </c:if>
+
+                                        </div>
+                                        <div class="mt-5 text-left">
+                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
+                                            <a class="btn btn-primary profile-button" href="password">Change Password</a>
+                                            <a class="btn btn-primary profile-button" href="address">Addresses</a>
                                         </div>
                                     </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12"><label class="labels">PhoneNumber</label><input value="${account.phone}" type="text" name="phone" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12"><label class="labels">Email</label><input value="${account.email}" type="text" name="email" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-6"><label class="labels">Gender</label>
-                                            <input type="radio" name="gender" checked value="${account.gender}"> Male
-                                            <input type="radio" name="gender" value="${account.gender}"> Female
-                                        </div>
-                                    </div>
-                                    <div class="mt-5 text-left">
-                                        <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
-                                    </div>
-                                    <div class="mt-2 text-left">
-                                        <a class="btn btn-primary profile-button" href="password">Change Password</a>
-                                    </div>
-                                    <div class="mt-2 text-left">
-                                        <a class="btn btn-primary profile-button" href="address">Addresses</a>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

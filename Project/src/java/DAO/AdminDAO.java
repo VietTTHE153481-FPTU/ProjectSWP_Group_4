@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Role;
+import javax.scene.input.KeyCode;
 
 /**
  *
@@ -20,7 +20,18 @@ import model.Role;
 public class AdminDAO extends DBContext {
 
     public Users check(String username, String password) {
-        String sql = "SELECT * FROM [dbo].[Users] WHERE [username] = ? and [password] = ?";
+        String sql = "SELECT [UserID]\n"
+                + "      ,[username]\n"
+                + "      ,[password]\n"
+                + "      ,[fullname]\n"
+                + "      ,[phone]\n"
+                + "      ,[gender]\n"
+                + "      ,[email]\n"
+                + "      ,[RoleID]\n"
+                + "      ,[ShopID]\n"
+                + "      ,[StatusID]\n"
+                + "  FROM [dbo].[Users]\n"
+                + "  WHERE [username] = ? and [password] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
@@ -60,7 +71,6 @@ public class AdminDAO extends DBContext {
                 p.setGender(rs.getBoolean("gender"));
                 p.setEmail(rs.getString("email"));
                 p.setRoleId(rs.getInt("roleId"));
-                p.setShopId(rs.getInt("shopId"));
                 p.setStatusId(rs.getInt("statusId"));
                 list.add(p);
             }
@@ -85,29 +95,33 @@ public class AdminDAO extends DBContext {
                 p.setGender(rs.getBoolean("gender"));
                 p.setEmail(rs.getString("email"));
                 p.setRoleId(rs.getInt("roleId"));
-                p.setShopId(rs.getInt("shopId"));
                 p.setStatusId(rs.getInt("statusId"));
                 return p;
             }
         } catch (SQLException e) {
+            System.out.println(e);
         }
         return null;
     }
 
-    public List<Role> getRole() {
-        List<Role> list = new ArrayList<>();
-        String sql = "SELECT * FROM [dbo].[Role]";
+    public void updateUserProfile(int id, String fullname, String phone, String email, int gender) {
+        String sql = "update Users set fullname = ?, phone = ?, email = ?, gender = ? where UserID = ?";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Role p = new Role();
-                p.setID(rs.getInt("ID"));
-                p.setRoleName(rs.getString("RoleName"));
-                list.add(p);
-            }
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, fullname);
+            ps.setString(2, phone);
+            ps.setString(3, email);
+            ps.setInt(4, gender);
+            ps.setInt(5, id);
+
+            ps.executeUpdate();
         } catch (SQLException e) {
+            System.out.println(e);
         }
-        return list;
+    }
+
+    public static void main(String[] args) {
+        AdminDAO ad = new AdminDAO();
+//        ad.updateUserProfile(23, "hieu", "0913475037", "hieu1234@gmail.com", 1);
     }
 }
