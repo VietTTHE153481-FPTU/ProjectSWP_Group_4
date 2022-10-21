@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.scene.input.KeyCode;
+//import javax.scene.input.KeyCode;
 
 /**
  *
@@ -71,6 +71,7 @@ public class AdminDAO extends DBContext {
                 p.setGender(rs.getBoolean("gender"));
                 p.setEmail(rs.getString("email"));
                 p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
                 p.setStatusId(rs.getInt("statusId"));
                 list.add(p);
             }
@@ -95,6 +96,7 @@ public class AdminDAO extends DBContext {
                 p.setGender(rs.getBoolean("gender"));
                 p.setEmail(rs.getString("email"));
                 p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
                 p.setStatusId(rs.getInt("statusId"));
                 return p;
             }

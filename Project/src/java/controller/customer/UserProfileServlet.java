@@ -87,18 +87,17 @@ public class UserProfileServlet extends HttpServlet {
         if (gender_raw.equals("1")) {
             gender = 1;
         }
-
         if (rd.getStringInput(fullname, "^[a-zA-Z"
                 + "_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơ"
                 + "ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊ"
                 + "ỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\ ]+$") == false) {
-            request.setAttribute("mes", "fullname incorrect");
+            request.setAttribute("mes", "Fullname Incorrect");
             request.getRequestDispatcher("userprofile.jsp").forward(request, response);
         } else if (rd.getStringInput(phone, "^(84|0[3|5|7|8|9])+([0-9]{8})$") == false) {
-            request.setAttribute("mes", "phone incorrect");
+            request.setAttribute("mes", "Phone Format error");
             request.getRequestDispatcher("userprofile.jsp").forward(request, response);
         } else if (rd.getStringInput(email, "^[a-zA-Z][a-zA-Z0-9\\-_]+@[a-zA-Z]+(\\.[a-zA-Z]+){1,3}$") == false) {
-            request.setAttribute("mes", "email incorrect");
+            request.setAttribute("mes", "Email Format error");
             request.getRequestDispatcher("userprofile.jsp").forward(request, response);
         } else {
             Users u = (Users) session.getAttribute("account");
@@ -106,10 +105,9 @@ public class UserProfileServlet extends HttpServlet {
 
             Users a = ad.getAccount(u.getUsername());
             session.setAttribute("account", a);
+            request.setAttribute("mess", "Update Successful");
             request.getRequestDispatcher("userprofile.jsp").forward(request, response);
         }
-
-        request.getRequestDispatcher("userprofile").forward(request, response);
     }
 
     /**

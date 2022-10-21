@@ -38,19 +38,16 @@
                                 </div>
                             </div>
                             <div class="col-md-5 border-right">
-                                <!-- cập nhật profile thành công 
-                                <div class="text-center"; style="color: #00cc00">
-                                    <span>Update Successful</span>
-                                    &nbsp;
-                                    <i class="fa fa-check-circle"></i>
+                                <div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    ${requestScope.mess}
                                 </div>
-                                -->
                                 <form method="post" action="userprofile">
                                     <div class="p-3 py-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="text-right">Your Profile</h4>
-                                            <h6 style="color: red">${mes}</h6>
                                         </div>
+                                        <h6 style="color: red; text-align: center">${mes}</h6>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label class="labels">Full Name</label>
@@ -66,17 +63,17 @@
                                             </div>
                                         </div>
                                         <div class="row mt-3">
-                                            <label class="labels">Gender</label>
-                                            <c:if test="${account.gender==true}">
-                                                <input type="radio" name="gender" checked value="1"> Male
-                                                <input type="radio" name="gender"  value="0"> Female
-                                            </c:if>
-
-                                            <c:if test="${account.gender==false}">
-                                                <input type="radio" name="gender" value="1"> Male
-                                                <input type="radio" name="gender" checked  value="0"> Female
-                                            </c:if>
-
+                                            <div class="col-md-12">
+                                                <label class="labels">Gender</label>
+                                                <c:if test="${account.gender == false}">
+                                                    <input type="radio" name="gender" checked value="0"> Male
+                                                    <input type="radio" name="gender"  value="1"> Female
+                                                </c:if>
+                                                <c:if test="${account.gender == true}">
+                                                    <input type="radio" name="gender" value="0"> Male
+                                                    <input type="radio" name="gender" checked  value="1"> Female
+                                                </c:if>
+                                            </div>
                                         </div>
                                         <div class="mt-5 text-left">
                                             <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
@@ -92,6 +89,13 @@
             </div>
             <%@include file ="layout/Footer.jsp" %>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('button').click(function () {
+                    $('.alert').show();
+                });
+            });
+        </script>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="styles/bootstrap4/popper.js"></script>
         <script src="styles/bootstrap4/bootstrap.min.js"></script>
