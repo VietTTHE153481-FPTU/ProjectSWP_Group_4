@@ -38,10 +38,12 @@
                                 </div>
                             </div>
                             <div class="col-md-5 border-right">
+                                <c:if test="${requestScope.mess!=null}">
                                 <div class="alert alert-success alert-dismissable">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     ${requestScope.mess}
                                 </div>
+                                </c:if>
                                 <form method="post" action="userprofile">
                                     <div class="p-3 py-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
