@@ -96,18 +96,19 @@ public class AccountDAO extends DBContext {
         return false;
     }
 
-    public void changePass(Users acc, String pass) {
+    public void changePass(String username, String pass) {
         String sql = "  update Users\n"
                 + "  set Password= ? \n"
                 + "  where Username= ? ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, pass);
-            st.setString(2, acc.getUsername());
+            st.setString(2, username);
             st.executeUpdate();
         } catch (SQLException e) {
         }
     }
+    
 
     public int getNoAcc() {
         String sql = "select count(*) from Users";
