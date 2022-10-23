@@ -147,29 +147,15 @@ INSERT INTO Ship VALUES (N'Yên Bái', 30000);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE UserAddress (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	UserID int,
 	ShipName nvarchar(500),
-	ShipAddress nvarchar(1000),
+	NoteDetail nvarchar(1000),
 	ShipCityID int,
 	PhoneNum nvarchar(20),
-	constraint userID_in_user_address FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint ship_city_in_ship_address FOREIGN KEY(ShipCityID) REFERENCES Ship(id)
 ) ON [PRIMARY]
 GO
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID],[PhoneNum]) values (1, N'Trần Trung Việt', N'Đại Học FPT', 36,'0142753896');
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (2, 'Shellysheldon', '80 Homewood Pass', 45);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (3, 'Joletta', '180 Evergreen Circle', 61);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (4, 'Tammi', '920 Melby Trail', 1);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (6, 'Eba', '0 Dovetail Park', 38);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (7, 'Farica', '39269 Calypso Place', 20);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (8, 'Vevay', '730 Walton Crossing', 6);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (9, 'Caitrin', '61811 Oak Trail', 54);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (10, 'Hamlin', '48603 Cordelia Pass', 7);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (11, 'Hortense', '443 Eastwood Drive', 30);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (12, 'Ilario', '87 Luster Drive', 9);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (13, 'Rici', '13953 Gateway Trail', 43);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (14, 'Nola', '79435 Pawling Center', 49);
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [ShipAddress], [ShipCityID]) values (15, 'Sax', '7501 Doe Crossing Place', 40);
+INSERT INTO dbo.[UserAddress] ([ShipName], [NoteDetail], [ShipCityID], [PhoneNum]) values (N'Trần Công Minh', N'Đại Học FPT', 24,'0147258369');
+INSERT INTO dbo.[UserAddress] ([ShipName], [NoteDetail], [ShipCityID], [PhoneNum]) values (N'Trần Trung Việt', N'Đại Học FPT', 24, '0968819830');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Category (
 	CategoryID int PRIMARY KEY identity(1,1),

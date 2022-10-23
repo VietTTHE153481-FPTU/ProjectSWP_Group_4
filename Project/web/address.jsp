@@ -30,31 +30,30 @@
             <%@include file="layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="row">
-                    <div class="container rounded bg-white mt-5 mb-5">
+                    <div class="container rounded bg-white mt-5">
                         <div class="col-md-12">
-                            <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
+                            <div style="padding-bottom: 15px;">
                                 <div class="mt-3">
                                     <h4 class="text-left" style="padding-bottom: 15px;">My Address</h4>
                                     <button type="button" class="btn btn-primary text-right" data-toggle="modal" data-target="#myModal">
-                                        Open modal
+                                        Add Address
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 border-right">
-                            <div class="row mt-3">
-                                <div class="col-md-12"><label class="labels">Current Password</label><input value="" type="password" name="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
+                            <div class="row card-body" style="border-top: 1px dotted #cccccc">
+                                <div class="col-sm-10" style="border-right: 1px dotted #cccccc">
+                                    <h5 class="card-title">User Name <span style="color: #999999">| Phone</span></h5>
+                                    <p class="card-text">Đại Học FPT</p>
+                                    <p class="card-text">City</p>
                                 </div>
-                                <div class="col-md-12"><label class="labels">New Password</label><input value="" type="password" name="newpass" class="form-control" placeholder="Nhập mật khẩu mới (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
+                                <div class="col-sm-2 text-center">
+                                    <div class="row">
+                                        <a href="#" class="col-sm-6">Edit</a>
+                                        <a href="#" class="col-sm-6">Delete</a>
+                                    </div>
                                 </div>
-                                <div class="col-md-12"><label class="labels">Confirm Password</label><input value="" type="password" name="cfpass" class="form-control" placeholder="Xác nhận mật khẩu mới">
-                                </div>
-                            </div>
-                            <div class="mt-5 text-left">
-                                <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Confirm</button>
-                            </div>
-                            <div class="mt-2 text-left">
-                                <a class="btn btn-primary profile-button" href="userprofile">View Profile</a>
                             </div>
                         </div>
                     </div>
