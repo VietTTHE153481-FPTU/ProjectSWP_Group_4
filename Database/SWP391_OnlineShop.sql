@@ -52,7 +52,7 @@ CREATE TABLE [Users] (
 	constraint role_in_Role FOREIGN KEY(RoleID) REFERENCES [Role]([ID])
 );
 GO
-INSERT INTO Users VALUES(N'admin','123456','Admin','0123445566',0,'admin@fpt.edu.vn',1,NULL,1);
+INSERT INTO Users VALUES(N'admin','12345','Admin','0123445566',0,'admin@fpt.edu.vn',1,NULL,1);
 INSERT INTO Users VALUES(N'hieu','hieu',N'Hiếu','0123456789',0,'hieuNTHE160326@fpt.edu.vn',1,NULL,1);
 INSERT INTO Users VALUES(N'vha','vha',N'Hoàng Anh','0987654321',0,'anhvhhe163109@fpt.edu.vn',1,NULL,1);
 INSERT INTO Users VALUES(N'minh','Minh1@',N'Minh','0147258369',0,'minhtche161354@fpt.edu.vn',2,1,1);
