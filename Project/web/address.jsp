@@ -39,6 +39,43 @@
                                         Add Address
                                     </button>
                                 </div>
+                                <div class="modal" id="myModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">New Address</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="row mt-3">
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="fullname" class="form-control" placeholder="Full name">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="fullname" class="form-control" placeholder="City">
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="note" class="form-control" placeholder="Street Name, Building, House No.">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 border-right">

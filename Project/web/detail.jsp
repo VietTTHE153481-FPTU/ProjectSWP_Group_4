@@ -97,7 +97,6 @@
                                 <span class="card-title">${detail.getShopName()}</span>
                                 <p class="card-text">Some example text. Some example text.</p>
                                 <a href="#" class="card-link">Chat with Seller</a>
-                                <a href="#" class="card-link">View Shop</a>
                             </div>
                             <div class="col-sm-8 text-center">
                                 <div class="row" style="padding-bottom: 40px">

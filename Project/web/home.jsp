@@ -77,7 +77,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="product_info">
-                                                        <h6 class="product_name"><a href="products">${cate.getCategoryName()}</a></h6>
+                                                        <h6 class="product_name"><a href="products?page=1&cid=${cate.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">${cate.getCategoryName()}</a></h6>
                                                     </div>
                                                 </div>
                                             </div>

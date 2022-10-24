@@ -163,14 +163,14 @@ CREATE TABLE Category (
 	CategoryImgURL varchar(225)
 ) ON [PRIMARY]
 GO
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Clothes','men_clothes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Clothes','women_clothes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Shoes','men_shoes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Shoes','women_shoes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Fashion Accessories','accessories.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Bags','bags.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Bags','women_bags.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Watches','watches.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Men Clothes','men_clothes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Women Clothes','women_clothes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Men Shoes','men_shoes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Women Shoes','women_shoes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Fashion Accessories','accessories.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Men Bags','bags.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Women Bags','women_bags.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Watches','watches.png');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[SubCategory](
 	[SubCategoryID] [int] PRIMARY KEY  IDENTITY(1,1) ,

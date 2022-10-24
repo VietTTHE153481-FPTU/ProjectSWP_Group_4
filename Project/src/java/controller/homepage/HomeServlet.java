@@ -68,9 +68,6 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        
-        
         CategoryDAO cdao = new CategoryDAO();
         List<Category> categories = cdao.getAll();
         request.setAttribute("categories", categories);
