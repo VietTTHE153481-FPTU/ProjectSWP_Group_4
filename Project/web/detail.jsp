@@ -68,10 +68,10 @@
                                 <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                             </c:if>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                                <span>Shipping:</span>
+                                <span>Delivery method:</span>
                                 <div style="padding-left: 25px">
                                     <i class="fa fa-truck"></i>&nbsp;
-                                    <span style="padding-right: 50px">Shipping To</span>
+                                    <span style="padding-right: 50px">Express delivery</span>
                                 </div>
                             </div>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
@@ -100,14 +100,14 @@
                             </div>
                             <div class="col-sm-8 text-center">
                                 <div class="row" style="padding-bottom: 40px">
-                                    <div class="col-sm-4">Products</div>
-                                    <div class="col-sm-4">Rattings</div>
-                                    <div class="col-sm-4">View</div>
+                                    <div class="col-sm-4">Products:</div>
+                                    <div class="col-sm-4">Rattings:</div>
+                                    <div class="col-sm-4">Comment:</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4">Products</div>
-                                    <div class="col-sm-4">Rattings</div>
-                                    <div class="col-sm-4">View</div>
+                                    <div class="col-sm-4">Products:</div>
+                                    <div class="col-sm-4">Rattings:</div>
+                                    <div class="col-sm-4">View:</div>
                                 </div>
                             </div>
                         </div>

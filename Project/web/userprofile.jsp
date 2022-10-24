@@ -39,10 +39,10 @@
                             </div>
                             <div class="col-md-5 border-right">
                                 <c:if test="${requestScope.mess!=null}">
-                                <div class="alert alert-success alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    ${requestScope.mess}
-                                </div>
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        ${requestScope.mess}
+                                    </div>
                                 </c:if>
                                 <form method="post" action="userprofile">
                                     <div class="p-3 py-5">
@@ -79,11 +79,15 @@
                                         </div>
                                         <div class="mt-5 text-left">
                                             <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
+                                        </div>
+                                        <div class="mt-2 text-left">
                                             <a class="btn btn-primary profile-button" href="password">Change Password</a>
+                                        </div>
+                                        <div class="mt-2 text-left">
                                             <a class="btn btn-primary profile-button" href="address">Addresses</a>
-                                            <a href="viewOrder?id=${user.userID}" style="width: 300px"
-                           class="mt-5 text-center btn btn-primary profile-button" type="button">View your orders
-                        </a>
+                                        </div>
+                                        <div class="mt-2 text-left">
+                                            <a class="btn btn-primary profile-button" href="viewOrder?id=${user.userID}" type="button">View your orders</a>
                                         </div>
                                     </div>
                                 </form>
