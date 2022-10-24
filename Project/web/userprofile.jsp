@@ -81,7 +81,7 @@
                                             <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
                                             <a class="btn btn-primary profile-button" href="password">Change Password</a>
                                             <a class="btn btn-primary profile-button" href="address">Addresses</a>
-                                            <a href="viewOrder?id=${user.userID}" style="width: 300px"
+                                            <a href="vieworders" style="width: 300px"
                            class="mt-5 text-center btn btn-primary profile-button" type="button">View your orders
                         </a>
                                         </div>

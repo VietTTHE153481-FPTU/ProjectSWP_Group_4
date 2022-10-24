@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.customer;
+package controller.seller;
 
-import DAO.AccountDAO;
+import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Users;
+import java.util.List;
+import model.Order;
 
 /**
  *
- * @author trung
+ * @author Admin
  */
-@WebServlet(name="ChangePassServlet", urlPatterns={"/password"})
-public class ChangePassServlet extends HttpServlet {
+@WebServlet(name="ViewOrders", urlPatterns={"/vieworders"})
+public class ViewOrders extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,10 @@ public class ChangePassServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePassServlet</title>");  
+            out.println("<title>Servlet ViewOrders</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePassServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewOrders at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +58,8 @@ public class ChangePassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("password.jsp").forward(request, response);
+           request.getRequestDispatcher("vieworders.jsp").forward(request, response);
+        
     } 
 
     /** 
@@ -71,31 +72,11 @@ public class ChangePassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            HttpSession session = request.getSession();
-            Users user = (Users) session.getAttribute("account");
-            if (user != null) {
-                String oldPassword = request.getParameter("oldpass");
-                String newPassword = request.getParameter("newpass");  
-                String repeatNewPassword = request.getParameter("cfpass");
-              
-                AccountDAO acc = new AccountDAO();
-
-                if (user.getPassword().equals(oldPassword)
-                        && newPassword.equals(repeatNewPassword)) {
-                    acc.changePass(user.getUsername(), newPassword);
-                    request.setAttribute("mess", "Success!");
-                    request.getRequestDispatcher("password.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("mess", "Fails");
-                    request.getRequestDispatcher("password.jsp").forward(request, response);
-                }
-            } else {
-                response.sendRedirect("home");
-            }
-        } catch (Exception ex) {
-            System.out.println("Error:" + ex);
-        }
+         int id = Integer.parseInt(request.getParameter("id"));
+            OrderDAO order = new OrderDAO();
+            List<Order> orders = order.getOrderByUsserID(id);
+            request.setAttribute("orders", orders);
+            request.getRequestDispatcher("vieworders.jsp").forward(request, response);
     }
 
     /** 
