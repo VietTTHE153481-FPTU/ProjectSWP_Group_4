@@ -5,6 +5,7 @@
 
 package controller.customer;
 
+import DAO.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Users;
 
 /**
  *
@@ -68,7 +71,31 @@ public class ChangePassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("account");
+            if (user != null) {
+                String oldPassword = request.getParameter("pass");
+                String newPassword = request.getParameter("new-pass");
+                String repeatNewPassword = request.getParameter("repeat-new-pass");
+              
+                AccountDAO acc = new AccountDAO();
+
+                if (user.getPassword().equals(oldPassword)
+                        && newPassword.equals(repeatNewPassword)) {
+                    acc.changePass(user.getUsername(), newPassword);
+                    request.setAttribute("mess", "Success!");
+                    response.sendRedirect("password.jsp");
+                } else {
+                    request.setAttribute("mess", "Fails");
+                    request.getRequestDispatcher("password.jsp").forward(request, response);
+                }
+            } else {
+                response.sendRedirect("home");
+            }
+        } catch (Exception ex) {
+            System.out.println("Error:" + ex);
+        }
     }
 
     /** 
