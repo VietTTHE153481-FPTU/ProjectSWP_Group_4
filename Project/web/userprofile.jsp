@@ -77,25 +77,19 @@
                                                 </c:if>
                                             </div>
                                         </div>
-                                        <div class="mt-5 text-left">
-                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
+                                        <div class="mt-5 text-center">
+                                            <button style="width: 300px" class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
                                         </div>
-                                        <div class="mt-2 text-left">
-                                            <a class="btn btn-primary profile-button" href="password">Change Password</a>
+                                        <div class="mt-5 text-center">
+                                            <a style="width: 300px" class="btn btn-primary profile-button" href="password">Change Password</a>
                                         </div>
-                                        <div class="mt-2 text-left">
-                                            <a class="btn btn-primary profile-button" href="address">Addresses</a>
-<<<<<<< HEAD
-                                            <a href="vieworders" style="width: 300px"
-                           class="mt-5 text-center btn btn-primary profile-button" type="button">View your orders
-                        </a>
-=======
+                                        <div class="mt-5 text-center">
+                                            <a style="width: 300px" class="btn btn-primary profile-button" href="address">Addresses</a>                                         
                                         </div>
-                                        <div class="mt-2 text-left">
-                                            <a class="btn btn-primary profile-button" href="viewOrder?id=${user.userID}" type="button">View your orders</a>
->>>>>>> 374f084f7e4ad3de27ea4ba576ee2e52a737e015
-                                        </div>
+                                            <div class="mt-5 text-center">
+                                          <a style="width: 300px" class="mt-5 btn btn-primary profile-button" type="button"href="vieworders">View your orders</a>
                                     </div>
+                                            
                                 </form>
                             </div>
                         </div>
