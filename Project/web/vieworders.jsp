@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>My Orders</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +33,7 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="home">Home</a></li>
-                        <li><a href="vieworders"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderLists</a></li>
+                        <li><a href="vieworders?id=${account.userID}"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderLists</a></li>
                     </ul>
                 </div>
                 <div class="container" style="margin-top: 1% ; margin-bottom: 1%;padding-left: 40px;padding-right: 70px;background-color: #f5f5f5">
@@ -55,7 +56,7 @@
                                                     <tr class="cell-1">
                                                         <td>#OR${o.id}</td>
                                                         <td>
-                                                            <span class="badge badge-pill badge-info">Delivering</span>
+                                                            <span class="badge badge-pill badge-info">${o.status}</span>
                                                         </td>
                                                         <td>${o.date}</td>
                                                         <td><a href="#" style="cursor: pointer ">View</a></td>

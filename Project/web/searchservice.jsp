@@ -116,21 +116,20 @@
                                 <form method="get" action="searchservice">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
-                                            <input value="${key}" type="text" class="search-input" placeholder="Search..." name="key">
-                                            <button class="search-icon"><i class="fa fa-search"></i></button>
+                                            <input type="hidden" name="seid" value="${seid}"/>
+                                            <input type="hidden" name="stid" value="${stid}"/>
+                                            <input value="${key}" type="search" class="search-input" placeholder="Search..." name="key"/>
+                                            <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
-
-                                <div >
+                                <div class="row mt-4 g-1 px-4 mb-5">
                                     <c:forEach items="${listcontent}" var="c">
-                                        <div >
-                                            <ul >
-                                                <li><a href="servicecategories?stid=${c.TitlteID}&seid=" style="color: black">
-                                                        ${c.Content}
-                                                    </a></li>
-                                            </ul>
-                                        </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item-light">
+                                                <a href="servicecategories?seid=&stid=${c.getTitlteID()}" style="color: black">${c.getContent()}</a>
+                                            </li>
+                                        </ul>
                                     </c:forEach>
                                 </div>
                             </div>
