@@ -99,9 +99,9 @@
                                 <form method="get" action="servicecategories">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
-                                            <input type="text" class="search-input" placeholder="Search..." name="key">
                                             <input type="hidden" name="seid" value="${seid}"/>
                                             <input type="hidden" name="stid" value="${stid}"/>
+                                            <input type="search" class="search-input" placeholder="Search..." name="key">
                                             <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>

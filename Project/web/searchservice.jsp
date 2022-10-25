@@ -116,21 +116,20 @@
                                 <form method="get" action="searchservice">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
-                                            <input value="${key}" type="text" class="search-input" placeholder="Search..." name="key">
-                                            <button class="search-icon"><i class="fa fa-search"></i></button>
+                                            <input value="${key}" type="search" class="search-input" placeholder="Search..." name="key"/>
+                                            <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
-
-                                <div >
+                                <div>
                                     <c:forEach items="${listcontent}" var="c">
-                                        <div >
-                                            <ul >
-                                                <li><a href="servicecategories?seid=${c.ContentID}&stid=${c.TitlteID}" style="color: black">
-                                                        ${c.Content}
-                                                    </a></li>
-                                            </ul>
-                                        </div>
+                                        <ul>
+                                            <li>
+                                                <a href="servicecategories?seid=${c.ContentID}&stid=${c.TitlteID}" style="color: black">
+                                                    ${c.getContent()}
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </c:forEach>
                                 </div>
                             </div>
