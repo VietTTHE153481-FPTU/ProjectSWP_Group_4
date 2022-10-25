@@ -111,12 +111,12 @@ public class AccountDAO extends DBContext {
     }
 
     public int getNoAcc() {
-        String sql = "select count(*) from Users";
+        String sql = "SELECT COUNT(UserID) AS Count,RoleID FROM dbo.Users WHERE RoleID=3 GROUP BY RoleID ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt("Count");
             }
         } catch (SQLException e) {
         }

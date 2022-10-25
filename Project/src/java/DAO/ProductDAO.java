@@ -190,6 +190,19 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
+    public int countProducts() {
+        String sql = "SELECT COUNT(ProductID) AS Count FROM dbo.Product";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         Products p = pd.getProductById(1);
