@@ -53,9 +53,9 @@
                                             <tbody class="table-body">
                                                 <c:forEach var="o" items="${orders}">
                                                     <tr class="cell-1">
-                                                        <td>${o.id}</td>
+                                                        <td>#OR${o.id}</td>
                                                         <td>
-                                                            <span class="badge badge-pill badge-info">${o.status}</span>
+                                                            <span class="badge badge-pill badge-info">Delivering</span>
                                                         </td>
                                                         <td>${o.date}</td>
                                                         <td><a href="#" style="cursor: pointer ">View</a></td>

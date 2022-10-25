@@ -22,10 +22,7 @@ public class OrderDAO extends DBContext{
 
     public List<Order> getOrderByUsserID(int userId) {
         List<Order> list = new ArrayList<>();
-        String sql = "SELECT o.ID, os.Name, o.TotalPrice, o.Date\n"
-                + "FROM Orders o  JOIN Order_Status os\n"
-                + "ON o.Status = os.ID\n"
-                + "WHERE o.UserId = ?";
+        String sql = "Select ID,Status,TotalPrice,Date from Orders where UserID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, userId);
@@ -33,10 +30,10 @@ public class OrderDAO extends DBContext{
             if (rs.next()) {
                // list.add(new Order(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
             Order o1 = new Order();
-            o1.setOrderId(rs.getInt("o.ID"));
-            o1.setUid(rs.getString("os.Name"));
-            o1.setTotalMoney(rs.getDouble("o.TotalPrice"));
-            o1.setOrderDate(rs.getString("o.Date"));
+            o1.setId(rs.getInt("ID"));
+            o1.setStatus(rs.getString("Status"));
+            o1.setTotalPrice(rs.getDouble("TotalPrice"));
+            o1.setDate(rs.getDate("Date"));
             list.add(o1);
             }
         } catch (SQLException e) {

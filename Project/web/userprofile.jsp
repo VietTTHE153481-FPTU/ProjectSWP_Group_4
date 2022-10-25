@@ -88,7 +88,10 @@
                                         </div>
                                         <div class="mt-2 text-center">
                                             <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="vieworders">View your orders</a>
-                                        </div>     
+                                        </div>
+                                         <div class="mt-2 text-center">
+                                            <a style="width: 300px" class="btn btn-primary profile-button" href="registerseller">Become a seller</a>
+                                        </div>
                                 </form>
                             </div>
                         </div>
