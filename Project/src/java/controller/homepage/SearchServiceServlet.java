@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.HelpContent;
+import model.HelpTitle;
 
 /**
  *
@@ -69,7 +70,7 @@ public class SearchServiceServlet extends HttpServlet {
         } else {
             list = hd.getHelpContentBySearch(key);
         }
-        
+                
         request.setAttribute("key", key);
         request.setAttribute("listcontent", list);
         

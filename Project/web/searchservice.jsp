@@ -126,7 +126,7 @@
                                     <c:forEach items="${listcontent}" var="c">
                                         <div >
                                             <ul >
-                                                <li><a href="servicecategories?seid=${c.ContentID}&stid=${c.TitlteID}" style="color: black">
+                                                <li><a href="servicecategories?stid=${c.TitlteID}&seid=" style="color: black">
                                                         ${c.Content}
                                                     </a></li>
                                             </ul>

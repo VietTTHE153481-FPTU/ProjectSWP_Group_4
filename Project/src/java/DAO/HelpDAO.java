@@ -126,9 +126,9 @@ public class HelpDAO extends DBContext {
         }
         return list;
     }
-    
-    public List<HelpContent> getHelpContentBySearch(String key){
-          List<HelpContent> list = new ArrayList<>();
+
+    public List<HelpContent> getHelpContentBySearch(String key) {
+        List<HelpContent> list = new ArrayList<>();
         String sql = "select h.* from HelpContent h where h.Content like ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -147,9 +147,9 @@ public class HelpDAO extends DBContext {
         }
         return list;
     }
-    
-    public List<HelpContent> getAllHelpContent(){
-         List<HelpContent> list = new ArrayList<>();
+
+    public List<HelpContent> getAllHelpContent() {
+        List<HelpContent> list = new ArrayList<>();
         String sql = "select h.* from HelpContent h";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -168,12 +168,15 @@ public class HelpDAO extends DBContext {
         return list;
     }
 
+
     public static void main(String[] args) {
         HelpDAO hd = new HelpDAO();
         List<HelpContent> list = hd.getHelpContentBySearch("đăng");
+        HelpTitle ht = hd.getHelpTitle(1);
+        System.out.println(ht);
         //List<HelpCenter> list = hd.getHelpCenterBySearch("thanh");
-        for (HelpContent hc : list) {
-            System.out.println(hc);
-        }
+//        for (HelpContent hc : list) {
+//            System.out.println(hc);
+//        }
     }
 }
