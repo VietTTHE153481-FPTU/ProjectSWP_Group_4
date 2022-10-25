@@ -39,18 +39,11 @@
                             </div>
                             <div class="col-md-5 border-right">
                                 <c:if test="${requestScope.mess!=null}">
-                                    <div class="alert alert-success alert-dismissable">
+                                    <div class="alert alert-danger alert-dismissable">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                         ${requestScope.mess}
                                     </div>
                                 </c:if>
-                                <!-- cập nhật pass thành công 
-                                <div class="text-center"; style="color: #00cc00">
-                                    <span>Change Password Successful</span>
-                                    &nbsp;
-                                    <i class="fa fa-check-circle"></i>
-                                </div>
-                                -->
                                 <div class="p-3 py-5">
                                     <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
                                         <h4 class="text-left" style="padding-bottom: 15px;">Change your password</h4>
