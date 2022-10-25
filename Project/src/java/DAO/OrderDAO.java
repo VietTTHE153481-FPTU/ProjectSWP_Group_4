@@ -35,10 +35,42 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
+    
+     public Order getOrderByOrderID(int orderID) {
+        String sql = "select o.ID , o.UserID , o.TotalPrice , o.Note , o.Status , o.Date , d.Order_ID , d.ProductID , d.ProductName  ,d.ProductPrice , d.Quantity from Orders o\n"
+                + "join Order_Detail d on d.Order_ID = o.ID\n"
+                + "where o.ID = ?  "; 
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, orderID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Order(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getInt(11));
 
-    public static void main(String[] args) {
-        OrderDAO od = new OrderDAO();
-        List<Order> orders = od.getOrderByUserID(5);
-        System.out.println(orders);
+            }
+        } catch (Exception e) {
+        }
+        return null;
     }
+
+//    public static void main(String[] args) {
+////        OrderDAO od = new OrderDAO();
+////        List<Order> orders = od.getOrderByUserID(5);
+////        for (Order order : orders) {
+////            System.out.println(order.getDate());
+////        }
+//           
+//
+//    }
 }

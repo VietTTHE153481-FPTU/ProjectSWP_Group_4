@@ -1,7 +1,6 @@
-
 <%-- 
-    Document   : certificateSecu
-    Created on : Oct 11, 2022, 10:08:07 PM
+    Document   : orderdetail
+    Created on : Oct 25, 2022, 11:25:59 PM
     Author     : Admin
 --%>
 
@@ -33,44 +32,55 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="home">Home</a></li>
-                        <li><a href="vieworders?id=${account.userID}"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderLists</a></li>
+                        <li><a href="orderdetail?id=${o.id}"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderDetail</a></li>
                     </ul>
                 </div>
-                <div class="container" style="margin-top: 1% ; margin-bottom: 1%;padding-left: 40px;padding-right: 70px;background-color: #f5f5f5">
-                    <div class="container mt-5">
-                        <div class="d-flex justify-content-center row">
-                            <div class="col-md-10">
-                                <div class="rounded">
-                                    <div class="table-responsive p-5">
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead>
+                <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title m-b-0"><i class="fa fa-shopping-cart green-color" ></i>
+                                Products</h5>
+                        </div>
+                        <div class="table-responsive p-5">
+                            
+                                    <table class="table table-striped table-hover">
+
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Quantity</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="customtable">
+                                            <c:forEach var="od" items="${listO}">
                                                 <tr>
-                                                    <th style="background-color: #FE7C7F">Order </th>
-                                                    <th style="background-color: #FE7C7F">Status</th>
-                                                    <th style="background-color: #FE7C7F">Created</th>
-                                                    <th style="background-color: #FE7C7F">Order Information</th>
+
+                                                    <td>${od.productName}</td>
+                                                    <td><img onmouseover="bigImg(this)" onmouseout="normalImg(this)"  
+                                                             src="resources/img/products//${od.productImgURL}" alt="" 
+                                                             style="width: 100px; height: 100px"></td>
+                                                    <td>${od.productPrice} VNĐ</td>
+                                                    <td>${od.quantity}</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody class="table-body">
-                                                <c:forEach var="o" items="${orders}">
-                                                    <tr class="cell-1">
-                                                        <td>#OR${o.id}</td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-info">${o.status}</span>
-                                                        </td>
-                                                        <td>${o.date}</td>
-                                                        <td><a href="orderdetail?${o.id}" style="cursor: pointer ">View</a></td>
-                                                    </tr>
-                                                    <c:set var="total" value="${total + o.totalPrice}" />
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+        
+
+                            <br>
+                            <br>
+                            <h3 style="color:black;">Total: ${Total} VNĐ</h3>
+                            <br>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
             </div>
             <%@include file = "layout/Footer.jsp" %>
         </div>
