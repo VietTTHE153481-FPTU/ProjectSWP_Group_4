@@ -116,18 +116,18 @@
                                 <form method="get" action="searchservice">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
+                                            <input type="hidden" name="seid" value="${seid}"/>
+                                            <input type="hidden" name="stid" value="${stid}"/>
                                             <input value="${key}" type="search" class="search-input" placeholder="Search..." name="key"/>
                                             <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
-                                <div>
+                                <div class="row mt-4 g-1 px-4 mb-5">
                                     <c:forEach items="${listcontent}" var="c">
-                                        <ul>
-                                            <li>
-                                                <a href="servicecategories?seid=${c.ContentID}&stid=${c.TitlteID}" style="color: black">
-                                                    ${c.getContent()}
-                                                </a>
+                                        <ul class="list-group">
+                                            <li class="list-group-item-light">
+                                                <a href="servicecategories?seid=0&stid=0&key=" style="color: black">${c.getContent()}</a>
                                             </li>
                                         </ul>
                                     </c:forEach>

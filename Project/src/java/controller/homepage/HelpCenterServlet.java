@@ -63,15 +63,7 @@ public class HelpCenterServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HelpDAO hd = new HelpDAO();
-        String key = request.getParameter("key");
-        List<HelpCenter> help = new ArrayList<>();
-        
-        if (key.equals("")) {
-            help = hd.getAllHelpCenter();
-        } else {
-            help = hd.getHelpCenterBySearch(key);
-        }
-        
+        List<HelpCenter> help = hd.getAllHelpCenter();
         request.setAttribute("category", help);
 
         request.getRequestDispatcher("service.jsp").forward(request, response);
