@@ -1,7 +1,7 @@
 <%-- 
-    Document   : service
-    Created on : Oct 15, 2022, 2:19:12 AM
-    Author     : trung
+    Document   : searchservice
+    Created on : Oct 25, 2022, 7:11:49 PM
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -114,24 +114,22 @@
                             <div class="card p-4 mt-3">
                                 <h3 class="heading mt-5 text-center">Hi! How can we help You?</h3>
                                 <form method="get" action="searchservice">
-                                <div class="d-flex justify-content-center px-5">
-                                    <div class="search">
-                                        <input type="text" class="search-input" placeholder="Search..." name="key">
-                                        <button class="search-icon"><i class="fa fa-search"></i></button>
+                                    <div class="d-flex justify-content-center px-5">
+                                        <div class="search">
+                                            <input value="${key}" type="text" class="search-input" placeholder="Search..." name="key">
+                                            <button class="search-icon"><i class="fa fa-search"></i></button>
+                                        </div>
                                     </div>
-                                </div>
                                 </form>
-                                <div class="row mt-4 g-1 px-4 mb-5">
-                                    <c:forEach items="${category}" var="cate">
-                                        <div class="col-md-3">
-                                            <a href="servicecategories?seid=${cate.getCategoryID()}&stid=${0}&key=" style="color: black">
-                                                <div class="card-inner p-3 d-flex flex-column align-items-center">
-                                                    <img src="resources/img/Categories/${cate.getImage()}" width="50">
-                                                    <div class="text-center mg-text">
-                                                        <span class="mg-text">${cate.getCategoryName()}</span>
-                                                    </div>
-                                                </div>
-                                            </a>  
+
+                                <div >
+                                    <c:forEach items="${listcontent}" var="c">
+                                        <div >
+                                            <ul >
+                                                <li><a href="servicecategories?seid=${c.ContentID}&stid=${c.TitlteID}" style="color: black">
+                                                        ${c.Content}
+                                                    </a></li>
+                                            </ul>
                                         </div>
                                     </c:forEach>
                                 </div>

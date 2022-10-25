@@ -14,16 +14,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.HelpCenter;
 import model.HelpContent;
-import model.HelpTitle;
 
 /**
  *
- * @author trung
+ * @author Admin
  */
-@WebServlet(name = "ServiceListServlet", urlPatterns = {"/servicecategories"})
-public class ServiceListServlet extends HttpServlet {
+@WebServlet(name = "SearchServiceServlet", urlPatterns = {"/searchservice"})
+public class SearchServiceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +40,10 @@ public class ServiceListServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServiceListServlet</title>");
+            out.println("<title>Servlet SearchServiceServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServiceListServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchServiceServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,51 +61,19 @@ public class ServiceListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         HelpDAO hd = new HelpDAO();
-        List<HelpCenter> help = hd.getAllHelpCenter();
-        request.setAttribute("category", help);
-
-        List<HelpTitle> title = hd.getAllHelpTitle();
-        request.setAttribute("listservice", title);
-
-        //String page_raw = request.getParameter("page");
-        String seid_raw = request.getParameter("seid");
-        String stid_raw = request.getParameter("stid");
-        int seid, stid;
-
-        //page = (page_raw == null) ? 0 : Integer.parseInt(page_raw);
-        seid = (seid_raw == null) ? 0 : Integer.parseInt(seid_raw);
-        stid = (stid_raw == null) ? 0 : Integer.parseInt(stid_raw);
-
-        //request.setAttribute("page", page_raw);
-        request.setAttribute("seid", seid_raw);
-        request.setAttribute("stid", stid_raw);
-
-        List<HelpContent> content = hd.getHelpContentByID(seid, stid);
-       
-
-        /*
-        int maxContentDisplay = 12;
-
-        int maxPage = (int) Math.ceil((content.size() * 1.0) / maxContentDisplay);
-        request.setAttribute("maxPage", maxPage);
-
-        List<HelpContent> display = new ArrayList<>();
-
-        for (int i = maxContentDisplay * (page - 1); i < maxContentDisplay * page; i++) {
-            if (i < content.size()) {
-                display.add(content.get(i));
-            }
+        String key = request.getParameter("key");
+        List<HelpContent> list = new ArrayList<>();
+        if (key.equals("")) {
+            list = hd.getAllHelpContent();
+        } else {
+            list = hd.getHelpContentBySearch(key);
         }
-         */
-        HelpTitle ht = hd.getHelpTitle(stid);
-
-        request.setAttribute("listContentByStId", content);
-        request.setAttribute("title", ht);
-        request.setAttribute("tag1", seid_raw);
-        request.setAttribute("tag2", stid_raw);
-        request.getRequestDispatcher("listservice.jsp").forward(request, response);
+        
+        request.setAttribute("key", key);
+        request.setAttribute("listcontent", list);
+        
+        request.getRequestDispatcher("searchservice.jsp").forward(request, response);
     }
 
     /**
@@ -121,7 +87,7 @@ public class ServiceListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("listservice.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
