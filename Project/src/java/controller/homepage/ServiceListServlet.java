@@ -71,21 +71,26 @@ public class ServiceListServlet extends HttpServlet {
         List<HelpTitle> title = hd.getAllHelpTitle();
         request.setAttribute("listservice", title);
 
+        int seid, stid;
+        String stid_raw = request.getParameter("stid");
         //String page_raw = request.getParameter("page");
         String seid_raw = request.getParameter("seid");
-        String stid_raw = request.getParameter("stid");
-        int seid, stid;
+        if (!seid_raw.equals("")) {
+            seid = (seid_raw == null) ? 0 : Integer.parseInt(seid_raw);
+        } else {
+            HelpTitle ht = hd.getHelpTitle(Integer.parseInt(stid_raw));
+            seid = ht.getCategoryID();
+        }
 
         //page = (page_raw == null) ? 0 : Integer.parseInt(page_raw);
-        seid = (seid_raw == null) ? 0 : Integer.parseInt(seid_raw);
         stid = (stid_raw == null) ? 0 : Integer.parseInt(stid_raw);
 
         //request.setAttribute("page", page_raw);
-        request.setAttribute("seid", seid_raw);
+        request.setAttribute("seid", seid);
         request.setAttribute("stid", stid_raw);
 
         List<HelpContent> content = hd.getHelpContentByID(seid, stid);
-       
+
 
         /*
         int maxContentDisplay = 12;
@@ -105,7 +110,7 @@ public class ServiceListServlet extends HttpServlet {
 
         request.setAttribute("listContentByStId", content);
         request.setAttribute("title", ht);
-        request.setAttribute("tag1", seid_raw);
+        request.setAttribute("tag1", seid);
         request.setAttribute("tag2", stid_raw);
         request.getRequestDispatcher("listservice.jsp").forward(request, response);
     }
