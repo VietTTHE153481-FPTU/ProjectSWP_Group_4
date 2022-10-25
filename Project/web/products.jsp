@@ -34,41 +34,46 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li class="active"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
+                                <li class="active"><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
                             </ul>
                         </div>
-                        <div class="sidebar">
-                            <div class="sidebar_section">
-                                <div class="form-floating mb-2">
-                                    <div class="input-append span12">
-                                        <input type="text" class="form-control" placeholder="Search here...">
+                        <form action="products" method="get">
+                            <input value="1" type="hidden" name="page">
+                            <div class="sidebar">
+                                <div class="sidebar_section">
+                                    <div class="form-floating mb-2">
+                                        <div class="input-append span12">
+                                            <input type="text" class="form-control" placeholder="Search here..." name="key" value="${query.replace('+', ' ')}">
+                                        </div>
                                     </div>
-                                </div>
-                                <!--Category-->
-                                <div class="sidebar_title">
-                                    <h5>Product Category</h5>
-                                </div>
-                                <ul class="sidebar_categories">
-                                    <c:forEach items="${categorys}" var="icategory">
-                                        <li class="${tag == icategory.getCategoryID() ? "active":""}">
-                                            <a href="products?page=1&cid=${icategory.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
-                                                <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                                                    ${icategory.getCategoryName()}
-                                            </a>
-                                        </li>
-                                        <c:forEach items="${subcategorys}" var="isubcategory">
-                                            <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
-                                                <li>
-                                                    <a class="form-check-label" href="products?page=1&cid=${icategory.getCategoryID()}&sid=${isubcategory.getSubCateID()}&sortType=${0}&sortMode=${0}">
-                                                        ${isubcategory.getSubCateName()} 
-                                                    </a>
-                                                </li>
-                                            </c:if>
+                                    <!--Category-->
+                                    <div class="sidebar_title">
+                                        <h5>Product Category</h5>
+                                    </div>
+                                    <ul class="sidebar_categories">
+                                        <c:forEach items="${categorys}" var="icategory">
+                                            <li class="${tag == icategory.getCategoryID() ? "active":""}">
+                                                <a href="products?page=1&key=&cid=${icategory.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
+                                                    <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                                                        ${icategory.getCategoryName()}
+                                                </a>
+                                            </li>
+                                            <c:forEach items="${subcategorys}" var="isubcategory">
+                                                <c:if test="${isubcategory.getCateID() == icategory.getCategoryID()}">
+                                                    <li>
+                                                        <a class="form-check-label" href="products?page=1&key=&cid=${icategory.getCategoryID()}&sid=${isubcategory.getSubCateID()}&sortType=${0}&sortMode=${0}">
+                                                            ${isubcategory.getSubCateName()} 
+                                                        </a>
+                                                    </li>
+                                                </c:if>
+                                            </c:forEach>
                                         </c:forEach>
-                                    </c:forEach>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                            <input value="0" type="hidden" name="sortType">
+                            <input value="0" type="hidden" name="sortMode">
+                        </form>
                         <div class="main_content">
                             <div class="products_iso">
                                 <div class="row">
@@ -79,8 +84,8 @@
                                                     Sort by price
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==1?'0':'1'}&sortMode=${sortType==1&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==1&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
-                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==2?'0':'1'}&sortMode=${sortType==1&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==1&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==1?'0':'1'}&sortMode=${sortType==1&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==1&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==2?'0':'1'}&sortMode=${sortType==1&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==1&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
                                                 </ul>
                                             </div>
                                             <div class="dropdown">
@@ -88,8 +93,8 @@
                                                     Sort by sale
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==1?'0':'2'}&sortMode=${sortType==2&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==2&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
-                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==2?'0':'2'}&sortMode=${sortType==2&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==2&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==1?'0':'2'}&sortMode=${sortType==2&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==2&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==2?'0':'2'}&sortMode=${sortType==2&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==2&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
                                                 </ul>
                                             </div>
                                             <div class="dropdown">
@@ -97,8 +102,8 @@
                                                     Sort by name
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==2?'0':'3'}&sortMode=${sortType==3&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==3&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
-                                                    <li><a class="dropdown-item" href="products?page=1&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==1?'0':'3'}&sortMode=${sortType==3&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==3&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==2?'0':'3'}&sortMode=${sortType==3&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==3&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==1?'0':'3'}&sortMode=${sortType==3&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==3&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -132,21 +137,21 @@
                                         </div>
                                         <nav class="my-3" aria-label="Page navigation">
                                             <ul class="pagination justify-content-center">
-                                                <li class="page-item ${page>1?'':'disabled'}"><a class="page-link" href="products?page=${page-1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Previous</a></li>
+                                                <li class="page-item ${page>1?'':'disabled'}"><a class="page-link" href="products?page=${page-1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Previous</a></li>
                                                     <c:if test="${page-2>0}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page-2}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-2}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page-2}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-2}</a></li>
                                                     </c:if>
                                                     <c:if test="${page-1>0}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page-1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-1}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page-1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-1}</a></li>
                                                     </c:if>
                                                 <li class="page-item active"><a class="page-link" href="#">${page}</a></li>
                                                     <c:if test="${page+1<=maxPage}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page+1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+1}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page+1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+1}</a></li>
                                                     </c:if>
                                                     <c:if test="${page+2<=maxPage}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page+2}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+2}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="products?page=${page+2}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+2}</a></li>
                                                     </c:if>
-                                                <li class="page-item ${page+1<=maxPage?'':'disabled'}"><a class="page-link" href="products?page=${page+1}&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Next</a></li>
+                                                <li class="page-item ${page+1<=maxPage?'':'disabled'}"><a class="page-link" href="products?page=${page+1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Next</a></li>
                                             </ul>
                                         </nav>
                                     </div>

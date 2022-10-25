@@ -354,7 +354,7 @@ CREATE TABLE [dbo].[Orders](
 	constraint statusID_in_order_status FOREIGN KEY(Status) REFERENCES Order_Status(ID)
 ) ON [PRIMARY]
 GO
-INSERT INTO Orders VALUES (4, 270000, null, 3, '2022/09/06 04:17');
+INSERT INTO Orders VALUES (3, 270000, null, 3, '2022/09/06 04:17');
 INSERT INTO Orders VALUES (5, 90000, null, 3, '2022/09/16 12:36');
 INSERT INTO Orders VALUES (5, 1270000, null, 3, '2022/09/12 10:18');
 INSERT INTO Orders VALUES (6, 1270000, null, 1, '2022/09/11 01:30');
@@ -364,9 +364,9 @@ INSERT INTO Orders VALUES (8, 4560000, null, 1, '2022/09/05 04:30');
 INSERT INTO Orders VALUES (9, 900000, null, 1, '2022/09/05 05:30');
 INSERT INTO Orders VALUES (9, 1240000, null, 1, '2022/09/09 09:30');
 INSERT INTO Orders VALUES (10, 1230000, null, 1, '2022/09/11 11:30');
-INSERT INTO Orders VALUES (11,1470000, null, 1, '2022/09/10 03:30');
-INSERT INTO Orders VALUES (12,1470000, null, 1, '2022/09/12 00:00');
-INSERT INTO Orders VALUES (15,1470000, null, 1, '2022/09/17 00:00');
+INSERT INTO Orders VALUES (11, 1470000, null, 1, '2022/09/10 03:30');
+INSERT INTO Orders VALUES (12, 1470000, null, 1, '2022/09/12 00:00');
+INSERT INTO Orders VALUES (15, 1470000, null, 1, '2022/09/17 00:00');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Detail](
 	ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,

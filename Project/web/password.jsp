@@ -38,6 +38,12 @@
                                 </div>
                             </div>
                             <div class="col-md-5 border-right">
+                                <c:if test="${requestScope.mess!=null}">
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        ${requestScope.mess}
+                                    </div>
+                                </c:if>
                                 <!-- cập nhật pass thành công 
                                 <div class="text-center"; style="color: #00cc00">
                                     <span>Change Password Successful</span>
@@ -49,8 +55,7 @@
                                     <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
                                         <h4 class="text-left" style="padding-bottom: 15px;">Change your password</h4>
                                         <h6>For your account's security, do not share your password with anyone else.</h6>
-                                        <h6>${requestScope.mess}</h6>
-                                    </div>
+                                        </div>
                                     <form action="password" method="POST">
                                         <div class="row mt-3">
                                       <!--  <div class="col-md-12"><label class="labels">Your Current Password</label><input type="text" class="form-control" placeholder="headline" value="${account.password}" disabled></div> -->

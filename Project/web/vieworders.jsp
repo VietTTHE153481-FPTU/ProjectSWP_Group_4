@@ -35,43 +35,41 @@
                         <li><a href="vieworders"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderLists</a></li>
                     </ul>
                 </div>
-               <div class="container" style="margin-top: 1% ; margin-bottom: 1%;padding-left: 40px;padding-right: 70px;background-color: #f5f5f5">
-            <div class="container mt-5">
-            <div class="d-flex justify-content-center row">
-                <div class="col-md-10">
-                    <div class="rounded">
-                        <div class="table-responsive p-5">
-
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="background-color: #FE7C7F">Order </th>
-                                        <th style="background-color: #FE7C7F">status</th>
-                                        <th style="background-color: #FE7C7F">Created</th>
-                                        <th style="background-color: #FE7C7F">Order Information</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-body">
-                                    <c:forEach var="o" items="${orders}">
-                                        <tr class="cell-1">
-                                            <td>${o.id}</td>
-                                            <td>
-                                                <span class="badge badge-pill badge-info">${o.status}</span>
-                                            </td>
-                                            <td>${o.date}</td>
-                                            <td><a href="#" style="cursor: pointer ">View</a></td>
-                                        </tr>
-                                        <c:set var="total" value="${total + o.totalPrice}" />
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-              
-        </div>
+                <div class="container" style="margin-top: 1% ; margin-bottom: 1%;padding-left: 40px;padding-right: 70px;background-color: #f5f5f5">
+                    <div class="container mt-5">
+                        <div class="d-flex justify-content-center row">
+                            <div class="col-md-10">
+                                <div class="rounded">
+                                    <div class="table-responsive p-5">
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="background-color: #FE7C7F">Order </th>
+                                                    <th style="background-color: #FE7C7F">Status</th>
+                                                    <th style="background-color: #FE7C7F">Created</th>
+                                                    <th style="background-color: #FE7C7F">Order Information</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-body">
+                                                <c:forEach var="o" items="${orders}">
+                                                    <tr class="cell-1">
+                                                        <td>${o.id}</td>
+                                                        <td>
+                                                            <span class="badge badge-pill badge-info">${o.status}</span>
+                                                        </td>
+                                                        <td>${o.date}</td>
+                                                        <td><a href="#" style="cursor: pointer ">View</a></td>
+                                                    </tr>
+                                                    <c:set var="total" value="${total + o.totalPrice}" />
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
-            </div>
-               </div>
             </div>
             <%@include file = "layout/Footer.jsp" %>
         </div>

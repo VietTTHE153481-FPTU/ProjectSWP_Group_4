@@ -35,7 +35,7 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
+                                <li><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
                                 <li class="active"><i class="fa fa-angle-right" aria-hidden="true"></i>${detail.getProductName()}</a></li></li>
                             </ul>
                         </div>
@@ -71,7 +71,7 @@
                                 <span>Delivery method:</span>
                                 <div style="padding-left: 25px">
                                     <i class="fa fa-truck"></i>&nbsp;
-                                    <span style="padding-right: 50px">Express delivery</span>
+                                    <span style="padding-right: 50px">Express Delivery</span>
                                 </div>
                             </div>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">

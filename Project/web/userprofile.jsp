@@ -80,16 +80,15 @@
                                         <div class="mt-5 text-center">
                                             <button style="width: 300px" class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
                                         </div>
-                                        <div class="mt-5 text-center">
+                                        <div class="mt-2 text-center">
                                             <a style="width: 300px" class="btn btn-primary profile-button" href="password">Change Password</a>
                                         </div>
-                                        <div class="mt-5 text-center">
+                                        <div class="mt-2 text-center">
                                             <a style="width: 300px" class="btn btn-primary profile-button" href="address">Addresses</a>                                         
                                         </div>
-                                            <div class="mt-5 text-center">
-                                          <a style="width: 300px" class="mt-5 btn btn-primary profile-button" type="button"href="vieworders">View your orders</a>
-                                    </div>
-                                            
+                                        <div class="mt-2 text-center">
+                                            <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="vieworders">View your orders</a>
+                                        </div>     
                                 </form>
                             </div>
                         </div>

@@ -89,7 +89,7 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public List<Products> getProductByCid(int cid, int sid, int sortType, int sortMode) {
+    public List<Products> getProductByCid(String key, int cid, int sid, int sortType, int sortMode) {
         List<Products> list = new ArrayList<>();
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
@@ -99,7 +99,7 @@ public class ProductDAO extends DBContext {
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
                 + "	              JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
-                + "WHERE 1=1 AND p.StatusID!= 2 AND p.Amount>0 ";
+                + "WHERE p.ProductName LIKE ? AND p.StatusID!= 2 AND p.Amount>0 ";
         if (cid != 0) {
             sql += "AND Sub.CategoryID=" + cid;
         }
@@ -130,6 +130,7 @@ public class ProductDAO extends DBContext {
         }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + key + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Products p = new Products();
