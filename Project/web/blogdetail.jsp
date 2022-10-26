@@ -58,10 +58,10 @@
                                     </div>
                                     <div class="p-t-32">
                                         <span class="flex-w flex-m stext-111 cl2 p-b-19">
-                                                <span>
-                                                    <span class="cl4">By</span> Name Author
-                                                    <span class="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
+                                            <span>
+                                                <span class="cl4">By</span> Name Author
+                                                <span class="cl12 m-l-4 m-r-6">|</span>
+                                            </span>
                                             <span>
                                                 ${blog.day} ${blog.month}, ${blog.year}
                                                 <span class="cl12 m-l-4 m-r-6">|</span>

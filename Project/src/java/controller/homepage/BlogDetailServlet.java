@@ -75,10 +75,7 @@ public class BlogDetailServlet extends HttpServlet {
             bd = b.getBlogDetailBySearch(key, id);
         }
         Blog bg = b.getBlogs(id);
-        AccountDAO ad = new AccountDAO();
-        List<Users> users = ad.getAllAccount();
         
-        request.setAttribute("author", users);
         request.setAttribute("key", key);
         request.setAttribute("blogdetail", bd);
         request.setAttribute("blog", bg);

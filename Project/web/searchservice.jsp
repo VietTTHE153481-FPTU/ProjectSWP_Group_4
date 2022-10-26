@@ -123,19 +123,19 @@
                                         </div>
                                     </div>
                                 </form>
-                                            
+
                                 <div class="row mt-4">
                                     <h3 style="color:green">There are ${num} search result</h3>
                                 </div>
-                                
+
                                 <div class="row mt-4 g-1 px-4 mb-5">
-                                    <c:forEach items="${listcontent}" var="c">
-                                        <ul class="list-group">
+                                    <ul class="list-group">
+                                        <c:forEach items="${listcontent}" var="c">
                                             <li class="list-group-item-light">
                                                 <a href="servicecategories?seid=&stid=${c.getTitlteID()}" style="color: black">${c.getContent()}</a>
                                             </li>
-                                        </ul>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

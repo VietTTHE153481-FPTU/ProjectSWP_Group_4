@@ -48,6 +48,29 @@ public class AccountDAO extends DBContext {
         }
         return list;
     }
+    
+    public Users getUserByID(int id) {
+        String sql = "SELECT * FROM [dbo].[Users]";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Users p = new Users();
+                p.setUserID(rs.getInt("userID"));
+                p.setUsername(rs.getString("username"));
+                p.setPassword(rs.getString("password"));
+                p.setFullname(rs.getString("fullname"));
+                p.setPhone(rs.getString("phone"));
+                p.setGender(rs.getBoolean("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
+                p.setStatusId(rs.getInt("statusId"));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
 
     public boolean isAccountValid(Users acc) {
         String sql = "  select * from Users where Username=? or Email=? ";
