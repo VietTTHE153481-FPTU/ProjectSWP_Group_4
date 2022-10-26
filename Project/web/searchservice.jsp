@@ -116,13 +116,18 @@
                                 <form method="get" action="searchservice">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
-                                            <input type="hidden" name="seid" value="${seid}"/>
-                                            <input type="hidden" name="stid" value="${stid}"/>
+<!--                                            <input type="hidden" name="seid" value="${seid}"/>
+                                            <input type="hidden" name="stid" value="${stid}"/>-->
                                             <input value="${key}" type="search" class="search-input" placeholder="Search..." name="key"/>
                                             <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
+                                            
+                                <div class="row mt-4">
+                                    <h3 style="color:green">There are ${num} search result</h3>
+                                </div>
+                                
                                 <div class="row mt-4 g-1 px-4 mb-5">
                                     <c:forEach items="${listcontent}" var="c">
                                         <ul class="list-group">

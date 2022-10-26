@@ -70,7 +70,9 @@ public class SearchServiceServlet extends HttpServlet {
         } else {
             list = hd.getHelpContentBySearch(key);
         }
-                
+        int num = hd.countAllHelpContentBySearch(key);
+        
+        request.setAttribute("num", num);
         request.setAttribute("key", key);
         request.setAttribute("listcontent", list);
         
