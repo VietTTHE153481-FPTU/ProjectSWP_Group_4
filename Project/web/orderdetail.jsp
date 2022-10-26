@@ -29,58 +29,45 @@
         <div class="super_container" >
             <%@include file = "layout/Header.jsp" %>
             <div class="container product_section_container">
-                <div class="breadcrumbs d-flex flex-row align-items-center">
-                    <ul>
-                        <li><a href="home">Home</a></li>
-                        <li><a href="orderdetail?id=${o.id}"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderDetail</a></li>
-                    </ul>
-                </div>
                 <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title m-b-0"><i class="fa fa-shopping-cart green-color" ></i>
-                                Products</h5>
-                        </div>
-                        <div class="table-responsive p-5">
-                            
+                    <div class="row">
+                        <div class="col-12" style="padding-top: 10px">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title m-b-0"><i class="fa fa-shopping-cart green-color" ></i>
+                                        Products</h5>
+                                </div>
+                                <div class="table-responsive p-5">
                                     <table class="table table-striped table-hover">
-
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
-
                                             </tr>
                                         </thead>
                                         <tbody class="customtable">
                                             <c:forEach var="od" items="${listO}">
                                                 <tr>
-
                                                     <td>${od.productName}</td>
                                                     <td><img onmouseover="bigImg(this)" onmouseout="normalImg(this)"  
-                                                             src="resources/img/products//${od.productImgURL}" alt="" 
+                                                             src="resources/img/products/${od.productImgURL}" alt="" 
                                                              style="width: 100px; height: 100px"></td>
-                                                    <td>${od.productPrice} VNĐ</td>
+                                                    <td>₫ ${od.productPrice}</td>
                                                     <td>${od.quantity}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
-        
-
-                            <br>
-                            <br>
-                            <h3 style="color:black;">Total: ${Total} VNĐ</h3>
-                            <br>
+                                    <br>
+                                    <br>
+                                    <h3 style="color:black;">Total: ₫ ${Total}</h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
             </div>
             <%@include file = "layout/Footer.jsp" %>
         </div>

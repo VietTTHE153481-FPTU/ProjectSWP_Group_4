@@ -355,16 +355,16 @@ CREATE TABLE [dbo].[Orders](
 ) ON [PRIMARY]
 GO
 INSERT INTO Orders VALUES (2, 179000, null, 3, '2022/09/06 04:17');
-INSERT INTO Orders VALUES (2, 90000, null, 3, '2022/09/16 12:36');
-INSERT INTO Orders VALUES (3, 1270000, null, 3, '2022/09/12 10:18');
-INSERT INTO Orders VALUES (4, 1270000, null, 1, '2022/09/11 01:30');
-INSERT INTO Orders VALUES (5, 143000, null, 5, '2022/09/11 01:30');
-INSERT INTO Orders VALUES (5, 2580000, null, 1, '2022/09/02 02:30');
-INSERT INTO Orders VALUES (5, 4560000, null, 1, '2022/09/05 04:30');
-INSERT INTO Orders VALUES (6, 900000, null, 1, '2022/09/05 05:30');
-INSERT INTO Orders VALUES (6, 1240000, null, 1, '2022/09/09 09:30');
-INSERT INTO Orders VALUES (6, 1230000, null, 1, '2022/09/11 11:30');
-INSERT INTO Orders VALUES (6, 1470000, null, 1, '2022/09/10 03:30');
+INSERT INTO Orders VALUES (2, 750000, null, 3, '2022/09/16 12:36');
+INSERT INTO Orders VALUES (3, 760000, null, 1, '2022/09/12 10:18');
+INSERT INTO Orders VALUES (4, 1080000, null, 1, '2022/09/11 01:30');
+INSERT INTO Orders VALUES (5, 150000, null, 5, '2022/09/11 01:30');
+INSERT INTO Orders VALUES (5, 200000, null, 1, '2022/09/02 02:30');
+INSERT INTO Orders VALUES (5, 131000, null, 1, '2022/09/05 04:30');
+INSERT INTO Orders VALUES (6, 762000, null, 1, '2022/09/05 05:30');
+INSERT INTO Orders VALUES (6, 735000, null, 1, '2022/09/09 09:30');
+INSERT INTO Orders VALUES (6, 260000, null, 1, '2022/09/11 11:30');
+INSERT INTO Orders VALUES (6, 1347000, null, 1, '2022/09/10 03:30');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Detail](
 	ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -377,16 +377,21 @@ CREATE TABLE [dbo].[Order_Detail](
 	constraint productID_in_order_detail FOREIGN KEY(ProductID) REFERENCES Product(ProductID)	
 ) ON [PRIMARY]
 GO
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (1,6,N'Unisex Bomber Jacket - Ulzzang Baseball Jacket',179000,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (1,2,N'Borsalino Seta Bicolore Fedora',2,3);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (2,3,N'Bailey Tate Braided Fedora',5,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (3,4,N'Bailey Archer Braid Fedora',6,3);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,5,N'Bailey Craig Braided Fedora',150,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (5,6,N'Mayser Calas Panama Straw Hat',270000,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (6,7,N'Mayser Piero Panama Straw Hat',90000,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (7,8,N'Mayser Nizza Panama Straw Hat',1270000,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (8,9,N'Bailey Rockett Endura Telescope Crown Hat',163000,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (9,10,N'Bailey Hanson Shantung Hat',163000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (1,5,N'Unisex Bomber Jacket - Ulzzang Baseball Jacket',179000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (2,6,N'Paisley Unisex N7 Basic Jeans oversize',400000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (2,16,N'Hoodie Oversize Odin Acid',350000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (3,7,N'Men stretch black jeans',380000,2);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,7,N'Men stretch black jeans',380000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,17,N'JBAGY JL0102',350000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,3,N'KAKI unisex jacket Ulzzang style',350000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (5,23,N'Korean style flared dress',150000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (6,22,N'Off Shoulder Body Hugging Dress',200000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (7,25,N'Short A-line Jean Skirt Women High Loose',131000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (8,20,N'UNISEX Plain Sweater (Multicolor)',312000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (8,19,N'UNISEX DURHAM sweatshirt hoodie',450000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (9,26,N'[Premium] Seamless bikini, luxurious V-neck',245000,3);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (10,21,N'Dress two-shoulder chiffon dress',130000,2);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (11,8,N'Men smokey gray 4-way stretch jeans HD02',449000,3);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ShipInfo (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,

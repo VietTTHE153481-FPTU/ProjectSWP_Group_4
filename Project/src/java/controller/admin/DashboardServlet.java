@@ -6,6 +6,7 @@
 package controller.admin;
 
 import DAO.AccountDAO;
+import DAO.OrderDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,6 +64,9 @@ public class DashboardServlet extends HttpServlet {
         
         ProductDAO pd = new ProductDAO();
         request.setAttribute("productcount", pd.countProducts());
+        
+        OrderDAO od = new OrderDAO();
+        request.setAttribute("ordercount", od.getTotalOrders());
         request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
     } 
 

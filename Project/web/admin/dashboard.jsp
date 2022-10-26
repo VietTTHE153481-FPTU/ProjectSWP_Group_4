@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link href="plugins/bower_components/chartist/chartist.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="plugins/bower_components/chartist/chartist.min.css">
         <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/chartist-plugin-tooltip.css">
         <link href="styles/css/style.min.css" rel="stylesheet">
     </head>
@@ -35,8 +35,6 @@
                                 <img src="images/logo-text.jpg" alt="homepage" />
                             </span>
                         </a>
-                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
@@ -99,36 +97,51 @@
                     </div>
                 </div>
                 <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Customer</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash">
+                                            <canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-success">${customercount} <i class="fa fa-user"></i></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Products</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash2"><canvas width="67" height="30"
+                                                                         style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-purple">${productcount} <i class="fa fa-product-hunt"></i></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Orders</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash3"><canvas width="67" height="30"
+                                                                         style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-info">${ordercount} <i class="fa fa-archive"></i></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="white-box">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card bg-primary text-white h-100"> 
-                                            <div class="card-body py-3">
-                                                <h3 class="text-white text-center fs-5">Total Customer</h3>
-                                                <p class="text-center text-white mt-3 mb-0 fs-3 ">${customercount} <i class="fa fa-user"></i></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card bg-warning text-dark h-100">
-                                            <div class="card-body py-3">
-                                                <h3 class="text-white text-center fs-5">Total Product </h3>
-                                                <p class="text-center text-white mt-4 mb-0 fs-3">${productcount} <i class="fa fa-archive"></i></p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card bg-danger text-white h-100">
-                                            <div class="card-body py-3">
-                                                <h3 class="text-white text-center fs-5">Total Order</h3>
-                                                <p class="text-center text-white mt-3 mb-0 fs-3">${ordercount} <i class="fa fa-file-invoice-dollar"></i></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <h3 class="box-title">Detailed statistics</h3>
                                 <div id="ct-visits" style="height: 405px;">
                                     <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
