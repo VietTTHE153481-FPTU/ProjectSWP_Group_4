@@ -167,16 +167,34 @@ public class HelpDAO extends DBContext {
         }
         return list;
     }
+    
+    public int countAllHelpContentBySearch(String key){
+        int a = 0;
+        String sql = "select count(h.ContentID) from HelpContent h where h.Content like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                a = rs.getInt(1);
+            }
+            
+        } catch (Exception e) {
+        }
+        return a;
+    }
 
 
     public static void main(String[] args) {
         HelpDAO hd = new HelpDAO();
         List<HelpContent> list = hd.getHelpContentBySearch("đăng");
         HelpTitle ht = hd.getHelpTitle(1);
-        System.out.println(ht);
+//        System.out.println(ht);
         //List<HelpCenter> list = hd.getHelpCenterBySearch("thanh");
 //        for (HelpContent hc : list) {
 //            System.out.println(hc);
 //        }
+         int a = hd.countAllHelpContentBySearch("");
+         System.out.println(a);
     }
 }
