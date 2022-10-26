@@ -4,6 +4,7 @@
  */
 package controller.homepage;
 
+import DAO.AccountDAO;
 import DAO.BannerDAO;
 import DAO.BlogDAO;
 import DAO.CategoryDAO;
@@ -22,6 +23,7 @@ import model.Blog;
 import model.Cart;
 import model.Category;
 import model.Products;
+import model.Users;
 
 /**
  *
@@ -83,6 +85,10 @@ public class HomeServlet extends HttpServlet {
         BannerDAO bd = new BannerDAO();
         List<Banner> listbn = bd.getAllBanner();
         request.setAttribute("listbn", listbn);
+        
+        AccountDAO ad = new AccountDAO();
+        List<Users> author = ad.getAllAccount();
+        request.setAttribute("author", author);
         
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

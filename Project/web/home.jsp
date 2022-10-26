@@ -231,7 +231,11 @@
                                     <div class="blog_background" style="background-image:url(./resources/img/Blog/${bg.getImageLink()})"></div>
                                     <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                                         <h4 class="blog_title">${bg.getTitle()}</h4>
-                                        <span class="blog_meta">by ${bg.getAuthor()} |&nbsp; ${bg.getDay()} ${bg.getMonth()} ${bg.getYear()}</span>
+                                        <c:forEach items="${author}" var="au">
+                                            <c:if test="${au.getUserID() == bg.getAuthorId()}">
+                                                <span class="blog_meta">by ${au.fullname} |&nbsp; ${bg.getDay()} ${bg.getMonth()} ${bg.getYear()}</span>
+                                            </c:if>
+                                        </c:forEach>
                                         <a class="blog_more" href="blogdetail?id=${bg.id}&key=">Read more</a>
                                     </div>
                                 </div>
