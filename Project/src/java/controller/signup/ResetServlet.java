@@ -75,16 +75,16 @@ public class ResetServlet extends HttpServlet {
     throws ServletException, IOException {
         AccountDAO ad= new AccountDAO();
         HttpSession session= request.getSession();
-        String email= (String) request.getAttribute("mail");
+        String email= request.getParameter("mail");
         if(ad.getAccByEmail(email)==null){
-            session.setAttribute("mess", "Invalid email! Please try again!");
+            request.setAttribute("mess", "Invalid email! Please try again!");
             request.getRequestDispatcher("forgetpassword.jsp").forward(request, response);
         }else{
             String host = "smtp.gmail.com";
             String port = "587";
             String senderName = "Lavender Shop";
             String senderEmail = "thailshe160614@fpt.edu.vn";
-            String senderPassword = "sntblzdurhldbaby";
+            String senderPassword = "pahvqukqvqpkxfor";
             String subject = "Your Password has been reset";
 
             String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -114,7 +114,7 @@ public class ResetServlet extends HttpServlet {
                 message = "There were an error: " + ex.getMessage();
             }
             request.setAttribute("message", message);
-            request.getRequestDispatcher("message.jsp").forward(request, response);
+            request.getRequestDispatcher("forgetpassword.jsp").forward(request, response);
         }
     }
 
