@@ -4,6 +4,7 @@
     Author     : trung
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,20 @@
         <link rel="stylesheet" href="styles/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" href="styles/css/dashboard.css"/>
+        <style>
+            .an {
+                display: block;
+                display: -webkit-box;
+                height: 16px * 1.3 *3;
+                font-size: 16px;
+                line-height: 1.3;
+                -webkit-line-clamp: 3;  /* số dòng hiển thị */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-top:10px;
+            }
+        </style>
     </head>
     <body>
         <div class="wrapper">
@@ -33,7 +48,41 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <span>Number of posts on listing page:</span>
+                                        <span>Number of posts on listing page: ${num}</span>
+                                        <div class="container" style="padding-top: 10px">
+                                            <c:forEach items="${list}" var="lb">
+                                                <c:if test="${sessionScope.account.userID == lb.authorId}">
+                                                    <div class="media">
+                                                        <div class="col-md-4">
+                                                            <div class="media-left media-middle">
+                                                                <img src="resources/img/Blog/${lb.imageLink}" class="align-self-center mr-3" style="width:300px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading">${lb.getTitle()}</h4>
+                                                                <div class="an">
+                                                                    <p style="color: #333333">${lb.content}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="media-body media-middle">
+                                                                <div class="mt-2 text-center">
+                                                                    <a style="width: 120px" class="btn btn-info" href="#">Edit Blog</a>                                         
+                                                                </div>
+                                                                <div class="mt-2 text-center">
+                                                                    <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
+                                                                </div>
+                                                                <div class="mt-2 text-center">
+                                                                    <a style="width: 120px" class="btn btn-info" href="#">View Detail</a>                                         
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><hr>
+                                                </c:if>
+                                            </c:forEach>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

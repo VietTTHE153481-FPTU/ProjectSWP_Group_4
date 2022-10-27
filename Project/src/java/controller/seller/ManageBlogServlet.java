@@ -4,6 +4,7 @@
  */
 package controller.seller;
 
+import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import model.Blog;
 
 /**
  *
@@ -57,6 +61,13 @@ public class ManageBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        BlogDAO bd = new BlogDAO();
+        int id = Integer.parseInt(request.getParameter("UserId"));
+        List<Blog> blog = bd.getAllBlogs();
+        int num = bd.getAccountBlog(id);
+        
+        request.setAttribute("num", num);
+        request.setAttribute("list", blog);
         request.getRequestDispatcher("manageblog.jsp").forward(request, response);
     }
 
