@@ -37,7 +37,7 @@
                     </ul>
                 </div>
                <div class="container" style="margin-bottom: 1%; margin-top: 1%;">
-            <p style="font-size: large;color: black "> WELCOME TO OUR SHOP <br>              
+            <p style="font-size: large;color: black  "> WELCOME TO OUR SHOP <br>              
             Leventshop là trang thương mại điện tử mua sắm, nó được lập ra bởi tập đoàn SEA của Forrest Li ở Singapore vào năm 2015. Nó chính là một cái chợ Online, là trung gian kết nối giữa người mua và người bán, giúp hoạt động kinh doanh online trở nên dễ dàng hơn. Ở đó người bán đăng tải các thông tin về sản phẩm và dịch vụ mà không cần người tư vấn hay vận chuyển, đồng thời người mua cũng tiếp cận được các thông tin ấy một cách trực quan mà không cần đến cửa hàng. 
 
             Leventshop hiện nay đã có mặt tại 7 quốc gia ở khu vực châu Á đó là: Singapore, Malaysia, Indonesia, Đài Loan, Philippines và đặc biệt ngày 8/8/2016, Leventshop đã chính thức ra mắt tại Việt Nam.

@@ -61,13 +61,15 @@ public class RegisterDAO extends DBContext {
         }
     }
 
-    public void updateseller(String username) {
+    public void updateseller(String username, String shopname) {
         String sql = "UPDATE Users\n"
                 + "SET RoleID = 2\n"
-                + "WHERE username = ?";
+                + "WHERE username = ?"
+                + "AND shopname = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
+            st.setString(2, shopname);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
