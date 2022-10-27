@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.customer;
+package controller.homepage;
 
-import DAO.OrderDAO;
-import DAO.OrderDetailDAO;
+import DAO.BrandDAO;
+import DAO.CategoryDAO;
+import DAO.ProductDAO;
+import DAO.SubCategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +16,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
-import model.Order;
-import model.OrderDetail;
+import model.Brand;
+import model.Category;
+import model.Products;
+import model.SubCategory;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="OrderDetailServlet", urlPatterns={"/orderdetails"})
-public class OrderDetailServlet extends HttpServlet {
+@WebServlet(name="ShopServlet", urlPatterns={"/viewshop"})
+public class ShopServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +45,10 @@ public class OrderDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderDetailServlet</title>");  
+            out.println("<title>Servlet ShopServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrderDetailServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ShopServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,17 +65,32 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-            int id = Integer.parseInt(request.getParameter("id"));
-            OrderDetailDAO od = new OrderDetailDAO();
-            List<OrderDetail> orderList = od.getOdByOrderId(id);           
-            int total=0;
-            for (OrderDetail o : orderList) {
-               total+=(o.getProductPrice()*o.getQuantity()); 
-            }
+        int n = Integer.parseInt(request.getParameter("id"));
+        CategoryDAO cdao = new CategoryDAO();
+        List<Category> categorys = cdao.getAll();
+        request.setAttribute("categorys", categorys);
 
-            request.setAttribute("Total", total);
-            request.setAttribute("listO", orderList);
-        request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
+        SubCategoryDAO scdao = new SubCategoryDAO();
+        List<SubCategory> subcategorys = scdao.getAllSubCategory();
+        request.setAttribute("subcategorys", subcategorys);
+
+        BrandDAO bdao = new BrandDAO();
+        List<Brand> brands = bdao.getAllBrand();
+        request.setAttribute("brands", brands);
+
+        ProductDAO pd = new ProductDAO();
+
+
+        List<Products> products = pd.getProductsbyShopid(n);
+
+        
+        List<Products> display = new ArrayList<>();
+        for (int i = 0; i < products.size() ; i++) {
+                display.add(products.get(i));
+        }
+
+        request.setAttribute("listPdByCid", display);
+        request.getRequestDispatcher("viewshop.jsp").forward(request, response);
     } 
 
     /** 
@@ -82,8 +102,8 @@ public class OrderDetailServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {              
-            request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /** 

@@ -44,6 +44,12 @@
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" name="Shopname" class="form-control" placeholder="Shopname">
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-phone"></i></span>
                         </div>
                         <input type="text" name="phone" class="form-control" placeholder="Phone">

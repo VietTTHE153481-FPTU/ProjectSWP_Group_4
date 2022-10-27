@@ -60,7 +60,11 @@
                                                             <span class="badge badge-pill badge-info">${o.status}</span>
                                                         </td>
                                                         <td>${o.date}</td>
+
+                                                        <td><a href="orderdetails?id=${o.id}" style="cursor: pointer ">View</a></td>
+
                                                         <td><a href="orderdetail?id=${o.id}" style="cursor: pointer ">View</a></td>
+
                                                     </tr>
                                                     <c:set var="total" value="${total + o.totalPrice}" />
                                                 </c:forEach>

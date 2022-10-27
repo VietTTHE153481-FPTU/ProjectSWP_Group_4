@@ -76,11 +76,12 @@ public class RegisterSellerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("Username");
+        String shopname = request.getParameter("Shopname");
         RegisterDAO rd = new RegisterDAO();
         HttpSession session = request.getSession();
             Users a = rd.checkAccountExist(username);
             if (a != null) {
-                rd.updateseller(username);
+                rd.updateseller(username,shopname);
                 response.sendRedirect("home");
             }else{
                 session.setAttribute("mess", "Người dùng không tồn tại");

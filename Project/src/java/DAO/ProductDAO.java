@@ -189,6 +189,77 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
+    public Products getProductByShopId(int id) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
+                + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
+                + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.ShopID) AS ShopID,\n"
+                + "MIN(s.ShopName) as ShopName, MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
+                + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                + "			  JOIN dbo.Shop s ON s.ID = p.ShopID\n"
+                + "GROUP BY p.ProductID ) t where t.shopId = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Products(rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SellPrice"),
+                        rs.getDouble("SalePercent"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("ShopID"),
+                        rs.getString("ShopName"),
+                        rs.getInt("Amount"),
+                        rs.getInt("StatusID"),
+                        rs.getString("ProductImgURL"),
+                        rs.getInt("CategoryID")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public List<Products> getProductsbyShopid(int shopid) {
+        List<Products> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
+                + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
+                + "MIN(p.SellPrice) AS SellPrice, MIN(p.SalePercent) AS SalePercent,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID, MIN(p.ShopID) AS ShopID,\n"
+                + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
+                + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                + "GROUP BY p.ProductID ) t where t.shopId = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Products p = new Products();
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setDescription(rs.getString("Description"));
+                p.setOriginalPrice(rs.getDouble("OriginalPrice"));
+                p.setSellPrice(rs.getDouble("SellPrice"));
+                p.setSalePercent(rs.getDouble("SalePercent"));
+                p.setSubCategoryID(rs.getInt("SubCategoryID"));
+                p.setShopID(rs.getInt("ShopID"));
+                p.setAmount(rs.getInt("Amount"));
+                p.setStatusID(rs.getInt("StatusID"));
+                p.setUrl(rs.getString("ProductImgURL"));
+                p.setCategoryID(rs.getInt("CategoryID"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
 
     public int countProducts() {
         String sql = "SELECT COUNT(ProductID) AS Count FROM dbo.Product";
@@ -204,8 +275,12 @@ public class ProductDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        ProductDAO pd = new ProductDAO();
-        Products p = pd.getProductById(1);
-        System.out.println(p.getProductName());
+        ProductDAO pd = new ProductDAO();        
+        List<Products> products = pd.getProductsbyShopid(2);
+        List<Products> display = new ArrayList<>();
+        for (int i = 0; i < products.size() ; i++) {
+                display.add(products.get(i));
+        }
+        System.out.println(products.size());  
     }
 }
