@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Shop;
 import model.Users;
 
@@ -79,14 +80,17 @@ public class RegisterSellerServlet extends HttpServlet {
         String username = request.getParameter("Username");
         String shopname = request.getParameter("Shopname");
         RegisterDAO rd = new RegisterDAO();
+
         HttpSession session = request.getSession();
             Users a = rd.checkAccountExist(username);
             if (a != null) {
                 Shop s = rd.getShopByShopname(shopname);
                 if(s == null){
                 rd.updateShop(shopname);
-                Shop s1 = rd.getShopByShopname(shopname);
-                rd.updateseller(s1.getID(),username);
+                List<Shop> shop = rd.getShopsByShopname(shopname);
+                    for (Shop shop1 : shop) {
+                        rd.updateseller(shop1.getID(),username);
+                    }
                 response.sendRedirect("home");
                 }
                 else{
