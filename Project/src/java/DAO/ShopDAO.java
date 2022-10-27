@@ -49,5 +49,5 @@ public class ShopDAO extends DBContext {
         } catch (SQLException e) {
         }
         return null;
-    }
+    }    
 }
