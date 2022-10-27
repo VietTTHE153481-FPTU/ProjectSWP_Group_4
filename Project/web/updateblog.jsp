@@ -1,18 +1,18 @@
 <%-- 
-    Document   : manageblog
-    Created on : Oct 27, 2022, 9:54:04 AM
+    Document   : updateblog
+    Created on : Oct 28, 2022, 3:25:19 AM
     Author     : trung
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Manage Blog</title>
+        <title>Update Blog</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -20,20 +20,6 @@
         <link rel="stylesheet" href="styles/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" href="styles/css/dashboard.css"/>
-        <style>
-            .an {
-                display: block;
-                display: -webkit-box;
-                height: 16px * 1.3 *3;
-                font-size: 16px;
-                line-height: 1.3;
-                -webkit-line-clamp: 3;  /* số dòng hiển thị */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                margin-top:10px;
-            }
-        </style>
     </head>
     <body>
         <div class="wrapper">
@@ -44,41 +30,40 @@
                         <div class="col-md-12 mb-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <span><i class="fa fa-list-alt"></i>&nbsp;&nbsp;</span>Blog Listing Page
+                                    <span><i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;</span>Update Blog
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <span>Number of posts on listing page: ${num}</span>
                                         <div class="container" style="padding-top: 10px">
-                                            <c:forEach items="${list}" var="lb">
-                                                <c:if test="${sessionScope.account.userID == lb.authorId}">
-                                                    <div class="media">
-                                                        <div class="col-md-4">
-                                                            <div class="media-left media-middle">
-                                                                <img src="resources/img/Blog/${lb.imageLink}" class="align-self-center mr-3" style="width:300px">
-                                                            </div>
+                                            <div class="container rounded bg-white mt-5">
+                                                <div class="row">
+                                                    <div class="col-md-4 border-right">
+                                                        <div class="d-flex flex-column align-items-center">
+                                                            <img class="align-self-center mr-3 mt-5" src="resources/img/Blog/${blog.imageLink}" width="350">
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="media-body">
-                                                                <h4 class="media-heading">${lb.getTitle()}</h4>
-                                                                <div class="an">
-                                                                    <p style="color: #333333">${lb.content}</p>
-                                                                </div>                 
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="media-body media-middle">
-                                                                <div class="mt-2 text-center">
-                                                                    <a style="width: 120px" class="btn btn-info" href="update?BlogId=${lb.id}">Edit Blog</a>                                         
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <!--<h4 class="text-center">${success}</h4>-->
+                                                        <div class="p-3 py-5">
+                                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                                                                    <a href="ManageBlog?UserId=${account.userID}">&nbsp;Back To List</a>
                                                                 </div>
-                                                                <div class="mt-2 text-center">
-                                                                    <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
+                                                                <h6 class="text-right">Edit Profile</h6>
+                                                            </div>
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="title" value="${blog.title}"></div>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-12">
+                                                                    <textarea class="form-control" name="content" rows="12">${blog.content}</textarea>
                                                                 </div>
                                                             </div>
+                                                            <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
                                                         </div>
-                                                    </div><hr>
-                                                </c:if>
-                                            </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller.seller;
 
 import DAO.BlogDAO;
@@ -12,47 +13,43 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import model.Blog;
+import model.BlogDetail;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "ManageBlogServlet", urlPatterns = {"/ManageBlog"})
-public class ManageBlogServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="UpdateBlogServlet", urlPatterns={"/update"})
+public class UpdateBlogServlet extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageBlogServlet</title>");
+            out.println("<title>Servlet UpdateBlogServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageBlogServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateBlogServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -60,22 +57,16 @@ public class ManageBlogServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         BlogDAO bd = new BlogDAO();
-        int id = Integer.parseInt(request.getParameter("UserId"));
-        List<Blog> blog = bd.getAllBlogs();
-        int num = bd.getAccountBlog(id);
-        Blog bg = bd.getBlogs(id);
-        
-        request.setAttribute("num", num);
-        request.setAttribute("detail", bg);
-        request.setAttribute("list", blog);
-        request.getRequestDispatcher("manageblog.jsp").forward(request, response);
-    }
+        int id = Integer.parseInt(request.getParameter("BlogId"));
+        Blog blogs = bd.getBlogs(id);
+        request.setAttribute("blog", blogs);
+        request.getRequestDispatcher("updateblog.jsp").forward(request, response);
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -83,13 +74,12 @@ public class ManageBlogServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("manageblog.jsp").forward(request, response);
+    throws ServletException, IOException {
+        request.getRequestDispatcher("updateblog.jsp").forward(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

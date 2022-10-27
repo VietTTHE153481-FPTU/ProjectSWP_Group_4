@@ -91,7 +91,7 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
-    
+
     public Blog getBlogByAuthor(int id) {
         String sql = "SELECT * FROM [dbo].[Blog] WHERE AuthorID = ?";
         try {
@@ -190,13 +190,13 @@ public class BlogDAO extends DBContext {
         }
         return list;
     }
-    
-    public int getAccountBlog(int id) {
+
+    public int getAccountBlog(int auid) {
         int a = 0;
         String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
+            st.setInt(1, auid);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 a = rs.getInt(1);
@@ -204,6 +204,20 @@ public class BlogDAO extends DBContext {
         } catch (SQLException e) {
         }
         return a;
+    }
+
+    public void updateBlog(int id, String title, String content) {
+        String sql = "UPDATE [Blog] SET [BlogTitle] = ? ,[BlogContent] = ? WHERE ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, content);
+            ps.setInt(3, id);
+
+            ps.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public static void main(String[] args) {
