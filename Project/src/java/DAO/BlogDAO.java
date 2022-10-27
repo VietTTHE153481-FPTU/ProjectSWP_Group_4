@@ -91,6 +91,29 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
+    
+    public Blog getBlogByAuthor(int id) {
+        String sql = "SELECT * FROM [dbo].[Blog] WHERE AuthorID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Blog(rs.getInt("ID"),
+                        rs.getInt("Day"),
+                        rs.getString("Month"),
+                        rs.getInt("Year"),
+                        rs.getString("BlogTitle"),
+                        rs.getString("BlogContent"),
+                        rs.getString("imageLink"),
+                        rs.getInt("AuthorID")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public List<BlogDetail> getBlogDetailById(int id) {
         List<BlogDetail> list = new ArrayList<>();
@@ -166,6 +189,21 @@ public class BlogDAO extends DBContext {
             System.out.println(e);
         }
         return list;
+    }
+    
+    public int getAccountBlog(int id) {
+        int a = 0;
+        String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
     }
 
     public static void main(String[] args) {

@@ -11,8 +11,11 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Order;
 import model.Shop;
 import model.Users;
 
@@ -87,7 +90,7 @@ public class RegisterDAO extends DBContext {
         }
     }
     public Shop getShopBySellerId(int id) {
-        String sql = "SELECT * FROM Shop WHERE ID = ?";
+        String sql = "SELECT ID, ShopName FROM Shop WHERE ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -103,7 +106,7 @@ public class RegisterDAO extends DBContext {
     }
     
     public Shop getShopByShopname(String shopname){
-        String sql = "SELECT * FROM Shop WHERE ShopName = ?";
+        String sql = "SELECT ID, ShopName FROM Shop WHERE ShopName = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, shopname);
@@ -118,6 +121,22 @@ public class RegisterDAO extends DBContext {
         }
         return null;
     }
+    
+    public List<Shop> getShopsByShopname(String shopname) {
+        List<Shop> list = new ArrayList<>();
+        String sql = "SELECT ID, ShopName FROM Shop WHERE ShopName = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, shopname);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Shop(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
     
     public Users getAccByUsername(String user) {
         String sql = "select * from dbo.[Users] where Username=?";
@@ -163,9 +182,16 @@ public class RegisterDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        String password = "123";
-        RegisterDAO rd = new RegisterDAO();
-        System.out.println(rd.bytesToHex(password));
+//        String password = "123";
+//        RegisterDAO rd = new RegisterDAO();
+//        System.out.println(rd.bytesToHex(password));
+        RegisterDAO rd = new RegisterDAO();        
+       
+        List<Shop> shop = rd.getShopsByShopname("Best seller");
+        
+        for (Shop shop1 : shop) {
+            System.out.println(shop1.getID());
+        }
     }
 
 }

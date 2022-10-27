@@ -179,7 +179,7 @@ public class HelpDAO extends DBContext {
                 a = rs.getInt(1);
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return a;
     }

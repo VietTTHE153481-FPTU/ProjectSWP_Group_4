@@ -50,7 +50,7 @@ public class AccountDAO extends DBContext {
     }
     
     public Users getUserByID(int id) {
-        String sql = "SELECT * FROM [dbo].[Users]";
+        String sql = "SELECT * FROM [dbo].[Users] WHERE UserID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

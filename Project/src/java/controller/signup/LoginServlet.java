@@ -89,7 +89,9 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-        if (ad.getAccount(u).getRoleId() != 1 && ad.getAccount(u).getRoleId() != 2) {
+        if (ad.getAccount(u).getRoleId() != 1 && ad.getAccount(u).getUserID() != 4
+                && ad.getAccount(u).getUserID() != 5 && ad.getAccount(u).getUserID() != 6
+                && ad.getAccount(u).getUserID() != 7) {
             p = rd.bytesToHex(request.getParameter("pass"));
         } else {
             p = request.getParameter("pass");
