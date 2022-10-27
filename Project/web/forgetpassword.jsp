@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,10 +26,10 @@
                 padding: 0;
             }
             body{
-                background-image: url(resources/img/background.jpg); 
+                background-image: url(resources/img/background.jpg);
             }
             .card{
-                background-image: url(resources/img/background.jpg); 
+                background-image: url(resources/img/background.jpg);
                 width: 100%;
                 height: 100vh;
                 align-items: center;
@@ -55,7 +56,7 @@
                 <div class="card-body mx-auto">
                     <h2 class="card-title mt-3 text-center">Reset your password</h2>
                     <p class="text-center" style="font-size: 22px">Please enter your login email, we will send a new random password to your inbox:</p>
-                    <h6 style="color: red">${sessionScope.mess}</h6>
+                    <h6 style="color: red">${requestScope.mess}</h6>
                     <form id="resetForm" action="reset" method="post">               
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
@@ -65,12 +66,18 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" name="reset" class="btn btn-primary btn-block">Send Email</button>
-                        </div> 
+                        </div>
+                        <c:set var="message" value="${requestScope.message}"/>
+                        <c:if test="{message != null}">
+                            <script>
+                                confirm(message);
+                            </script>
+                        </c:if>
                         <p class="text-left"><a href="login">Go back log in page</a></p>                                                             
                     </form>
                 </div>
             </div>    
         </div>
-        
+
     </body>
 </html>
