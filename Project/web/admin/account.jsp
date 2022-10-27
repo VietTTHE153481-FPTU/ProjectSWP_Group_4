@@ -99,7 +99,7 @@
                                         <th>NUMBER PHONE</th>
                                         <th>GENDER</th>
                                         <th>EMAIL</th>
-                                        <th>PERMISSION</th>
+                                        <th>ROLE</th>
                                         <th>ACTION</th>
                                     </tr>
                                     <c:forEach items="${listac}" var="ac">

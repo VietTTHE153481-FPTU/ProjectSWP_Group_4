@@ -102,6 +102,12 @@
             .mg-text{
                 line-height: 24px;
             }
+            .content{
+                font-size: 15px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px dotted #999999;
+            }
         </style>
     </head>
     <body>
@@ -116,21 +122,26 @@
                                 <form method="get" action="searchservice">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
-                                            <input type="hidden" name="seid" value="${seid}"/>
-                                            <input type="hidden" name="stid" value="${stid}"/>
+<!--                                            <input type="hidden" name="seid" value="${seid}"/>
+                                            <input type="hidden" name="stid" value="${stid}"/>-->
                                             <input value="${key}" type="search" class="search-input" placeholder="Search..." name="key"/>
                                             <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
-                                <div class="row mt-4 g-1 px-4 mb-5">
-                                    <c:forEach items="${listcontent}" var="c">
-                                        <ul class="list-group">
-                                            <li class="list-group-item-light">
-                                                <a href="servicecategories?seid=&stid=${c.getTitlteID()}" style="color: black">${c.getContent()}</a>
-                                            </li>
-                                        </ul>
-                                    </c:forEach>
+                                <div class="row mt-4">
+                                    <h4><span>There are ${num} search result for </span><span style="color: #ff0000">"${key}"</span></h4>
+                                </div>
+                                <div class="row mt-4">
+                                    <ul class="list-group">
+                                        <c:forEach items="${listcontent}" var="c">
+                                            <div class="content">
+                                                <li class="list-group-item-light">
+                                                    <a href="servicecategories?seid=&stid=${c.getTitlteID()}" style="color: black">${c.getContent()}</a>
+                                                </li>
+                                            </div>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

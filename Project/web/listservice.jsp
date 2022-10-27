@@ -96,7 +96,7 @@
                         <div class="col-md-9">
                             <div class="card p-4 mt-3">
                                 <h3 class="heading mt-5 text-center">Hi! How can we help You?</h3>
-                                 <form method="get" action="searchservice">
+                                <form method="get" action="searchservice">
                                     <div class="d-flex justify-content-center px-5">
                                         <div class="search">
                                             <input type="text" class="search-input" placeholder="Search..." name="key">

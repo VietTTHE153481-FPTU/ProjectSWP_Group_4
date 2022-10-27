@@ -4,6 +4,7 @@
  */
 package controller.homepage;
 
+import DAO.AccountDAO;
 import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
 import model.BlogDetail;
+import model.Users;
 
 /**
  *

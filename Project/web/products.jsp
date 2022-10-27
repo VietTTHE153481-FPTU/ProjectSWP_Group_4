@@ -71,93 +71,95 @@
                                     </ul>
                                 </div>
                             </div>
+                            <input type="hidden" name="cid" value="0"/>
+                            <input type="hidden" name="sid" value="0"/>            
                             <input value="0" type="hidden" name="sortType">
                             <input value="0" type="hidden" name="sortMode">
-                        </form>
-                        <div class="main_content">
-                            <div class="products_iso">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="btn-group flex-wrap pb-3" role="group" aria-label="Basic example">
-                                            <div class="dropdown">
-                                                <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==1?'active':''}" data-toggle="dropdown">
-                                                    Sort by price
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==1?'0':'1'}&sortMode=${sortType==1&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==1&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
-                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==2?'0':'1'}&sortMode=${sortType==1&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==1&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
-                                                </ul>
+                            <div class="main_content">
+                                <div class="products_iso">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="btn-group flex-wrap pb-3" role="group" aria-label="Basic example">
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==1?'active':''}" data-toggle="dropdown">
+                                                        Sort by price
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="products?page=1&key=${key}&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==1?'0':'1'}&sortMode=${sortType==1&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==1&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                        <li><a class="dropdown-item" href="products?page=1&key=${key}&cid=${cid}&sid=${sid}&sortType=${sortType==1&&sortMode==2?'0':'1'}&sortMode=${sortType==1&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==1&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==2?'active':''}" data-toggle="dropdown">
+                                                        Sort by sale
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="products?page=1&key=${key}&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==1?'0':'2'}&sortMode=${sortType==2&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==2&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                        <li><a class="dropdown-item" href="products?page=1&key=${key}&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==2?'0':'2'}&sortMode=${sortType==2&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==2&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==3?'active':''}" data-toggle="dropdown">
+                                                        Sort by name
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="products?page=1&key=${key}&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==2?'0':'3'}&sortMode=${sortType==3&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==3&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
+                                                        <li><a class="dropdown-item" href="products?page=1&key=${key}&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==1?'0':'3'}&sortMode=${sortType==3&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==3&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==2?'active':''}" data-toggle="dropdown">
-                                                    Sort by sale
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==1?'0':'2'}&sortMode=${sortType==2&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==2&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
-                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==2&&sortMode==2?'0':'2'}&sortMode=${sortType==2&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==2&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn btn-outline-dark dropdown-toggle ${sortType==3?'active':''}" data-toggle="dropdown">
-                                                    Sort by name
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==2?'0':'3'}&sortMode=${sortType==3&&sortMode==2?'0':'2'}">Descend&nbsp;${sortType==3&&sortMode==2?'<i class="fa fa-check"></i>':''}</a></li>
-                                                    <li><a class="dropdown-item" href="products?page=1&key=&cid=${cid}&sid=${sid}&sortType=${sortType==3&&sortMode==1?'0':'3'}&sortMode=${sortType==3&&sortMode==1?'0':'1'}">Ascend&nbsp;${sortType==3&&sortMode==1?'<i class="fa fa-check"></i>':''}</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-grid">
-                                            <ul>
-                                                <c:forEach items="${listPdByCid}" var="pd">
-                                                    <div class="product-item">
-                                                        <div class="product discount product_filter">
-                                                            <a href="detail?id=${pd.getProductID()}">
-                                                                <div class="product_image">
-                                                                    <img src="resources/img/products/${pd.getUrl()}" height="230px"/>
-                                                                </div>
-                                                                <div class="favorite favorite_left"></div>
-                                                                <c:if test="${pd.getSalePercent()>0}">
-                                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.getSalePercent()}%</span></div>
-                                                                </c:if>
-                                                                <div class="product_info">
-                                                                    <h6 class="product_name">${pd.getProductName()}</h6>
-                                                                    <div class="product_price">₫ ${pd.getSellPrice()}
-                                                                        <c:if test="${pd.getSalePercent()>0}">
-                                                                            <span>₫ ${pd.getOriginalPrice()}</span>
-                                                                        </c:if>
+                                            <div class="product-grid">
+                                                <ul>
+                                                    <c:forEach items="${listPdByCid}" var="pd">
+                                                        <div class="product-item">
+                                                            <div class="product discount product_filter">
+                                                                <a href="detail?id=${pd.getProductID()}">
+                                                                    <div class="product_image">
+                                                                        <img src="resources/img/products/${pd.getUrl()}" height="230px"/>
                                                                     </div>
-                                                                </div>
-                                                            </a>
+                                                                    <div class="favorite favorite_left"></div>
+                                                                    <c:if test="${pd.getSalePercent()>0}">
+                                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.getSalePercent()}%</span></div>
+                                                                    </c:if>
+                                                                    <div class="product_info">
+                                                                        <h6 class="product_name">${pd.getProductName()}</h6>
+                                                                        <div class="product_price">₫ ${pd.getSellPrice()}
+                                                                            <c:if test="${pd.getSalePercent()>0}">
+                                                                                <span>₫ ${pd.getOriginalPrice()}</span>
+                                                                            </c:if>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="red_button add_to_cart_button"><a href="cart?id=${pd.getProductID()}&numO=1">add to cart</a></div>
                                                         </div>
-                                                        <div class="red_button add_to_cart_button"><a href="cart?id=${pd.getProductID()}&numO=1">add to cart</a></div>
-                                                    </div>
-                                                </c:forEach>
-                                            </ul>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                            <nav class="my-3" aria-label="Page navigation">
+                                                <ul class="pagination justify-content-center">
+                                                    <li class="page-item ${page>1?'':'disabled'}"><a class="page-link" href="products?page=${page-1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Previous</a></li>
+                                                        <c:if test="${page-2>0}">
+                                                        <li class="page-item"><a class="page-link" href="products?page=${page-2}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-2}</a></li>
+                                                        </c:if>
+                                                        <c:if test="${page-1>0}">
+                                                        <li class="page-item"><a class="page-link" href="products?page=${page-1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-1}</a></li>
+                                                        </c:if>
+                                                    <li class="page-item active"><a class="page-link" href="#">${page}</a></li>
+                                                        <c:if test="${page+1<=maxPage}">
+                                                        <li class="page-item"><a class="page-link" href="products?page=${page+1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+1}</a></li>
+                                                        </c:if>
+                                                        <c:if test="${page+2<=maxPage}">
+                                                        <li class="page-item"><a class="page-link" href="products?page=${page+2}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+2}</a></li>
+                                                        </c:if>
+                                                    <li class="page-item ${page+1<=maxPage?'':'disabled'}"><a class="page-link" href="products?page=${page+1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Next</a></li>
+                                                </ul>
+                                            </nav>
                                         </div>
-                                        <nav class="my-3" aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item ${page>1?'':'disabled'}"><a class="page-link" href="products?page=${page-1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Previous</a></li>
-                                                    <c:if test="${page-2>0}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page-2}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-2}</a></li>
-                                                    </c:if>
-                                                    <c:if test="${page-1>0}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page-1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page-1}</a></li>
-                                                    </c:if>
-                                                <li class="page-item active"><a class="page-link" href="#">${page}</a></li>
-                                                    <c:if test="${page+1<=maxPage}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page+1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+1}</a></li>
-                                                    </c:if>
-                                                    <c:if test="${page+2<=maxPage}">
-                                                    <li class="page-item"><a class="page-link" href="products?page=${page+2}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">${page+2}</a></li>
-                                                    </c:if>
-                                                <li class="page-item ${page+1<=maxPage?'':'disabled'}"><a class="page-link" href="products?page=${page+1}&key=&cid=${cid}&sid=${sid}&sortType=${sortType}&sortMode=${sortMode}">Next</a></li>
-                                            </ul>
-                                        </nav>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

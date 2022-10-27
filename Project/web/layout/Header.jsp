@@ -44,7 +44,7 @@
                                                 </c:if>
                                             <!-- Seller -->
                                             <c:if test="${sessionScope.account.roleId == 2}">
-                                                <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
+                                                <li><a href="mktdashboard"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
                                                 </c:if>
                                             <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                             </c:when>

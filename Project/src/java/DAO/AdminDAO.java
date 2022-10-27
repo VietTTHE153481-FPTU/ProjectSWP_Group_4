@@ -54,7 +54,7 @@ public class AdminDAO extends DBContext {
         }
         return null;
     }
-
+    
     public List<Users> getAllAccount() {
         List<Users> list = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Users]";
@@ -79,7 +79,7 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
-
+    
     public Users getAccount(String username) {
         String sql = "select * from Users where username = ?";
         try {

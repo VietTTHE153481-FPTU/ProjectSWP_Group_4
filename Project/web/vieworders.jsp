@@ -33,7 +33,8 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="home">Home</a></li>
-                        <li><a href="vieworders?id=${account.userID}"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderLists</a></li>
+                        <li><a href="userprofile"><i class="fa fa-angle-right" aria-hidden="true"></i>My Profile</a></li>
+                        <li class="active"><a href="vieworders?id=${account.userID}"><i class="fa fa-angle-right" aria-hidden="true"></i>OrderLists</a></li>
                     </ul>
                 </div>
                 <div class="container" style="margin-top: 1% ; margin-bottom: 1%;padding-left: 40px;padding-right: 70px;background-color: #f5f5f5">
@@ -59,7 +60,11 @@
                                                             <span class="badge badge-pill badge-info">${o.status}</span>
                                                         </td>
                                                         <td>${o.date}</td>
+
                                                         <td><a href="orderdetails?id=${o.id}" style="cursor: pointer ">View</a></td>
+
+                                                        <td><a href="orderdetail?id=${o.id}" style="cursor: pointer ">View</a></td>
+
                                                     </tr>
                                                     <c:set var="total" value="${total + o.totalPrice}" />
                                                 </c:forEach>

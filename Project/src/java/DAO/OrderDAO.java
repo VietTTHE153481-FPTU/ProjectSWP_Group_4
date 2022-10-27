@@ -35,11 +35,11 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
-    
-     public Order getOrderByOrderID(int orderID) {
+
+    public Order getOrderByOrderID(int orderID) {
         String sql = "select o.ID , o.UserID , o.TotalPrice , o.Note , o.Status , o.Date , d.Order_ID , d.ProductID , d.ProductName  ,d.ProductPrice , d.Quantity from Orders o\n"
                 + "join Order_Detail d on d.Order_ID = o.ID\n"
-                + "where o.ID = ?  "; 
+                + "where o.ID = ?  ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, orderID);
@@ -59,9 +59,23 @@ public class OrderDAO extends DBContext {
                         rs.getInt(11));
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return null;
+    }
+
+    public int getTotalOrders() {
+        String sql = "SELECT count (*) FROM [Orders]";
+        int total = 0;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
     }
 
 //    public static void main(String[] args) {
