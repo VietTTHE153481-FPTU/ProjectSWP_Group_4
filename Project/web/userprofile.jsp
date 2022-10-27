@@ -98,19 +98,13 @@
                                             </c:when>
                                         </c:choose>
                                         <c:choose>
-                                            <c:when test="${account.roleId == 1}">
+                                            <c:when test="${account.roleId == 3}">
                                                 <div class="mt-2 text-center">
                                                     <a style="width: 300px" class="btn btn-primary profile-button" href="registerseller">Become a seller</a>
                                                 </div>
                                             </c:when>
                                         </c:choose>
 
-                                        <div class="mt-2 text-center">
-                                            <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="vieworders?id=${account.userID}">View your orders</a>
-                                        </div>
-                                        <div class="mt-2 text-center">
-                                            <a style="width: 300px" class="btn btn-primary profile-button" href="registerseller">Become a seller</a>
-                                        </div>
                                 </form>
                             </div>
                         </div>

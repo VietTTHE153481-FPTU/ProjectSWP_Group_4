@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Shop;
 import model.Users;
 
 /**
@@ -81,8 +82,17 @@ public class RegisterSellerServlet extends HttpServlet {
         HttpSession session = request.getSession();
             Users a = rd.checkAccountExist(username);
             if (a != null) {
-                rd.updateseller(username,shopname);
+                Shop s = rd.getShopByShopname(shopname);
+                if(s == null){
+                rd.updateShop(shopname);
+                Shop s1 = rd.getShopByShopname(shopname);
+                rd.updateseller(s1.getID(),username);
                 response.sendRedirect("home");
+                }
+                else{
+                   session.setAttribute("mess", "Tên cửa hàng đã tồn tại");
+                   response.sendRedirect("registerseller");        
+            }               
             }else{
                 session.setAttribute("mess", "Người dùng không tồn tại");
                 response.sendRedirect("registerseller");
