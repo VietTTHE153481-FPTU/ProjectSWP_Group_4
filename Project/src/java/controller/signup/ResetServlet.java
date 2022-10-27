@@ -108,7 +108,7 @@ public class ResetServlet extends HttpServlet {
                 EmailUtility.sendEmail(host, port, senderEmail, senderName, senderPassword,
                         email, subject, content);
                 message = "Your password has been reset. Please check your e-mail.";
-                ad.changePass(ad.getAccByEmail(email), newPassword);
+                ad.changePass(ad.getAccByEmail(email).getUsername(), newPassword);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 message = "There were an error: " + ex.getMessage();

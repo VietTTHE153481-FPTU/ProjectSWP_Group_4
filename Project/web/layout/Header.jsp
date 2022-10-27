@@ -40,11 +40,11 @@
                                             <li><a href="userprofile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
                                             <!-- Admin -->
                                             <c:if test="${sessionScope.account.roleId == 1}">
-                                                <li><a href="account"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
+                                                <li><a href="dashboard"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
                                                 </c:if>
                                             <!-- Seller -->
                                             <c:if test="${sessionScope.account.roleId == 2}">
-                                                <li><a href="#"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
+                                                <li><a href="mktdashboard"><i class="fa fa-dashboard" aria-hidden="true"></i>Management</a></li>
                                                 </c:if>
                                             <li><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                             </c:when>
@@ -71,9 +71,9 @@
                             <a href="home">Levents<span>shop</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <ul class="navbar_menu">
                                 <li><a href="home">home</a></li>
-                                <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
+                                <li><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">Product</a></li>
                                 <li><a href="bloglist?key=">blogs</a></li>
-                                <li><a href="helpcenter?key=">service</a></li>
+                                <li><a href="helpcenter">service</a></li>
                                 <li><a href="#">contact</a></li>
                             </ul>
                         </nav>

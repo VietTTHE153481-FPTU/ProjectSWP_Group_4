@@ -67,7 +67,7 @@ public class ProfileServlet extends HttpServlet {
         Users a = ad.getAccount(username);
 //        Users b = session.getAttribute("account");
         request.setAttribute("account", a);
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/profile.jsp").forward(request, response);
 
     }
 

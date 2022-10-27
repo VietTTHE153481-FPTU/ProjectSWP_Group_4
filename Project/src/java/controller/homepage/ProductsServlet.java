@@ -82,6 +82,7 @@ public class ProductsServlet extends HttpServlet {
         ProductDAO pd = new ProductDAO();
 
         String page_raw = request.getParameter("page");
+        String key = request.getParameter("key");
         String cid_raw = request.getParameter("cid");
         String sid_raw = request.getParameter("sid");
         String sortType_raw = request.getParameter("sortType");
@@ -95,12 +96,13 @@ public class ProductsServlet extends HttpServlet {
         sortMode = (sortMode_raw == null) ? 0 : Integer.parseInt(sortMode_raw);
 
         request.setAttribute("page", page_raw);
+        request.setAttribute("key", key.replace(' ', '+'));
         request.setAttribute("cid", cid_raw);
         request.setAttribute("sid", sid_raw);
         request.setAttribute("sortType", sortType_raw);
         request.setAttribute("sortMode", sortMode_raw);
 
-        List<Products> products = pd.getProductByCid(cid, sid, sortType, sortMode);
+        List<Products> products = pd.getProductByCid(key, cid, sid, sortType, sortMode);
 
         int maxProductDisplay = 12;
         

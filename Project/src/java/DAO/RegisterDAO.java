@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Shop;
 import model.Users;
 
 /**
@@ -61,17 +62,75 @@ public class RegisterDAO extends DBContext {
         }
     }
 
-    public void updateseller(String username) {
+    public void updateseller(int shopid,String username) {
         String sql = "UPDATE Users\n"
-                + "SET RoleID = 2\n"
+                + "SET RoleID = 2, ShopID = ?\n"
                 + "WHERE username = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, username);
+            st.setInt(1, shopid);
+            st.setString(2, username);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public void updateShop(String shopname){
+        String sql = "INSERT INTO Shop VALUES (?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, shopname);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public Shop getShopBySellerId(int id) {
+        String sql = "SELECT * FROM Shop WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Shop sh = new Shop();
+                sh.setID(rs.getInt("ID"));
+                sh.setShopName(rs.getString("ShopName"));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+    
+    public Shop getShopByShopname(String shopname){
+        String sql = "SELECT * FROM Shop WHERE ShopName = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, shopname);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Shop sh = new Shop();
+                sh.setID(rs.getInt("ID"));
+                sh.setShopName(rs.getString("ShopName"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public Users getAccByUsername(String user) {
+        String sql = "select * from dbo.[Users] where Username=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
     }
 
     public boolean getStringInput(String str, String regex) {

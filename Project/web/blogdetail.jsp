@@ -59,7 +59,7 @@
                                     <div class="p-t-32">
                                         <span class="flex-w flex-m stext-111 cl2 p-b-19">
                                             <span>
-                                                <span class="cl4">By</span> ${blog.author}  
+                                                <span class="cl4">By</span> Name Author
                                                 <span class="cl12 m-l-4 m-r-6">|</span>
                                             </span>
                                             <span>

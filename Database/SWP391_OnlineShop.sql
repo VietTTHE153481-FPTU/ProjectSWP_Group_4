@@ -163,14 +163,14 @@ CREATE TABLE Category (
 	CategoryImgURL varchar(225)
 ) ON [PRIMARY]
 GO
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Clothes','men_clothes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Clothes','women_clothes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Shoes','men_shoes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Shoes','women_shoes.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Fashion Accessories','accessories.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Men Bags','bags.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Women Bags','women_bags.png');
-INSERT INTO dbo.Category(CategoryName,CategoryImgURL)VALUES(N'Watches','watches.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Men Clothes','men_clothes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Women Clothes','women_clothes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Men Shoes','men_shoes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Women Shoes','women_shoes.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Fashion Accessories','accessories.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Men Bags','bags.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Women Bags','women_bags.png');
+INSERT INTO dbo.Category(CategoryName, CategoryImgURL)VALUES(N'Watches','watches.png');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[SubCategory](
 	[SubCategoryID] [int] PRIMARY KEY  IDENTITY(1,1) ,
@@ -354,19 +354,17 @@ CREATE TABLE [dbo].[Orders](
 	constraint statusID_in_order_status FOREIGN KEY(Status) REFERENCES Order_Status(ID)
 ) ON [PRIMARY]
 GO
-INSERT INTO Orders VALUES (4, 270000, null, 3, '2022/09/06 04:17');
-INSERT INTO Orders VALUES (5, 90000, null, 3, '2022/09/16 12:36');
-INSERT INTO Orders VALUES (5, 1270000, null, 3, '2022/09/12 10:18');
-INSERT INTO Orders VALUES (6, 1270000, null, 1, '2022/09/11 01:30');
-INSERT INTO Orders VALUES (6, 143000, null, 5, '2022/09/11 01:30');
-INSERT INTO Orders VALUES (7, 2580000, null, 1, '2022/09/02 02:30');
-INSERT INTO Orders VALUES (8, 4560000, null, 1, '2022/09/05 04:30');
-INSERT INTO Orders VALUES (9, 900000, null, 1, '2022/09/05 05:30');
-INSERT INTO Orders VALUES (9, 1240000, null, 1, '2022/09/09 09:30');
-INSERT INTO Orders VALUES (10, 1230000, null, 1, '2022/09/11 11:30');
-INSERT INTO Orders VALUES (11,1470000, null, 1, '2022/09/10 03:30');
-INSERT INTO Orders VALUES (12,1470000, null, 1, '2022/09/12 00:00');
-INSERT INTO Orders VALUES (15,1470000, null, 1, '2022/09/17 00:00');
+INSERT INTO Orders VALUES (2, 179000, null, 3, '2022/09/06 04:17');
+INSERT INTO Orders VALUES (2, 750000, null, 3, '2022/09/16 12:36');
+INSERT INTO Orders VALUES (3, 760000, null, 1, '2022/09/12 10:18');
+INSERT INTO Orders VALUES (4, 1080000, null, 1, '2022/09/11 01:30');
+INSERT INTO Orders VALUES (5, 150000, null, 5, '2022/09/11 01:30');
+INSERT INTO Orders VALUES (5, 200000, null, 1, '2022/09/02 02:30');
+INSERT INTO Orders VALUES (5, 131000, null, 1, '2022/09/05 04:30');
+INSERT INTO Orders VALUES (6, 762000, null, 1, '2022/09/05 05:30');
+INSERT INTO Orders VALUES (6, 735000, null, 1, '2022/09/09 09:30');
+INSERT INTO Orders VALUES (6, 260000, null, 1, '2022/09/11 11:30');
+INSERT INTO Orders VALUES (6, 1347000, null, 1, '2022/09/10 03:30');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Detail](
 	ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -379,31 +377,21 @@ CREATE TABLE [dbo].[Order_Detail](
 	constraint productID_in_order_detail FOREIGN KEY(ProductID) REFERENCES Product(ProductID)	
 ) ON [PRIMARY]
 GO
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (1,1,N'Borsalino Bogart Fur Felt Fedora',15,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (1,2,N'Borsalino Seta Bicolore Fedora',2,3);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (2,3,N'Bailey Tate Braided Fedora',5,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (3,4,N'Bailey Archer Braid Fedora',6,3);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,5,N'Bailey Craig Braided Fedora',150,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (5,6,N'Mayser Calas Panama Straw Hat',270000,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (6,7,N'Mayser Piero Panama Straw Hat',90000,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (7,8,N'Mayser Nizza Panama Straw Hat',1270000,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (8,9,N'Bailey Rockett Endura Telescope Crown Hat',163000,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (9,10,N'Bailey Hanson Shantung Hat',163000,1);
-
--- This month
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,11,N'Male T-Shirt I7TSH545I',15,5);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,50,N'FLAANS 925 NewMoon N',2,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,49,N'FLAANS ChainBZ_N',5,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,25,N'Black Gao Zipper Jean',6,3);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,35,N'Vans Sk8-Hi',150,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,15,N'Female T-Shirt I9TSH545I',270000,4);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,40,N'Female Sock I9SOK222E',90000,3);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,8,N'Mayser Nizza Panama Straw Hat',1270000,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,16,N'BLUE STRIPES SWEATER - WHITE',163000,2);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (12,10,N'Bailey Hanson Shantung Hat',163000,1);
--- Last month
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (13,1,N'Borsalino Bogart Fur Felt Fedora',15,1);
-INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (13,10,N'Bailey Hanson Shantung Hat',163000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (1,5,N'Unisex Bomber Jacket - Ulzzang Baseball Jacket',179000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (2,6,N'Paisley Unisex N7 Basic Jeans oversize',400000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (2,16,N'Hoodie Oversize Odin Acid',350000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (3,7,N'Men stretch black jeans',380000,2);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,7,N'Men stretch black jeans',380000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,17,N'JBAGY JL0102',350000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (4,3,N'KAKI unisex jacket Ulzzang style',350000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (5,23,N'Korean style flared dress',150000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (6,22,N'Off Shoulder Body Hugging Dress',200000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (7,25,N'Short A-line Jean Skirt Women High Loose',131000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (8,20,N'UNISEX Plain Sweater (Multicolor)',312000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (8,19,N'UNISEX DURHAM sweatshirt hoodie',450000,1);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (9,26,N'[Premium] Seamless bikini, luxurious V-neck',245000,3);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (10,21,N'Dress two-shoulder chiffon dress',130000,2);
+INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (11,8,N'Men smokey gray 4-way stretch jeans HD02',449000,3);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ShipInfo (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
@@ -465,22 +453,23 @@ INSERT INTO Feedback_Replies VALUES (3, 6, N'Xin Cám Ơn!');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create TABLE Blog(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	Author nvarchar(100),
 	[Day] int,
 	[Month] nvarchar(20),
 	[Year] int,
 	BlogTitle nvarchar(2500),
 	BlogContent nvarchar(2500),
 	imageLink nvarchar(1000),
+	AuthorID int,
+	constraint AuthorID FOREIGN KEY(AuthorID) REFERENCES Users(UserID),
 )ON [PRIMARY]
 GO
-INSERT INTO dbo.Blog(Author,[Day], [Month], [Year],BlogTitle,BlogContent,imageLink)VALUES(N'maintn','11',N'Sep','2022',N'Áo phông xám nữ, item mix đồ thời thượng',N'Áo phông xám là một item được nhiều bạn trẻ yêu thích. Khi xu hướng thời trang thế giới đang hướng đến những thứ đơn giản, tinh tế thì gam màu xám được đánh giá rất hiện đại, trẻ trung và là một trong những gam màu hot trend thời gian gần đây.
-Với áo phông xám, chị em có thể biến tấu linh hoạt trong cách phối đồ, lên đồ ấn tượng mà không lo nhạt nhòa, kém nổi bật. ',N'1.jpg')
-INSERT INTO dbo.Blog(Author,[Day], [Month], [Year],BlogTitle,BlogContent,imageLink)VALUES(N'ngoc12','15',N'Sep','2022', N'Áo thun oversize chuẩn phong cách, ấn tượng',N'Áo phông oversize đang là một hot item dẫn đầu xu hướng thời trang giới trẻ hiện nay. Ngày càng nhiều các bạn trẻ yêu thích, ưa chuộng và đánh giá cao kiểu áo này. 
-Một item đầy mới mẻ, phá cách và tính ứng dụng thực tiễn cao như áo phông oversize quả thực sẽ thu hút sự quan tâm của rất nhiều bạn trẻ. ',N'2.jpg')
-INSERT INTO dbo.Blog(Author,[Day], [Month], [Year],BlogTitle,BlogContent,imageLink)VALUES(N'minh123','17',N'Sep','2022', N'Blazzer, xu thế thời trang 2022',N'Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.',N'3.jpg')
-INSERT INTO dbo.Blog(Author,[Day], [Month], [Year],BlogTitle,BlogContent,imageLink)VALUES(N'author_1','01',N'Sep','2022', N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg')
-INSERT INTO dbo.Blog(Author,[Day], [Month], [Year],BlogTitle,BlogContent,imageLink)VALUES(N'author_2','24',N'Sep','2022', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng. Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách. ',N'5.jpg')
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('11',N'Sep','2022',N'Áo phông xám nữ, item mix đồ thời thượng',N'Áo phông xám là một item được nhiều bạn trẻ yêu thích. Khi xu hướng thời trang thế giới đang hướng đến những thứ đơn giản, tinh tế thì gam màu xám được đánh giá rất hiện đại, trẻ trung và là một trong những gam màu hot trend thời gian gần đây.
+Với áo phông xám, chị em có thể biến tấu linh hoạt trong cách phối đồ, lên đồ ấn tượng mà không lo nhạt nhòa, kém nổi bật.',N'1.jpg', 4)
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('15',N'Sep','2022', N'Áo thun oversize chuẩn phong cách, ấn tượng',N'Áo phông oversize đang là một hot item dẫn đầu xu hướng thời trang giới trẻ hiện nay. Ngày càng nhiều các bạn trẻ yêu thích, ưa chuộng và đánh giá cao kiểu áo này. 
+Một item đầy mới mẻ, phá cách và tính ứng dụng thực tiễn cao như áo phông oversize quả thực sẽ thu hút sự quan tâm của rất nhiều bạn trẻ.',N'2.jpg', 4)
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('17',N'Sep','2022', N'Blazzer, xu thế thời trang 2022',N'Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.',N'3.jpg', 5)
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('01',N'Sep','2022', N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg', 5)
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('24',N'Sep','2022', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng. Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách.',N'5.jpg', 6)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create Table BlogDetail (
 	BlogDetailID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,

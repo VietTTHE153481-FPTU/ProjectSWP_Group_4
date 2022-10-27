@@ -39,10 +39,10 @@
                             </div>
                             <div class="col-md-5 border-right">
                                 <c:if test="${requestScope.mess!=null}">
-                                <div class="alert alert-success alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    ${requestScope.mess}
-                                </div>
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        ${requestScope.mess}
+                                    </div>
                                 </c:if>
                                 <form method="post" action="userprofile">
                                     <div class="p-3 py-5">
@@ -77,20 +77,42 @@
                                                 </c:if>
                                             </div>
                                         </div>
-                                        <div class="mt-5 text-left">
-                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
-                                            <a class="btn btn-primary profile-button" href="password">Change Password</a>
-                                            <a class="btn btn-primary profile-button" href="address">Addresses</a>
+                                        <div class="mt-5 text-center">
+                                            <button style="width: 300px" class="btn btn-primary profile-button" type="submit" value="Xác nhận">Save Profile</button>
                                         </div>
-                                    </div>
+                                        <div class="mt-2 text-center">
+                                            <a style="width: 300px" class="btn btn-primary profile-button" href="password">Change Password</a>
+                                        </div>
+                                        <div class="mt-2 text-center">
+                                            <a style="width: 300px" class="btn btn-primary profile-button" href="address">Addresses</a>                                         
+                                        </div>
+
+                                        <c:choose>
+                                            <c:when test="${account.roleId == 2}">
+                                                <div class="mt-2 text-center">
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="vieworders?id=${account.userID}">View your orders</a>                                              
+                                                </div> 
+                                                <div class="mt-2 text-center">
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="viewshop?id=${account.shopId}">View shop</a>                                              
+                                                </div> 
+                                            </c:when>
+                                        </c:choose>
+                                        <c:choose>
+                                            <c:when test="${account.roleId == 3}">
+                                                <div class="mt-2 text-center">
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" href="registerseller">Become a seller</a>
+                                                </div>
+                                            </c:when>
+                                        </c:choose>
+
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <%@include file ="layout/Footer.jsp" %>
         </div>
+        <%@include file ="layout/Footer.jsp" %>
         <script>
             $(document).ready(function () {
                 $('button').click(function () {

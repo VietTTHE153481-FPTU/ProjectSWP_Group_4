@@ -38,29 +38,37 @@
                                 </div>
                             </div>
                             <div class="col-md-5 border-right">
-                                <!-- cập nhật pass thành công 
-                                <div class="text-center"; style="color: #00cc00">
-                                    <span>Change Password Successful</span>
-                                    &nbsp;
-                                    <i class="fa fa-check-circle"></i>
-                                </div>
-                                -->
+                                <c:if test="${requestScope.success != null}">
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        ${requestScope.success}
+                                    </div>
+                                </c:if>
+                                <c:if test="${requestScope.fail != null}">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        ${requestScope.fail}
+                                    </div>
+                                </c:if>
                                 <div class="p-3 py-5">
                                     <div style="border-bottom: 1px dotted #cccccc; padding-bottom: 15px;">
                                         <h4 class="text-left" style="padding-bottom: 15px;">Change your password</h4>
                                         <h6>For your account's security, do not share your password with anyone else.</h6>
                                     </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12"><label class="labels">Current Password</label><input value="" type="password" name="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
+                                    <form action="password" method="POST">
+                                        <div class="row mt-3">
+                                      <!--  <div class="col-md-12"><label class="labels">Your Current Password</label><input type="text" class="form-control" placeholder="headline" value="${account.password}" disabled></div> -->
+                                            <div class="col-md-12"><label class="labels">Current Password</label><input value="" type="password" name="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
+                                            </div>
+                                            <div class="col-md-12"><label class="labels">New Password</label><input value="" type="password" name="newpass" class="form-control" placeholder="Nhập mật khẩu mới (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
+                                            </div>
+                                            <div class="col-md-12"><label class="labels">Confirm Password</label><input value="" type="password" name="cfpass" class="form-control" placeholder="Xác nhận mật khẩu mới">
+                                            </div>
                                         </div>
-                                        <div class="col-md-12"><label class="labels">New Password</label><input value="" type="password" name="newpass" class="form-control" placeholder="Nhập mật khẩu mới (Có 1 đến 20 kí tự)" pattern="^.{1,20}$">
+                                        <div class="mt-5 text-left">
+                                            <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Confirm</button>
                                         </div>
-                                        <div class="col-md-12"><label class="labels">Confirm Password</label><input value="" type="password" name="cfpass" class="form-control" placeholder="Xác nhận mật khẩu mới">
-                                        </div>
-                                    </div>
-                                    <div class="mt-5 text-left">
-                                        <button class="btn btn-primary profile-button" type="submit" value="Xác nhận">Confirm</button>
-                                    </div>
+                                    </form>
                                     <div class="mt-2 text-left">
                                         <a class="btn btn-primary profile-button" href="userprofile">View Profile</a>
                                     </div>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : account
-    Created on : Jul 19, 2022, 12:32:38 PM
-    Author     : trung
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,6 +46,13 @@
                         <c:choose>
                             <c:when test="${sessionScope.account != null}">
                                 <ul id="sidebarnav">
+                                    <li class="sidebar-item pt-2">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard"
+                                           aria-expanded="false">
+                                            <i class="fa fa-dashboard" aria-hidden="true"></i>
+                                            <span class="hide-menu">Dashboard</span>
+                                        </a>
+                                    </li>
                                     <li class="sidebar-item">
                                         <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
                                            aria-expanded="false">
@@ -98,7 +99,7 @@
                                         <th>NUMBER PHONE</th>
                                         <th>GENDER</th>
                                         <th>EMAIL</th>
-                                        <th>PERMISSION</th>
+                                        <th>ROLE</th>
                                         <th>ACTION</th>
                                     </tr>
                                     <c:forEach items="${listac}" var="ac">

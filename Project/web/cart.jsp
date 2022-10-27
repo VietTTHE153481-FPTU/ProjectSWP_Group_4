@@ -91,7 +91,7 @@
                                     <a href="#" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-                                    <a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">
+                                    <a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">
                                         <i class="fa fa-arrow-left mr-2"></i>Continue Shopping</a>
                                 </div>
                             </div>

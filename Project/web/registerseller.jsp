@@ -44,16 +44,11 @@
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-phone"></i></span>
+                            <span class="input-group-text"> <i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" name="phone" class="form-control" placeholder="Phone">
-                    </div>                    
-                    <div class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-envelope"></i></span>
-                        </div>
-                        <input type="text" name="mail" class="form-control" placeholder="Email">
+                        <input type="text" name="Shopname" class="form-control" placeholder="Shopname">
                     </div>
+                    
                     <div class="form-group">
                         <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
                     </div> 

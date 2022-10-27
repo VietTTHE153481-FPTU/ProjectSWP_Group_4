@@ -10,13 +10,13 @@ package model;
  */
 public class Users {
 
-    private int userID;
-    private String username, password, fullname, phone;
-    private boolean gender;
-    private String email;
-    private int roleId;
-    private int shopId;
-    private int statusId;
+    int userID;
+    String username, password, fullname, phone;
+    boolean gender;
+    String email;
+    int roleId;
+    int shopId;
+    int statusId;
 
     public Users() {
     }

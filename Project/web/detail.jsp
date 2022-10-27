@@ -35,7 +35,7 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
+                                <li><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
                                 <li class="active"><i class="fa fa-angle-right" aria-hidden="true"></i>${detail.getProductName()}</a></li></li>
                             </ul>
                         </div>
@@ -68,10 +68,10 @@
                                 <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
                             </c:if>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                                <span>Shipping:</span>
+                                <span>Delivery method:</span>
                                 <div style="padding-left: 25px">
                                     <i class="fa fa-truck"></i>&nbsp;
-                                    <span style="padding-right: 50px">Shipping To</span>
+                                    <span style="padding-right: 50px">Express Delivery</span>
                                 </div>
                             </div>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
@@ -97,18 +97,17 @@
                                 <span class="card-title">${detail.getShopName()}</span>
                                 <p class="card-text">Some example text. Some example text.</p>
                                 <a href="#" class="card-link">Chat with Seller</a>
-                                <a href="#" class="card-link">View Shop</a>
                             </div>
                             <div class="col-sm-8 text-center">
                                 <div class="row" style="padding-bottom: 40px">
-                                    <div class="col-sm-4">Products</div>
-                                    <div class="col-sm-4">Rattings</div>
-                                    <div class="col-sm-4">View</div>
+                                    <div class="col-sm-4">Products:</div>
+                                    <div class="col-sm-4">Rattings:</div>
+                                    <div class="col-sm-4">Comment:</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4">Products</div>
-                                    <div class="col-sm-4">Rattings</div>
-                                    <div class="col-sm-4">View</div>
+                                    <div class="col-sm-4">Products:</div>
+                                    <div class="col-sm-4">Rattings:</div>
+                                    <div class="col-sm-4">View:</div>
                                 </div>
                             </div>
                         </div>

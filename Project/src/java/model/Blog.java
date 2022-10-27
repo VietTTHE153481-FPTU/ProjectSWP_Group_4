@@ -13,33 +13,32 @@ import lombok.ToString;
  *
  * @author trung
  */
-
 @Setter
 @Getter
 @ToString
 @Builder
 public class Blog {
+
     int id;
-    String author;
     int day;
     String month;
     int year;
     String title;
     String content;
     String imageLink;
+    int authorId;
 
     public Blog() {
     }
 
-    public Blog(int id, String author, int day, String month, int year, String title, String content, String imageLink) {
+    public Blog(int id, int day, String month, int year, String title, String content, String imageLink, int authorId) {
         this.id = id;
-        this.author = author;
         this.day = day;
         this.month = month;
         this.year = year;
         this.title = title;
         this.content = content;
         this.imageLink = imageLink;
+        this.authorId = authorId;
     }
-
 }
