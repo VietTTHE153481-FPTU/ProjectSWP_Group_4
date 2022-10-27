@@ -13,16 +13,19 @@
             <a href="home">Home &nbsp;<i class="fa fa-home"></i></a>
         </li>
         <li>
-            <a href="#">Manager Order &nbsp;<i class="fa fa-cart-plus"></i></i></a>
+            <a href="mktdashboard">Dashboard &nbsp;<i class="fa fa-dashboard"></i></a>
         </li>
         <li>
-            <a href="#">Manager Product &nbsp;<i class="fa fa-product-hunt"></i></a>
+            <a href="#">Manage Order &nbsp;<i class="fa fa-cart-plus"></i></i></a>
         </li>
         <li>
-            <a href="#">Manager Blog &nbsp;<i class="fa fa-newspaper-o"></i></a>
+            <a href="#">Manage Product &nbsp;<i class="fa fa-product-hunt"></i></a>
         </li>
         <li>
-            <a href="#">Manager Feedback &nbsp;<i class="fa fa-reply-all"></i></a>
+            <a href="ManageBlog">Manage Blog &nbsp;<i class="fa fa-newspaper-o"></i></a>
+        </li>
+        <li>
+            <a href="#">Manage Feedback &nbsp;<i class="fa fa-reply-all"></i></a>
         </li>
     </ul>
     <ul class="list-unstyled CTAs">
