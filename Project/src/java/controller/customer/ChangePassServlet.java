@@ -84,10 +84,10 @@ public class ChangePassServlet extends HttpServlet {
                 if (user.getPassword().equals(oldPassword)
                         && newPassword.equals(repeatNewPassword)) {
                     acc.changePass(user.getUsername(), newPassword);
-                    request.setAttribute("mess", "Success!");
+                    request.setAttribute("success", "Password update successful !!!");
                     request.getRequestDispatcher("password.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("mess", "Fails");
+                    request.setAttribute("fail", "Passwords are not the same. Please re-enter!!!");
                     request.getRequestDispatcher("password.jsp").forward(request, response);
                 }
             } else {

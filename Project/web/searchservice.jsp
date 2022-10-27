@@ -102,6 +102,12 @@
             .mg-text{
                 line-height: 24px;
             }
+            .content{
+                font-size: 15px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px dotted #999999;
+            }
         </style>
     </head>
     <body>
@@ -123,17 +129,17 @@
                                         </div>
                                     </div>
                                 </form>
-
                                 <div class="row mt-4">
-                                    <h3 style="color:green">There are ${num} search result</h3>
+                                    <h4><span>There are ${num} search result for </span><span style="color: #ff0000">"${key}"</span></h4>
                                 </div>
-
-                                <div class="row mt-4 g-1 px-4 mb-5">
+                                <div class="row mt-4">
                                     <ul class="list-group">
                                         <c:forEach items="${listcontent}" var="c">
-                                            <li class="list-group-item-light">
-                                                <a href="servicecategories?seid=&stid=${c.getTitlteID()}" style="color: black">${c.getContent()}</a>
-                                            </li>
+                                            <div class="content">
+                                                <li class="list-group-item-light">
+                                                    <a href="servicecategories?seid=&stid=${c.getTitlteID()}" style="color: black">${c.getContent()}</a>
+                                                </li>
+                                            </div>
                                         </c:forEach>
                                     </ul>
                                 </div>
