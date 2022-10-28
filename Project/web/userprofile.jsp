@@ -104,7 +104,6 @@
                                                 </div>
                                             </c:when>
                                         </c:choose>
-
                                 </form>
                             </div>
                         </div>

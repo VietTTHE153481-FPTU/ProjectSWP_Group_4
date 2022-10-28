@@ -48,38 +48,40 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <span>Number of posts on listing page: ${num}</span>
-                                        <div class="container" style="padding-top: 10px">
-                                            <c:forEach items="${list}" var="lb">
-                                                <c:if test="${sessionScope.account.userID == lb.authorId}">
-                                                    <div class="media">
-                                                        <div class="col-md-4">
-                                                            <div class="media-left media-middle">
-                                                                <img src="resources/img/Blog/${lb.imageLink}" class="align-self-center mr-3" style="width:300px">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="media-body">
-                                                                <h4 class="media-heading">${lb.getTitle()}</h4>
-                                                                <div class="an">
-                                                                    <p style="color: #333333">${lb.content}</p>
-                                                                </div>                 
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="media-body media-middle">
-                                                                <div class="mt-2 text-center">
-                                                                    <a style="width: 120px" class="btn btn-info" href="update?BlogId=${lb.id}">Edit Blog</a>                                         
-                                                                </div>
-                                                                <div class="mt-2 text-center">
-                                                                    <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
+                                        <form method="get" action="ManageBlog">
+                                            <span>Number of posts on listing page: ${num}</span>
+                                            <div class="container" style="padding-top: 10px">
+                                                <c:forEach items="${list}" var="lb">
+                                                    <c:if test="${sessionScope.account.userID == lb.authorId}">
+                                                        <div class="media">
+                                                            <div class="col-md-4">
+                                                                <div class="media-left media-middle">
+                                                                    <img src="resources/img/Blog/${lb.imageLink}" class="align-self-center mr-3" style="width:300px">
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div><hr>
-                                                </c:if>
-                                            </c:forEach>
-                                        </div>
+                                                            <div class="col-md-6">
+                                                                <div class="media-body">
+                                                                    <h4 class="media-heading">${lb.getTitle()}</h4>
+                                                                    <div class="an">
+                                                                        <p style="color: #333333">${lb.content}</p>
+                                                                    </div>                 
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="media-body media-middle">
+                                                                    <div class="mt-2 text-center">
+                                                                        <a style="width: 120px" class="btn btn-info" href="update?BlogId=${lb.id}">Edit Blog</a>                                         
+                                                                    </div>
+                                                                    <div class="mt-2 text-center">
+                                                                        <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><hr>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -51,15 +51,17 @@
                                                                 </div>
                                                                 <h6 class="text-right">Edit Profile</h6>
                                                             </div>
-                                                            <div class="row mt-2">
-                                                                <div class="col-md-12"><input type="text" class="form-control" name="title" value="${blog.title}"></div>
-                                                            </div>
-                                                            <div class="row mt-3">
-                                                                <div class="col-md-12">
-                                                                    <textarea class="form-control" name="content" rows="12">${blog.content}</textarea>
+                                                            <form method="get" action="update">
+                                                                <div class="row mt-2">
+                                                                    <div class="col-md-12"><input type="text" class="form-control" name="title" value="${blog.title}"></div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                                                                <div class="row mt-3">
+                                                                    <div class="col-md-12">
+                                                                        <textarea type="text" class="form-control" name="content" rows="12">${blog.content}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
