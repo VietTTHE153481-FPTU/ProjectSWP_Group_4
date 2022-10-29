@@ -10,8 +10,8 @@ package model;
  */
 public class Shop {
 
-    public int ID;
-    public String ShopName;
+    int ID;
+    String ShopName;
 
     public Shop() {
     }

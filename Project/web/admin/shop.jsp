@@ -130,7 +130,7 @@
                                                         <td>${u.email}</td>
                                                         <td>&nbsp;</td>
                                                         <td>
-                                                            <a href="#"><i class="fa fa-user"></i></a>
+                                                            <a href="shopdetail?id=${shop.ID}"><i class="fa fa-eye"></i></a>
                                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                                             <a href="#"><i class="fa fa-close"></i></a>
                                                         </td>

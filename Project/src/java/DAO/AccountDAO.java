@@ -13,13 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.UserAddress;
 import model.Users;
 
 public class AccountDAO extends DBContext {
@@ -47,29 +43,6 @@ public class AccountDAO extends DBContext {
         } catch (SQLException e) {
         }
         return list;
-    }
-
-    public Users getUserByID(int id) {
-        String sql = "SELECT * FROM [dbo].[Users] WHERE UserID = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                Users p = new Users();
-                p.setUserID(rs.getInt("userID"));
-                p.setUsername(rs.getString("username"));
-                p.setPassword(rs.getString("password"));
-                p.setFullname(rs.getString("fullname"));
-                p.setPhone(rs.getString("phone"));
-                p.setGender(rs.getBoolean("gender"));
-                p.setEmail(rs.getString("email"));
-                p.setRoleId(rs.getInt("roleId"));
-                p.setShopId(rs.getInt("shopId"));
-                p.setStatusId(rs.getInt("statusId"));
-            }
-        } catch (SQLException e) {
-        }
-        return null;
     }
 
     public boolean isAccountValid(Users acc) {
@@ -145,6 +118,31 @@ public class AccountDAO extends DBContext {
         return false;
     }
 
+    public Users getSellerByShopID(int id) {
+        String sql = "SELECT * FROM [dbo].[Users] WHERE ShopID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Users p = new Users();
+                p.setUserID(rs.getInt("userID"));
+                p.setUsername(rs.getString("username"));
+                p.setPassword(rs.getString("password"));
+                p.setFullname(rs.getString("fullname"));
+                p.setPhone(rs.getString("phone"));
+                p.setGender(rs.getBoolean("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
+                p.setStatusId(rs.getInt("statusId"));
+                return p;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+
     public void changePass(String username, String pass) {
         String sql = "  update Users\n"
                 + "  set Password= ? \n"
@@ -204,5 +202,11 @@ public class AccountDAO extends DBContext {
         }
         return hexString.toString();
     }
+    
+    public static void main(String[] args) {
+        AccountDAO ad = new AccountDAO();
+        Users ul = ad.getSellerByShopID(2);
+        System.out.println(ul);
 
+    }
 }

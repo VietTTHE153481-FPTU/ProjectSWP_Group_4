@@ -106,6 +106,31 @@ public class AdminDAO extends DBContext {
         return null;
     }
 
+    public Users getUserByID(int id) {
+        String sql = "SELECT * FROM [Users] WHERE UserID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Users p = new Users();
+                p.setUserID(rs.getInt("userID"));
+                p.setUsername(rs.getString("username"));
+                p.setPassword(rs.getString("password"));
+                p.setFullname(rs.getString("fullname"));
+                p.setPhone(rs.getString("phone"));
+                p.setGender(rs.getBoolean("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
+                p.setStatusId(rs.getInt("statusId"));
+                return p;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+
     public void updateUserProfile(int id, String fullname, String phone, String email, int gender) {
         String sql = "update Users set fullname = ?, phone = ?, email = ?, gender = ? where UserID = ?";
         try {
@@ -149,7 +174,7 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int countAllUserBySearch(String key) {
         int a = 0;
         String sql = "select count(u.UserID) from Users u JOIN Role r ON u.RoleID = r.ID where u.username like ? or u.fullname like ? or r.RoleName like ?";
@@ -169,10 +194,9 @@ public class AdminDAO extends DBContext {
 
     public static void main(String[] args) {
         AdminDAO ad = new AdminDAO();
-        List<Users> ul = ad.getAllAccount();
+        Users ul = ad.getUserByID(1);
         List<Users> us = ad.getUserBySearch("anh");
-        for (Users users : ul) {
-            System.out.println(users);
-        }
+        System.out.println(ul);
+
     }
 }

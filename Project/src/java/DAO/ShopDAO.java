@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Shop;
-import model.Users;
 
 /**
  *
@@ -36,16 +35,16 @@ public class ShopDAO extends DBContext {
         return list;
     }
 
-    public Shop getShopBySellerId(int id) {
+    public Shop getShopById(int id) {
         String sql = "SELECT * FROM Shop WHERE ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Shop sh = new Shop();
-                sh.setID(rs.getInt("ID"));
-                sh.setShopName(rs.getString("ShopName"));
+            if (rs.next()) {
+                return new Shop(rs.getInt("ID"),
+                        rs.getString("ShopName")
+                );
             }
         } catch (SQLException e) {
         }
@@ -86,12 +85,25 @@ public class ShopDAO extends DBContext {
         }
         return a;
     }
+    
+    public int getTotalProduct(int id) {
+        int a = 0;
+        String sql = "SELECT count(ProductID) FROM [Product] WHERE ShopID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
 
     public static void main(String[] args) {
         ShopDAO sd = new ShopDAO();
-        List<Shop> shop = sd.getAllShop();
-        for (Shop shop1 : shop) {
-            System.out.println(shop1);
-        }
+        Shop shop = sd.getShopById(4);
+        System.out.println(shop);
     }
 }

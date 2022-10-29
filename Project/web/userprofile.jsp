@@ -90,10 +90,10 @@
                                         <c:choose>
                                             <c:when test="${account.roleId == 2}">
                                                 <div class="mt-2 text-center">
-                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="vieworders?id=${account.userID}">View your orders</a>                                              
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button" href="vieworders?id=${account.userID}">View your orders</a>                                              
                                                 </div> 
                                                 <div class="mt-2 text-center">
-                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="viewshop?id=${account.shopId}">View shop</a>                                              
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button" href="viewshop?id=${account.shopId}">View shop</a>                                              
                                                 </div> 
                                             </c:when>
                                         </c:choose>
