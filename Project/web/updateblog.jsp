@@ -52,6 +52,7 @@
                                                                 <h6 class="text-right">Edit Profile</h6>
                                                             </div>
                                                             <form method="get" action="update">
+                                                                <input type="hidden" name="BlogId" value="${blog.id}"/>
                                                                 <div class="row mt-2">
                                                                     <div class="col-md-12"><input type="text" class="form-control" name="title" value="${blog.title}"></div>
                                                                 </div>

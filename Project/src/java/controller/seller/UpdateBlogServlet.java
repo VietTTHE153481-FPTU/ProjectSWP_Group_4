@@ -66,7 +66,7 @@ public class UpdateBlogServlet extends HttpServlet {
         String content = request.getParameter("content");
 
         Blog blogs = bd.getBlogs(id);
-        bd.updateBlog(blogs.getId(), title, content);
+        bd.updateBlog(id, title, content);
 
         request.setAttribute("blog", blogs);
         request.getRequestDispatcher("updateblog.jsp").forward(request, response);
