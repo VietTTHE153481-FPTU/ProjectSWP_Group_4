@@ -54,7 +54,7 @@ public class AdminDAO extends DBContext {
         }
         return null;
     }
-    
+
     public List<Users> getAllAccount() {
         List<Users> list = new ArrayList<>();
         String sql = "SELECT * FROM [dbo].[Users]";
@@ -79,7 +79,7 @@ public class AdminDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Users getAccount(String username) {
         String sql = "select * from Users where username = ?";
         try {
@@ -122,8 +122,57 @@ public class AdminDAO extends DBContext {
         }
     }
 
+    public List<Users> getUserBySearch(String key) {
+        List<Users> list = new ArrayList<>();
+        String sql = "select * from Users u JOIN Role r ON u.RoleID = r.ID where u.username like ? or u.fullname like ? or r.RoleName like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Users p = new Users();
+                p.setUserID(rs.getInt("userID"));
+                p.setUsername(rs.getString("username"));
+                p.setPassword(rs.getString("password"));
+                p.setFullname(rs.getString("fullname"));
+                p.setPhone(rs.getString("phone"));
+                p.setGender(rs.getBoolean("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setRoleId(rs.getInt("roleId"));
+                p.setShopId(rs.getInt("shopId"));
+                p.setStatusId(rs.getInt("statusId"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public int countAllUserBySearch(String key) {
+        int a = 0;
+        String sql = "select count(u.UserID) from Users u JOIN Role r ON u.RoleID = r.ID where u.username like ? or u.fullname like ? or r.RoleName like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+
     public static void main(String[] args) {
         AdminDAO ad = new AdminDAO();
-//        ad.updateUserProfile(23, "hieu", "0913475037", "hieu1234@gmail.com", 1);
+        List<Users> ul = ad.getAllAccount();
+        List<Users> us = ad.getUserBySearch("anh");
+        for (Users users : ul) {
+            System.out.println(users);
+        }
     }
 }

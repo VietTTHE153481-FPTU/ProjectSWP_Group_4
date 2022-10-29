@@ -4,7 +4,8 @@
  */
 package controller.admin;
 
-import DAO.AdminDAO;
+import DAO.AccountDAO;
+import DAO.ShopDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +15,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import model.Shop;
 import model.Users;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "AccountServlet", urlPatterns = {"/account"})
-public class AccountServlet extends HttpServlet {
+@WebServlet(name = "ShopServlet", urlPatterns = {"/shop"})
+public class ShopServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +42,10 @@ public class AccountServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountServlet</title>");
+            out.println("<title>Servlet ShopServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AccountServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ShopServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,20 +63,24 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminDAO ad = new AdminDAO();
+        ShopDAO sd = new ShopDAO();
         String key = request.getParameter("key");
-        List<Users> user = new ArrayList<>();
+        List<Shop> list = new ArrayList<>();
         if (key.equals("")) {
-            user = ad.getAllAccount();
-        } else {
-            user = ad.getUserBySearch(key);
+            list = sd.getAllShop();
+        }else{
+            list = sd.getUserBySearch(key);
         }
-        int num = ad.countAllUserBySearch(key);
+        int num = sd.getTotalShop(key);
         
-        request.setAttribute("listac", user);
+        AccountDAO ad = new AccountDAO();
+        List<Users> u = ad.getAllAccount();
+
+        request.setAttribute("user", u);
+        request.setAttribute("listshop", list);
         request.setAttribute("search", key);
         request.setAttribute("num", num);
-        request.getRequestDispatcher("admin/account.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/shop.jsp").forward(request, response);
     }
 
     /**
@@ -88,7 +94,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("admin/account.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/shop.jsp").forward(request, response);
     }
 
     /**

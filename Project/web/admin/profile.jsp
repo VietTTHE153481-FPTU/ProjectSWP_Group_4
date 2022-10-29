@@ -54,10 +54,17 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account?key="
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="shop?key="
+                                           aria-expanded="false">
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            <span class="hide-menu">Shop Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item pt-2">
@@ -138,7 +145,7 @@
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="col-sm-12">
-                                                <a href="account" class="btn btn-success">Back</a>
+                                                <a href="account?key=" class="btn btn-success">Back</a>
                                             </div>
                                         </div>
                                     </div>

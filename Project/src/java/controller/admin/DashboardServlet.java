@@ -61,12 +61,10 @@ public class DashboardServlet extends HttpServlet {
         
         AccountDAO ad = new AccountDAO();
         request.setAttribute("customercount", ad.getNoAcc());
+        request.setAttribute("sellercount", ad.getSeller());
         
         ProductDAO pd = new ProductDAO();
         request.setAttribute("productcount", pd.countProducts());
-        
-        OrderDAO od = new OrderDAO();
-        request.setAttribute("ordercount", od.getTotalOrders());
         request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
     } 
 

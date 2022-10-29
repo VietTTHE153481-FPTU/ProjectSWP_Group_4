@@ -35,8 +35,6 @@
                                 <img src="images/logo-text.jpg" alt="homepage" />
                             </span>
                         </a>
-                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
@@ -64,10 +62,17 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account?key="
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="shop?key="
+                                           aria-expanded="false">
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            <span class="hide-menu">Shop Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item pt-2">

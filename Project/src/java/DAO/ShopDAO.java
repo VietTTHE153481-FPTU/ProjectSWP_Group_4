@@ -21,7 +21,7 @@ public class ShopDAO extends DBContext {
 
     public List<Shop> getAllShop() {
         List<Shop> list = new ArrayList<>();
-        String sql = "SELECT * FROM [dbo].[Shop]";
+        String sql = "SELECT * FROM [Shop]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -29,6 +29,7 @@ public class ShopDAO extends DBContext {
                 Shop sh = new Shop();
                 sh.setID(rs.getInt("ID"));
                 sh.setShopName(rs.getString("ShopName"));
+                list.add(sh);
             }
         } catch (SQLException e) {
         }
@@ -49,5 +50,48 @@ public class ShopDAO extends DBContext {
         } catch (SQLException e) {
         }
         return null;
-    }    
+    }
+
+    public List<Shop> getUserBySearch(String key) {
+        List<Shop> list = new ArrayList<>();
+        String sql = "select * from Shop s JOIN Users u ON s.ID = u.ShopID where s.ShopName like ? or u.fullname like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ps.setString(2, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Shop sh = new Shop();
+                sh.setID(rs.getInt("ID"));
+                sh.setShopName(rs.getString("ShopName"));
+                list.add(sh);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public int getTotalShop(String key) {
+        int a = 0;
+        String sql = "select count(s.ID) from Shop s JOIN Users u ON s.ID = u.ShopID where s.ShopName like ? or u.fullname like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ps.setString(2, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+
+    public static void main(String[] args) {
+        ShopDAO sd = new ShopDAO();
+        List<Shop> shop = sd.getAllShop();
+        for (Shop shop1 : shop) {
+            System.out.println(shop1);
+        }
+    }
 }
