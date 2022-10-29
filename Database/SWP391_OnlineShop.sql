@@ -317,6 +317,26 @@ INSERT INTO dbo.ProductImg VALUES (27,'Bikini-1-piece-cross-shoulder-BK1.png');
 INSERT INTO dbo.ProductImg VALUES (28,'Swimwear-Sexy-purple-blue-bikini_2392.png');
 INSERT INTO dbo.ProductImg VALUES (29,'Korean-Croptop-bikini.png');
 INSERT INTO dbo.ProductImg VALUES (30,'dosiin-karihada-oops-i-did-it-again-115992115992.jpg');
+INSERT INTO dbo.ProductImg VALUES (31,NULL);
+INSERT INTO dbo.ProductImg VALUES (32,NULL);
+INSERT INTO dbo.ProductImg VALUES (33,NULL);
+INSERT INTO dbo.ProductImg VALUES (34,NULL);
+INSERT INTO dbo.ProductImg VALUES (35,NULL);
+INSERT INTO dbo.ProductImg VALUES (36,NULL);
+INSERT INTO dbo.ProductImg VALUES (37,NULL);
+INSERT INTO dbo.ProductImg VALUES (38,NULL);
+INSERT INTO dbo.ProductImg VALUES (39,NULL);
+INSERT INTO dbo.ProductImg VALUES (40,NULL);
+INSERT INTO dbo.ProductImg VALUES (41,NULL);
+INSERT INTO dbo.ProductImg VALUES (42,NULL);
+INSERT INTO dbo.ProductImg VALUES (43,NULL);
+INSERT INTO dbo.ProductImg VALUES (44,NULL);
+INSERT INTO dbo.ProductImg VALUES (45,NULL);
+INSERT INTO dbo.ProductImg VALUES (46,NULL);
+INSERT INTO dbo.ProductImg VALUES (47,NULL);
+INSERT INTO dbo.ProductImg VALUES (48,NULL);
+INSERT INTO dbo.ProductImg VALUES (49,NULL);
+INSERT INTO dbo.ProductImg VALUES (50,NULL);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Cart (
 	UserID int,
