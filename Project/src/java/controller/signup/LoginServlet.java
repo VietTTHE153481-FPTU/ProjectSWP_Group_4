@@ -5,6 +5,7 @@
 package controller.signup;
 
 import DAO.AdminDAO;
+import DAO.CartDAO;
 import DAO.RegisterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Cart;
 import model.Users;
 
 /**
@@ -119,6 +121,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("error", "Username or password incorrect!!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
+            CartDAO c = new CartDAO();
+            session.setAttribute("cart", c.getAll(a.getUserID(),(Cart)session.getAttribute("cart")));
             session.setAttribute("account", a);
             response.sendRedirect("home");
         }

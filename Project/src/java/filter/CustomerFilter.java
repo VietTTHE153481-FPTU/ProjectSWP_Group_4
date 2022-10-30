@@ -28,7 +28,7 @@ public class CustomerFilter implements Filter {
     private HttpServletRequest httpRequest;
     
     private static final String[] loginRequiredURLs = {
-            "/userprofile", "/edit_profile", "/update_profile", "/cart", "/ViewCartServlet"
+            "/userprofile", "/edit_profile", "/update_profile", 
     };
  
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

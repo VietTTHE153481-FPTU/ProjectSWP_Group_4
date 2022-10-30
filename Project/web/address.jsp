@@ -52,6 +52,7 @@
                                                 <div class="modal-body">
                                                     <div class="row mt-3">
                                                         <div class="col-md-6">
+                                                            <input type="text" name="id" hidden value="${sessionScope.account.getUserID()}"/>
                                                             <input value="${fullname}" type="text" name="fullname" class="form-control" placeholder="Full name">
                                                         </div>
                                                         <div class="col-md-6">
@@ -76,7 +77,7 @@
                                                 </div>
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-danger" data-dismiss="modal">Add New</button>
+                                                    <input type="submit" class="btn btn-danger" value="Add New"/>
                                                 </div>
                                             </form>
                                         </div> 
