@@ -118,7 +118,7 @@
                                                     <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
                                                     <div class="product_info">
                                                         <h6 class="product_name"><a href="detail?id=${pd.getProductID()}">${pd.getProductName()}</a></h6>
-                                                        <div class="product_price">₫ ${pd.getSellPrice()}</div>
+                                                        <div class="product_price">₫ ${pd.FormatPrice(pd.getSellPrice())}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,7 +167,7 @@
                                         <div class="timer_unit">Sec</div>
                                     </li>
                                 </ul>
-                                <div class="red_button deal_ofthe_week_button"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">shop now</a></div>
+                                <div class="red_button deal_ofthe_week_button"><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${2}&sortMode=${2}">shop now</a></div>
                             </div>
                         </div>
                     </div>
