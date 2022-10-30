@@ -59,14 +59,11 @@ public class UpdateBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO bd = new BlogDAO();
 
         int id = Integer.parseInt(request.getParameter("BlogId"));
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-
+      
+        BlogDAO bd = new BlogDAO();
         Blog blogs = bd.getBlogs(id);
-        bd.updateBlog(id, title, content);
 
         request.setAttribute("blog", blogs);
         request.getRequestDispatcher("updateblog.jsp").forward(request, response);
@@ -83,6 +80,15 @@ public class UpdateBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("BlogId"));
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+       
+        BlogDAO bd = new BlogDAO();
+        bd.updateBlog(id, title, content);
+        Blog blogs = bd.getBlogs(id);
+
+        request.setAttribute("blog", blogs);
         request.getRequestDispatcher("updateblog.jsp").forward(request, response);
     }
 

@@ -194,16 +194,16 @@ public class BlogDAO extends DBContext {
     public void updateBlog(int id, String title, String content) {
         String sql = "UPDATE [Blog] SET [BlogTitle] = ? ,[BlogContent] = ? WHERE ID = ?";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, title);
-            ps.setString(2, content);
-            ps.setInt(3, id);
-
-            ps.executeUpdate(sql);
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
         } catch (SQLException e) {
+            System.out.println("error" + e);
         }
     }
-
+    
     public int getAccountBlog(int id) {
         int a = 0;
         String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
@@ -222,10 +222,8 @@ public class BlogDAO extends DBContext {
     public static void main(String[] args) {
         BlogDAO b = new BlogDAO();
         List<Blog> bl = b.getAllBlogs();
-        List<Blog> bd = b.getBlogBySearch("ao");
-        for (Blog be : bd) {
-            System.out.println(be);
-        }
+        b.updateBlog(1,"acbcc" ,"ccacacac" );
+
 //        for (Blog blog : bl) {
 //            System.out.println(bl);
 //        }
