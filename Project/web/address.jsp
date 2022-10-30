@@ -79,13 +79,13 @@
                                                     <button type="submit" class="btn btn-danger" data-dismiss="modal">Add New</button>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 border-right">
-                            <form action="address" method="get">
+<!--                            <form action="address" method="get">-->
                                 <c:forEach items="${address}" var="ad">
                                     <div class="row card-body" style="border-top: 1px dotted #cccccc">
                                         <div class="col-sm-10" style="border-right: 1px dotted #cccccc">
@@ -105,7 +105,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-                            </form>
+<!--                            </form>-->
                         </div>
                     </div>
                 </div>

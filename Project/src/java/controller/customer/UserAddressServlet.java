@@ -96,11 +96,8 @@ public class UserAddressServlet extends HttpServlet {
         AdminDAO ad = new AdminDAO();
         Users u = ad.getUserByID(id);
         uad.addAddress(u.getUserID(), fullname, phone, inputCity, note);
-        
-        request.setAttribute("fullname", fullname);
-        request.setAttribute("phone", phone);
-        request.setAttribute("inputCity", inputCity);
-        request.setAttribute("note", note);
+        List<UserAddress> list = uad.getUserAddress(u.getUserID());
+        request.setAttribute("address", list);
         response.sendRedirect("address");
     }
 
