@@ -626,3 +626,22 @@ CREATE TABLE Delivery(
 	FOREIGN KEY (UserID) REFERENCES dbo.Users(UserID),
 );
 go
+create table chat_room(
+	[room_id] int IDENTITY(1,1) primary key,
+	[is_Private] bit,
+	[name] nvarchar(200)
+);
+go
+create table [messsages](
+	[message_id] int IDENTITY(1,1) primary key,
+	[room_id] int foreign key references chat_room(room_id),
+	[UserID] int foreign key references Users(UserID), 
+	[Message] nvarchar(1000)
+);
+go
+create table [member](
+	[member_id] int IDENTITY(1,1) primary key,
+	[room_id] int foreign key references chat_room(room_id),
+	[UserID] int foreign key references Users(UserID)
+);
+go

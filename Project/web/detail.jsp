@@ -185,7 +185,6 @@
                 var numO = document.getElementById('quantity_value').innerHTML;
                 //href="cart?id=${detail.getProductID()}&numO=(int)document.getElementById('quantity_value').innerHTML"
                 window.location.href = "cart?id=${detail.getProductID()}&numO=" + numO;
-                window.alert(numO);
             }
         </script>
         <script src="js/jquery-3.2.1.min.js"></script>
