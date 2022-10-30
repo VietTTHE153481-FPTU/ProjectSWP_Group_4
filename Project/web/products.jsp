@@ -123,9 +123,9 @@
                                                                     </c:if>
                                                                     <div class="product_info">
                                                                         <h6 class="product_name">${pd.getProductName()}</h6>
-                                                                        <div class="product_price">₫ ${pd.getSellPrice()}
+                                                                        <div class="product_price">₫ ${pd.FormatPrice(pd.getSellPrice())}
                                                                             <c:if test="${pd.getSalePercent()>0}">
-                                                                                <span>₫ ${pd.getOriginalPrice()}</span>
+                                                                                <span>₫ ${pd.FormatPrice(pd.getOriginalPrice())}</span>
                                                                             </c:if>
                                                                         </div>
                                                                     </div>

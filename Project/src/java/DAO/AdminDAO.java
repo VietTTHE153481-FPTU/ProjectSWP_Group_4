@@ -194,7 +194,7 @@ public class AdminDAO extends DBContext {
 
     public static void main(String[] args) {
         AdminDAO ad = new AdminDAO();
-        Users ul = ad.getUserByID(1);
+        Users ul = ad.getUserByID(6);
         List<Users> us = ad.getUserBySearch("anh");
         System.out.println(ul);
 

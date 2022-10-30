@@ -36,7 +36,8 @@
                                 <img src="resources/img/shopping.png" class="rounded" width="350" height="350">
                                 <p class="mb-5">Your shopping cart is empty</p>
                                 <div class="red_button deal_ofthe_week_button" style="padding-left: 5px; padding-right: 5px">
-                                    <a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">go shopping now !!</a>
+                                    <a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">go shopping now !!</a>
+                                    
                                 </div>
                             </div>
                         </c:if>
@@ -66,7 +67,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td data-th="Price">${i.item_product.sellPrice} ₫</td>
+                                                <td data-th="Price">${i.item_product.FormatPrice(i.item_product.sellPrice)} ₫</td>
                                                 <td data-th="Quantity">${i.numO}</td>
                                                 <td class="actions" data-th="">
                                                     <div class="text-right">
@@ -82,7 +83,7 @@
                                     </table>
                                     <div class="float-right text-right">
                                         <h4>Total Amount:</h4>&nbsp;
-                                        <h4 style="color: #ff3333">${sessionScope.cart.totalmoney()} ₫</h4>
+                                        <h4 style="color: #ff3333">${sessionScope.cart.FormatPrice(sessionScope.cart.totalmoney())} ₫</h4>
                                     </div>
                                 </div>
                             </div>

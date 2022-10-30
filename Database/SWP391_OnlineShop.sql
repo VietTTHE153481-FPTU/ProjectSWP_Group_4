@@ -147,15 +147,17 @@ INSERT INTO Ship VALUES (N'Yên Bái', 30000);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE UserAddress (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	UserID int,
 	ShipName nvarchar(500),
-	NoteDetail nvarchar(1000),
-	ShipCityID int,
 	PhoneNum nvarchar(20),
+	ShipCityID int,
+	NoteDetail nvarchar(1000),
+	constraint UserID FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint ship_city_in_ship_address FOREIGN KEY(ShipCityID) REFERENCES Ship(id)
 ) ON [PRIMARY]
 GO
-INSERT INTO dbo.[UserAddress] ([ShipName], [NoteDetail], [ShipCityID], [PhoneNum]) values (N'Trần Công Minh', N'Đại Học FPT', 24,'0147258369');
-INSERT INTO dbo.[UserAddress] ([ShipName], [NoteDetail], [ShipCityID], [PhoneNum]) values (N'Trần Trung Việt', N'Đại Học FPT', 24, '0968819830');
+INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (4, N'Trần Công Minh', '0147258369', 24, N'Đại Học FPT');
+INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (6, N'Trần Trung Việt', '0968819830', 24, N'Đại Học FPT');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Category (
 	CategoryID int PRIMARY KEY identity(1,1),

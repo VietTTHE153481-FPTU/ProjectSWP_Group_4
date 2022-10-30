@@ -218,16 +218,4 @@ public class BlogDAO extends DBContext {
         }
         return a;
     }
-
-    public static void main(String[] args) {
-        BlogDAO b = new BlogDAO();
-        List<Blog> bl = b.getAllBlogs();
-        b.updateBlog(1,"acbcc" ,"ccacacac" );
-
-//        for (Blog blog : bl) {
-//            System.out.println(bl);
-//        }
-//        ListBlogDetail bd = b.getBlogDetailById(1);
-//        System.out.println(bd);
-    }
 }
