@@ -11,20 +11,22 @@ package model;
 public class UserAddress {
 
     private int ID;
+    private int UserID;
     private String ShipName;
-    private String NoteDetail;
+    private String PhoneNum;
     private int ShipCityID;
-    private String PhoneNume;
+    private String NoteDetail;
 
     public UserAddress() {
     }
 
-    public UserAddress(int ID, String ShipName, String NoteDetail, int ShipCityID, String PhoneNume) {
+    public UserAddress(int ID, int UserID, String ShipName, String PhoneNum, int ShipCityID, String NoteDetail) {
         this.ID = ID;
+        this.UserID = UserID;
         this.ShipName = ShipName;
-        this.NoteDetail = NoteDetail;
+        this.PhoneNum = PhoneNum;
         this.ShipCityID = ShipCityID;
-        this.PhoneNume = PhoneNume;
+        this.NoteDetail = NoteDetail;
     }
 
     public int getID() {
@@ -35,6 +37,14 @@ public class UserAddress {
         this.ID = ID;
     }
 
+    public int getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(int UserID) {
+        this.UserID = UserID;
+    }
+
     public String getShipName() {
         return ShipName;
     }
@@ -43,12 +53,12 @@ public class UserAddress {
         this.ShipName = ShipName;
     }
 
-    public String getNoteDetail() {
-        return NoteDetail;
+    public String getPhoneNum() {
+        return PhoneNum;
     }
 
-    public void setNoteDetail(String NoteDetail) {
-        this.NoteDetail = NoteDetail;
+    public void setPhoneNum(String PhoneNum) {
+        this.PhoneNum = PhoneNum;
     }
 
     public int getShipCityID() {
@@ -59,11 +69,11 @@ public class UserAddress {
         this.ShipCityID = ShipCityID;
     }
 
-    public String getPhoneNume() {
-        return PhoneNume;
+    public String getNoteDetail() {
+        return NoteDetail;
     }
 
-    public void setPhoneNume(String PhoneNume) {
-        this.PhoneNume = PhoneNume;
+    public void setNoteDetail(String NoteDetail) {
+        this.NoteDetail = NoteDetail;
     }
 }

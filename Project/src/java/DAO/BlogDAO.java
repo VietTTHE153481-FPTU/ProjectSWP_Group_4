@@ -221,10 +221,9 @@ public class BlogDAO extends DBContext {
 
     public static void main(String[] args) {
         BlogDAO b = new BlogDAO();
-        List<Blog> bl = b.getAllBlogs();
-        List<Blog> bd = b.getBlogBySearch("ao");
-        for (Blog be : bd) {
-            System.out.println(be);
+        List<BlogDetail> bd = b.getBlogDetailById(2);
+        for (BlogDetail blogDetail : bd) {
+            System.out.println(blogDetail);
         }
 //        for (Blog blog : bl) {
 //            System.out.println(bl);
