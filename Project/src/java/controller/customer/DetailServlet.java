@@ -4,12 +4,11 @@
  */
 package controller.customer;
 
-import DAO.CategoryDAO;
 import DAO.ProductDAO;
+import DAO.ShopDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Products;
+import model.Shop;
 
 /**
  *
@@ -26,7 +26,8 @@ import model.Products;
 public class DetailServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -62,51 +63,14 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        ProductDAO pd = new ProductDAO();
+        Products p = pd.getProductById(id);
         
-        String id_raw = request.getParameter("id");
-        int id;
-        try {
-            /*
-            CategoryDAO cd = new CategoryDAO();
-            Cookie arr[] = request.getCookies();
-            List<Products> list = new ArrayList<>();
-            for (Cookie o : arr) {
-                if (o.getName().equals("id")) {
-                    String txt[] = o.getValue().split(",");
-                    for (String s : txt) {
-                        list.add(cd.getProducts(s));
-                    }
-                }
-            }
-            for (int i = 0; i < list.size(); i++) {
-                int count = 1;
-                for (int j = i + 1; j < list.size(); j++) {
-                    if (list.get(i).getProductID() == list.get(j).getProductID()) {
-                        count++;
-                        list.remove(j);
-                        j--;
-                        list.get(i).setQuantity(count);
-                    }
-                }
-            }
-            for (Cookie o : arr) {
-                o.setMaxAge(0);
-                response.addCookie(o);
-            }
-            int n = list.size();
-            request.setAttribute("size", n);
-            id = Integer.parseInt(id_raw);
-            Products p = cd.getProductsById(id);
-            request.setAttribute("detail", p);
-            */
-            id = Integer.parseInt(id_raw);
-            ProductDAO pd= new ProductDAO();
-            Products p= pd.getProductById(id);
-            request.setAttribute("detail", p);
-            request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-        }
-        
+        request.setAttribute("detail", p);
+        request.getRequestDispatcher("detail.jsp").forward(request, response);
+
     }
 
     /**

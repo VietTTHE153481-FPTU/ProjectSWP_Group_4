@@ -21,7 +21,8 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getHotBlogs() {
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT TOP 3 * FROM [dbo].[Blog] \n"
+        String sql = "SELECT TOP 3 bg.*, u.fullname FROM Blog bg JOIN Users u\n"
+                + "ON bg.AuthorID = u.UserID\n"
                 + "ORDER BY [Day] DESC, [Month] DESC, [Year] DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -29,13 +30,13 @@ public class BlogDAO extends DBContext {
             while (rs.next()) {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
-                bg.setAuthor(rs.getString("Author"));
                 bg.setDay(rs.getInt("Day"));
                 bg.setMonth(rs.getString("Month"));
                 bg.setYear(rs.getInt("Year"));
                 bg.setTitle(rs.getString("BlogTitle"));
                 bg.setContent(rs.getString("BlogContent"));
                 bg.setImageLink(rs.getString("imageLink"));
+                bg.setAuthorId(rs.getInt("AuthorID"));
                 list.add(bg);
             }
         } catch (SQLException e) {
@@ -46,28 +47,20 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getAllBlogs() {
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT [ID]\n"
-                + "      ,[Author]\n"
-                + "      ,[Day]\n"
-                + "      ,[Month]\n"
-                + "      ,[Year]\n"
-                + "      ,[BlogTitle]\n"
-                + "      ,[BlogContent]\n"
-                + "      ,[imageLink]\n"
-                + "  FROM [dbo].[Blog]";
+        String sql = "SELECT * FROM [dbo].[Blog]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog bg = new Blog();
                 bg.setId(rs.getInt("ID"));
-                bg.setAuthor(rs.getString("Author"));
                 bg.setDay(rs.getInt("Day"));
                 bg.setMonth(rs.getString("Month"));
                 bg.setYear(rs.getInt("Year"));
                 bg.setTitle(rs.getString("BlogTitle"));
                 bg.setContent(rs.getString("BlogContent"));
                 bg.setImageLink(rs.getString("imageLink"));
+                bg.setAuthorId(rs.getInt("AuthorID"));
                 list.add(bg);
             }
         } catch (SQLException e) {
@@ -84,13 +77,36 @@ public class BlogDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return new Blog(rs.getInt("ID"),
-                        rs.getString("Author"),
                         rs.getInt("Day"),
                         rs.getString("Month"),
                         rs.getInt("Year"),
                         rs.getString("BlogTitle"),
                         rs.getString("BlogContent"),
-                        rs.getString("imageLink")
+                        rs.getString("imageLink"),
+                        rs.getInt("AuthorID")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Blog getBlogByAuthor(int id) {
+        String sql = "SELECT * FROM [dbo].[Blog] WHERE AuthorID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Blog(rs.getInt("ID"),
+                        rs.getInt("Day"),
+                        rs.getString("Month"),
+                        rs.getInt("Year"),
+                        rs.getString("BlogTitle"),
+                        rs.getString("BlogContent"),
+                        rs.getString("imageLink"),
+                        rs.getInt("AuthorID")
                 );
             }
         } catch (SQLException e) {
@@ -149,7 +165,7 @@ public class BlogDAO extends DBContext {
 
     public List<Blog> getBlogBySearch(String key) {
         List<Blog> list = new ArrayList<>();
-        String sql = "select * from Blog b where b.BlogTitle like ? or b.BlogContent like ? or b.Author like ?";
+        String sql = "select * from Blog b JOIN Users u ON b.AuthorID = u.UserID where b.BlogTitle like ? or b.BlogContent like ? or u.fullname like ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + key + "%");
@@ -159,13 +175,13 @@ public class BlogDAO extends DBContext {
             while (rs.next()) {
                 Blog bd = Blog.builder()
                         .id(rs.getInt(1)).
-                        author(rs.getString(2)).
-                        day(rs.getInt(3)).
-                        month(rs.getString(4)).
-                        year(rs.getInt(5)).
-                        title(rs.getString(6)).
-                        content(rs.getString(7)).
-                        imageLink(rs.getString(8))
+                        day(rs.getInt(2)).
+                        month(rs.getString(3)).
+                        year(rs.getInt(4)).
+                        title(rs.getString(5)).
+                        content(rs.getString(6)).
+                        imageLink(rs.getString(7)).
+                        authorId(rs.getInt(8))
                         .build();
                 list.add(bd);
             }
@@ -174,18 +190,47 @@ public class BlogDAO extends DBContext {
         }
         return list;
     }
-    
-    public static void main(String[] args) {
-        BlogDAO b = new BlogDAO();
-        List<Blog> bl = b.getAllBlogs();
-        List<Blog> bd = b.getBlogBySearch("ao");
-        for (Blog be : bd) {
-            System.out.println(be);
+
+    public void updateBlog(int id, String title, String content) {
+        String sql = "UPDATE [Blog] SET [BlogTitle] = ? ,[BlogContent] = ? WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
         }
-//        for (Blog blog : bl) {
-//            System.out.println(bl);
-//        }
-//        ListBlogDetail bd = b.getBlogDetailById(1);
-//        System.out.println(bd);
+    }
+    
+    public int getAccountBlog(int id) {
+        int a = 0;
+        String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+    
+    public int totalBlogDetail(int id) {
+        int a = 0;
+        String sql = "SELECT count(BlogDetailID) FROM [dbo].[BlogDetail] WHERE BlogID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
     }
 }

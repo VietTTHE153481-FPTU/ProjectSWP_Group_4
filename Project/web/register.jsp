@@ -59,27 +59,14 @@
                         <input value="${phone}" type="text" name="phone" class="form-control" placeholder="Phone">
                     </div>
                     <center>
-                        <c:if test="${gender==0}" >
-                            <div class="form-check form-check-inline mb-0">
-                                <input class="form-check-input" type="radio" name="sex" checked value="0" />
-                                <label class="form-check-label">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline mb-0 me-4">
-                                <input class="form-check-input" type="radio" name="sex" value="1" />
-                                <label class="form-check-label">Female</label>
-                            </div>
-                        </c:if>
-
-                        <c:if test="${gender==1}" >
-                            <div class="form-check form-check-inline mb-0">
-                                <input class="form-check-input" type="radio" name="sex" value="0" />
-                                <label class="form-check-label">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline mb-0 me-4">
-                                <input class="form-check-input" type="radio" name="sex" checked value="1" />
-                                <label class="form-check-label">Female</label>
-                            </div>
-                        </c:if>
+                        <div class="form-check form-check-inline mb-0">
+                            <input class="form-check-input" type="radio" name="sex" checked value="0" />
+                            <label class="form-check-label">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline mb-0 me-4">
+                            <input class="form-check-input" type="radio" name="sex" value="1" />
+                            <label class="form-check-label">Female</label>
+                        </div>
                     </center>
                     <br/>
                     <div class="form-group input-group">

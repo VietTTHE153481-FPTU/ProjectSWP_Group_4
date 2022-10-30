@@ -1,6 +1,6 @@
 <%-- 
     Document   : dashboard
-    Created on : Jun 29, 2022, 11:21:24 PM
+    Created on : Oct 26, 2022, 1:52:20 AM
     Author     : trung
 --%>
 
@@ -12,12 +12,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Levents Dashboard</title>
+        <title>Dashboard</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link href="plugins/bower_components/chartist/chartist.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="plugins/bower_components/chartist/chartist.min.css">
         <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/chartist-plugin-tooltip.css">
         <link href="styles/css/style.min.css" rel="stylesheet">
     </head>
@@ -35,8 +35,6 @@
                                 <img src="images/logo-text.jpg" alt="homepage" />
                             </span>
                         </a>
-                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
@@ -64,10 +62,24 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account?key="
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="shop?key="
+                                           aria-expanded="false">
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            <span class="hide-menu">Shop Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item pt-2">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="service"
+                                           aria-expanded="false">
+                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                            <span class="hide-menu">Service Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
@@ -92,6 +104,48 @@
                     </div>
                 </div>
                 <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Customer</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash">
+                                            <canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-success">${customercount} <i class="fa fa-user"></i></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Seller</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash3"><canvas width="67" height="30"
+                                                                         style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-info">${sellercount} <i class="fa fa-user"></i></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Products</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash2"><canvas width="67" height="30"
+                                                                         style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-purple">${productcount} <i class="fa fa-product-hunt"></i></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="white-box">

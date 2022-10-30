@@ -12,8 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 import model.Users;
 
 /**
@@ -24,7 +22,8 @@ import model.Users;
 public class ProfileServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -60,15 +59,12 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         AdminDAO ad = new AdminDAO();
-       // HttpSession session = request.getSession();
+        Users u = ad.getUserByID(id);
         
-       String username = request.getParameter("username");
-        Users a = ad.getAccount(username);
-//        Users b = session.getAttribute("account");
-        request.setAttribute("account", a);
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
-
+        request.setAttribute("profile", u);
+        request.getRequestDispatcher("admin/profile.jsp").forward(request, response);
     }
 
     /**
@@ -82,7 +78,7 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("admin/profile.jsp").forward(request, response);
     }
 
     /**

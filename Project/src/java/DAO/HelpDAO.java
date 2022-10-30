@@ -106,32 +106,6 @@ public class HelpDAO extends DBContext {
         return list;
     }
 
-    public List<HelpContent> getHelpContentBySearch(int seid, int stid, String key) {
-        List<HelpContent> list = new ArrayList<>();
-        String sql = "select hc.* from HelpContent hc, HelpTitle ht where hc.TitleID = ht.TitleID and hc.Content like ? ";
-        if (seid != 0) {
-            sql += " AND ht.CategoryID= " + seid;
-        }
-        if (stid != 0) {
-            sql += " AND ht.TitleID= " + stid;
-        }
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, "%" + key + "%");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                HelpContent hc = HelpContent.builder().
-                        ContentID(rs.getInt(1)).
-                        Content(rs.getString(2)).
-                        TitlteID(rs.getInt(3)).build();
-                list.add(hc);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
     public List<HelpCenter> getHelpCenterBySearch(String key) {
         List<HelpCenter> list = new ArrayList<>();
         String sql = "select hc.* from HelpCategory hc where hc.CategoryName like ?";
@@ -153,12 +127,74 @@ public class HelpDAO extends DBContext {
         return list;
     }
 
+    public List<HelpContent> getHelpContentBySearch(String key) {
+        List<HelpContent> list = new ArrayList<>();
+        String sql = "select h.* from HelpContent h where h.Content like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HelpContent hc = HelpContent.builder().
+                        ContentID(rs.getInt(1)).
+                        Content(rs.getString(2)).
+                        TitlteID(rs.getInt(3)).
+                        build();
+                list.add(hc);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<HelpContent> getAllHelpContent() {
+        List<HelpContent> list = new ArrayList<>();
+        String sql = "select h.* from HelpContent h";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HelpContent hc = HelpContent.builder().
+                        ContentID(rs.getInt(1)).
+                        Content(rs.getString(2)).
+                        TitlteID(rs.getInt(3)).
+                        build();
+                list.add(hc);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public int countAllHelpContentBySearch(String key){
+        int a = 0;
+        String sql = "select count(h.ContentID) from HelpContent h where h.Content like ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                a = rs.getInt(1);
+            }
+            
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+
+
     public static void main(String[] args) {
         HelpDAO hd = new HelpDAO();
-        List<HelpContent> list = hd.getHelpContentBySearch(1, 2, "đăng");
+        List<HelpContent> list = hd.getHelpContentBySearch("đăng");
+        HelpTitle ht = hd.getHelpTitle(1);
+//        System.out.println(ht);
         //List<HelpCenter> list = hd.getHelpCenterBySearch("thanh");
-        for (HelpContent hc : list) {
-            System.out.println(hc);
-        }
+//        for (HelpContent hc : list) {
+//            System.out.println(hc);
+//        }
+         int a = hd.countAllHelpContentBySearch("");
+         System.out.println(a);
     }
 }

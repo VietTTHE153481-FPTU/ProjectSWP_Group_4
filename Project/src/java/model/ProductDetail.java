@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ProductDetail {
     double sellPrice;
     double salePercent;
     int subCateID;
-    int sellerID;
+    int ShopID;
     int amount;
     int statusID;
     int brandID;
@@ -28,7 +29,7 @@ public class ProductDetail {
     public ProductDetail() {
     }
 
-    public ProductDetail(int productID, String productName, String desc, double originPrice, double sellPrice, double salePercent, int subCateID, int sellerID, int amount, int statusID, int brandID, List<String> images) {
+    public ProductDetail(int productID, String productName, String desc, double originPrice, double sellPrice, double salePercent, int subCateID, int ShopID, int amount, int statusID, int brandID, List<String> images) {
         this.productID = productID;
         this.productName = productName;
         this.desc = desc;
@@ -36,7 +37,7 @@ public class ProductDetail {
         this.sellPrice = sellPrice;
         this.salePercent = salePercent;
         this.subCateID = subCateID;
-        this.sellerID = sellerID;
+        this.ShopID = ShopID;
         this.amount = amount;
         this.statusID = statusID;
         this.brandID = brandID;
@@ -99,12 +100,12 @@ public class ProductDetail {
         this.subCateID = subCateID;
     }
 
-    public int getSellerID() {
-        return sellerID;
+    public int getShopID() {
+        return ShopID;
     }
 
-    public void setSellerID(int sellerID) {
-        this.sellerID = sellerID;
+    public void setShopID(int ShopID) {
+        this.ShopID = ShopID;
     }
 
     public int getAmount() {
@@ -139,4 +140,9 @@ public class ProductDetail {
         this.images = images;
     }
 
+    public String FormatPrice(double p){
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        String format =formatter.format(p).toString();
+        return format;
+    }
 }

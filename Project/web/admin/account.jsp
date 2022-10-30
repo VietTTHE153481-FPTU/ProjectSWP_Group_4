@@ -1,9 +1,3 @@
-<%-- 
-    Document   : account
-    Created on : Jul 19, 2022, 12:32:38 PM
-    Author     : trung
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,6 +30,11 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <form action="account" class="app-search d-none d-md-block me-3">
+                                <li class="in">
+                                    <input value="${search}" type="text" name="key" placeholder="Search..." class="form-control mt-0">
+                                </li>
+                            </form>
                             <li>
                                 <a class="profile-pic" href="#">
                                     <img src="resources/img/logo_admin.jpg" alt="user-img" class="img-circle" width="36">
@@ -60,10 +59,24 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account?key="
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="shop?key="
+                                           aria-expanded="false">
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            <span class="hide-menu">Shop Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item pt-2">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="service"
+                                           aria-expanded="false">
+                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                            <span class="hide-menu">Service Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
@@ -91,30 +104,44 @@
                     <div class="row">
                         <div class="white-box">
                             <div id="ct-visits" style="height: auto;">
-                                <table class="table table-hover">
-                                    <tr>
-                                        <th>USERNAME</th>
-                                        <th>FULL NAME</th>
-                                        <th>NUMBER PHONE</th>
-                                        <th>GENDER</th>
-                                        <th>EMAIL</th>
-                                        <th>PERMISSION</th>
-                                        <th>DETAIL</th>
-                                    </tr>
-                                    <c:forEach items="${listac}" var="ac">
+                                <div class="box-title analytics-info">
+                                    <h3 class="box-title">Total Account: ${num} <i class="fa fa-user" style="color: #ff0000"></i></h3>
+                                </div>
+                                <form action="account" method="get">
+                                    <table class="table table-hover">
                                         <tr>
-                                            <td>${ac.username}</td>
-                                            <td>${ac.fullname}</td>
-                                            <td>${ac.phone}</td>
-                                            <td>${ac.gender?'Female':'Male'}</td>
-                                            <td>${ac.email}</td>
-                                            <td>${ac.roleId}</td>
-                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a href="profile?userID=${ac.getUsername()}"><i class="fa fa-user-md"></i></a>
-                                            </td>
+                                            <th>USERNAME</th>
+                                            <th>FULL NAME</th>
+                                            <th>NUMBER PHONE</th>
+                                            <th>GENDER</th>
+                                            <th>EMAIL</th>
+                                            <th>ROLE</th>
+                                            <th>ACTION</th>
                                         </tr>
-                                    </c:forEach>
-                                </table>
+                                        <c:forEach items="${listac}" var="ac">
+                                            <tr>
+                                                <td>${ac.username}</td>
+                                                <td>${ac.fullname}</td>
+                                                <td>${ac.phone}</td>
+                                                <td>${ac.gender?'Female':'Male'}
+                                                    <c:if test="${ac.gender == false}">
+                                                        &nbsp;<i class="fa fa-mars" style="color: #6699ff"></i>
+                                                    </c:if>
+                                                    <c:if test="${ac.gender == true}">
+                                                        &nbsp;<i class="fa fa-venus" style="color: #ff99ff"></i>
+                                                    </c:if>
+                                                </td>
+                                                <td>${ac.email}</td>
+                                                <td>${ac.getRoleName()}</td>
+                                                <td>
+                                                    <a href="profile?id=${ac.userID}"><i class="fa fa-user"></i></a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a href="#"><i class="fa fa-close"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>

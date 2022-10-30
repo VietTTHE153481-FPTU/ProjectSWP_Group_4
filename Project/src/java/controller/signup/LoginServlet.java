@@ -89,22 +89,22 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-        if (ad.getAccount(u).getRoleId() != 1) {
+        if (ad.getAccount(u).getRoleId() != 1 && ad.getAccount(u).getUserID() != 4
+                && ad.getAccount(u).getUserID() != 5 && ad.getAccount(u).getUserID() != 6
+                && ad.getAccount(u).getUserID() != 7) {
             p = rd.bytesToHex(request.getParameter("pass"));
         } else {
             p = request.getParameter("pass");
         }
-        //tạo 3 cookie: username, password, remember
+
         Cookie cu = new Cookie("cuser", u);
         Cookie cp = new Cookie("cpass", p);
         Cookie cr = new Cookie("crem", r);
         if (r != null) {
-            //có chọn, muốn lưu lại
-            cu.setMaxAge(60 * 60 * 24 * 7); // 7 ngày
+            cu.setMaxAge(60 * 60 * 24 * 7);
             cp.setMaxAge(60 * 60 * 24 * 7);
             cr.setMaxAge(60 * 60 * 24 * 7);
         } else {
-            //Kh muốn lưu lại, xóa đi
             cu.setMaxAge(0);
             cp.setMaxAge(0);
             cr.setMaxAge(0);
@@ -116,12 +116,9 @@ public class LoginServlet extends HttpServlet {
         Users a = ad.check(u, p);
         HttpSession session = request.getSession();
         if (a == null) {
-            //Chưa có tài khoản
             request.setAttribute("error", "Username or password incorrect!!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            //Tìm thấy tài khoản
-            //Tạo session
             session.setAttribute("account", a);
             response.sendRedirect("home");
         }

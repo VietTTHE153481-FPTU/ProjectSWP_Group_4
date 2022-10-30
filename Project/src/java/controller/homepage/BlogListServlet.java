@@ -4,6 +4,7 @@
  */
 package controller.homepage;
 
+import DAO.AccountDAO;
 import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.Users;
 
 /**
  *
@@ -70,6 +72,11 @@ public class BlogListServlet extends HttpServlet {
         } else {
             blogs = bd.getBlogBySearch(key);
         }
+        
+        AccountDAO ad = new AccountDAO();
+        List<Users> users = ad.getAllAccount();
+        
+        request.setAttribute("author", users);
         request.setAttribute("bloglist", blogs);
         request.setAttribute("search", key);
         request.getRequestDispatcher("bloglist.jsp").forward(request, response);

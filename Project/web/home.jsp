@@ -34,13 +34,18 @@
                     <div class="row align-items-center fill_height">
                         <div class="col">
                             <div class="s005">
-                                <form>
+                                <form action="products" method="get">
                                     <fieldset>
                                         <legend>WHAT ARE YOU LOOKING FOR?</legend>
                                         <div class="inner-form">
                                             <div class="input-field">
-                                                <input class="form-control" id="choices-text-preset-values" type="text" placeholder="Type to search..." />
-                                                <button class="btn-search" type="button">
+                                                <input type="hidden" name="page" value="1"/>
+                                                <input class="form-control" id="choices-text-preset-values" name="key" type="search" placeholder="Type to search..." />
+                                                <input type="hidden" name="cid" value="0"/>
+                                                <input type="hidden" name="sid" value="0"/>
+                                                <input type="hidden" name="sortType" value="0"/>
+                                                <input type="hidden" name="sortMode" value="0"/>
+                                                <button class="btn-search" type="submit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24">
                                                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                                     </svg>
@@ -72,12 +77,12 @@
                                             <div class="product-item">
                                                 <div class="product discount">
                                                     <div class="product_image">
-                                                        <a href="products?page=1&cid=${cate.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
+                                                        <a href="products?page=1&key=&cid=${cate.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">
                                                             <img src="resources/img/Categories/${cate.getCategoryImgURL()}" height="200px"/>
                                                         </a>
                                                     </div>
                                                     <div class="product_info">
-                                                        <h6 class="product_name"><a href="products">${cate.getCategoryName()}</a></h6>
+                                                        <h6 class="product_name"><a href="products?page=1&cid=${cate.getCategoryID()}&sid=${0}&sortType=${0}&sortMode=${0}">${cate.getCategoryName()}</a></h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,8 +117,8 @@
                                                     <div class="favorite favorite_left"></div>
                                                     <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
                                                     <div class="product_info">
-                                                        <h6 class="product_name"><a href="products">${pd.getProductName()}</a></h6>
-                                                        <div class="product_price">₫ ${pd.getSellPrice()}</div>
+                                                        <h6 class="product_name"><a href="detail?id=${pd.getProductID()}">${pd.getProductName()}</a></h6>
+                                                        <div class="product_price">₫ ${pd.FormatPrice(pd.getSellPrice())}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,7 +167,7 @@
                                         <div class="timer_unit">Sec</div>
                                     </li>
                                 </ul>
-                                <div class="red_button deal_ofthe_week_button"><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">shop now</a></div>
+                                <div class="red_button deal_ofthe_week_button"><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${2}&sortMode=${2}">shop now</a></div>
                             </div>
                         </div>
                     </div>
@@ -226,7 +231,11 @@
                                     <div class="blog_background" style="background-image:url(./resources/img/Blog/${bg.getImageLink()})"></div>
                                     <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                                         <h4 class="blog_title">${bg.getTitle()}</h4>
-                                        <span class="blog_meta">by ${bg.getAuthor()} |&nbsp; ${bg.getDay()} ${bg.getMonth()} ${bg.getYear()}</span>
+                                        <c:forEach items="${author}" var="au">
+                                            <c:if test="${au.getUserID() == bg.getAuthorId()}">
+                                                <span class="blog_meta">by ${au.fullname} |&nbsp; ${bg.getDay()} ${bg.getMonth()} ${bg.getYear()}</span>
+                                            </c:if>
+                                        </c:forEach>
                                         <a class="blog_more" href="blogdetail?id=${bg.id}&key=">Read more</a>
                                     </div>
                                 </div>

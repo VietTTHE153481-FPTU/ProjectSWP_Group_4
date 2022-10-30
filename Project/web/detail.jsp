@@ -35,7 +35,7 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li><a href="products?page=1&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
+                                <li><a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
                                 <li class="active"><i class="fa fa-angle-right" aria-hidden="true"></i>${detail.getProductName()}</a></li></li>
                             </ul>
                         </div>
@@ -56,37 +56,48 @@
                     <div class="col-lg-5">
                         <div class="product_details">
                             <div class="product_details_title">
-                                <h2>${detail.getProductName()}</h2>
-                                <dt>Description</dt>
-                                <p>${detail.getDescription()}</p>
+                                <h3>${detail.getProductName()}</h3>
                             </div>
                             <div class="original_price">
                                 <c:if test="${detail.getSalePercent()>0}">
-                                    <span>${detail.getOriginalPrice()}₫ </span>
+                                    <span>${detail.FormatPrice(detail.getOriginalPrice())}₫ </span>
                                 </c:if>
                             </div>
-                            <div class="product_price">${detail.getSellPrice()}₫</div>&nbsp;&nbsp;&nbsp;
+                            <div class="product_price">${detail.FormatPrice(detail.getSellPrice())}₫</div>&nbsp;&nbsp;&nbsp;
                             <c:if test="${detail.getSalePercent()>0}">
-                                <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
+                                <span style="text-decoration: none; color: red;">-${detail.FormatPrice(detail.getSalePercent())}%</span>
                             </c:if>
-
-                                <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                                    <span>Quantity:</span>
-                                    <div class="quantity_selector">
-                                        <span class="minus"><i class="fa fa-minus" aria-hidden="true"><a href="sub?id=${detail.getProductID()}"></a></i></span>
-                                        <span id="quantity_value">1</span>
-                                        <input hidden id="numO" name="numO" type="number" value="1" />
-                                        <input hidden id="ProID" name="id" type="text" value="1" />
-                                        <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
-                                    </div>
-                                    <a onclick="func();"><div id="button1" class="red_button add_to_cart_button" >add to cart</div></a>
+                            <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                                <span>Delivery method:</span>
+                                <div style="padding-left: 25px">
+                                    <i class="fa fa-truck"></i>&nbsp;
+                                    <span style="padding-right: 50px">Express Delivery</span>
                                 </div>
+                            </div>
+                            <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                                <span>Quantity:</span>
+                                <div class="quantity_selector">
+                                    <span class="minus"><i class="fa fa-minus" aria-hidden="true"><a href="sub?id=${detail.getProductID()}"></a></i></span>
+                                    <span id="quantity_value">1</span>
+                                    <input hidden id="numO" name="numO" type="number" value="1" />
+                                    <input hidden id="ProID" name="id" type="text" value="1" />
+                                    <span class="plus"><i class="fa fa-plus" aria-hidden="true"><a href="cart?id=${detail.getProductID()}"></a></i></span>
+                                </div>
+                                <a onclick="func();"><button id="button1" class="red_button add_to_cart_button" >ADD TO CART</button></a>
+                            </div>
                         </div>
                     </div>       
                 </div>
             </div>
-            <div class="tabs_section_container">
+            <div class="tabs_section_container" style="padding-top: 10px">
                 <div class="container">
+                    <div class="row card-body">
+                        <div class="col-sm-4" style="border-right: 1px dotted #cccccc">
+                            <h4 class="card-title">${detail.getShopName()} Shop</h4>
+                            <a href="#" class="card-link">Chat with Seller</a>
+                            <a href="viewshop?id=${detail.getShopID()}&page=1&key=&cid=${0}&sortType=${0}&sortMode=${0}" class="card-link">View Shop</a>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="tabs_container">
@@ -104,6 +115,7 @@
                                     <div class="col-lg-5 desc_col">
                                         <div class="tab_title">
                                             <h4>Description</h4>
+                                            <p>${detail.getDescription()}</p>
                                         </div>
                                     </div>
                                 </div>

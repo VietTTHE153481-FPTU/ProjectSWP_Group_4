@@ -60,9 +60,11 @@
                                                 <p class="stext-117 cl6">${bl.getContent()}</p>
                                                 <div class="flex-w flex-sb-m p-t-18">
                                                     <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-                                                        <h5>
-                                                            <span class="cl4">By |</span> ${bl.getAuthor()}
-                                                        </h5>
+                                                        <c:forEach items="${author}" var="au">
+                                                            <c:if test="${au.getUserID() == bl.getAuthorId()}">
+                                                                <h5><span class="cl4">By |</span> ${au.fullname}</h5>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </span>
                                                     <a href="blogdetail?id=${bl.id}&key=" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                                         Continue Reading
