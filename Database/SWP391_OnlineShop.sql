@@ -147,15 +147,17 @@ INSERT INTO Ship VALUES (N'Yên Bái', 30000);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE UserAddress (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	UserID int,
 	ShipName nvarchar(500),
-	NoteDetail nvarchar(1000),
-	ShipCityID int,
 	PhoneNum nvarchar(20),
+	ShipCityID int,
+	NoteDetail nvarchar(1000),
+	constraint UserID FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint ship_city_in_ship_address FOREIGN KEY(ShipCityID) REFERENCES Ship(id)
 ) ON [PRIMARY]
 GO
-INSERT INTO dbo.[UserAddress] ([ShipName], [NoteDetail], [ShipCityID], [PhoneNum]) values (N'Trần Công Minh', N'Đại Học FPT', 24,'0147258369');
-INSERT INTO dbo.[UserAddress] ([ShipName], [NoteDetail], [ShipCityID], [PhoneNum]) values (N'Trần Trung Việt', N'Đại Học FPT', 24, '0968819830');
+INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (4, N'Trần Công Minh', '0147258369', 24, N'Đại Học FPT');
+INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (6, N'Trần Trung Việt', '0968819830', 24, N'Đại Học FPT');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Category (
 	CategoryID int PRIMARY KEY identity(1,1),
@@ -317,6 +319,26 @@ INSERT INTO dbo.ProductImg VALUES (27,'Bikini-1-piece-cross-shoulder-BK1.png');
 INSERT INTO dbo.ProductImg VALUES (28,'Swimwear-Sexy-purple-blue-bikini_2392.png');
 INSERT INTO dbo.ProductImg VALUES (29,'Korean-Croptop-bikini.png');
 INSERT INTO dbo.ProductImg VALUES (30,'dosiin-karihada-oops-i-did-it-again-115992115992.jpg');
+INSERT INTO dbo.ProductImg VALUES (31,NULL);
+INSERT INTO dbo.ProductImg VALUES (32,NULL);
+INSERT INTO dbo.ProductImg VALUES (33,NULL);
+INSERT INTO dbo.ProductImg VALUES (34,NULL);
+INSERT INTO dbo.ProductImg VALUES (35,NULL);
+INSERT INTO dbo.ProductImg VALUES (36,NULL);
+INSERT INTO dbo.ProductImg VALUES (37,NULL);
+INSERT INTO dbo.ProductImg VALUES (38,NULL);
+INSERT INTO dbo.ProductImg VALUES (39,NULL);
+INSERT INTO dbo.ProductImg VALUES (40,NULL);
+INSERT INTO dbo.ProductImg VALUES (41,NULL);
+INSERT INTO dbo.ProductImg VALUES (42,NULL);
+INSERT INTO dbo.ProductImg VALUES (43,NULL);
+INSERT INTO dbo.ProductImg VALUES (44,NULL);
+INSERT INTO dbo.ProductImg VALUES (45,NULL);
+INSERT INTO dbo.ProductImg VALUES (46,NULL);
+INSERT INTO dbo.ProductImg VALUES (47,NULL);
+INSERT INTO dbo.ProductImg VALUES (48,NULL);
+INSERT INTO dbo.ProductImg VALUES (49,NULL);
+INSERT INTO dbo.ProductImg VALUES (50,NULL);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Cart (
 	UserID int,
@@ -467,9 +489,11 @@ INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, 
 Với áo phông xám, chị em có thể biến tấu linh hoạt trong cách phối đồ, lên đồ ấn tượng mà không lo nhạt nhòa, kém nổi bật.',N'1.jpg', 4)
 INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('15',N'Sep','2022', N'Áo thun oversize chuẩn phong cách, ấn tượng',N'Áo phông oversize đang là một hot item dẫn đầu xu hướng thời trang giới trẻ hiện nay. Ngày càng nhiều các bạn trẻ yêu thích, ưa chuộng và đánh giá cao kiểu áo này. 
 Một item đầy mới mẻ, phá cách và tính ứng dụng thực tiễn cao như áo phông oversize quả thực sẽ thu hút sự quan tâm của rất nhiều bạn trẻ.',N'2.jpg', 4)
-INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('17',N'Sep','2022', N'Blazzer, xu thế thời trang 2022',N'Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.',N'3.jpg', 5)
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('17',N'Sep','2022', N'Blazzer, xu thế thời trang 2022',N'Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ.
+Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng LeventShop khám phá ngay nhé.',N'3.jpg', 5)
 INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('01',N'Sep','2022', N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg', 5)
-INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('24',N'Sep','2022', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng. Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách.',N'5.jpg', 6)
+INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('24',N'Sep','2022', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng.
+Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách.',N'5.jpg', 6)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create Table BlogDetail (
 	BlogDetailID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,

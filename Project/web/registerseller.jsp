@@ -34,7 +34,7 @@
             <div class="card-body mx-auto">
                 <h2 class="card-title mt-3 text-center">Become a seller</h2>
                 <p class="text-center" style="font-size: 22px">Get started with your information</p>
-                <h6 style="color: red">${sessionScope.mess}</h6>
+                <h6 style="color: red">${requestScope.mess}</h6>
                 <form action="registerseller" method="post">                        
                     <div class="form-group input-group">
                         <div class="input-group-prepend">

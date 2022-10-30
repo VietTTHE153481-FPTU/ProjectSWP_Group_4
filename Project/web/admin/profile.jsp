@@ -54,10 +54,17 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account?key="
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="shop?key="
+                                           aria-expanded="false">
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            <span class="hide-menu">Shop Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item pt-2">
@@ -95,50 +102,74 @@
                                 <div class="user-bg">
                                     <div class="overlay-box">
                                         <div class="user-content">
-                                            <a href="javascript:void(0)"><img src="resources/img/logo_admin.jpg"
-                                                                              class="thumb-lg img-circle" alt="img"></a>
-                                            <h4 class="text-white mt-2">${account.fullname}</h4>
-                                            <h5 class="text-white mt-2">${account.email}</h5>
+                                            <img src="resources/img/logo_admin.jpg" class="thumb-lg img-circle" alt="img">
+                                            <h4 class="text-white mt-2">${profile.fullname}</h4>
+                                            <h5 class="text-white mt-2">${profile.email}</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <%--<c:set var="p" value="${requestScope.ac}"/>--%>
                         <div class="col-lg-8 col-xlg-9 col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-horizontal form-material">
-                                        <div class="form-group mb-4">
-                                            <div class="col-md-12 border-bottom p-0">Full Name
-                                                <input value="${account.fullname}" type="text" name="fullname" class="form-control validate" readonly required/>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">Full Name
+                                                <input value="${profile.fullname}" type="text" class="form-control validate" readonly required/>
+                                            </div>
+                                            <div class="col-md-6">Phone Number
+                                                <input value="${profile.phone}" type="text" class="form-control validate" readonly required/>
                                             </div>
                                         </div>
-                                        <div class="form-group mb-4">
-                                            <div class="col-md-12 border-bottom p-0">Phone Number
-                                                <input value="${account.phone}" type="text" name="phone" class="form-control validate" readonly required/>
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">Email
+                                                <input value="${profile.email}" type="email" class="form-control validate" readonly required>
                                             </div>
                                         </div>
-                                        <div class="form-group mb-4">
-                                            <div class="col-md-12 border-bottom p-0">Password
-                                                <input value="${account.password}" type="password" name="password" class="form-control validate" readonly required/>
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">Gender
+                                                <br>
+                                                <c:if test="${profile.gender == false}">
+                                                    <input type="radio" name="gender" checked value="0"> Male &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" name="gender"  value="1"> Female
+                                                </c:if>
+                                                <c:if test="${profile.gender == true}">
+                                                    <input type="radio" name="gender" value="0"> Male &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" name="gender" checked  value="1"> Female
+                                                </c:if>
+                                            </div>
+                                            <div class="col-md-6">Role
+                                                <br>
+                                                <c:if test="${profile.roleId == 1}">
+                                                    <input type="radio" checked value="1"> Admin &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="2"> Seller &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="3"> Customer &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="4"> Shipper 
+                                                </c:if>
+                                                <c:if test="${profile.roleId == 2}">
+                                                    <input type="radio" value="1"> Admin &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" checked value="2"> Seller &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="3"> Customer &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="4"> Shipper 
+                                                </c:if>
+                                                <c:if test="${profile.roleId == 3}">
+                                                    <input type="radio" value="1"> Admin &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="2"> Seller &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" checked value="3"> Customer &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="4"> Shipper 
+                                                </c:if>
+                                                <c:if test="${profile.roleId == 4}">
+                                                    <input type="radio" value="1"> Admin &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="2"> Seller &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" value="3"> Customer &nbsp;&nbsp;&nbsp;
+                                                    <input type="radio" checked value="4"> Shipper 
+                                                </c:if>
                                             </div>
                                         </div>
-                                        <div>Gender
-                                            <br/>
-                                            <br/>
-                                            <input type="radio" name="gender" checked value="${account.gender}"> Male &nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="gender" value="${account.gender}"> Female
-                                        </div>
-                                        <br/>
-                                        <div class="form-group mb-4">
-                                            <div class="col-md-12 border-bottom p-0">Email
-                                                <input value="${account.email}" type="email" class="form-control p-0 border-0" name="email" readonly required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <div class="col-sm-12">
-                                                <a href="account" class="btn btn-success">Back</a>
+                                        <div class="row mt-5">
+                                            <div class="col-sm-6">
+                                                <a href="account?key=" class="btn btn-success">Back</a>
                                             </div>
                                         </div>
                                     </div>

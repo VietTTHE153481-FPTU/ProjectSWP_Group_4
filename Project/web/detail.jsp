@@ -60,12 +60,12 @@
                             </div>
                             <div class="original_price">
                                 <c:if test="${detail.getSalePercent()>0}">
-                                    <span>${detail.getOriginalPrice()}₫ </span>
+                                    <span>${detail.FormatPrice(detail.getOriginalPrice())}₫ </span>
                                 </c:if>
                             </div>
-                            <div class="product_price">${detail.getSellPrice()}₫</div>&nbsp;&nbsp;&nbsp;
+                            <div class="product_price">${detail.FormatPrice(detail.getSellPrice())}₫</div>&nbsp;&nbsp;&nbsp;
                             <c:if test="${detail.getSalePercent()>0}">
-                                <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
+                                <span style="text-decoration: none; color: red;">-${detail.FormatPrice(detail.getSalePercent())}%</span>
                             </c:if>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                                 <span>Delivery method:</span>
@@ -91,25 +91,11 @@
             </div>
             <div class="tabs_section_container" style="padding-top: 10px">
                 <div class="container">
-                    <div class="card">
-                        <div class="row card-body">
-                            <div class="col-sm-4" style="border-right: 1px dotted #cccccc">
-                                <span class="card-title">${detail.getShopName()}</span>
-                                <p class="card-text">Some example text. Some example text.</p>
-                                <a href="#" class="card-link">Chat with Seller</a>
-                            </div>
-                            <div class="col-sm-8 text-center">
-                                <div class="row" style="padding-bottom: 40px">
-                                    <div class="col-sm-4">Products:</div>
-                                    <div class="col-sm-4">Rattings:</div>
-                                    <div class="col-sm-4">Comment:</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">Products:</div>
-                                    <div class="col-sm-4">Rattings:</div>
-                                    <div class="col-sm-4">View:</div>
-                                </div>
-                            </div>
+                    <div class="row card-body">
+                        <div class="col-sm-4" style="border-right: 1px dotted #cccccc">
+                            <h4 class="card-title">${detail.getShopName()} Shop</h4>
+                            <a href="#" class="card-link">Chat with Seller</a>
+                            <a href="viewshop?id=${detail.getShopID()}&page=1&key=&cid=${0}&sortType=${0}&sortMode=${0}" class="card-link">View Shop</a>
                         </div>
                     </div>
                     <div class="row">

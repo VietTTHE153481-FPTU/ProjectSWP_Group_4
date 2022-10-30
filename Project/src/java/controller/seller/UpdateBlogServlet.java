@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.customer;
+package controller.seller;
 
-import DAO.OrderDAO;
+import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,17 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Order;
-import model.Users;
+import model.Blog;
 
 /**
  *
- * @author Admin
+ * @author trung
  */
-@WebServlet(name = "ViewOrders", urlPatterns = {"/vieworders"})
-public class ViewOrders extends HttpServlet {
+@WebServlet(name = "UpdateBlogServlet", urlPatterns = {"/update"})
+public class UpdateBlogServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +38,10 @@ public class ViewOrders extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewOrders</title>");
+            out.println("<title>Servlet UpdateBlogServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewOrders at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateBlogServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,12 +59,14 @@ public class ViewOrders extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Users u = (Users) session.getAttribute("account");
-        OrderDAO order = new OrderDAO();
-        List<Order> orders = order.getOrderByUserID(u.getUserID());
-        request.setAttribute("orders", orders);
-        request.getRequestDispatcher("vieworders.jsp").forward(request, response);
+
+        int id = Integer.parseInt(request.getParameter("BlogId"));
+      
+        BlogDAO bd = new BlogDAO();
+        Blog blogs = bd.getBlogs(id);
+
+        request.setAttribute("blog", blogs);
+        request.getRequestDispatcher("updateblog.jsp").forward(request, response);
     }
 
     /**
@@ -81,7 +80,16 @@ public class ViewOrders extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("vieworders.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("BlogId"));
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+       
+        BlogDAO bd = new BlogDAO();
+        bd.updateBlog(id, title, content);
+        Blog blogs = bd.getBlogs(id);
+
+        request.setAttribute("blog", blogs);
+        request.getRequestDispatcher("updateblog.jsp").forward(request, response);
     }
 
     /**

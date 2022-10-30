@@ -5,6 +5,9 @@
 
 package controller.customer;
 
+import DAO.AdminDAO;
+import DAO.ShipDAO;
+import DAO.UserAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +15,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Ship;
+import model.UserAddress;
+import model.Users;
 
 /**
  *
@@ -55,6 +63,16 @@ public class UserAddressServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        UserAddressDAO uad = new UserAddressDAO();
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
+        
+        ShipDAO sd = new ShipDAO();
+        List<Ship> ship = sd.getShip();
+        List<UserAddress> list = uad.getUserAddress(u.getUserID());
+        
+        request.setAttribute("city", ship);
+        request.setAttribute("address", list);
         request.getRequestDispatcher("address.jsp").forward(request, response);
     } 
 
@@ -68,7 +86,22 @@ public class UserAddressServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("address.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        int inputCity = Integer.parseInt(request.getParameter("inputCity"));
+        String note = request.getParameter("note");
+        
+        UserAddressDAO uad = new UserAddressDAO();
+        AdminDAO ad = new AdminDAO();
+        Users u = ad.getUserByID(id);
+        uad.addAddress(u.getUserID(), fullname, phone, inputCity, note);
+        
+        request.setAttribute("fullname", fullname);
+        request.setAttribute("phone", phone);
+        request.setAttribute("inputCity", inputCity);
+        request.setAttribute("note", note);
+        response.sendRedirect("address");
     }
 
     /** 

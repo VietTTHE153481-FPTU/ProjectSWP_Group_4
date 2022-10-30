@@ -86,14 +86,13 @@
                                         <div class="mt-2 text-center">
                                             <a style="width: 300px" class="btn btn-primary profile-button" href="address">Addresses</a>                                         
                                         </div>
-
                                         <c:choose>
                                             <c:when test="${account.roleId == 2}">
                                                 <div class="mt-2 text-center">
-                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="vieworders?id=${account.userID}">View your orders</a>                                              
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" href="vieworders">View your orders</a>                                              
                                                 </div> 
                                                 <div class="mt-2 text-center">
-                                                    <a style="width: 300px" class="btn btn-primary profile-button" type="button"href="viewshop?id=${account.shopId}">View shop</a>                                              
+                                                    <a style="width: 300px" class="btn btn-primary profile-button" href="viewshop?id=${account.shopId}&page=1&key=&cid=${0}&sortType=${0}&sortMode=${0}">View shop</a>                                              
                                                 </div> 
                                             </c:when>
                                         </c:choose>
@@ -104,30 +103,29 @@
                                                 </div>
                                             </c:when>
                                         </c:choose>
-
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <%@include file ="layout/Footer.jsp" %>
-        <script>
-            $(document).ready(function () {
-                $('button').click(function () {
-                    $('.alert').show();
+            <%@include file ="layout/Footer.jsp" %>
+            <script>
+                $(document).ready(function () {
+                    $('button').click(function () {
+                        $('.alert').show();
+                    });
                 });
-            });
-        </script>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="styles/bootstrap4/popper.js"></script>
-        <script src="styles/bootstrap4/bootstrap.min.js"></script>
-        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-        <script src="plugins/easing/easing.js"></script>
-        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-        <script src="js/categories_custom.js"></script>
-        <script src="js/custom.js"></script>
+            </script>
+            <script src="js/jquery-3.2.1.min.js"></script>
+            <script src="styles/bootstrap4/popper.js"></script>
+            <script src="styles/bootstrap4/bootstrap.min.js"></script>
+            <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+            <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+            <script src="plugins/easing/easing.js"></script>
+            <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+            <script src="js/categories_custom.js"></script>
+            <script src="js/custom.js"></script>
     </body>
 </html>

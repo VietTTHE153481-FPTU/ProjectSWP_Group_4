@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Shop;
 import model.Users;
 
@@ -79,22 +80,23 @@ public class RegisterSellerServlet extends HttpServlet {
         String username = request.getParameter("Username");
         String shopname = request.getParameter("Shopname");
         RegisterDAO rd = new RegisterDAO();
-        HttpSession session = request.getSession();
+
+        //HttpSession session = request.getSession();
             Users a = rd.checkAccountExist(username);
             if (a != null) {
                 Shop s = rd.getShopByShopname(shopname);
                 if(s == null){
                 rd.updateShop(shopname);
-                Shop s1 = rd.getShopByShopname(shopname);
-                rd.updateseller(s1.getID(),username);
+                List<Shop> shop = rd.getShopsByShopname(shopname);
+                rd.updateseller(shop.get(0).getID(),username);
                 response.sendRedirect("home");
                 }
                 else{
-                   session.setAttribute("mess", "Tên cửa hàng đã tồn tại");
+                   request.setAttribute("mess", "Tên cửa hàng đã tồn tại");
                    response.sendRedirect("registerseller");        
             }               
             }else{
-                session.setAttribute("mess", "Người dùng không tồn tại");
+                request.setAttribute("mess", "Người dùng không tồn tại");
                 response.sendRedirect("registerseller");
             }
         }

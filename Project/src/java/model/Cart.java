@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,12 @@ public class Cart {
     }
     public int Size(){
         return this.hold.size();
+    }
+    
+    public String FormatPrice(double p) {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        String format = formatter.format(p).toString();
+        return format;
     }
 }
 

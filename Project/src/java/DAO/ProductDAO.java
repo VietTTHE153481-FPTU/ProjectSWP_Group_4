@@ -226,7 +226,7 @@ public class ProductDAO extends DBContext {
         return null;
     }
     
-    public List<Products> getProductsbyShopid(int shopid) {
+    public List<Products> getProductsbyShopid(int id, String key, int cid, int sortType, int sortMode) {
         List<Products> list = new ArrayList<>();
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
@@ -235,10 +235,37 @@ public class ProductDAO extends DBContext {
                 + "MIN(p.Amount) AS Amount, MIN(p.StatusID) AS StatusID,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL, MIN(Sub.CategoryID) AS CategoryID\n"
                 + "FROM dbo.Product p JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
-                + "		      JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
-                + "GROUP BY p.ProductID ) t where t.shopId = ?";
+                + "	              JOIN dbo.SubCategory Sub ON Sub.SubCategoryID = p.SubCategoryID\n"
+                + "WHERE p.ShopID = ? AND p.ProductName LIKE ? AND p.StatusID!= 2 AND p.Amount>0 ";
+        if (cid != 0) {
+            sql += "AND Sub.CategoryID=" + cid;
+        }
+        sql += "GROUP BY p.ProductID) t";
+        switch (sortType) {
+            case 0:
+                break;
+            case 1:
+                sql += " ORDER BY t.SellPrice ";
+                break;
+            case 2:
+                sql += " ORDER BY t.SalePercent ";
+                break;
+            case 3:
+                sql += " ORDER BY t.ProductName ";
+                break;
+        }
+        if (sortType != 0) {
+            if (sortMode == 1) {
+                sql += " ASC ";
+            }
+            if (sortMode == 2) {
+                sql += " DESC ";
+            }
+        }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.setString(2, "%" + key + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Products p = new Products();
@@ -276,11 +303,10 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();        
-        List<Products> products = pd.getProductsbyShopid(2);
-        List<Products> display = new ArrayList<>();
-        for (int i = 0; i < products.size() ; i++) {
-                display.add(products.get(i));
+        List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
+        for (Products product : products) {
+            System.out.println(product);
         }
-        System.out.println(products.size());  
+ 
     }
 }

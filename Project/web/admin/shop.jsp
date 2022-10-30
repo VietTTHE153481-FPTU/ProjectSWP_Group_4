@@ -1,12 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Account Management</title>
+        <title>Shop Management</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                         <ul class="navbar-nav ms-auto d-flex align-items-center">
-                            <form action="account" class="app-search d-none d-md-block me-3">
+                            <form action="" class="app-search d-none d-md-block me-3">
                                 <li class="in">
                                     <input value="${search}" type="text" name="key" placeholder="Search..." class="form-control mt-0">
                                 </li>
@@ -59,14 +59,14 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="account?key="
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="account?key="
                                            aria-expanded="false">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="hide-menu">Account Management</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="shop?key="
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="shop?key="
                                            aria-expanded="false">
                                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                             <span class="hide-menu">Shop Management</span>
@@ -96,49 +96,47 @@
                 <div class="page-breadcrumb bg-white">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">Account Management</h4>
+                            <h4 class="page-title">Shop Management</h4>
                         </div>
                     </div>
                 </div>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="white-box">
-                            <div id="ct-visits" style="height: auto;">
+                            <div id="ct-visits">
                                 <div class="box-title analytics-info">
-                                    <h3 class="box-title">Total Account: ${num} <i class="fa fa-user" style="color: #ff0000"></i></h3>
+                                    <h3 class="box-title">Total Shop: ${num} <i class="fa fa-cart-plus" style="color: #ff0000"></i></h3>
                                 </div>
-                                <form action="account" method="get">
+                                <form action="shop" method="get">
                                     <table class="table table-hover">
                                         <tr>
-                                            <th>USERNAME</th>
-                                            <th>FULL NAME</th>
-                                            <th>NUMBER PHONE</th>
-                                            <th>GENDER</th>
-                                            <th>EMAIL</th>
-                                            <th>ROLE</th>
+                                            <th>#</th>
+                                            <th>SHOP NAME</th>
+                                            <th>SELLER<th>
+                                            <th>PHONE<th>
+                                            <th>EMAIL<th>
                                             <th>ACTION</th>
                                         </tr>
-                                        <c:forEach items="${listac}" var="ac">
-                                            <tr>
-                                                <td>${ac.username}</td>
-                                                <td>${ac.fullname}</td>
-                                                <td>${ac.phone}</td>
-                                                <td>${ac.gender?'Female':'Male'}
-                                                    <c:if test="${ac.gender == false}">
-                                                        &nbsp;<i class="fa fa-mars" style="color: #6699ff"></i>
-                                                    </c:if>
-                                                    <c:if test="${ac.gender == true}">
-                                                        &nbsp;<i class="fa fa-venus" style="color: #ff99ff"></i>
-                                                    </c:if>
-                                                </td>
-                                                <td>${ac.email}</td>
-                                                <td>${ac.getRoleName()}</td>
-                                                <td>
-                                                    <a href="profile?id=${ac.userID}"><i class="fa fa-user"></i></a>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a href="#"><i class="fa fa-close"></i></a>
-                                                </td>
-                                            </tr>
+                                        <c:forEach items="${listshop}" var="shop">
+                                            <c:forEach items="${user}" var="u">
+                                                <c:if test="${shop.ID == u.shopId}">
+                                                    <tr>
+                                                        <td>${shop.getID()}</td>
+                                                        <td>${shop.getShopName()}</td>
+                                                        <td>${u.fullname}</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>${u.phone}</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>${u.email}</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>
+                                                            <a href="shopdetail?id=${shop.ID}"><i class="fa fa-eye"></i></a>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a href="#"><i class="fa fa-close"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </c:if>
+                                            </c:forEach>
                                         </c:forEach>
                                     </table>
                                 </form>
