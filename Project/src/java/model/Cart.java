@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class Cart {
 
-    public List<item> hold;
-    public double total;
+    private List<item> hold;
+    private double total;
 
     public Cart() {
         this.hold = new ArrayList<>();
@@ -28,16 +28,24 @@ public class Cart {
         return null;
     }
     public List<item> getListItem(){
-        return this.hold;
+        return hold;
     }
     public void addItem(item a){
         if(search(a)!=null){
             item mid = search(a);
-            mid.setNumO(a.getNumO()+mid.getNumO());
+            mid.setNumO(a.getNumO() + mid.getNumO());
         }else {
             hold.add(a);
         }
     }
+    
+    
+//    if (search(a) != null) {
+//            item m = search(a);
+//            m.setQuant(m.getQuant() + a.getQuant());
+//        } else {
+//            list.add(a);
+//        }
     public void remove(int id) {
         for (item i : hold) {
             if (i.getItem_product().getProductID() == id) {
