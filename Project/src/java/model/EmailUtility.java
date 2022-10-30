@@ -23,7 +23,7 @@ import javax.mail.internet.MimeMessage;
  * @author admin
  */
 public class EmailUtility {
-    public static void sendEmail(String host, String port,
+    public void sendEmail(String host, String port,
             final String senderEmail, String senderName, final String password,
             String recipientEmail, String subject, String message) throws AddressException,
             MessagingException, UnsupportedEncodingException {
@@ -37,7 +37,7 @@ public class EmailUtility {
   
         // creates a new session with an authenticator
         Authenticator auth = new Authenticator() {
-            public PasswordAuthentication getPasswordAuthentication() {
+            protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(senderEmail, password);
             }
         };

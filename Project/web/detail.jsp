@@ -60,12 +60,12 @@
                             </div>
                             <div class="original_price">
                                 <c:if test="${detail.getSalePercent()>0}">
-                                    <span>${detail.getOriginalPrice()}₫ </span>
+                                    <span>${detail.FormatPrice(detail.getOriginalPrice())}₫ </span>
                                 </c:if>
                             </div>
-                            <div class="product_price">${detail.getSellPrice()}₫</div>&nbsp;&nbsp;&nbsp;
+                            <div class="product_price">${detail.FormatPrice(detail.getSellPrice())}₫</div>&nbsp;&nbsp;&nbsp;
                             <c:if test="${detail.getSalePercent()>0}">
-                                <span style="text-decoration: none; color: red;">-${detail.getSalePercent()}%</span>
+                                <span style="text-decoration: none; color: red;">-${detail.FormatPrice(detail.getSalePercent())}%</span>
                             </c:if>
                             <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                                 <span>Delivery method:</span>

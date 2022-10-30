@@ -94,7 +94,11 @@ public class ResetServlet extends HttpServlet {
             String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
             Random random = new Random();
             String newPassword ="";
-            for (int i = 0; i < 8; i++) {
+            newPassword += capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
+            newPassword += lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length()));
+            newPassword += specialCharacters.charAt(random.nextInt(specialCharacters.length()));
+            newPassword += numbers.charAt(random.nextInt(numbers.length()));
+            for (int i = 4; i < 8; i++) {
                 newPassword += combinedChars.charAt(random.nextInt(combinedChars.length()));
             }
 
@@ -105,7 +109,8 @@ public class ResetServlet extends HttpServlet {
             String message = "";
 
             try {
-                EmailUtility.sendEmail(host, port, senderEmail, senderName, senderPassword,
+                EmailUtility eu= new EmailUtility();
+                eu.sendEmail(host, port, senderEmail, senderName, senderPassword,
                         email, subject, content);
                 message = "Your password has been reset. Please check your e-mail.";
                 ad.changePass(ad.getAccByEmail(email).getUsername(), newPassword);
