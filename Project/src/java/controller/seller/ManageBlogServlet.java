@@ -12,8 +12,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Blog;
+import model.Users;
 
 /**
  *
@@ -61,10 +63,11 @@ public class ManageBlogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BlogDAO bd = new BlogDAO();
-        int id = Integer.parseInt(request.getParameter("UserId"));
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
         List<Blog> blog = bd.getAllBlogs();
-        int num = bd.getAccountBlog(id);
-        Blog bg = bd.getBlogs(id);
+        int num = bd.getAccountBlog(u.getUserID());
+        Blog bg = bd.getBlogs(u.getUserID());
         
         request.setAttribute("num", num);
         request.setAttribute("detail", bg);

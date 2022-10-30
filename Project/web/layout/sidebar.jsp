@@ -22,7 +22,7 @@
             <a href="#">Manage Product &nbsp;<i class="fa fa-product-hunt"></i></a>
         </li>
         <li>
-            <a href="ManageBlog?UserId=${account.userID}">Manage Blog &nbsp;<i class="fa fa-newspaper-o"></i></a>
+            <a href="ManageBlog">Manage Blog &nbsp;<i class="fa fa-newspaper-o"></i></a>
         </li>
         <li>
             <a href="#">Manage Feedback &nbsp;<i class="fa fa-reply-all"></i></a>

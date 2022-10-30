@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Manage Blog</title>
+        <title>${blog.title}</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -44,7 +44,7 @@
                         <div class="col-md-12 mb-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <span><i class="fa fa-list-alt"></i>&nbsp;&nbsp;</span>Blog Listing Page
+                                    <span><i class="fa fa-list-alt"></i>&nbsp;&nbsp;</span>Blog Content Listing Page
                                     <div class="card-link">
                                         <div class="mt-2">
                                             <a style="width: 120px" class="btn btn-info" href="#">Add New</a>                                         
@@ -53,40 +53,37 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <form method="get" action="ManageBlog">
-                                            <span>Number of posts on listing page: ${num}</span>
-                                            <div class="container" style="padding-top: 10px">
-                                                <c:forEach items="${list}" var="lb">
-                                                    <c:if test="${sessionScope.account.userID == lb.authorId}">
-                                                        <div class="media">
-                                                            <div class="col-md-4">
-                                                                <div class="media-left media-middle">
-                                                                    <a href="ManageBlogDetail?id=${lb.id}"><img src="resources/img/Blog/${lb.imageLink}" class="img-thumbnail align-self-center mr-3" style="width:300px"></a>
-                                                                </div>
+                                        <span>Number of posts on listing page: ${num}</span>
+                                        <div class="container" style="padding-top: 10px">
+                                            <c:forEach items="${blogdetail}" var="bd">
+                                                <div class="media">
+                                                    <div class="col-md-4">
+                                                        <div class="media-left media-middle">
+                                                            <img src="resources/img/Blog/${bd.imgBlogDetail}" class="img-thumbnail align-self-center mr-3" style="width:300px">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading">${bd.title}</h4>
+                                                            <div class="an">
+                                                                <p style="color: #333333">${bd.content}</p>
+                                                            </div>                 
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="media-body media-middle">
+                                                            <div class="mt-2 text-center">
+                                                                <a style="width: 120px" class="btn btn-info" href="#">Edit Content</a>                                         
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="media-body">
-                                                                    <h4 class="media-heading">${lb.getTitle()}</h4>
-                                                                    <div class="an">
-                                                                        <p style="color: #333333">${lb.content}</p>
-                                                                    </div>                 
-                                                                </div>
+                                                            <div class="mt-2 text-center">
+                                                                <a style="width: 120px" class="btn btn-info" href="#">Delete</a>                                         
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="media-body media-middle">
-                                                                    <div class="mt-2 text-center">
-                                                                        <a style="width: 120px" class="btn btn-info" href="update?BlogId=${lb.id}">Edit Blog</a>                                         
-                                                                    </div>
-                                                                    <div class="mt-2 text-center">
-                                                                        <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><hr>
-                                                    </c:if>
-                                                </c:forEach>
-                                            </div>
-                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div><hr>
+                                            </c:forEach>
+                                            <i class="fa fa-long-arrow-left mr-1 mb-1"></i><a href="ManageBlog" style="color: #00cccc">Back To Blog List</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

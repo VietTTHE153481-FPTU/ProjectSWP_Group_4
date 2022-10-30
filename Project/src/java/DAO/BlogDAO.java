@@ -218,4 +218,19 @@ public class BlogDAO extends DBContext {
         }
         return a;
     }
+    
+    public int totalBlogDetail(int id) {
+        int a = 0;
+        String sql = "SELECT count(BlogDetailID) FROM [dbo].[BlogDetail] WHERE BlogID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
 }
