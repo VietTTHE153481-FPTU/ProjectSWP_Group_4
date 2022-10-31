@@ -9,14 +9,16 @@ package model;
  * @author Minhm
  */
 public class Messages {
+    private int id;
     private int by_user;
-    private int in_group;
     private String message;
+    private String date;
 
-    public Messages(int by_user, int in_group, String message) {
+    public Messages(int id,int by_user, String message, String date) {
         this.by_user = by_user;
-        this.in_group = in_group;
         this.message = message;
+        this.date = date;
+        this.id = id;
     }
 
     public Messages() {
@@ -30,13 +32,13 @@ public class Messages {
         this.by_user = by_user;
     }
 
-    public int getIn_group() {
-        return in_group;
-    }
-
-    public void setIn_group(int in_group) {
-        this.in_group = in_group;
-    }
+//    public int getIn_group() {
+//        return in_group;
+//    }
+//
+//    public void setIn_group(int in_group) {
+//        this.in_group = in_group;
+//    }
 
     public String getMessage() {
         return message;
