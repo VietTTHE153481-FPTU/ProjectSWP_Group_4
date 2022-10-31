@@ -204,6 +204,20 @@ public class BlogDAO extends DBContext {
         }
     }
     
+    public void addBlog(String content, String title,String image,int id){
+        String sql = "INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES(1, 'November', 2022, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setString(3, image);
+            st.setInt(4, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
     public int getAccountBlog(int id) {
         int a = 0;
         String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
@@ -232,5 +246,10 @@ public class BlogDAO extends DBContext {
         } catch (SQLException e) {
         }
         return a;
+    }
+    
+    public static void main(String[] args) {
+        BlogDAO bl = new BlogDAO();
+        bl.addBlog("aaa", "aaaaa", "aaaaaaaaaa", 6);
     }
 }

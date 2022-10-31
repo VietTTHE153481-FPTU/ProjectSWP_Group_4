@@ -102,6 +102,19 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
+    public Users getAccById(int id) {
+        String sql = "select * from dbo.[Users] where UserID=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
 
     public boolean isAccountExist(String user, String pass) {
         String sql = "select * from Users where Username=? and Password=?";

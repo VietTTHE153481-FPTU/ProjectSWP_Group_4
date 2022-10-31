@@ -47,7 +47,7 @@
                                     <span><i class="fa fa-list-alt"></i>&nbsp;&nbsp;</span>Blog Listing Page
                                     <div class="card-link">
                                         <div class="mt-2">
-                                            <a style="width: 120px" class="btn btn-info" href="#">Add New</a>                                         
+                                            <a style="width: 120px" class="btn btn-info" href="addblog?AuthorId=${sessionScope.account.userID }">Add New</a>                                         
                                         </div>
                                     </div>
                                 </div>
@@ -80,6 +80,7 @@
                                                                     <div class="mt-2 text-center">
                                                                         <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
                                                                     </div>
+                                  
                                                                 </div>
                                                             </div>
                                                         </div><hr>
