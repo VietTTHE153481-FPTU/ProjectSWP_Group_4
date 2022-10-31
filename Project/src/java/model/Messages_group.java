@@ -61,7 +61,9 @@ public class Messages_group {
         this.isPrivated = isPrivated;
         this.name = name;
     }
-
+    public String getName(){
+        return this.name;
+    }
     public Messages_group() {
     }
     @Override

@@ -11,14 +11,40 @@ package model;
 public class Messages {
     private int id;
     private int by_user;
+    private String username;
     private String message;
     private String date;
 
-    public Messages(int id,int by_user, String message, String date) {
+    public Messages(int id,int by_user, String message, String date, String username) {
         this.by_user = by_user;
         this.message = message;
         this.date = date;
         this.id = id;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Messages() {
