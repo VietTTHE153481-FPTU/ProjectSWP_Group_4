@@ -94,7 +94,7 @@
                     <div class="row card-body">
                         <div class="col-sm-4" style="border-right: 1px dotted #cccccc">
                             <h4 class="card-title">${detail.getShopName()} Shop</h4>
-                            <a href="#" class="card-link">Chat with Seller</a>
+                            <a href="ChatServlet?id=${detail.getShopID()}" class="card-link">Chat with Seller</a>
                             <a href="viewshop?id=${detail.getShopID()}&page=1&key=&cid=${0}&sortType=${0}&sortMode=${0}" class="card-link">View Shop</a>
                         </div>
                     </div>
