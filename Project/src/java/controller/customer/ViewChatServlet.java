@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.signup;
+package controller.customer;
 
-import DAO.AccountDAO;
 import DAO.MessagesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.Messages;
 import model.Messages_group;
 import model.Users;
 
@@ -24,8 +22,8 @@ import model.Users;
  *
  * @author Minhm
  */
-@WebServlet(name = "ChatServlet", urlPatterns = {"/ChatServlet"})
-public class ChatServlet extends HttpServlet {
+@WebServlet(name = "ViewChatServlet", urlPatterns = {"/viewChat"})
+public class ViewChatServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +42,10 @@ public class ChatServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChatServlet</title>");
+            out.println("<title>Servlet ViewChatServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChatServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewChatServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,62 +63,14 @@ public class ChatServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
         MessagesDAO dao = new MessagesDAO();
-        AccountDAO dao2 = new AccountDAO();
+        HttpSession session = request.getSession();
         Users a = (Users) session.getAttribute("account");
         int id1 = a.getUserID();
         List<Messages_group> lmao = new ArrayList<>();
-        if (request.getParameter("gid") == null) {
-            List<Users> a2 = dao2.getAllAccount();
-
-            int id2;
-            if (request.getParameter("id") == null) {
-                id2 = Integer.parseInt(request.getParameter("uid"));
-            } else {
-                int shopid = Integer.parseInt(request.getParameter("id"));
-                id2 = dao2.getSellerByShopID(shopid).getUserID();
-            }
-
-            session.setAttribute("talkingwithid", id2);
-            session.setAttribute("talkingwithname", dao2.getUserByID(id2));
-
-            if (id1 == id2) {
-                request.getRequestDispatcher("home").forward(request, response);
-                return;
-            }
-            int room = dao.CheckForExistingInbox(id1, id2);
-
-            if (room != -1) {
-                lmao = dao.GetAllGroupListOfUsers(id1);
-                if (lmao != null) {
-                    for (Messages_group lemao : lmao) {
-                        if (lemao.getGroup_ID() == room) {
-                            request.setAttribute("chatbox", lemao.getMessagesInGroup());
-                            break;
-                        }
-                    }
-                    request.setAttribute("chatnavi", lmao);
-                    request.getRequestDispatcher("chat.jsp").forward(request, response);
-                    return;
-                }
-            } else {
-                int[] memberID = {id1, id2};
-                dao.newRoom(memberID, null);
-                lmao = dao.GetAllGroupListOfUsers(id1);
-                if (lmao != null) {
-                    request.setAttribute("chatnavi", lmao);
-                    response.sendRedirect("viewChat");
-                    return;
-                }
-            }
-        } else {
-            int groupID = Integer.parseInt(request.getParameter("gid"));
-            int id2 = dao.getOp(groupID, a.getUserID());
-            response.sendRedirect("ChatServlet?id=" + dao2.getShopID(id2));
-            return;
-        }
-
+        lmao = dao.GetAllGroupListOfUsers(id1);
+        request.setAttribute("chatnavi", lmao);
+        request.getRequestDispatcher("chat.jsp").forward(request, response);
     }
 
     /**

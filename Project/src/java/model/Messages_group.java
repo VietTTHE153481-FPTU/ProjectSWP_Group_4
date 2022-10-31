@@ -15,6 +15,8 @@ public class Messages_group {
 //    List<Users> UserInGroup;
     List<Messages> MessagesInGroup;
     int Group_ID;
+    int[] userIDs;
+    String toUser;
     boolean isPrivated;
     String name;
 
@@ -47,12 +49,40 @@ public class Messages_group {
         this.Group_ID = Group_ID;
     }
 
-    public Messages_group( List<Messages> MessagesInGroup, int Group_ID) {
+    public Messages_group( List<Messages> MessagesInGroup, int Group_ID,String toUser) {
 //        this.UserInGroup = UserInGroup; List<Users> UserInGroup,
         this.MessagesInGroup = MessagesInGroup;
         this.Group_ID = Group_ID;
+        this.toUser = toUser;
         this.isPrivated = false;
         this.name = null;
+    }
+
+    public int[] getUserIDs() {
+        return userIDs;
+    }
+
+    public void setUserIDs(int[] userIDs) {
+        this.userIDs = userIDs;
+    }
+
+    public String getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
+    }
+
+    public boolean isIsPrivated() {
+        return isPrivated;
+    }
+
+    public void setIsPrivated(boolean isPrivated) {
+        this.isPrivated = isPrivated;
+    }
+    public void setUsers(int[] userIDs){
+        this.userIDs = userIDs;
     }
 
     public Messages_group(List<Messages> MessagesInGroup, int Group_ID, boolean isPrivated, String name) {

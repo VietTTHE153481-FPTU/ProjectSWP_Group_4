@@ -18,7 +18,9 @@ import model.Users;
  * @author Minhm
  */
 public class MessagesDAO extends DBContext {
+
     AccountDAO dao = new AccountDAO();
+
     public int CheckForExistingInbox(int UserID1, int UserID2) {
         String sql = "select c.room_id from\n"
                 + "(select  b.room_id, b.is_Private,b.name\n"
@@ -32,7 +34,7 @@ public class MessagesDAO extends DBContext {
             ps.setInt(2, UserID2);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                    return rs.getInt("room_id");
+                return rs.getInt("room_id");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -52,7 +54,7 @@ public class MessagesDAO extends DBContext {
             ps.setInt(1, uID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(getMessageByGroupID(rs.getInt("room_id")));
+                list.add(getMessageByGroupID(rs.getInt("room_id"),dao.getUserByID(getOp(rs.getInt("room_id"),uID))));
             }
         } catch (Exception ex) {
 
@@ -60,15 +62,28 @@ public class MessagesDAO extends DBContext {
         return list;
     }
 
-    public Messages_group getMessageByGroupID(int groupID) {
+    public int getOp(int room, int Uid1){
+        String sql = "select * from member where room_id = ? and UserID != ?";
+        try{
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, room);
+            ps.setInt(2, Uid1);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())return rs.getInt("UserID");
+        }catch(Exception ex){
+            
+        }
+        return -1;
+    }
+    public Messages_group getMessageByGroupID(int groupID, String toUser) {
         String sql = "Select * from messsages where room_id = ?";
         List<Messages> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, groupID);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Messages(rs.getInt("message_id"), rs.getInt("UserID"), rs.getString("Message"), rs.getString("Date"),dao.getUserByID(rs.getInt("UserID"))));
+            while (rs.next()) {       
+                list.add(new Messages(rs.getInt("message_id"), rs.getInt("UserID"), rs.getString("Message"), rs.getString("Date"), dao.getUserByID(rs.getInt("UserID"))));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage() + ex.getLocalizedMessage());
@@ -79,7 +94,11 @@ public class MessagesDAO extends DBContext {
             ps.setInt(1, groupID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new Messages_group(list, groupID, rs.getBoolean("is_Private"), rs.getString("name"));
+                if (rs.getBoolean("is_Private")) {
+                    return new Messages_group(list, groupID, toUser);
+                } else {
+                    return new Messages_group(list, groupID, rs.getBoolean("is_Private"), rs.getString("name"));
+                }
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -87,10 +106,55 @@ public class MessagesDAO extends DBContext {
         return null;
     }
 
+    public void newRoom(int[] memberID, String name) {
+        boolean is_private = memberID.length == 2 ? true : false;
+        int num_O_user = memberID.length;
+
+        String getRoom = "select top(1)* from chat_room order by room_id desc";
+        String sql = "INSERT INTO [dbo].[chat_room]\n"
+                + "           ([is_Private]\n"
+                + "           ,[name])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        String sql2 = "INSERT INTO [dbo].[member]\n"
+                + "           ([room_id]\n"
+                + "           ,[UserID])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        String sql3 = sql2;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setBoolean(1, is_private);
+            ps.setString(2, name);
+            ps.execute();
+            PreparedStatement ps2 = connection.prepareStatement(getRoom);
+            ResultSet rs = ps2.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("room_id");
+
+                PreparedStatement ps3 = connection.prepareStatement(sql2);
+                ps3.setInt(1, id);
+                ps3.setInt(2, memberID[0]);
+                ps3.execute();
+                PreparedStatement ps4 = connection.prepareStatement(sql3);
+                ps4.setInt(1, id);
+                ps4.setInt(2, memberID[1]);
+                ps4.execute();
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+    }
+
+    public void SaveNewMessage(int room) {
+
+    }
+
     public static void main(String[] args) {
         MessagesDAO test = new MessagesDAO();
-        System.out.println(test.CheckForExistingInbox(4, 5));;
-//        List<Messages_group> a = test.GetAllGroupListOfUsers(4);
-//        System.out.println(a.get(0).getMessagesInGroup().get(0).getMessage());
+//        test.newRoom(new int[]{1, 4}, null);
+        List<Messages_group> a = test.GetAllGroupListOfUsers(4);
+        System.out.println(a.get(0).getToUser());
     }
 }
