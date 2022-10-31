@@ -288,6 +288,18 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    public int getNumProductByShopId(int id){
+        String sql = "SELECT COUNT(*) FROM Product WHERE ShopID = ?";
+        try{
+            PreparedStatement st= connection.prepareStatement(sql);
+            st.setInt(0, id);
+            ResultSet rs= st.executeQuery();
+            return rs.getInt(0);
+        } catch(SQLException e){
+        }
+        return 0;
+    }
+    
     public int countProducts() {
         String sql = "SELECT COUNT(ProductID) AS Count FROM dbo.Product";
         try {

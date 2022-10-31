@@ -84,7 +84,7 @@ public class ResetServlet extends HttpServlet {
             String port = "587";
             String senderName = "Lavender Shop";
             String senderEmail = "thailshe160614@fpt.edu.vn";
-            String senderPassword = "pahvqukqvqpkxfor";
+            String senderPassword = "fzpulqmyhwcbyhzu";
             String subject = "Your Password has been reset";
 
             String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
