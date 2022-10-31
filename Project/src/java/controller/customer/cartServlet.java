@@ -76,13 +76,7 @@ public class cartServlet extends HttpServlet {
         session.setAttribute("test", numO);
         session.setAttribute("cart", a);
         response.sendRedirect("ViewCartServlet");
-<<<<<<< HEAD
         return;
-=======
-
-        return;
-
->>>>>>> 5c64e00c44a37d5a33742692715f245c297d1a63
     } 
 
     /** 

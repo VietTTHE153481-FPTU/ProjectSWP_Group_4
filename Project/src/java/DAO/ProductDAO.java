@@ -289,12 +289,14 @@ public class ProductDAO extends DBContext {
     }
 
     public int getNumProductByShopId(int id){
-        String sql = "SELECT COUNT(*) FROM Product WHERE ShopID = ?";
+        String sql = "SELECT COUNT(ProductID) AS Count FROM Product WHERE ShopID = ?";
         try{
             PreparedStatement st= connection.prepareStatement(sql);
             st.setInt(0, id);
             ResultSet rs= st.executeQuery();
-            return rs.getInt(0);
+            if (rs.next()){
+                return rs.getInt("Count");
+            }
         } catch(SQLException e){
         }
         return 0;

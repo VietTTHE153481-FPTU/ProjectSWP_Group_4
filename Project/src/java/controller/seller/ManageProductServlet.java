@@ -65,7 +65,7 @@ public class ManageProductServlet extends HttpServlet {
         ProductDAO pd= new ProductDAO();
         HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("account");
-        List<Products> products= pd.getProductsbyShopid(u.getShopId(), null, 0, 0, 0);
+        List<Products> products= pd.getProductsbyShopid(u.getShopId(), "", 0, 0, 0);
         int num= pd.getNumProductByShopId(u.getShopId());
         Products product= pd.getProductByShopId(u.getShopId());
         
