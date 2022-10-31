@@ -117,7 +117,7 @@ public class ChatServlet extends HttpServlet {
         } else {
             int groupID = Integer.parseInt(request.getParameter("gid"));
             int id2 = dao.getOp(groupID, a.getUserID());
-            response.sendRedirect("ChatServlet?id=" + dao2.getShopID(id2));
+            response.sendRedirect("ChatServlet?uid=" + id2);
             return;
         }
 
