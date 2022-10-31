@@ -117,6 +117,19 @@ public class AccountDAO extends DBContext {
         }
         return false;
     }
+    public int getShopID(int id){
+        String sql = "select * from Users where UserID = ?";
+        try{
+          PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("ShopID");
+            }
+        } catch (SQLException e) {
+        }
+        return -1;
+    }
     public String getUserByID(int id){
         String sql = "select * from Users where UserID = ?";
         try{
