@@ -129,7 +129,7 @@
                         <div class="position-relative">
                             <div class="chat-messages p-4">
 
-                                <c:forEach items="${requestScope.chatbox}" var="box">
+                                <c:forEach items="${requestScope.chatbox.getMessagesInGroup()}" var="box">
                                     <c:choose>
                                         <c:when test="${sessionScope.account.getUserID()==box.getBy_user()}">
 
@@ -167,10 +167,10 @@
                             </div>
                         </div>
                         <div class="flex-grow-0 py-3 px-4 border-top">
-                            <form action="action">
-
+                            <form action="ChatServlet" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Type your message">
+                                    <input type="text" class="form-control" name="text" placeholder="Type your message">
+                                    <input type="text" name="room" hidden value="${requestScope.chatbox.getGroup_ID()}" >
                                     <button class="btn btn-primary">Send</button>
                                 </div>
 

@@ -4,9 +4,12 @@
  */
 package DAO;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Messages;
@@ -54,7 +57,7 @@ public class MessagesDAO extends DBContext {
             ps.setInt(1, uID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(getMessageByGroupID(rs.getInt("room_id"),dao.getUserByID(getOp(rs.getInt("room_id"),uID))));
+                list.add(getMessageByGroupID(rs.getInt("room_id"), dao.getUserByID(getOp(rs.getInt("room_id"), uID))));
             }
         } catch (Exception ex) {
 
@@ -62,19 +65,22 @@ public class MessagesDAO extends DBContext {
         return list;
     }
 
-    public int getOp(int room, int Uid1){
+    public int getOp(int room, int Uid1) {
         String sql = "select * from member where room_id = ? and UserID != ?";
-        try{
+        try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, room);
             ps.setInt(2, Uid1);
             ResultSet rs = ps.executeQuery();
-            if(rs.next())return rs.getInt("UserID");
-        }catch(Exception ex){
-            
+            if (rs.next()) {
+                return rs.getInt("UserID");
+            }
+        } catch (Exception ex) {
+
         }
         return -1;
     }
+
     public Messages_group getMessageByGroupID(int groupID, String toUser) {
         String sql = "Select * from messsages where room_id = ?";
         List<Messages> list = new ArrayList<>();
@@ -82,7 +88,7 @@ public class MessagesDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, groupID);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {       
+            while (rs.next()) {
                 list.add(new Messages(rs.getInt("message_id"), rs.getInt("UserID"), rs.getString("Message"), rs.getString("Date"), dao.getUserByID(rs.getInt("UserID"))));
             }
         } catch (Exception ex) {
@@ -147,8 +153,27 @@ public class MessagesDAO extends DBContext {
         }
     }
 
-    public void SaveNewMessage(int room) {
-
+    public void SaveNewMessage(int room, String message, int Uid) {
+        String sql = "INSERT INTO [dbo].[messsages]\n"
+                + "           ([room_id]\n"
+                + "           ,[UserID]\n"
+                + "           ,[Message]\n"
+                + "           ,[Date])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?)";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, room);
+            ps.setInt(2, Uid);
+            ps.setString(3, message);
+            ps.setString(4, date);
+            ps.execute();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public static void main(String[] args) {

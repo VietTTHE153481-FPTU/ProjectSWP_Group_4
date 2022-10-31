@@ -96,7 +96,7 @@ public class ChatServlet extends HttpServlet {
                 if (lmao != null) {
                     for (Messages_group lemao : lmao) {
                         if (lemao.getGroup_ID() == room) {
-                            request.setAttribute("chatbox", lemao.getMessagesInGroup());
+                            request.setAttribute("chatbox", lemao);
                             break;
                         }
                     }
@@ -134,7 +134,18 @@ public class ChatServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        MessagesDAO dao = new MessagesDAO();
+        AccountDAO dao2 = new AccountDAO();
+        HttpSession session = request.getSession();
+        String message = request.getParameter("text");
+        int room = Integer.parseInt(request.getParameter("room"));
+        Users a = (Users) session.getAttribute("account");
+        int uID = a.getUserID();
+        dao.SaveNewMessage(room, message, uID);
+        int id2 = dao.getOp(room, uID);
+        response.sendRedirect("ChatServlet?uid=" + id2);
+        return;
+
     }
 
     /**
