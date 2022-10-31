@@ -28,7 +28,15 @@ public class CustomerFilter implements Filter {
     private HttpServletRequest httpRequest;
     
     private static final String[] loginRequiredURLs = {
+<<<<<<< HEAD
             "/userprofile", "/edit_profile", "/update_profile"
+=======
+
+            "/userprofile", "/edit_profile", "/update_profile", 
+
+            "/userprofile", "/edit_profile", "/update_profile"
+
+>>>>>>> 5c64e00c44a37d5a33742692715f245c297d1a63
     };
  
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

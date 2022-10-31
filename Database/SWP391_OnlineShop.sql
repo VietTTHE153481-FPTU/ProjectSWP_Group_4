@@ -636,7 +636,8 @@ create table [messsages](
 	[message_id] int IDENTITY(1,1) primary key,
 	[room_id] int foreign key references chat_room(room_id),
 	[UserID] int foreign key references Users(UserID), 
-	[Message] nvarchar(1000)
+	[Message] nvarchar(1000),
+	[Date] Date
 );
 go
 create table [member](
@@ -645,3 +646,7 @@ create table [member](
 	[UserID] int foreign key references Users(UserID)
 );
 go
+
+drop table member
+drop table messsages
+drop table chat_room
