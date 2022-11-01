@@ -71,8 +71,8 @@
                                                         <td>${o.FormatPrice(o.getSalePercent())} %</td>
                                                         <td>${o.getAmount()}</td>
                                                         <td>
-                                                            <a href="UpdateProduct" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Update</a>
-                                                            <a href="DeleteProduct" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Delete</a>
+                                                            <a href="UpdateProduct?id=${o.getProductID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Update</a>
+                                                            <a href="#" onclick="doDelete('${o.getProductID()}')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Delete</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -91,6 +91,13 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/seller/scrollbar.concat.min.js"></script>
 
+        <script type="text/javascript">
+            function doDelete(id){
+                if(confirm("Are you sure to delete product with id="+id)){
+                    window.location="DeleteProduct?id="+id;
+                }
+            }
+        </script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#sidebar").mCustomScrollbar({
