@@ -6,6 +6,7 @@ package DAO;
 
 import context.DBContext;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -24,5 +25,27 @@ public class FavoriteProductDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("error" + e);
         }
+    }
+    
+    public int countFavoriteProduct(int id) {
+        int a = 0;
+        String sql = "SELECT COUNT(ProductID) AS Count FROM dbo.Favorite_Product WHERE ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return a = rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+    
+    public static void main(String[] args) {
+
+        FavoriteProductDAO pd = new FavoriteProductDAO();
+        int num = pd.countFavoriteProduct(2);
+        System.out.println(num);
     }
 }
