@@ -317,18 +317,40 @@ public class ProductDAO extends DBContext {
         return 0;
     }
 
-    public static void main(String[] args) {
-<<<<<<< HEAD
-        ProductDAO pd = new ProductDAO();        
-        List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
-        for (Products product : products) {
-            System.out.println(product.getProductName());
+    public void insert(Products p) {
+        try {
+            String sql = "INSERT INTO [dbo].[Product]\n"
+                    + "           ([ProductName]\n"
+                    + "           ,[Description]\n"
+                    + "           ,[OriginalPrice]\n"
+                    + "           ,[SellPrice]\n"
+                    + "           ,[SalePercent]\n"
+                    + "           ,[SubCategoryID]\n"
+                    + "           ,[ShopID]\n"
+                    + "           ,[Amount]\n"
+                    + "           ,[StatusID])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?,?,1)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getProductName());
+            st.setString(2, p.getDescription());
+            st.setDouble(3, p.getOriginalPrice());
+            st.setDouble(4, p.getSellPrice());
+            st.setDouble(5, p.getSalePercent());
+            st.setInt(6, p.getSubCategoryID());
+            st.setInt(7, p.getShopID());
+            st.setInt(8, p.getAmount());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
         }
- 
-=======
-        ProductDAO pd = new ProductDAO();
-        int products = pd.getNumProductByShopId(1);
-        System.out.println(products);
->>>>>>> 3f3d08227446b574b00716a7acccfb1e151eff2e
     }
-}
+    public static void main(String[] args) {
+        ProductDAO pd = new ProductDAO();
+        int num = pd.getNumProductByShopId(4);
+        System.out.println(num);
+//        for (Products product : products) {
+//            System.out.println(product);
+//        }
+        }
+    }

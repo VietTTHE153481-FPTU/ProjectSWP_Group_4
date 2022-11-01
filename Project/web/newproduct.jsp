@@ -1,7 +1,7 @@
 <%-- 
     Document   : addcategory
     Created on : Jul 1, 2022, 4:36:37 AM
-    Author     : trung
+    Author     : admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,152 +12,93 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Add Product - Dashboard</title>
+        <title>Add New Product</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link href="styles/css/style.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/css/dataTables.bootstrap5.min.css"/>
+        <link rel="stylesheet" href="styles/css/dashboard.css"/>
     </head>
     <body>
-        <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-             data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-            <header class="topbar" data-navbarbg="skin5">
-                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                    <div class="navbar-header" data-logobg="skin6">
-                        <a class="navbar-brand" href="dashboard.jsp">
-                            <b class="logo-icon">
-                                <img src="images/logo-icon.jpg" alt="homepage" />
-                            </b>
-                            <span class="logo-text">
-                                <img src="images/logo-text.jpg" alt="homepage" />
-                            </span>
-                        </a>
-                    </div>
-                    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                        <ul class="navbar-nav ms-auto d-flex align-items-center">
-                            <li>
-                                <a class="profile-pic" href="#">
-                                    <img src="images/logo_admin.png" alt="user-img" width="36"
-                                         class="img-circle"><span class="text-white font-medium">${sessionScope.admin.username}</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-            <aside class="left-sidebar" data-sidebarbg="skin6">
-                <div class="scroll-sidebar">
-                    <nav class="sidebar-nav">
-                        <ul id="sidebarnav">
-                            <li class="sidebar-item pt-2">
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.jsp"
-                                   aria-expanded="false">
-                                    <i class="fa fa-dashboard" aria-hidden="true"></i>
-                                    <span class="hide-menu">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.jsp"
-                                   aria-expanded="false">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span class="hide-menu">Profile</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="adproducts"
-                                   aria-expanded="false">
-                                    <i class="fa fa-product-hunt" aria-hidden="true"></i>
-                                    <span class="hide-menu">Products</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin.jsp"
-                                   aria-expanded="false">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                    <span class="hide-menu">Logout</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
-            <div class="page-wrapper">
-                <div class="page-breadcrumb bg-white">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">Products Admin</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">       
-                    <form action="newproduct" method="post">
-                        <div class="row">
-                            <div class="col-lg-6 col-xs-12 col-md-12">
-                                <div class="white-box">
-                                    <center>
-                                        <h4 style="color: red">${requestScope.err}</h4>
-                                    </center>
-                                    <div class="row">
-                                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            Product ID 
-                                            <input type="number" name="id" class="form-control validate"/>
-                                        </div>
-                                    </div>
-                                    <div> Product name
-                                        <input type="text" name="name" class="form-control validate" required/>
-                                    </div>
-                                    <br/>
-                                    <div class="row">
-                                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            Price
-                                            <input name="price" type="text" class="form-control validate"/>
-                                        </div>
-                                    </div>
-                                    <div>Describe
-                                        <input type="text" name="describe" class="form-control validate" required/>
-                                    </div>
-                                    <br/>
-                                    <div>Materials
-                                        <textarea name="materials" class="form-control validate" rows="3"></textarea>
-                                    </div>
-                                    <br/>
-                                    <div class="row">
-                                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            Release Date:
-                                            <input type="date" name="date" class="form-control validate"/>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div class="form-group mb-3">
-                                        Category:
-                                        <select name="category" class="form-select-sm">
-                                            <option>Select a Category</option>
-                                            <c:forEach items="${requestScope.categories}" var="cn">
-                                                <option value="${cn.id}">${cn.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <center>
-                                        <input type="submit" value="Add new Product Now!" 
-                                               class="btn btn-primary btn-block text-uppercase mb-3">
-                                        </a>
-                                    </center>
-                                    <a href="adproducts" class="fa fa-angle-double-left">&nbsp; Back</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-xs-12 col-md-12">
-                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                    <input accept="image/*" 
-                                           id="upload" name="image" type="file" onchange="readURL(this);" class="form-control border-0">
-                                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose File</label>
-                                    <div>
-                                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>&nbsp;<small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                                    </div>
-                                </div>
-                                <div class="image-area"><img id="imageResult" src="#" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+        <div class="wrapper">
+            <div id="content">
+                <%@include file="layout/sidebar.jsp"%>
+                <div class="page-wrapper">
+                    <div class="page-breadcrumb bg-white">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                <h4 class="page-title">Products</h4>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="container-fluid">       
+                        <form action="AddProduct" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 col-xs-12 col-md-12">
+                                    <div class="white-box">
+                                        <center>
+                                            <h4 style="color: red">${requestScope.err}</h4>
+                                        </center>
+                                        
+                                        <div> Product name
+                                            <input type="text" name="name" class="form-control validate" required/>
+                                        </div>
+                                        <div>Description
+                                            <textarea name="description" class="form-control validate" rows="3"></textarea>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                Original Price
+                                                <input name="originalprice" type="text" class="form-control validate"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                Sell Price
+                                                <input name="sellprice" type="text" class="form-control validate"/>
+                                            </div>
+                                        </div>                     
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                Amount:
+                                                <input type="number" name="amount" class="form-control validate"/>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="form-group mb-3">
+                                            SubCategory:
+                                            <select name="subcategory" class="form-select-sm">
+                                                <option>Select a SubCategory</option>
+                                                <c:forEach items="${requestScope.subcategories}" var="subcate">
+                                                    <option value="${subcate.getSubCateID()}">${subcate.getSubCateName()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <center>
+                                            <input type="submit" value="Add new Product Now!" 
+                                                   class="btn btn-primary btn-block text-uppercase mb-3">
+                                            </a>
+                                        </center>
+                                        <a href="ManageProduct" class="fa fa-angle-double-left">&nbsp; Back</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xs-12 col-md-12">
+                                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                        <input accept="image/*" 
+                                               id="upload" name="image" type="file" onchange="readURL(this);" class="form-control border-0">
+                                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose File</label>
+                                        <div>
+                                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>&nbsp;<small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                        </div>
+                                    </div>
+                                    <div class="image-area"><img id="imageResult" src="#" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,5 +135,32 @@
         <script src="js/dashboards/app-style-switcher.js"></script>
         <script src="js/dashboards/waves.js"></script>
         <script src="js/dashboards/sidebarmenu.js"></script>
+        <div class="overlay"></div>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/seller/scrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').addClass('active');
+                    $('.overlay').fadeIn();
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+        <script src="js/seller/jquery.dataTables.min.js"></script>
+        <script src="js/seller/dataTables.bootstrap5.min.js"></script>
+        <script src="js/seller/script1.js"></script>
     </body>
 </html>
