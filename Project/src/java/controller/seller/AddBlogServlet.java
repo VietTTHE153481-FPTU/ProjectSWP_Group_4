@@ -90,7 +90,7 @@ public class AddBlogServlet extends HttpServlet {
         request.setAttribute("num", num);
         request.setAttribute("detail", bg);
         request.setAttribute("list", blog);
-        request.getRequestDispatcher("ManageBlog").forward(request, response);
+        response.sendRedirect("ManageBlog");
     }
 
     /** 

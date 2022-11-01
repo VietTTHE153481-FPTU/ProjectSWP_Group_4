@@ -351,7 +351,7 @@ public class ProductDAO extends DBContext {
         return 0;
     }
     
-    public void delete(int id) {
+    public void deleteFromWishlist(int id) {
         String sql = "DELETE FROM [Favorite_Product] WHERE ProductID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -390,7 +390,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-<<<<<<< HEAD
     public void update(Products p) {
         String sql = "UPDATE [dbo].[Product]\n"
                 + "   SET [ProductName] = ?\n"
@@ -431,9 +430,7 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
     }
-
-=======
->>>>>>> 4e5cf30928f689c3c00b2dc03499edc4d3be8f30
+    
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         int num = pd.getNumProductByShopId(4);

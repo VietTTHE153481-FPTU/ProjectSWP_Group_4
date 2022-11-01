@@ -58,7 +58,7 @@ public class DeleteFavoriteProductServlet extends HttpServlet {
     throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ProductDAO pd = new ProductDAO();
-        pd.delete(id);
+        pd.deleteFromWishlist(id);
         response.sendRedirect("Wishlist");
     } 
 

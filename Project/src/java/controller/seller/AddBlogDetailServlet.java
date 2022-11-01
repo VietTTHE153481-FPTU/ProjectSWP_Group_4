@@ -86,7 +86,6 @@ public class AddBlogDetailServlet extends HttpServlet {
         int num = b.totalBlogDetail(id);
         int blogid = bg.getId();
         
-        
         request.setAttribute("blogdetail", bd);
         request.setAttribute("blog", bg);
         request.setAttribute("num", num);

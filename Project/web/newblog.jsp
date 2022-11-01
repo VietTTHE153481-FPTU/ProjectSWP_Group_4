@@ -39,31 +39,26 @@
                                                 <div class="row">
                                                     <form method="post" action="addblog">
                                                         <input type="hidden" name="AuthorId" value="${sessionScope.account.userID }"/>
-                                                        <div class="col-md-8">
-
-                                                            <div class="p-3 py-5">
-                                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
-                                                                        <a href="ManageBlog" style="color: #33ccff">&nbsp;Back To List</a>
-                                                                    </div>
-                                                                    <h6 class="text-right">Add Profile</h6>
+                                                        <div class="p-3 py-5">
+                                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                                                                    <a href="ManageBlog" style="color: #33ccff">&nbsp;Back To List</a>
                                                                 </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-12">Image<input type="text" class="form-control" name="image"></div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-12">Title<input type="text" class="form-control" name="title"></div>
-                                                                </div>
-                                                                <div class="row mt-3">Content
-                                                                    <div class="col-md-12">
-                                                                        <textarea type="text" class="form-control" name="content" rows="12"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Add Blog</button></div>
+                                                                <h6 class="text-right">Add Profile</h6>
                                                             </div>
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-12">Image<input type="text" class="form-control" name="image"></div>
+                                                            </div>
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-12">Title<input type="text" class="form-control" name="title"></div>
+                                                            </div>
+                                                            <div class="row mt-3">Content
+                                                                <div class="col-md-12">
+                                                                    <textarea type="text" class="form-control" name="content" rows="12"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Add Blog</button></div>
                                                         </div>
-
                                                     </form>
                                                 </div>
                                             </div>

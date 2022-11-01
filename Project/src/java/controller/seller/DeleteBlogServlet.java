@@ -75,7 +75,7 @@ public class DeleteBlogServlet extends HttpServlet {
         request.setAttribute("num", num);
         request.setAttribute("detail", bg);
         request.setAttribute("list", blog);
-        request.getRequestDispatcher("ManageBlog").forward(request, response);
+        response.sendRedirect("ManageBlog");
     } 
 
     /** 
@@ -88,7 +88,7 @@ public class DeleteBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("manageblog");
+        response.sendRedirect("ManageBlog");
     }
 
     /** 
