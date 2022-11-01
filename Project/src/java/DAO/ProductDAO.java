@@ -189,6 +189,7 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
+
     public Products getProductByShopId(int id) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
                 + "MIN(p.Description) AS Description, MIN(p.OriginalPrice) AS OriginalPrice,\n"
@@ -225,7 +226,7 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-    
+
     public List<Products> getProductsbyShopid(int id, String key, int cid, int sortType, int sortMode) {
         List<Products> list = new ArrayList<>();
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,\n"
@@ -288,20 +289,21 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public int getNumProductByShopId(int id){
+    public int getNumProductByShopId(int id) {
+        int a = 0;
         String sql = "SELECT COUNT(ProductID) AS Count FROM Product WHERE ShopID = ?";
-        try{
-            PreparedStatement st= connection.prepareStatement(sql);
-            st.setInt(0, id);
-            ResultSet rs= st.executeQuery();
-            if (rs.next()){
-                return rs.getInt("Count");
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return a = rs.getInt("Count");
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
         }
-        return 0;
+        return a;
     }
-    
+
     public int countProducts() {
         String sql = "SELECT COUNT(ProductID) AS Count FROM dbo.Product";
         try {
@@ -316,11 +318,8 @@ public class ProductDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        ProductDAO pd = new ProductDAO();        
-        List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
-        for (Products product : products) {
-            System.out.println(product);
-        }
- 
+        ProductDAO pd = new ProductDAO();
+        int products = pd.getNumProductByShopId(1);
+        System.out.println(products);
     }
 }

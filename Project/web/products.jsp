@@ -119,7 +119,7 @@
                                                                     </div>
                                                                     <div class="favorite favorite_left"></div>
                                                                     <c:if test="${pd.getSalePercent()>0}">
-                                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.getSalePercent()}%</span></div>
+                                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.FormatPrice(pd.getSalePercent())}%</span></div>
                                                                     </c:if>
                                                                     <div class="product_info">
                                                                         <h6 class="product_name">${pd.getProductName()}</h6>
