@@ -305,7 +305,7 @@ public class ProductDAO extends DBContext {
         ProductDAO pd = new ProductDAO();        
         List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
         for (Products product : products) {
-            System.out.println(product);
+            System.out.println(product.getProductName());
         }
  
     }

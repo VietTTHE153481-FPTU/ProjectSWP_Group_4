@@ -169,9 +169,9 @@
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <form action="ChatServlet" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="text" placeholder="Type your message">
+                                    <input id="stop" type="text" class="form-control" name="text" placeholder="Type your message">
                                     <input type="text" name="room" hidden value="${requestScope.chatbox.getGroup_ID()}" >
-                                    <button class="btn btn-primary">Send</button>
+                                    <button id="start" class="btn btn-primary">Send</button>
                                 </div>
 
                             </form>
@@ -184,5 +184,31 @@
             </div>
         </div>
     </div>
+    <script src="js/jquery-3.2.1.min.js"></script> 
+    <script type="text/javascript">
 
-</html>
+        var timer = null,
+                interval = 3000,
+                value = 0;
+
+        $(function () {
+            if (timer !== null)
+                return;
+            timer = setInterval(function () {
+                window.location = "ChatServlet?uid=" +${sessionScope.talkingwithid};
+            }, interval);
+        });
+        $("#start").click(function () {
+            if (timer !== null)
+                return;
+            timer = setInterval(function () {
+                value = value + 1;
+                $("#input").val(value);
+            }, interval);
+        });
+        $("#stop").click(function () {
+            clearInterval(timer);
+            timer = null
+        });
+    </script>
+    <html>

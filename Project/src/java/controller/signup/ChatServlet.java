@@ -117,6 +117,8 @@ public class ChatServlet extends HttpServlet {
         } else {
             int groupID = Integer.parseInt(request.getParameter("gid"));
             int id2 = dao.getOp(groupID, a.getUserID());
+            session.setAttribute("talkingwithid", id2);
+            session.setAttribute("talkingwithname", dao2.getUserByID(id2));
             response.sendRedirect("ChatServlet?uid=" + id2);
             return;
         }
