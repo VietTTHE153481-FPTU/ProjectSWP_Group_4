@@ -78,7 +78,7 @@
                                                                         <a style="width: 120px" class="btn btn-info" href="update?BlogId=${lb.id}">Edit Blog</a>                                         
                                                                     </div>
                                                                     <div class="mt-2 text-center">
-                                                                        <a style="width: 120px" class="btn btn-info" href="#">Delete Blog</a>                                         
+                                                                        <a style="width: 120px" class="btn btn-info" href="deleteblog?BlogId=${lb.id}&AuthorId=${sessionScope.account.userID }">Delete Blog</a>                                         
                                                                     </div>
                                   
                                                                 </div>

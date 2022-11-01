@@ -218,6 +218,17 @@ public class BlogDAO extends DBContext {
         }
     }
     
+    public void delete(int id) {
+        String sql = "DELETE FROM [Blog] WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    
     public int getAccountBlog(int id) {
         int a = 0;
         String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
@@ -250,6 +261,6 @@ public class BlogDAO extends DBContext {
     
     public static void main(String[] args) {
         BlogDAO bl = new BlogDAO();
-        bl.addBlog("aaa", "aaaaa", "aaaaaaaaaa", 6);
+        bl.delete(7);
     }
 }
