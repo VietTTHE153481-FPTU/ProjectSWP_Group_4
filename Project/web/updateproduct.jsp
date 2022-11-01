@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Add New Product</title>
+        <title>Update Product</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -34,51 +34,56 @@
                         </div>
                     </div>
                     <div class="container-fluid">       
-                        <form action="AddProduct" method="post">
+                        <form action="UpdateProduct" method="post">
                             <div class="row">
                                 <div class="col-lg-6 col-xs-12 col-md-12">
                                     <div class="white-box">
+                                        <c:set var="p" value="${requestScope.product}"/>
                                         <center>
                                             <h4 style="color: red">${requestScope.err}</h4>
                                         </center>
                                         
                                         <div> Product name
-                                            <input type="text" name="name" class="form-control validate" required/>
+                                            <input type="text" name="name" class="form-control validate" required value="${p.getProductName()}"/>
                                         </div>
                                         <div>Description
-                                            <textarea name="description" class="form-control validate" rows="3"></textarea>
+                                            <textarea name="description" class="form-control validate" rows="3" value="${p.getDescription()}"></textarea>
                                         </div>
                                         <br/>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Original Price
-                                                <input name="originalprice" type="text" class="form-control validate"/>
+                                                <input name="originalprice" type="text" class="form-control validate" value="${p.FormatPrice(p.getOriginalPrice())}"/>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Sell Price
-                                                <input name="sellprice" type="text" class="form-control validate"/>
+                                                <input name="sellprice" type="text" class="form-control validate" value="${p.FormatPrice(p.getSellPrice())}"/>
                                             </div>
                                         </div>                     
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Amount:
-                                                <input type="number" name="amount" class="form-control validate"/>
+                                                <input name="amount" type="text" class="form-control validate" value="${p.getAmount()}"/>
                                             </div>
                                         </div>
                                         <br/>
-                                        <div class="form-group mb-3 subcate">
+                                        <div class="form-group mb-3">
                                             SubCategory:
                                             <select name="subcategory" class="form-select-sm">
-                                                <option>Select a SubCategory</option>
+                                                <option value="0">Select a subcategory</option>
                                                 <c:forEach items="${requestScope.subcategories}" var="subcate">
+                                                    <c:if test="${subcate.getSubCateID() == p.getSubCategoryID()}">
+                                                        <option value="${subcate.getSubCateID()}" selected>${subcate.getSubCateName()}</option>
+                                                    </c:if>
                                                     <option value="${subcate.getSubCateID()}">${subcate.getSubCateName()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
+                                        
                                         <center>
-                                            <input type="submit" value="Add new Product Now!" 
+                                            <input type="submit" value="Update Product" 
                                                    class="btn btn-primary btn-block text-uppercase mb-3">
                                             </a>
                                         </center>

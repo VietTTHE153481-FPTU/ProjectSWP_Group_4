@@ -345,6 +345,48 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
     }
+
+    public void update(Products p) {
+        String sql = "UPDATE [dbo].[Product]\n"
+                + "   SET [ProductName] = ?\n"
+                + "      ,[Description] = ?\n"
+                + "      ,[OriginalPrice] = ?\n"
+                + "      ,[SellPrice] = ?\n"
+                + "      ,[SalePercent] = ?\n"
+                + "      ,[SubCategoryID] = ?\n"
+                + "      ,[ShopID] = ?\n"
+                + "      ,[Amount] = ?\n"
+                + "      ,[StatusID] = 1\n"
+                + " WHERE ProductID =?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getProductName());
+            st.setString(2, p.getDescription());
+            st.setDouble(3, p.getOriginalPrice());
+            st.setDouble(4, p.getSellPrice());
+            st.setDouble(5, p.getSalePercent());
+            st.setInt(6, p.getSubCategoryID());
+            st.setInt(7, p.getShopID());
+            st.setInt(8, p.getAmount());
+            st.setInt(9, p.getProductID());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM [dbo].[Product]\n"
+                + "      WHERE ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         int num = pd.getNumProductByShopId(4);
@@ -352,5 +394,5 @@ public class ProductDAO extends DBContext {
 //        for (Products product : products) {
 //            System.out.println(product);
 //        }
-        }
     }
+}
