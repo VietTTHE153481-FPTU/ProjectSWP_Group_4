@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.customer;
+package controller.seller;
 
 import DAO.ProductDAO;
+import DAO.SubCategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +15,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Cart;
+import java.text.DecimalFormat;
+import java.util.List;
 import model.Products;
-import model.item;
+import model.SubCategory;
+import model.Users;
 
 /**
  *
- * @author Minhm
+ * @author admin
  */
-@WebServlet(name="cartServlet", urlPatterns={"/cart"})
-public class cartServlet extends HttpServlet {
+@WebServlet(name="AddNewProduct", urlPatterns={"/AddProduct"})
+public class AddNewProduct extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +43,10 @@ public class cartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet cartServlet</title>");  
+            out.println("<title>Servlet AddNewProduct</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet cartServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddNewProduct at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,23 +63,11 @@ public class cartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDAO lmao = new ProductDAO();
+        SubCategoryDAO sd= new SubCategoryDAO();
+        List<SubCategory> subcategories= sd.getAllSubCategory();
         
-        int proID = Integer.parseInt(request.getParameter("id"));
-        int numO = Integer.parseInt(request.getParameter("numO"));
-        Products toAdd = lmao.getProductById(proID);
-        HttpSession session = request.getSession();
-        
-        if((Cart)session.getAttribute("cart")==null){
-            session.setAttribute("cart", new Cart());
-        }
-        Cart a = (Cart)session.getAttribute("cart");
-        item b = new item(toAdd, numO);
-        a.addItem(b);
-        session.setAttribute("test", numO);
-        session.setAttribute("cart", a);
-        response.sendRedirect("ViewCartServlet");
-        return;
+        request.setAttribute("subcategories", subcategories);
+        request.getRequestDispatcher("newproduct.jsp").forward(request, response);
     } 
 
     /** 
@@ -89,7 +80,39 @@ public class cartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Users u= (Users) session.getAttribute("account");
+        DecimalFormat f = new DecimalFormat("##.0");
+        String name= request.getParameter("name");
+        String description = request.getParameter("description");
+        String raw_originalprice= request.getParameter("originalprice");
+        String raw_sellprice= request.getParameter("sellprice");
+        String raw_amount = request.getParameter("amount");
+        String raw_subcategory= request.getParameter("subcategory");
+        
+        try{
+            ProductDAO pd= new ProductDAO();            
+            double originalprice= Double.parseDouble(raw_originalprice);
+            double sellprice= Double.parseDouble(raw_sellprice);
+            int amount= Integer.parseInt(raw_amount);
+            int subcategory= Integer.parseInt(raw_subcategory);
+            String raw_salepercent= f.format(sellprice/originalprice*100);
+            double salepercent= Double.parseDouble(raw_salepercent);
+            Products p= new Products();
+            p.setProductName(name);
+            p.setOriginalPrice(originalprice);
+            p.setDescription(description);
+            p.setSellPrice(sellprice);
+            p.setSalePercent(salepercent);
+            p.setAmount(amount);
+            p.setSubCategoryID(subcategory);
+            p.setShopID(u.getShopId());
+            pd.insert(p);
+            request.setAttribute("err","Add Succesfully!");
+            request.getRequestDispatcher("newproduct.jsp").forward(request, response);
+        }catch(NumberFormatException ex){
+            System.out.println(ex);
+        }
     }
 
     /** 

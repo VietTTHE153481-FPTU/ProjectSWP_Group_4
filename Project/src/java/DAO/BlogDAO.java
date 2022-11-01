@@ -114,6 +114,26 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
+    
+    public BlogDetail getBlogDetail(int id) {
+        String sql = "SELECT * FROM [dbo].[BlogDetail] WHERE BlogDetailID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new BlogDetail(rs.getInt("BlogDetailID"),
+                        rs.getString("Title"),
+                        rs.getString("Content"),
+                        rs.getString("imgBlogDetail"),
+                        rs.getInt("BlogID")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public List<BlogDetail> getBlogDetailById(int id) {
         List<BlogDetail> list = new ArrayList<>();
@@ -204,6 +224,80 @@ public class BlogDAO extends DBContext {
         }
     }
     
+    public void updateBlogdetail(int id, String title, String content) {
+        String sql = "UPDATE [BlogDetail] SET [Title] = ? ,[Content] = ? WHERE BlogDetailID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
+    public void addBlog(String content, String title,String image,int id){
+        String sql = "INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES(1, 'November', 2022, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setString(3, image);
+            st.setInt(4, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
+    public void addBlogDetail(String content, String title,int id){
+        String sql = "INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(?,?,null,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
+    public void addBlog1(String content, String title,int id){
+        String sql = "INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES(1, 'November', 2022, ?, ?, null, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
+    public void delete(int id) {
+        String sql = "DELETE FROM [Blog] WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
+    public void deleteDetail(int id) {
+        String sql = "DELETE FROM [BlogDetail] WHERE BlogDetailID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    
     public int getAccountBlog(int id) {
         int a = 0;
         String sql = "SELECT count(Blog.ID) FROM [dbo].[Blog] WHERE AuthorID = ?";
@@ -232,5 +326,13 @@ public class BlogDAO extends DBContext {
         } catch (SQLException e) {
         }
         return a;
+    }
+    
+    public static void main(String[] args) {
+        BlogDAO bd = new BlogDAO();
+       // Blogdetail blogs = bd.getBlogs(id);
+         BlogDetail bld = bd.getBlogDetail(13);
+         
+        System.out.println(bld);
     }
 }

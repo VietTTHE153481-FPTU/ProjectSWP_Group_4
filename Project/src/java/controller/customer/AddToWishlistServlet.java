@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.seller;
+package controller.customer;
 
-import DAO.BlogDAO;
+import DAO.AccountDAO;
+import DAO.FavoriteProductDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,17 +14,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Blog;
-import model.BlogDetail;
+import model.Favorite_Products;
+import model.Products;
+import model.Users;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "ManageBlogDetailServlet", urlPatterns = {"/ManageBlogDetail"})
-public class ManageBlogDetailServlet extends HttpServlet {
+@WebServlet(name = "AddToWishlistServlet", urlPatterns = {"/addToWishlist"})
+public class AddToWishlistServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +44,10 @@ public class ManageBlogDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageBlogDetailServlet</title>");
+            out.println("<title>Servlet AddToWishlistServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageBlogDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddToWishlistServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,20 +65,16 @@ public class ManageBlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO b = new BlogDAO();
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
         int id = Integer.parseInt(request.getParameter("id"));
-        List<BlogDetail> bd = b.getBlogDetailById(id);
+        ProductDAO pd = new ProductDAO();
+        FavoriteProductDAO fpd = new FavoriteProductDAO();
+        Products p = pd.getProductById(id);
+        fpd.addProductToWishlish(u.getUserID(), id);
 
-        Blog bg = b.getBlogs(id);
-        int num = b.totalBlogDetail(id);
-        int blogid = bg.getId();
-        
-        
-        request.setAttribute("blogdetail", bd);
-        request.setAttribute("blog", bg);
-        request.setAttribute("num", num);
-        request.setAttribute("blogid", blogid);
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        request.setAttribute("detail", p);
+        request.getRequestDispatcher("detail.jsp").forward(request, response);
     }
 
     /**
@@ -89,7 +88,7 @@ public class ManageBlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        request.getRequestDispatcher("detail.jsp").forward(request, response);
     }
 
     /**

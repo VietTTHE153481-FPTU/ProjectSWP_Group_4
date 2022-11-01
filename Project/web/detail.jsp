@@ -25,6 +25,14 @@
         <link rel="stylesheet" type="text/css" href="styles/detail_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/detail_responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
+        <style>
+            .favorite{
+                padding-top: 50px;
+                margin-bottom: -70px;
+                font-size: 15px;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <div class="super_container">
@@ -51,6 +59,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="favorite">
+                            <i class="fa fa-heart-o" style="color: #ff0000">&nbsp;</i><span>Favorite (${num})</span>
                         </div>
                     </div>
                     <div class="col-lg-5">
@@ -85,8 +96,20 @@
                                 </div>
                                 <a onclick="func();"><button id="button1" class="red_button add_to_cart_button" >ADD TO CART</button></a>
                             </div>
+                            <br>
+                            <form method="get" action="addToWishlist">
+                                <c:if test="${account.roleId != 2}">
+                                    <div class="mt-5">
+                                        <input hidden type="number" value="${account.getUserID()}"/>
+                                        <input hidden name="id" type="text" value="${detail.getProductID()}"/>
+                                        <button class="btn btn-addwish-b2 profile-button" type="submit">
+                                            <i class="fa fa-heart" style="color: #ff0000"></i>&nbsp;ADD TO YOUR WISHLIST
+                                        </button>
+                                    </div>
+                                </c:if>
+                            </form>
                         </div>
-                    </div>       
+                    </div>
                 </div>
             </div>
             <div class="tabs_section_container" style="padding-top: 10px">
@@ -94,7 +117,7 @@
                     <div class="row card-body">
                         <div class="col-sm-4" style="border-right: 1px dotted #cccccc">
                             <h4 class="card-title">${detail.getShopName()} Shop</h4>
-                            <a href="#" class="card-link">Chat with Seller</a>
+                            <a href="ChatServlet?id=${detail.getShopID()}" class="card-link">Chat with Seller</a>
                             <a href="viewshop?id=${detail.getShopID()}&page=1&key=&cid=${0}&sortType=${0}&sortMode=${0}" class="card-link">View Shop</a>
                         </div>
                     </div>

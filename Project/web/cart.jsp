@@ -37,7 +37,6 @@
                                 <p class="mb-5">Your shopping cart is empty</p>
                                 <div class="red_button deal_ofthe_week_button" style="padding-left: 5px; padding-right: 5px">
                                     <a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">go shopping now !!</a>
-                                    
                                 </div>
                             </div>
                         </c:if>
@@ -60,7 +59,7 @@
                                                 <td data-th="Product">
                                                     <div class="row">
                                                         <div class="col-md-3 text-left">
-                                                            <img src="resources/img/products/${i.item_product.url}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                                            <img src="resources/img/products/${i.item_product.url}" class="img-thumbnail" style="height: 150px; width: 150px">
                                                         </div>
                                                         <div class="col-md-9 text-left mt-sm-2">
                                                             <h4>${i.item_product.productName}</h4>
@@ -68,10 +67,17 @@
                                                     </div>
                                                 </td>
                                                 <td data-th="Price">${i.item_product.FormatPrice(i.item_product.sellPrice)} ₫</td>
-                                                <td data-th="Quantity">${i.numO}</td>
+                                                <td data-th="Quantity">
+                                                    <div class="flex-b">
+                                                        <button type="button" name="button"onclick="minus(${i.item_product.getProductID()})"><div style="padding-right: 10px">-</div></button>
+                                                        <div><input style="text-align: center;width: 30px;border: solid; border-radius: 2px" type="text" name="name" value="${i.numO}" size="10" id="count" readonly></div>
+                                                        <button type="button" name="button"onclick="plus(${i.item_product.getProductID()})"><div style="padding-left: 10px">+</div></button>
+                                                    </div>
+
+                                                </td>
                                                 <td class="actions" data-th="">
                                                     <div class="text-right">
-                                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2" onclick="del(${i.item_product.getProductID()})">
                                                             <a href="#">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -89,7 +95,7 @@
                             </div>
                             <div class="row mt-4 d-flex align-items-center">
                                 <div class="col-sm-6 order-md-2 text-right">
-                                    <a href="#" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
+                                    <a href="CheckOut" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
                                     <a href="products?page=1&key=&cid=${0}&sid=${0}&sortType=${0}&sortMode=${0}">
@@ -105,5 +111,17 @@
         <script src="js/cart/jquery-3.3.1.slim.min.js"></script>
         <script src="js/cart/popper.min.js"></script>
         <script src="js/cart/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            function plus(a){
+                window.location="DeleteInCart?mode=1&id="+a;
+            }
+            function minus(a){
+                window.location="DeleteInCart?mode=2&id="+a;
+            }
+            function del(a){
+                window.location="DeleteInCart?mode=3&id="+a;
+            }
+            
+        </script>
     </body>
 </html>

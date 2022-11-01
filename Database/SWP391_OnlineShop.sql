@@ -155,9 +155,6 @@ CREATE TABLE UserAddress (
 	constraint UserID FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint ship_city_in_ship_address FOREIGN KEY(ShipCityID) REFERENCES Ship(id)
 ) ON [PRIMARY]
-GO
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (4, N'Trần Công Minh', '0147258369', 24, N'Đại Học FPT');
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (6, N'Trần Trung Việt', '0968819830', 24, N'Đại Học FPT');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Category (
 	CategoryID int PRIMARY KEY identity(1,1),
@@ -353,6 +350,13 @@ INSERT INTO Cart VALUES (4,3,1);
 INSERT INTO Cart VALUES (5,1,1);
 INSERT INTO Cart VALUES (5,2,1);
 INSERT INTO Cart VALUES (6,2,2);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Favorite_Product (
+	UserID int,
+	ProductID int
+	constraint userID_in_favorite_product FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	constraint productID_in_favorite_product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
+) ON [PRIMARY]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Status](
 	[ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -636,7 +640,8 @@ create table [messsages](
 	[message_id] int IDENTITY(1,1) primary key,
 	[room_id] int foreign key references chat_room(room_id),
 	[UserID] int foreign key references Users(UserID), 
-	[Message] nvarchar(1000)
+	[Message] nvarchar(1000),
+	[Date] Date
 );
 go
 create table [member](
@@ -645,6 +650,7 @@ create table [member](
 	[UserID] int foreign key references Users(UserID)
 );
 go
+<<<<<<< HEAD
 create table tracking(
 	no_day int,
 	num int,
@@ -661,3 +667,5 @@ values
 (6,0,'2000-11-11'),
 (7,0,'2000-11-11')
 go
+=======
+>>>>>>> 9792c38f75f5ef4dba756dd5a154ad7fff8e3874

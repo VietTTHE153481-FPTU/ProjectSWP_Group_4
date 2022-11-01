@@ -2,29 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.signup;
+package controller.seller;
 
-import DAO.AdminDAO;
-import DAO.CartDAO;
-import DAO.RegisterDAO;
+import DAO.ProductDAO;
+import DAO.SubCategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Cart;
+import java.text.DecimalFormat;
+import java.util.List;
+import model.Products;
+import model.SubCategory;
+import model.UserStatus;
 import model.Users;
 
 /**
  *
- * @author trung
+ * @author admin
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "UpdateProduct", urlPatterns = {"/UpdateProduct"})
+public class UpdateProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +45,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Servlet UpdateProduct</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,7 +66,19 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        ProductDAO pd = new ProductDAO();
+        SubCategoryDAO sd = new SubCategoryDAO();
+        List<SubCategory> subcategories = sd.getAllSubCategory();
+        String raw_id = request.getParameter("id");
+        try {
+            int id = Integer.parseInt(raw_id);
+            Products p = pd.getProductById(id);
+            request.setAttribute("product", p);
+            request.setAttribute("subcategories", subcategories);
+            request.getRequestDispatcher("updateproduct.jsp").forward(request, response);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -78,53 +92,38 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String u = request.getParameter("user");
-        RegisterDAO rd = new RegisterDAO();
-        String p = "";
-        String r = request.getParameter("rem");
-        AdminDAO ad = new AdminDAO();
-        Users b = new Users();
-        b = ad.getAccount(u);
-
-        if (b == null) {
-            request.setAttribute("error", "Username or password incorrect!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-        if (ad.getAccount(u).getRoleId() != 1 && ad.getAccount(u).getUserID() != 4
-                && ad.getAccount(u).getUserID() != 5 && ad.getAccount(u).getUserID() != 6
-                && ad.getAccount(u).getUserID() != 7) {
-            p = rd.bytesToHex(request.getParameter("pass"));
-        } else {
-            p = request.getParameter("pass");
-        }
-
-        Cookie cu = new Cookie("cuser", u);
-        Cookie cp = new Cookie("cpass", p);
-        Cookie cr = new Cookie("crem", r);
-        if (r != null) {
-            cu.setMaxAge(60 * 60 * 24 * 7);
-            cp.setMaxAge(60 * 60 * 24 * 7);
-            cr.setMaxAge(60 * 60 * 24 * 7);
-        } else {
-            cu.setMaxAge(0);
-            cp.setMaxAge(0);
-            cr.setMaxAge(0);
-        }
-        response.addCookie(cu);
-        response.addCookie(cp);
-        response.addCookie(cr);
-
-        Users a = ad.check(u, p);
         HttpSession session = request.getSession();
-        if (a == null) {
-            request.setAttribute("error", "Username or password incorrect!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            CartDAO c = new CartDAO();
-            session.setAttribute("cart", c.getAll(a.getUserID(),(Cart)session.getAttribute("cart")));
-            session.setAttribute("account", a);
-            response.sendRedirect("home");
+        Users u= (Users) session.getAttribute("account");
+        DecimalFormat f = new DecimalFormat("##.0");
+        String name= request.getParameter("name");
+        String description = request.getParameter("description");
+        String raw_originalprice= request.getParameter("originalprice");
+        String raw_sellprice= request.getParameter("sellprice");
+        String raw_amount = request.getParameter("amount");
+        String raw_subcategory= request.getParameter("subcategory");
+        
+        try{
+            ProductDAO pd= new ProductDAO();            
+            double originalprice= Double.parseDouble(raw_originalprice);
+            double sellprice= Double.parseDouble(raw_sellprice);
+            int amount= Integer.parseInt(raw_amount);
+            int subcategory= Integer.parseInt(raw_subcategory);
+            String raw_salepercent= f.format(sellprice/originalprice*100);
+            double salepercent= Double.parseDouble(raw_salepercent);
+            Products p= new Products();
+            p.setProductName(name);
+            p.setOriginalPrice(originalprice);
+            p.setDescription(description);
+            p.setSellPrice(sellprice);
+            p.setSalePercent(salepercent);
+            p.setAmount(amount);
+            p.setSubCategoryID(subcategory);
+            p.setShopID(u.getShopId());
+            pd.insert(p);
+            request.setAttribute("err","Update Succesfully!");
+            request.getRequestDispatcher("newproduct.jsp").forward(request, response);
+        }catch(NumberFormatException ex){
+            System.out.println(ex);
         }
     }
 

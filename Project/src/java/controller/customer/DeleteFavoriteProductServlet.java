@@ -5,6 +5,7 @@
 
 package controller.customer;
 
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,10 +16,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Minhm
+ * @author trung
  */
-@WebServlet(name="checkout", urlPatterns={"/PlaceOrderServlet"})
-public class PlaceOrderServlet extends HttpServlet {
+@WebServlet(name="DeleteFavoriteProductServlet", urlPatterns={"/deleteProduct"})
+public class DeleteFavoriteProductServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +36,10 @@ public class PlaceOrderServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PlaceOrderServlet</title>");  
+            out.println("<title>Servlet DeleteFavoriteProductServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PlaceOrderServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteFavoriteProductServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +56,10 @@ public class PlaceOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        ProductDAO pd = new ProductDAO();
+        pd.deleteFromWishlist(id);
+        response.sendRedirect("Wishlist");
     } 
 
     /** 

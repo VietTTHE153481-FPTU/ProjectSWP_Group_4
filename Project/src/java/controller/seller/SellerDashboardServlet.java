@@ -4,6 +4,7 @@
  */
 package controller.seller;
 
+import DAO.SellerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Users;
 
 /**
  *
@@ -57,6 +60,18 @@ public class SellerDashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        SellerDAO sd = new SellerDAO();
+        HttpSession session = request.getSession();
+        Users a = (Users) session.getAttribute("account");
+        
+        int numCus = sd.countTotalCustomerBySeller(a.getShopId());
+        int numProduct = sd.countTotalProductBySeller(a.getShopId());
+        int numOrder = sd.countTotalOrderBySeller(a.getShopId());
+        
+        
+        request.setAttribute("totalCus", numCus);
+        request.setAttribute("toalProduct", numProduct);
+        request.setAttribute("totalOrders", numOrder);
         request.getRequestDispatcher("sellerdashboard.jsp").forward(request, response);
     }
 

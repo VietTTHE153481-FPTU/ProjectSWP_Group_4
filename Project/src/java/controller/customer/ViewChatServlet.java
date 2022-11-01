@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.seller;
+package controller.customer;
 
-import DAO.BlogDAO;
+import DAO.MessagesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,17 +12,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.Blog;
-import model.BlogDetail;
+import model.Messages_group;
+import model.Users;
 
 /**
  *
- * @author trung
+ * @author Minhm
  */
-@WebServlet(name = "ManageBlogDetailServlet", urlPatterns = {"/ManageBlogDetail"})
-public class ManageBlogDetailServlet extends HttpServlet {
+@WebServlet(name = "ViewChatServlet", urlPatterns = {"/viewChat"})
+public class ViewChatServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +42,10 @@ public class ManageBlogDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageBlogDetailServlet</title>");
+            out.println("<title>Servlet ViewChatServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageBlogDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewChatServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,20 +63,14 @@ public class ManageBlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO b = new BlogDAO();
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<BlogDetail> bd = b.getBlogDetailById(id);
-
-        Blog bg = b.getBlogs(id);
-        int num = b.totalBlogDetail(id);
-        int blogid = bg.getId();
-        
-        
-        request.setAttribute("blogdetail", bd);
-        request.setAttribute("blog", bg);
-        request.setAttribute("num", num);
-        request.setAttribute("blogid", blogid);
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        MessagesDAO dao = new MessagesDAO();
+        HttpSession session = request.getSession();
+        Users a = (Users) session.getAttribute("account");
+        int id1 = a.getUserID();
+        List<Messages_group> lmao = new ArrayList<>();
+        lmao = dao.GetAllGroupListOfUsers(id1);
+        request.setAttribute("chatnavi", lmao);
+        request.getRequestDispatcher("chat.jsp").forward(request, response);
     }
 
     /**
@@ -89,7 +84,7 @@ public class ManageBlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

@@ -4,6 +4,7 @@
  */
 package controller.customer;
 
+import DAO.FavoriteProductDAO;
 import DAO.ProductDAO;
 import DAO.ShopDAO;
 import java.io.IOException;
@@ -66,9 +67,12 @@ public class DetailServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         ProductDAO pd = new ProductDAO();
+        FavoriteProductDAO fpd = new FavoriteProductDAO();
         Products p = pd.getProductById(id);
+        int num = fpd.countFavoriteProduct(id);
         
         request.setAttribute("detail", p);
+        request.setAttribute("num", num);
         request.getRequestDispatcher("detail.jsp").forward(request, response);
 
     }
