@@ -646,7 +646,3 @@ create table [member](
 	[UserID] int foreign key references Users(UserID)
 );
 go
-
-drop table member
-drop table messsages
-drop table chat_room
