@@ -114,6 +114,26 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
+    
+    public BlogDetail getBlogDetail(int id) {
+        String sql = "SELECT * FROM [dbo].[BlogDetail] WHERE BlogDetailID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new BlogDetail(rs.getInt("BlogDetailID"),
+                        rs.getString("Title"),
+                        rs.getString("Content"),
+                        rs.getString("imgBlogDetail"),
+                        rs.getInt("BlogID")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public List<BlogDetail> getBlogDetailById(int id) {
         List<BlogDetail> list = new ArrayList<>();
@@ -193,6 +213,19 @@ public class BlogDAO extends DBContext {
 
     public void updateBlog(int id, String title, String content) {
         String sql = "UPDATE [Blog] SET [BlogTitle] = ? ,[BlogContent] = ? WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
+    public void updateBlogdetail(int id, String title, String content) {
+        String sql = "UPDATE [BlogDetail] SET [Title] = ? ,[Content] = ? WHERE BlogDetailID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, title);
@@ -286,7 +319,10 @@ public class BlogDAO extends DBContext {
     }
     
     public static void main(String[] args) {
-        BlogDAO bl = new BlogDAO();
-        bl.addBlogDetail("aaaaaaa", "aaaaaaaa", 1);
+        BlogDAO bd = new BlogDAO();
+       // Blogdetail blogs = bd.getBlogs(id);
+         BlogDetail bld = bd.getBlogDetail(13);
+         
+        System.out.println(bld);
     }
 }

@@ -5,7 +5,6 @@
 
 package controller.seller;
 
-import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,16 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Blog;
-import model.BlogDetail;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="AddBlogDetailServlet", urlPatterns={"/addblogdetail"})
-public class AddBlogDetailServlet extends HttpServlet {
+@WebServlet(name="DeleteBlogDetailServlet", urlPatterns={"/deleteblogdetail"})
+public class DeleteBlogDetailServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +35,10 @@ public class AddBlogDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBlogDetailServlet</title>");  
+            out.println("<title>Servlet DeleteBlogDetailServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBlogDetailServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteBlogDetailServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,9 +55,7 @@ public class AddBlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("BlogId"));
-        request.setAttribute("BlogId", id);
-        request.getRequestDispatcher("newblogdetail.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -74,25 +68,7 @@ public class AddBlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("BlogId"));
-        String title = request.getParameter("title");
-        String image = request.getParameter("image");
-        String content = request.getParameter("content");
-        BlogDAO b = new BlogDAO();
-        b.addBlogDetail(content, title, id);
-        List<BlogDetail> bd = b.getBlogDetailById(id);
-
-        Blog bg = b.getBlogs(id);
-        int num = b.totalBlogDetail(id);
-        int blogid = bg.getId();
-        
-        
-        request.setAttribute("blogdetail", bd);
-        request.setAttribute("blog", bg);
-        request.setAttribute("num", num);
-        request.setAttribute("blogid", blogid);
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
-        
+        processRequest(request, response);
     }
 
     /** 

@@ -39,7 +39,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4 border-right">
                                                         <div class="d-flex flex-column align-items-center">
-                                                            <img class="align-self-center mr-3 mt-5" src="resources/img/Blog/${blog.imageLink}" width="350">
+                                                            <img class="align-self-center mr-3 mt-5" src="resources/img/Blog/${BlogDetail.imgBlogDetail}" width="350">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">
@@ -47,18 +47,18 @@
                                                         <div class="p-3 py-5">
                                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                                 <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
-                                                                    <a href="ManageBlog" style="color: #33ccff">&nbsp;Back To List</a>
+                                                                    <a href="ManageBlogDetail?id=${BlogDetail.blogID}" style="color: #33ccff">&nbsp;Back To List</a>
                                                                 </div>
                                                                 <h6 class="text-right">Edit Profile</h6>
                                                             </div>
-                                                            <form method="post" action="update">
-                                                                <input type="hidden" name="BlogId" value="${blog.id}"/>
+                                                            <form method="post" action="updateblogdetail">
+                                                                <input type="hidden" name="BlogDetailId" value="${BlogDetail.blogDetailID}"/>
                                                                 <div class="row mt-2">
-                                                                    <div class="col-md-12"><input type="text" class="form-control" name="title" value="${blog.title}"></div>
+                                                                    <div class="col-md-12"><input type="text" class="form-control" name="title" value="${BlogDetail.title}"></div>
                                                                 </div>
                                                                 <div class="row mt-3">
                                                                     <div class="col-md-12">
-                                                                        <textarea type="text" class="form-control" name="content" rows="12">${blog.content}</textarea>
+                                                                        <textarea type="text" class="form-control" name="content" rows="12">${BlogDetail.content}</textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>

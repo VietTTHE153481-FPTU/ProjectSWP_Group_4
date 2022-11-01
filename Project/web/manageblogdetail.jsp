@@ -47,7 +47,7 @@
                                     <span><i class="fa fa-list-alt"></i>&nbsp;&nbsp;</span>Blog Content Listing Page
                                     <div class="card-link">
                                         <div class="mt-2">
-                                            <a style="width: 120px" class="btn btn-info" href="#">Add New</a>                                         
+                                            <a style="width: 120px" class="btn btn-info" href="addblogdetail?BlogId=${blogid}">Add New</a>                                         
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                                     <div class="col-md-2">
                                                         <div class="media-body media-middle">
                                                             <div class="mt-2 text-center">
-                                                                <a style="width: 120px" class="btn btn-info" href="updateblogdetail?BlogDetailID=${bd.BlogDetailID}">Edit Content</a>                                         
+                                                                <a style="width: 120px" class="btn btn-info" href="updateblogdetail?BlogDetailID=${bd.blogDetailID}">Edit Content</a>                                         
                                                             </div>
                                                             <div class="mt-2 text-center">
                                                                 <a style="width: 120px" class="btn btn-info" href="#">Delete</a>                                         

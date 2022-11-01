@@ -68,11 +68,13 @@ public class ManageBlogDetailServlet extends HttpServlet {
 
         Blog bg = b.getBlogs(id);
         int num = b.totalBlogDetail(id);
+        int blogid = bg.getId();
         
         
         request.setAttribute("blogdetail", bd);
         request.setAttribute("blog", bg);
         request.setAttribute("num", num);
+        request.setAttribute("blogid", blogid);
         request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
     }
 

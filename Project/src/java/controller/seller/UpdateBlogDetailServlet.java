@@ -5,6 +5,7 @@
 
 package controller.seller;
 
+import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Blog;
+import model.BlogDetail;
 
 /**
  *
@@ -55,6 +58,12 @@ public class UpdateBlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("BlogDetailID"));
+      
+         BlogDAO bd = new BlogDAO();
+       // Blogdetail blogs = bd.getBlogs(id);
+         BlogDetail bld = bd.getBlogDetail(id);
+         request.setAttribute("BlogDetail", bld);
         request.getRequestDispatcher("updateblogdetail.jsp").forward(request, response);
     } 
 
@@ -68,7 +77,16 @@ public class UpdateBlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("BlogDetailId"));
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+       
+        BlogDAO bd = new BlogDAO();
+        bd.updateBlogdetail(id, title, content);
+        BlogDetail blogdetail = bd.getBlogDetail(id);
+
+        request.setAttribute("BlogDetail", blogdetail);
+        request.getRequestDispatcher("updateblogdetail.jsp").forward(request, response);
     }
 
     /** 

@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Update Blog</title>
+        <title>Add Blog Detail</title>
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -38,13 +38,13 @@
                                             <div class="container rounded bg-white mt-5">
                                                 <div class="row">
                                                     <form method="post" action="addblogdetail">
-                                                        <input type="hidden" name="BlogId" value="${blog.id}"/>
+                                                        <input type="hidden" name="BlogId" value="${BlogId}"/>
                                                         <div class="col-md-8">
 
                                                             <div class="p-3 py-5">
                                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                                     <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
-                                                                        <a href="ManageBlog" style="color: #33ccff">&nbsp;Back To List</a>
+                                                                        <a href="ManageBlogDetail?id=${blogid}" style="color: #33ccff">&nbsp;Back To List</a>
                                                                     </div>
                                                                     <h6 class="text-right">Add Profile</h6>
                                                                 </div>
