@@ -650,3 +650,22 @@ create table [member](
 	[UserID] int foreign key references Users(UserID)
 );
 go
+<<<<<<< HEAD
+create table tracking(
+	no_day int,
+	num int,
+	lastUpdate Date
+)
+go
+insert into tracking
+values
+(1,0,'2000-11-11'),
+(2,0,'2000-11-11'),
+(3,0,'2000-11-11'),
+(4,0,'2000-11-11'),
+(5,0,'2000-11-11'),
+(6,0,'2000-11-11'),
+(7,0,'2000-11-11')
+go
+=======
+>>>>>>> 9792c38f75f5ef4dba756dd5a154ad7fff8e3874
