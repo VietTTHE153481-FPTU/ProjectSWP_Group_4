@@ -318,17 +318,11 @@ public class ProductDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-<<<<<<< HEAD
+
         ProductDAO pd = new ProductDAO();        
         List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
         for (Products product : products) {
             System.out.println(product.getProductName());
         }
- 
-=======
-        ProductDAO pd = new ProductDAO();
-        int products = pd.getNumProductByShopId(1);
-        System.out.println(products);
->>>>>>> 3f3d08227446b574b00716a7acccfb1e151eff2e
     }
 }

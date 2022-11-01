@@ -67,10 +67,17 @@
                                                     </div>
                                                 </td>
                                                 <td data-th="Price">${i.item_product.FormatPrice(i.item_product.sellPrice)} ₫</td>
-                                                <td data-th="Quantity">${i.numO}</td>
+                                                <td data-th="Quantity">
+                                                    <div class="flex-b">
+                                                        <button type="button" name="button"onclick="minus(${i.item_product.getProductID()})"><div style="padding-right: 10px">-</div></button>
+                                                        <div><input style="text-align: center;width: 30px;border: solid; border-radius: 2px" type="text" name="name" value="${i.numO}" size="10" id="count" readonly></div>
+                                                        <button type="button" name="button"onclick="plus(${i.item_product.getProductID()})"><div style="padding-left: 10px">+</div></button>
+                                                    </div>
+
+                                                </td>
                                                 <td class="actions" data-th="">
                                                     <div class="text-right">
-                                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2" onclick="del(${i.item_product.getProductID()})">
                                                             <a href="#">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -104,5 +111,17 @@
         <script src="js/cart/jquery-3.3.1.slim.min.js"></script>
         <script src="js/cart/popper.min.js"></script>
         <script src="js/cart/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            function plus(a){
+                window.location="DeleteInCart?mode=1&id="+a;
+            }
+            function minus(a){
+                window.location="DeleteInCart?mode=2&id="+a;
+            }
+            function del(a){
+                window.location="DeleteInCart?mode=3&id="+a;
+            }
+            
+        </script>
     </body>
 </html>

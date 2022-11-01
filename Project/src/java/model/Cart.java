@@ -20,27 +20,35 @@ public class Cart {
     public Cart() {
         this.hold = new ArrayList<>();
     }
-    private item search(item a){
-        for(item i: hold){
-            if(i.getItem_product().getProductID()==a.getItem_product().getProductID()){
+
+    private item search(item a) {
+        for (item i : hold) {
+            if (i.getItem_product().getProductID() == a.getItem_product().getProductID()) {
                 return i;
             }
         }
         return null;
     }
-    public List<item> getListItem(){
+
+    public List<item> getListItem() {
         return hold;
     }
-    public void addItem(item a){
-        if(search(a)!=null){
+
+    public void addItem(item a) {
+        if (search(a) != null) {
             item mid = search(a);
-            mid.setNumO(a.getNumO() + mid.getNumO());
-        }else {
+            if (a.getNumO() == -1 && mid.getNumO() == 1) {
+                remove(mid.getItem_product().getProductID());
+                return;
+            } else {
+                mid.setNumO(a.getNumO() + mid.getNumO());
+            }
+
+        } else {
             hold.add(a);
         }
     }
-    
-    
+
 //    if (search(a) != null) {
 //            item m = search(a);
 //            m.setQuant(m.getQuant() + a.getQuant());
@@ -55,23 +63,23 @@ public class Cart {
             }
         }
     }
+
     public double totalmoney() {
         double t = 0;
         for (item i : hold) {
-            double a = i.getNumO()* i.getItem_product().getSellPrice();
+            double a = i.getNumO() * i.getItem_product().getSellPrice();
             t += (double) a;
         }
         return t;
     }
-    public int Size(){
+
+    public int Size() {
         return this.hold.size();
     }
-    
+
     public String FormatPrice(double p) {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         String format = formatter.format(p).toString();
         return format;
     }
 }
-
-
