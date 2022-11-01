@@ -64,7 +64,7 @@ public class DeleteProduct extends HttpServlet {
         String raw_id = request.getParameter("id");
         try {
             int id = Integer.parseInt(raw_id);
-            pd.delete(id);
+            pd.deleteProduct(id);
         } catch (Exception ex) {
             System.out.println(ex);
         }

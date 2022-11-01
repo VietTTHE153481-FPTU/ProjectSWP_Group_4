@@ -390,7 +390,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-<<<<<<< HEAD
     public void update(Products p) {
         String sql = "UPDATE [dbo].[Product]\n"
                 + "   SET [ProductName] = ?\n"
@@ -420,11 +419,17 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    public void delete(int id) {
-        String sql = "DELETE FROM [dbo].[Product]\n"
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM ProductImg\n"
+                + "      WHERE ProductID = ?";
+        String sql1= "DELETE FROM Product\n"
                 + "      WHERE ProductID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            
+            PreparedStatement st1 = connection.prepareStatement(sql1);
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
@@ -432,8 +437,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-=======
->>>>>>> 4e5cf30928f689c3c00b2dc03499edc4d3be8f30
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         int num = pd.getNumProductByShopId(4);
