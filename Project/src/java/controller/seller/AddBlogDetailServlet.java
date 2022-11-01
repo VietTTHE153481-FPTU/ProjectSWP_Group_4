@@ -5,7 +5,6 @@
 
 package controller.seller;
 
-import DAO.AccountDAO;
 import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,17 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Blog;
-import model.Users;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="AddBlogServlet", urlPatterns={"/addblog"})
-public class AddBlogServlet extends HttpServlet {
+@WebServlet(name="AddBlogDetailServlet", urlPatterns={"/addblogdetail"})
+public class AddBlogDetailServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +36,10 @@ public class AddBlogServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBlogServlet</title>");  
+            out.println("<title>Servlet AddBlogDetailServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBlogServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddBlogDetailServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,8 +55,8 @@ public class AddBlogServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {  
-        request.getRequestDispatcher("newblog.jsp").forward(request, response);
+    throws ServletException, IOException {
+        processRequest(request, response);
     } 
 
     /** 
@@ -74,23 +69,13 @@ public class AddBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("AuthorId"));
+        int id = Integer.parseInt(request.getParameter("BlogId"));
         String title = request.getParameter("title");
         String image = request.getParameter("image");
         String content = request.getParameter("content");
         BlogDAO bd1 = new BlogDAO();
-        bd1.addBlog1(content, title, id);
-        BlogDAO bd = new BlogDAO();
-        AccountDAO ac = new AccountDAO();
-        Users u = ac.getAccById(id);
-        List<Blog> blog = bd.getAllBlogs();
-        int num = bd.getAccountBlog(u.getUserID());
-        Blog bg = bd.getBlogs(u.getUserID());
+        bd1.addBlogDetail(content, title, id);
         
-        request.setAttribute("num", num);
-        request.setAttribute("detail", bg);
-        request.setAttribute("list", blog);
-        request.getRequestDispatcher("ManageBlog").forward(request, response);
     }
 
     /** 

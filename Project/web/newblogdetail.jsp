@@ -1,6 +1,6 @@
 <%-- 
-    Document   : newblog
-    Created on : Oct 31, 2022, 11:07:58 PM
+    Document   : newblogdetail
+    Created on : Nov 1, 2022, 9:36:02 AM
     Author     : Admin
 --%>
 
@@ -37,8 +37,8 @@
                                         <div class="container" style="padding-top: 10px">
                                             <div class="container rounded bg-white mt-5">
                                                 <div class="row">
-                                                    <form method="post" action="addblog">
-                                                        <input type="hidden" name="AuthorId" value="${sessionScope.account.userID }"/>
+                                                    <form method="post" action="addblogdetail">
+                                                        <input type="hidden" name="BlogId" value="${blog.id}"/>
                                                         <div class="col-md-8">
 
                                                             <div class="p-3 py-5">

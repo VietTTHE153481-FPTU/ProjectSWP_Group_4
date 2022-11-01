@@ -218,6 +218,32 @@ public class BlogDAO extends DBContext {
         }
     }
     
+    public void addBlogDetail(String content, String title,int id){
+        String sql = "INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(?,?,null,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
+    public void addBlog1(String content, String title,int id){
+        String sql = "INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES(1, 'November', 2022, ?, ?, null, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, content);
+            st.setInt(3, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+    }
+    
     public void delete(int id) {
         String sql = "DELETE FROM [Blog] WHERE ID = ?";
         try {
@@ -261,6 +287,6 @@ public class BlogDAO extends DBContext {
     
     public static void main(String[] args) {
         BlogDAO bl = new BlogDAO();
-        bl.delete(7);
+        bl.addBlogDetail("aaaaaaa", "aaaaaaaa", 1);
     }
 }
