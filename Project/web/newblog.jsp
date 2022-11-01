@@ -27,7 +27,7 @@
                 <%@include file="layout/sidebar.jsp"%>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <span><i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;</span>Add Blog
@@ -36,31 +36,35 @@
                                     <div class="table-responsive">
                                         <div class="container" style="padding-top: 10px">
                                             <div class="container rounded bg-white mt-5">
-                                                <div class="row">
-                                                    <form method="post" action="addblog">
-                                                        <input type="hidden" name="AuthorId" value="${sessionScope.account.userID }"/>
-                                                        <div class="p-3 py-5">
-                                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                                <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
-                                                                    <a href="ManageBlog" style="color: #33ccff">&nbsp;Back To List</a>
-                                                                </div>
-                                                                <h6 class="text-right">Add Profile</h6>
-                                                            </div>
-                                                            <div class="row mt-2">
-                                                                <div class="col-md-12">Image<input type="text" class="form-control" name="image"></div>
-                                                            </div>
-                                                            <div class="row mt-2">
-                                                                <div class="col-md-12">Title<input type="text" class="form-control" name="title"></div>
-                                                            </div>
-                                                            <div class="row mt-3">Content
-                                                                <div class="col-md-12">
-                                                                    <textarea type="text" class="form-control" name="content" rows="12"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Add Blog</button></div>
+                                                <form method="post" action="addblog">
+                                                    <input type="hidden" name="AuthorId" value="${sessionScope.account.userID }"/>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                                                            <a href="ManageBlog" style="color: #33ccff">&nbsp;Back To List</a>
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                        <h6 class="text-right">Add Profile</h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-xs-12 col-md-12">
+                                                            <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                                                <input accept="image/*" 
+                                                                       id="upload" name="imageLink" type="file" onchange="readURL(this);" class="form-control border-0">
+                                                                <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose File</label>
+                                                                <div>
+                                                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>&nbsp;<small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="image-area"><img id="imageResult" src="#" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-xs-12 col-md-12">
+                                                            <div class="col-md-12">Title<input type="text" class="form-control" name="title"></div>
+                                                            <div class="col-md-12">Content
+                                                                <textarea type="text" class="form-control" name="content" rows="12"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Add Blog</button></div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -70,33 +74,58 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="overlay"></div>
-        <script src="js/jquery-2.1.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/seller/scrollbar.concat.min.js"></script>
+            <div class="overlay"></div>
+            <script src="js/jquery-2.1.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/seller/scrollbar.concat.min.js"></script>
+            <script>
+                                                                           $(document).ready(function () {
+                                                                               $("#sidebar").mCustomScrollbar({
+                                                                                   theme: "minimal"
+                                                                               });
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
+                                                                               $('#dismiss, .overlay').on('click', function () {
+                                                                                   $('#sidebar').removeClass('active');
+                                                                                   $('.overlay').fadeOut();
+                                                                               });
 
-                $('#dismiss, .overlay').on('click', function () {
-                    $('#sidebar').removeClass('active');
-                    $('.overlay').fadeOut();
-                });
+                                                                               $('#sidebarCollapse').on('click', function () {
+                                                                                   $('#sidebar').addClass('active');
+                                                                                   $('.overlay').fadeIn();
+                                                                                   $('.collapse.in').toggleClass('in');
+                                                                                   $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                                                                               });
+                                                                           });
+            </script>
+            <script>
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').addClass('active');
-                    $('.overlay').fadeIn();
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                        reader.onload = function (e) {
+                            $('#imageResult')
+                                    .attr('src', e.target.result);
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                $(function () {
+                    $('#upload').on('change', function () {
+                        readURL(input);
+                    });
                 });
-            });
-        </script>
-        <script src="js/seller/jquery.dataTables.min.js"></script>
-        <script src="js/seller/dataTables.bootstrap5.min.js"></script>
-        <script src="js/seller/script1.js"></script>
+                var input = document.getElementById('upload');
+                var infoArea = document.getElementById('upload-label');
+
+                input.addEventListener('change', showFileName);
+                function showFileName(event) {
+                    var input = event.srcElement;
+                    var fileName = input.files[0].name;
+                    infoArea.textContent = 'File name: ' + fileName;
+                }
+            </script>
+            <script src="js/seller/jquery.dataTables.min.js"></script>
+            <script src="js/seller/dataTables.bootstrap5.min.js"></script>
+            <script src="js/seller/script1.js"></script>
     </body>
 </html>

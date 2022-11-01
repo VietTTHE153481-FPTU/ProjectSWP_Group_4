@@ -76,10 +76,10 @@ public class AddBlogServlet extends HttpServlet {
     throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("AuthorId"));
         String title = request.getParameter("title");
-        String image = request.getParameter("image");
+        String image = request.getParameter("imageLink");
         String content = request.getParameter("content");
         BlogDAO bd1 = new BlogDAO();
-        bd1.addBlog1(content, title, id);
+        bd1.addBlog1(content, title, image, id);
         BlogDAO bd = new BlogDAO();
         AccountDAO ac = new AccountDAO();
         Users u = ac.getAccById(id);

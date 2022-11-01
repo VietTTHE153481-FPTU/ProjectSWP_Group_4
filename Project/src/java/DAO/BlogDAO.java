@@ -211,26 +211,28 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
-    public void updateBlog(int id, String title, String content) {
-        String sql = "UPDATE [Blog] SET [BlogTitle] = ? ,[BlogContent] = ? WHERE ID = ?";
+    public void updateBlog(int id, String title, String content, String imageLink) {
+        String sql = "UPDATE [Blog] SET [BlogTitle] = ? ,[BlogContent] = ?, [imageLink] = ? WHERE ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, title);
             st.setString(2, content);
-            st.setInt(3, id);
+            st.setString(3, imageLink);
+            st.setInt(4, id);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error" + e);
         }
     }
     
-    public void updateBlogdetail(int id, String title, String content) {
-        String sql = "UPDATE [BlogDetail] SET [Title] = ? ,[Content] = ? WHERE BlogDetailID = ?";
+    public void updateBlogdetail(int id, String title, String content, String imgBlogDetail) {
+        String sql = "UPDATE [BlogDetail] SET [Title] = ? ,[Content] = ? ,[imgBlogDetail] = ? WHERE BlogDetailID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, title);
             st.setString(2, content);
-            st.setInt(3, id);
+            st.setString(3, imgBlogDetail);
+            st.setInt(4, id);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error" + e);
@@ -251,26 +253,28 @@ public class BlogDAO extends DBContext {
         }
     }
     
-    public void addBlogDetail(String content, String title,int id){
-        String sql = "INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(?,?,null,?)";
+    public void addBlogDetail(String content, String title, String imgBlogDetail, int id){
+        String sql = "INSERT INTO dbo.BlogDetail(Title, Content, imgBlogDetail, BlogID) VALUES(?,?,?,?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, title);
             st.setString(2, content);
-            st.setInt(3, id);
+            st.setString(3, imgBlogDetail);
+            st.setInt(4, id);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error" + e);
         }
     }
     
-    public void addBlog1(String content, String title,int id){
-        String sql = "INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES(1, 'November', 2022, ?, ?, null, ?)";
+    public void addBlog1(String content, String title, String imageLink, int id){
+        String sql = "INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID) VALUES(1, 'November', 2022, ?, ?, ?, ?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, title);
             st.setString(2, content);
-            st.setInt(3, id);
+            st.setString(3, imageLink);
+            st.setInt(4, id);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error" + e);
