@@ -354,6 +354,19 @@ INSERT INTO Cart VALUES (5,1,1);
 INSERT INTO Cart VALUES (5,2,1);
 INSERT INTO Cart VALUES (6,2,2);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Favorite_Product (
+	UserID int,
+	ProductID int
+	constraint userID_in_favorite_product FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	constraint productID_in_favorite_product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
+) ON [PRIMARY]
+GO
+INSERT INTO Favorite_Product VALUES (4,1);
+INSERT INTO Favorite_Product VALUES (4,15);
+INSERT INTO Favorite_Product VALUES (4,18);
+INSERT INTO Favorite_Product VALUES (4,8);
+INSERT INTO Favorite_Product VALUES (4,24);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Status](
 	[ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Name] [nvarchar](50) NOT NULL,
