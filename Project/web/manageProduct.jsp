@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +26,8 @@
             <div id="content">
                 <%@include file="layout/sidebar.jsp"%>
                 <div class="container-fluid">
-                    <span>Number of products: ${num}</span>
+                    <span>Number of products: ${num}&nbsp;<i class="fa fa-cart-plus" style="color: #ff0000"></i></span>
+                    <hr>
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <div class="card">
@@ -37,8 +39,8 @@
                                         <table id="example" class="table table-striped data-table" style="width: 100%">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Product Name</th>
+                                                    <th>Image</th>
                                                     <th>Description</th>
                                                     <th>Original Price</th>
                                                     <th>Sell Price</th>
@@ -47,14 +49,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach var="o" items="${list}">
-                                                <tr>
-                                                    <td>${o.getProductID()}</td>
-                                                    <td>${o.getProductName()}</td>
-                                                    <td>${o.getDescription()}</td>
-                                                
-                                                </tr>
-                                            </c:forEach>
+                                                <c:forEach var="o" items="${list}">
+                                                    <tr>
+                                                        <td>${o.getProductName()}</td>
+                                                        <td>
+                                                            <div class="img-thumbnail">
+                                                                <img src="resources/img/products/${o.getUrl()}" style="height: 200px; width: 200px"/>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div style="width: 330px">
+                                                                ${o.getDescription()}
+                                                            </div>
+                                                        </td>
+                                                        <td>₫ ${o.FormatPrice(o.getOriginalPrice())}</td>
+                                                        <td>₫ ${o.FormatPrice(o.getSellPrice())}</td>
+                                                        <td>${o.FormatPrice(o.getSalePercent())} %</td>
+                                                        <td>${o.getAmount()}</td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
