@@ -19,7 +19,7 @@
             <a href="#">Manage Order &nbsp;<i class="fa fa-cart-plus"></i></i></a>
         </li>
         <li>
-            <a href="#">Manage Product &nbsp;<i class="fa fa-product-hunt"></i></a>
+            <a href="ManageProduct">Manage Product &nbsp;<i class="fa fa-product-hunt"></i></a>
         </li>
         <li>
             <a href="ManageBlog">Manage Blog &nbsp;<i class="fa fa-newspaper-o"></i></a>

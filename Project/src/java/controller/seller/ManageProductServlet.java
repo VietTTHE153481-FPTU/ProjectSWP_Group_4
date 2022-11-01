@@ -4,7 +4,7 @@
  */
 package controller.seller;
 
-import DAO.BlogDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,17 +12,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Blog;
-import model.BlogDetail;
+import model.Products;
+import model.Users;
 
 /**
  *
- * @author trung
+ * @author admin
  */
-@WebServlet(name = "ManageBlogDetailServlet", urlPatterns = {"/ManageBlogDetail"})
-public class ManageBlogDetailServlet extends HttpServlet {
+@WebServlet(name = "ManageProductServlet", urlPatterns = {"/ManageProduct"})
+public class ManageProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ManageBlogDetailServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageBlogDetailServlet</title>");
+            out.println("<title>Servlet ManageProductServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageBlogDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageProductServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,20 +62,17 @@ public class ManageBlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO b = new BlogDAO();
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<BlogDetail> bd = b.getBlogDetailById(id);
-
-        Blog bg = b.getBlogs(id);
-        int num = b.totalBlogDetail(id);
-        int blogid = bg.getId();
+        ProductDAO pd= new ProductDAO();
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
+        List<Products> products= pd.getProductsbyShopid(u.getShopId(), "", 0, 0, 0);
+        int num= pd.getNumProductByShopId(u.getShopId());
+        Products product= pd.getProductByShopId(u.getShopId());
         
-        
-        request.setAttribute("blogdetail", bd);
-        request.setAttribute("blog", bg);
         request.setAttribute("num", num);
-        request.setAttribute("blogid", blogid);
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        request.setAttribute("detail", product);
+        request.setAttribute("list", products);
+        request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
     }
 
     /**
@@ -89,7 +86,7 @@ public class ManageBlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
