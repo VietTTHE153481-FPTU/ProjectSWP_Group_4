@@ -5,6 +5,7 @@
 
 package controller.seller;
 
+import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Blog;
+import model.BlogDetail;
 
 /**
  *
@@ -55,7 +59,23 @@ public class DeleteBlogDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("BlogDetailId"));
+        int id1 = Integer.parseInt(request.getParameter("BlogId"));
+        BlogDAO b = new BlogDAO();
+        b.deleteDetail(id);
+        List<BlogDetail> bd = b.getBlogDetailById(id1);
+
+        Blog bg = b.getBlogs(id1);
+        int num = b.totalBlogDetail(id1);
+        int blogid = bg.getId();
+        
+        
+        request.setAttribute("blogdetail", bd);
+        request.setAttribute("blog", bg);
+        request.setAttribute("num", num);
+        request.setAttribute("blogid", blogid);
+        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        
     } 
 
     /** 

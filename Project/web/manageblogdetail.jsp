@@ -76,7 +76,7 @@
                                                                 <a style="width: 120px" class="btn btn-info" href="updateblogdetail?BlogDetailID=${bd.blogDetailID}">Edit Content</a>                                         
                                                             </div>
                                                             <div class="mt-2 text-center">
-                                                                <a style="width: 120px" class="btn btn-info" href="#">Delete</a>                                         
+                                                                <a style="width: 120px" class="btn btn-info" href="deleteblogdetail?BlogDetailId=${bd.blogDetailID}&BlogId=${blogid}">Delete</a>                                         
                                                             </div>
                                                         </div>
                                                     </div>

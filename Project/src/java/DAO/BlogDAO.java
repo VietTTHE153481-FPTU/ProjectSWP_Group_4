@@ -286,6 +286,16 @@ public class BlogDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
+    
+    public void deleteDetail(int id) {
+        String sql = "DELETE FROM [BlogDetail] WHERE BlogDetailID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
 
     
     public int getAccountBlog(int id) {
