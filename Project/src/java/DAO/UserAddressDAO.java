@@ -41,6 +41,26 @@ public class UserAddressDAO extends DBContext {
         return list;
     }
 
+    public void updateAddress(int id, String fullname, String phone, int inputCity, String note) {
+        String sql = "UPDATE [dbo].[UserAddress]\n"
+                + "   SET [UserID] = ?\n"
+                + "      ,[ShipName] = ?\n"
+                + "      ,[PhoneNum] = ?\n"
+                + "      ,[ShipCityID] = ?\n"
+                + "      ,[NoteDetail] = ?\n"
+                + " WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.setString(2, fullname);
+            st.setString(3, phone);
+            st.setInt(4, inputCity);
+            st.setString(5, note);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
     public void addAddress(int id, String fullname, String phone, int inputCity,
             String note) {
         String sql = "INSERT INTO [UserAddress] VALUES (?, ?, ?, ?, ?)";
@@ -55,7 +75,7 @@ public class UserAddressDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
-    
+
     public void delete(int id) {
         String sql = "DELETE FROM [UserAddress] WHERE ID = ?";
         try {
@@ -69,7 +89,7 @@ public class UserAddressDAO extends DBContext {
     public static void main(String[] args) {
         UserAddressDAO ad = new UserAddressDAO();
         ad.addAddress(6, "Trung Việt", "0369147268", 52, "Sơn La");
-        
+
         System.out.println(ad);
     }
 

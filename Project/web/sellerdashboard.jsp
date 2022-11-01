@@ -38,7 +38,7 @@
                             <div class="card bg-warning text-dark h-100">
                                 <div class="card-body py-3">
                                     <h3 class="text-white text-center fs-5">Total Product </h3>
-                                    <p class="text-center text-white mt-4 mb-0 fs-3 ">${totalPro} <i class="fa fa-product-hunt"></i></p>
+                                    <p class="text-center text-white mt-4 mb-0 fs-3 ">${toalProduct} <i class="fa fa-product-hunt"></i></p>
                                 </div>
                             </div>
                         </div>

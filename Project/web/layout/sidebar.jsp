@@ -16,7 +16,7 @@
             <a href="mktdashboard">Dashboard &nbsp;<i class="fa fa-dashboard"></i></a>
         </li>
         <li>
-            <a href="#">Manage Order &nbsp;<i class="fa fa-cart-plus"></i></i></a>
+            <a href="ManageOrder">Manage Order &nbsp;<i class="fa fa-cart-plus"></i></i></a>
         </li>
         <li>
             <a href="ManageProduct">Manage Product &nbsp;<i class="fa fa-product-hunt"></i></a>

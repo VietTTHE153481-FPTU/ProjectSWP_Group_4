@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.seller;
+package controller.customer;
 
-import DAO.SellerDAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +13,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Users;
+import model.Cart;
+import model.Products;
+import model.item;
 
 /**
  *
- * @author trung
+ * @author Minhm
  */
-@WebServlet(name = "SellerDashboardServlet", urlPatterns = {"/mktdashboard"})
-public class SellerDashboardServlet extends HttpServlet {
+@WebServlet(name = "DeleteInCartServlet", urlPatterns = {"/DeleteInCart"})
+public class DeleteInCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class SellerDashboardServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SellerDashboardServlet</title>");
+            out.println("<title>Servlet DeleteInCartServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SellerDashboardServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteInCartServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,19 +62,32 @@ public class SellerDashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SellerDAO sd = new SellerDAO();
+        ProductDAO dao = new ProductDAO();
         HttpSession session = request.getSession();
-        Users a = (Users) session.getAttribute("account");
-        
-        int numCus = sd.countTotalCustomerBySeller(a.getShopId());
-        int numProduct = sd.countTotalProductBySeller(a.getShopId());
-        int numOrder = sd.countTotalOrderBySeller(a.getShopId());
-        
-        
-        request.setAttribute("totalCus", numCus);
-        request.setAttribute("toalProduct", numProduct);
-        request.setAttribute("totalOrders", numOrder);
-        request.getRequestDispatcher("sellerdashboard.jsp").forward(request, response);
+        int mode = Integer.parseInt(request.getParameter("mode"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        Cart b = (Cart) session.getAttribute("cart");
+
+        switch (mode) {
+            case 1: {
+                b.addItem(new item(dao.getProductById(id), 1));
+                break;
+            }
+            case 2: {             
+                b.addItem(new item(dao.getProductById(id), -1));
+                break;
+            }
+            case 3: {
+                b.remove(id);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        session.setAttribute("cart", b);
+        response.sendRedirect("ViewCartServlet");
+
     }
 
     /**
@@ -86,7 +101,7 @@ public class SellerDashboardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("sellerdashboard.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
