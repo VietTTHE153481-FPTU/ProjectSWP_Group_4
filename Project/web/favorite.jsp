@@ -37,11 +37,11 @@
                                 <p class="mb-5 text-center">
                                     There are <i class="text-info font-weight-bold">${num}</i>&nbsp; products in your favorite list
                                 </p>
-                                <table id="shoppingCart" class="table table-condensed table-responsive">
+                                <table id="shoppingCart" class="table table-condensed">
                                     <tr>
                                         <th style="width:50%">Product</th>
                                         <th style="width:12%">Price</th>
-                                        <th style="width:10%">Quantity</th>
+                                        <th style="width:10%">Shop</th>
                                         <th style="width:10%"></th>
                                     </tr>
                                     <c:forEach items="${wishlish}" var="i">
@@ -58,19 +58,23 @@
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td data-th="Price">${p.FormatPrice(p.getSellPrice())}₫</td>
+                                                    <c:forEach items="${listS}" var="s">
+                                                        <c:if test="${s.getID() == p.getShopID()}">
+                                                            <td data-th="Shop">${s.getShopName()}</td>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    <td class="actions" data-th="">
+                                                        <div class="text-right">
+                                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                                <a href="#" onclick="doDelete('${i.getProductID()}')">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
+                                                            </button>
+                                                        </div>
+                                                    </td>
                                                 </c:if>
                                             </c:forEach>
-                                            <td data-th="Price"></td>
-                                            <td data-th="Quantity"></td>
-                                            <td class="actions" data-th="">
-                                                <div class="text-right">
-                                                    <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                                        <a href="#" onclick="doDelete('${i.getProductID()}')">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </button>
-                                                </div>
-                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </table>

@@ -25,18 +25,6 @@
         <link rel="stylesheet" type="text/css" href="styles/detail_styles.css">
         <link rel="stylesheet" type="text/css" href="styles/detail_responsive.css">
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
-        <style>
-            .wishlist{
-                background-color: #cccccc;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 200px;
-                height: 50px;
-                border: solid 1px #e5e5e5;
-                padding-left: 14px;
-            }
-        </style>
     </head>
     <body>
         <div class="super_container">
@@ -98,13 +86,17 @@
                                 <a onclick="func();"><button id="button1" class="red_button add_to_cart_button" >ADD TO CART</button></a>
                             </div>
                             <br>
-                            <div class="wishlist">
-                                <a href="#" style="color: #000">
-                                    <i class="fa fa-heart" style="color: #ff0000"></i>&nbsp;ADD TO YOUR WISHLIST
-                                </a>
-                            </div>
+                            <form method="get" action="addToWishlist">
+                                <div class="mt-5">
+                                    <input hidden type="number" value="${account.getUserID()}"/>
+                                    <input hidden name="id" type="text" value="${detail.getProductID()}"/>
+                                    <button class="btn btn-addwish-b2 profile-button" type="submit">
+                                        <i class="fa fa-heart" style="color: #ff0000"></i>&nbsp;ADD TO YOUR WISHLIST
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                    </div>       
+                    </div>   
                 </div>
             </div>
             <div class="tabs_section_container" style="padding-top: 10px">
