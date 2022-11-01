@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Favorite_Products;
 import model.Products;
 
 /**
@@ -289,6 +290,39 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    public List<Favorite_Products> getMyWishlist(int id) {
+        List<Favorite_Products> list = new ArrayList<>();
+        String sql = "SELECT * FROM Favorite_Product WHERE UserID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Favorite_Products fp = new Favorite_Products();
+                fp.setUserID(rs.getInt("UserID"));
+                fp.setProductID(rs.getInt("ProductID"));
+                list.add(fp);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public int totalProductInWishlish(int id) {
+        int a = 0;
+        String sql = "SELECT COUNT(ProductID) AS Count FROM Favorite_Product WHERE UserID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return a = rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+
     public int getNumProductByShopId(int id) {
         int a = 0;
         String sql = "SELECT COUNT(ProductID) AS Count FROM Product WHERE ShopID = ?";
@@ -315,6 +349,16 @@ public class ProductDAO extends DBContext {
         } catch (SQLException e) {
         }
         return 0;
+    }
+    
+    public void delete(int id) {
+        String sql = "DELETE FROM [Favorite_Product] WHERE ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
     }
 
     public void insert(Products p) {
@@ -346,6 +390,7 @@ public class ProductDAO extends DBContext {
         }
     }
 
+<<<<<<< HEAD
     public void update(Products p) {
         String sql = "UPDATE [dbo].[Product]\n"
                 + "   SET [ProductName] = ?\n"
@@ -387,6 +432,8 @@ public class ProductDAO extends DBContext {
         }
     }
 
+=======
+>>>>>>> 4e5cf30928f689c3c00b2dc03499edc4d3be8f30
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         int num = pd.getNumProductByShopId(4);
