@@ -113,11 +113,13 @@
                                                     <c:forEach items="${listPdByCid}" var="pd">
                                                         <div class="product-item">
                                                             <div class="product discount product_filter">
-                                                                <a href="detail?id=${pd.getProductID()}">
-                                                                    <div class="product_image">
+                                                                <div class="product_image">
+                                                                    <a href="detail?id=${pd.getProductID()}">
                                                                         <img src="resources/img/products/${pd.getUrl()}" height="230px"/>
-                                                                    </div>
-                                                                    <div class="favorite favorite_left"></div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="favorite favorite_left"></div>
+                                                                <a href="detail?id=${pd.getProductID()}">
                                                                     <c:if test="${pd.getSalePercent()>0}">
                                                                         <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${pd.FormatPrice(pd.getSalePercent())}%</span></div>
                                                                     </c:if>

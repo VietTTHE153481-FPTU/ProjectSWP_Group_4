@@ -34,6 +34,9 @@
                                 <div class="card-header">
                                     <span><i class="fa fa-table me-2"></i></span> Product Dashboard
                                 </div>
+                                <div>
+                                    <a href="AddProduct" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Add New Product</a>
+                                </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="example" class="table table-striped data-table" style="width: 100%">
@@ -46,6 +49,7 @@
                                                     <th>Sell Price</th>
                                                     <th>Sale Percent</th>
                                                     <th>Amount</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -66,6 +70,10 @@
                                                         <td>₫ ${o.FormatPrice(o.getSellPrice())}</td>
                                                         <td>${o.FormatPrice(o.getSalePercent())} %</td>
                                                         <td>${o.getAmount()}</td>
+                                                        <td>
+                                                            <a href="UpdateProduct?id=${o.getProductID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Update</a>
+                                                            <a href="#" onclick="doDelete('${o.getProductID()}')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Delete</a>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -83,6 +91,13 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/seller/scrollbar.concat.min.js"></script>
 
+        <script type="text/javascript">
+            function doDelete(id){
+                if(confirm("Are you sure to delete product with id="+id)){
+                    window.location="DeleteProduct?id="+id;
+                }
+            }
+        </script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#sidebar").mCustomScrollbar({

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Favorite_Products;
 import model.Products;
 
 /**
@@ -289,6 +290,39 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    public List<Favorite_Products> getMyWishlist(int id) {
+        List<Favorite_Products> list = new ArrayList<>();
+        String sql = "SELECT * FROM Favorite_Product WHERE UserID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Favorite_Products fp = new Favorite_Products();
+                fp.setUserID(rs.getInt("UserID"));
+                fp.setProductID(rs.getInt("ProductID"));
+                list.add(fp);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public int totalProductInWishlish(int id) {
+        int a = 0;
+        String sql = "SELECT COUNT(ProductID) AS Count FROM Favorite_Product WHERE UserID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return a = rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+        }
+        return a;
+    }
+
     public int getNumProductByShopId(int id) {
         int a = 0;
         String sql = "SELECT COUNT(ProductID) AS Count FROM Product WHERE ShopID = ?";
@@ -316,13 +350,108 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
+    
+    public void delete(int id) {
+        String sql = "DELETE FROM [Favorite_Product] WHERE ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    public void insert(Products p) {
+        try {
+            String sql = "INSERT INTO [dbo].[Product]\n"
+                    + "           ([ProductName]\n"
+                    + "           ,[Description]\n"
+                    + "           ,[OriginalPrice]\n"
+                    + "           ,[SellPrice]\n"
+                    + "           ,[SalePercent]\n"
+                    + "           ,[SubCategoryID]\n"
+                    + "           ,[ShopID]\n"
+                    + "           ,[Amount]\n"
+                    + "           ,[StatusID])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?,?,1)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getProductName());
+            st.setString(2, p.getDescription());
+            st.setDouble(3, p.getOriginalPrice());
+            st.setDouble(4, p.getSellPrice());
+            st.setDouble(5, p.getSalePercent());
+            st.setInt(6, p.getSubCategoryID());
+            st.setInt(7, p.getShopID());
+            st.setInt(8, p.getAmount());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void update(Products p) {
+        String sql = "UPDATE [dbo].[Product]\n"
+                + "   SET [ProductName] = ?\n"
+                + "      ,[Description] = ?\n"
+                + "      ,[OriginalPrice] = ?\n"
+                + "      ,[SellPrice] = ?\n"
+                + "      ,[SalePercent] = ?\n"
+                + "      ,[SubCategoryID] = ?\n"
+                + "      ,[ShopID] = ?\n"
+                + "      ,[Amount] = ?\n"
+                + "      ,[StatusID] = 1\n"
+                + " WHERE ProductID =?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getProductName());
+            st.setString(2, p.getDescription());
+            st.setDouble(3, p.getOriginalPrice());
+            st.setDouble(4, p.getSellPrice());
+            st.setDouble(5, p.getSalePercent());
+            st.setInt(6, p.getSubCategoryID());
+            st.setInt(7, p.getShopID());
+            st.setInt(8, p.getAmount());
+            st.setInt(9, p.getProductID());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM ProductImg\n"
+                + "      WHERE ProductID = ?";
+        String sql1= "DELETE FROM Product\n"
+                + "      WHERE ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public static void main(String[] args) {
+<<<<<<< HEAD
 
         ProductDAO pd = new ProductDAO();        
         List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
         for (Products product : products) {
             System.out.println(product.getProductName());
         }
+=======
+        ProductDAO pd = new ProductDAO();
+        int num = pd.getNumProductByShopId(4);
+        System.out.println(num);
+//        for (Products product : products) {
+//            System.out.println(product);
+//        }
+>>>>>>> ae24527ccc9b6ff2ac9748b1fe2d0470f7c7feb3
     }
 }
