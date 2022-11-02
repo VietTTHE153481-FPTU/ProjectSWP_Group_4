@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.OrderSeller;
 import model.Users;
 
 /**
@@ -67,8 +69,9 @@ public class SellerDashboardServlet extends HttpServlet {
         int numCus = sd.countTotalCustomerBySeller(a.getShopId());
         int numProduct = sd.countTotalProductBySeller(a.getShopId());
         int numOrder = sd.countTotalOrderBySeller(a.getShopId());
+        List<OrderSeller> list = sd.getAllProductOrderBySeller(a.getShopId());
         
-        
+        request.setAttribute("listOrder", list);
         request.setAttribute("totalCus", numCus);
         request.setAttribute("toalProduct", numProduct);
         request.setAttribute("totalOrders", numOrder);
