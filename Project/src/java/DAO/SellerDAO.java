@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.OrderSeller;
 import model.Products;
 
 /**
@@ -63,28 +64,23 @@ public class SellerDAO extends DBContext {
         return -1;
     }
 
-    public List<Products> getProductBySeller(int id) {
-        List<Products> list = new ArrayList<>();
-        String sql = "select p.* from Product p , ProductStatus ps where ps.StatusID = p.StatusID and p.ShopID = ?";
+    public List<OrderSeller> getAllProductOrderBySeller(int id) {
+        List<OrderSeller> list = new ArrayList<>();
+        String sql = "select distinct o.ID, od.ProductName,od.ProductPrice,o.Status, o.Date, od.Quantity from Orders o, Order_Detail od, Product p, Order_Status os where p.ShopID = ? and o.ID = od.Order_ID";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                 Products p = new Products();
-                p.setProductID(rs.getInt("ProductID"));
-                p.setProductName(rs.getString("ProductName"));
-                p.setDescription(rs.getString("Description"));
-                p.setOriginalPrice(rs.getDouble("OriginalPrice"));
-                p.setSellPrice(rs.getDouble("SellPrice"));
-                p.setSalePercent(rs.getDouble("SalePercent"));
-                p.setSubCategoryID(rs.getInt("SubCategoryID"));
-                p.setShopID(rs.getInt("ShopID"));
-                p.setAmount(rs.getInt("Amount"));
-                p.setStatusID(rs.getInt("StatusID"));
-                p.setUrl(rs.getString("ProductImgURL"));
-                p.setCategoryID(rs.getInt("CategoryID"));
-                list.add(p);
+                OrderSeller os = OrderSeller.builder()
+                        .orderID(rs.getInt(1)).
+                        productName(rs.getString(2)).
+                        productPrice(rs.getInt(3)).
+                        status(rs.getInt(4)).
+                        date(rs.getDate(5)).
+                        quantity(rs.getInt(6))
+                        .build();
+                list.add(os);
               }
           } catch (SQLException e) {
             System.out.println(e);
@@ -94,10 +90,11 @@ public class SellerDAO extends DBContext {
 
     public static void main(String[] args) {
         SellerDAO sd = new SellerDAO();
-//        System.out.println(sd.countTotalProductBySeller(1));
-        List<Products> list = sd.getProductBySeller(1);
-        for (Products products : list) {
-            System.out.println(products);
+        List<OrderSeller> list = sd.getAllProductOrderBySeller(1);
+        for (OrderSeller o : list) {
+            System.out.println(o);
         }
+//        System.out.println(sd.countTotalProductBySeller(1));
+      
     }
 }
