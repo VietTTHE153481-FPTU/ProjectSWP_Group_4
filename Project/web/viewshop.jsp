@@ -35,7 +35,13 @@
                             <div class="breadcrumbs d-flex flex-row align-items-center">
                                 <div class="row card-body" style="padding-top: 25px">
                                     <div class="col-sm-4">
-                                        <h4 class="card-title">${shop.getShopName()} Shop</h4>
+                                        <h4 class="card-title">${shop.getShopName()} Shop&nbsp;
+                                            <c:if test="${account.getShopId() != shop.getID()}">
+                                                <a href="report" style="color: #000000">
+                                                    <i class="fa fa-exclamation-circle"></i>
+                                                </a>
+                                            </c:if>
+                                        </h4>
                                         <p class="card-text"><i class="fa fa-envelope">&nbsp;</i> ${seller.getEmail()}</p>
                                     </div>
                                     <div class="col-sm-8 text-center">
