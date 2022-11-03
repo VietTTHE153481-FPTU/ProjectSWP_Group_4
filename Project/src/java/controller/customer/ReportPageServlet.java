@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.customer;
 
-import DAO.ProductDAO;
-import DAO.UserAddressDAO;
+import DAO.ReportDAO;
+import DAO.ShopDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,43 +14,47 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.text.DecimalFormat;
+import java.util.List;
+import model.Shop;
 import model.Users;
 
 /**
  *
- * @author Minhm
+ * @author trung
  */
-@WebServlet(name="checkout", urlPatterns={"/CheckOut"})
-public class CheckOutServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+@WebServlet(name = "ReportPageServlet", urlPatterns = {"/report"})
+public class ReportPageServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PlaceOrderServlet</title>");  
+            out.println("<title>Servlet ReportPageServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PlaceOrderServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ReportPageServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -59,23 +62,17 @@ public class CheckOutServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        ProductDAO pd= new ProductDAO();
-        HttpSession session = request.getSession();
-        Users u = (Users) session.getAttribute("account");
-        UserAddressDAO uad= new UserAddressDAO();
-        String address= uad.getAddressByUser(u);
-        int shippingfee= uad.getShippingFee(u);
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        String format = formatter.format(shippingfee).toString();
-        
-        request.setAttribute("shippingfee", format);
-        request.setAttribute("address", address);
-        request.getRequestDispatcher("checkout.jsp").forward(request, response);
-    } 
+            throws ServletException, IOException {
+        ShopDAO sd = new ShopDAO();
+        List<Shop> list = sd.getAllShop();
 
-    /** 
+        request.setAttribute("shop", list);
+        request.getRequestDispatcher("reportpage.jsp").forward(request, response);
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -83,12 +80,22 @@ public class CheckOutServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        String title = request.getParameter("title");
+        int inputShop = Integer.parseInt(request.getParameter("inputShop"));
+        String content = request.getParameter("content");
+        
+        ReportDAO rd = new ReportDAO();
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
+        
+        rd.addReport(u.getUserID(), title, inputShop, content);
+        request.getRequestDispatcher("reportpage.jsp").forward(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

@@ -29,7 +29,7 @@
                 display: flex;
                 border: 1px dashed rgba(0,0,0,.09);
                 margin: 10px;
-                justify-content: space-evenly;
+                justify-content: space-between;
             }
             .noti{
                 flex: 4;
@@ -72,8 +72,8 @@
                                         <h4 style="color:orange;">Address</h4>
                                         <br/>
                                         <p>
-                                            <span style="font-weight: bold">${sessionScope.account.getFullname()}  ${sessionScope.account.getPhone()}</span>
-                                            <span></span>
+                                            
+                                            <span>${requestScope.address}</span>
                                             &nbsp&nbsp&nbsp&nbsp
                                             <a><a href="address">Change address</a>
                                         </p>
@@ -114,7 +114,9 @@
                                         </div>
                                         <div class="ship">
                                             <span style="color: #008fa1">Shipping fees:</span>
-                                            
+                                            <div>
+                                                <h5>${requestScope.shippingfee} ₫</h5>
+                                            </div>
                                         </div>
                                     </div>
                                             <div class="float-right text-right">

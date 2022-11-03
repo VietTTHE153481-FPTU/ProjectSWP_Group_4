@@ -419,6 +419,19 @@ INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPri
 INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (10,21,N'Dress two-shoulder chiffon dress',130000,2);
 INSERT [dbo].[Order_Detail] ([Order_ID], [ProductID], [ProductName], [ProductPrice], [Quantity]) VALUES (11,8,N'Men smokey gray 4-way stretch jeans HD02',449000,3);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE [dbo].[Report](
+	[ReportID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[UserID] [int],
+	[ReportTitle] nvarchar(1000),
+	[ShopID] int,
+	[ReportContent] nvarchar(2000),
+	[Date] DATETIME,
+	constraint userID_in_repor FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	constraint ShopID_in_repor FOREIGN KEY(ShopID) REFERENCES Shop(ID),
+) ON [PRIMARY]
+GO
+INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả',2 , N'Shop LsThai có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ShipInfo (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	Order_ID int,
@@ -431,20 +444,6 @@ CREATE TABLE ShipInfo (
 	constraint ship_city_in_ship_info FOREIGN KEY(ShipCityID) REFERENCES Ship(id)
 ) ON [PRIMARY]
 GO
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE Notifications(
-	ID int PRIMARY KEY identity (1,1),
-	UserID int,
-	OrderID int,
-	Content nvarchar(1000),
-	[status] int,
-	[time] datetime,
-	constraint UserID_in_Users FOREIGN KEY(UserID) REFERENCES Users(userId),
-	constraint OrderID_in_Orders FOREIGN KEY(OrderID) REFERENCES Orders(ID)
-);
-GO
-INSERT INTO Notifications VALUES (5,1,N'Test Checked',1,GETDATE())
-INSERT INTO Notifications VALUES (5,1,N'Test Unchecked',0,GETDATE())
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Feedback (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
@@ -468,14 +467,15 @@ CREATE TABLE Feedback_Replies (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	FeedbackID int,
 	UserID int,
+	ProductID int,
 	RepliesText nvarchar(2000),
 	constraint userID_in_user_4 FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint feedbackID_in_feedback FOREIGN KEY(FeedbackID) REFERENCES Feedback(ID),
 ) ON [PRIMARY]
 GO
-INSERT INTO Feedback_Replies VALUES (1, 5, N'Xin Cám Ơn!');
-INSERT INTO Feedback_Replies VALUES (2, 4, N'Xin Cám Ơn!');
-INSERT INTO Feedback_Replies VALUES (3, 6, N'Xin Cám Ơn!');
+INSERT INTO Feedback_Replies VALUES (1, 5, 1, N'Xin Cám Ơn!');
+INSERT INTO Feedback_Replies VALUES (2, 4, 2, N'Xin Cám Ơn!');
+INSERT INTO Feedback_Replies VALUES (3, 6, 1, N'Xin Cám Ơn!');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create TABLE Blog(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
@@ -601,12 +601,6 @@ INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (16, 
 INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (17, N'[Tài khoản LeventShop] Hướng dẫn thay đổi mật khẩu tài khoản đăng nhập',9)
 INSERT INTO [dbo].[HelpContent] ([ContentID], [Content], [TitleID]) VALUES (18, N'Coming soon....',10)
 SET IDENTITY_INSERT HelpContent OFF
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-CREATE TABLE HelpContentDetail(
-	ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-
-)*/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Banner
 (

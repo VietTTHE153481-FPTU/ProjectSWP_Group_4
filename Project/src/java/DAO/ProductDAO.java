@@ -307,7 +307,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int totalProductInWishlish(int id) {
         int a = 0;
         String sql = "SELECT COUNT(ProductID) AS Count FROM Favorite_Product WHERE UserID = ?";
@@ -350,7 +350,7 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
-    
+
     public void deleteFromWishlist(int id) {
         String sql = "DELETE FROM [Favorite_Product] WHERE ProductID = ?";
         try {
@@ -375,6 +375,11 @@ public class ProductDAO extends DBContext {
                     + "           ,[StatusID])\n"
                     + "     VALUES\n"
                     + "           (?,?,?,?,?,?,?,?,1)";
+            String sql1 = "INSERT INTO [dbo].[ProductImg]\n"
+                    + "           ([ProductID]\n"
+                    + "           ,[ProductImgURL])\n"
+                    + "     VALUES\n"
+                    + "           (?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, p.getProductName());
             st.setString(2, p.getDescription());
@@ -385,6 +390,9 @@ public class ProductDAO extends DBContext {
             st.setInt(7, p.getShopID());
             st.setInt(8, p.getAmount());
             st.executeUpdate();
+            PreparedStatement st1= connection.prepareStatement(sql1);
+            st1.setInt(1, p.getProductID());
+            st1.setString(2, p.getUrl());
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -420,29 +428,62 @@ public class ProductDAO extends DBContext {
     }
 
     public void deleteProduct(int id) {
-        String sql = "DELETE FROM ProductImg\n"
+        String sql1 = "DELETE FROM Order_Detail\n"
                 + "      WHERE ProductID = ?";
-        String sql1= "DELETE FROM Product\n"
+        String sql2 = "DELETE FROM Cart\n"
+                + "      WHERE ProductID = ?";
+        String sql3 = "DELETE FROM Feedback\n"
+                + "      WHERE ProductID = ?";
+        String sql4 = "DELETE FROM Feedback_Replies\n"
+                + "      WHERE ProductID = ?";
+        String sql5 = "DELETE FROM ProductImg\n"
+                + "      WHERE ProductID = ?";
+        String sql = "DELETE FROM Product\n"
                 + "      WHERE ProductID = ?";
         try {
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setInt(1, id);
+            st1.executeUpdate();
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+            st2.setInt(1, id);
+            st2.executeUpdate();
+            PreparedStatement st3 = connection.prepareStatement(sql3);
+            st3.setInt(1, id);
+            st3.executeUpdate();
+            PreparedStatement st4 = connection.prepareStatement(sql4);
+            st4.setInt(1, id);
+            st4.executeUpdate();
+            PreparedStatement st5 = connection.prepareStatement(sql5);
+            st5.setInt(1, id);
+            st5.executeUpdate();
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
-            
-            PreparedStatement st1 = connection.prepareStatement(sql1);
-            st.setInt(1, id);
-            st.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
+
     public static void main(String[] args) {
+<<<<<<< HEAD
 
         ProductDAO pd = new ProductDAO();        
+=======
+        ProductDAO pd = new ProductDAO();
+>>>>>>> 290b7a1fca355d534ae3251bf0029c606101515e
         List<Products> products = pd.getProductsbyShopid(2, "", 0, 0, 0);
         for (Products product : products) {
             System.out.println(product.getProductName());
         }
+<<<<<<< HEAD
 
+=======
+        int num = pd.getNumProductByShopId(4);
+        System.out.println(num);
+//        for (Products product : products) {
+//            System.out.println(product);
+//        }
+>>>>>>> 290b7a1fca355d534ae3251bf0029c606101515e
     }
 }
