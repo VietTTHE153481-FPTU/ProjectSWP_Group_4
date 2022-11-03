@@ -41,7 +41,7 @@ public class UserAddressDAO extends DBContext {
         return list;
     }
 
-    public void updateAddress(int id, String fullname, String phone, int inputCity, String note) {
+    public void updateAddress(int addressid, int id, String fullname, String phone, int inputCity, String note) {
         String sql = "UPDATE [dbo].[UserAddress]\n"
                 + "   SET [UserID] = ?\n"
                 + "      ,[ShipName] = ?\n"
@@ -56,6 +56,7 @@ public class UserAddressDAO extends DBContext {
             st.setString(3, phone);
             st.setInt(4, inputCity);
             st.setString(5, note);
+            st.setInt(6, addressid);
             st.executeUpdate();
         } catch (SQLException e) {
         }
