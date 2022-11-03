@@ -44,11 +44,9 @@ public class Tracking extends DBContext {
                 + "   SET [num] = ?\n"
                 + "      ,[lastUpdate] = ?\n"
                 + " WHERE no_day = 1";
-<<<<<<< HEAD
         List<hold> Hold = isOK();
 
-=======
-        List<hold> Hold = isOK(num);
+
         /*
 >>>>>>> 290b7a1fca355d534ae3251bf0029c606101515e
         if (now.isAfter(LocalDate.parse(Hold.get(0).date, dtf))) {

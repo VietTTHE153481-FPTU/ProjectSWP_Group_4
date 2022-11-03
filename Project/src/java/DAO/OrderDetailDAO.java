@@ -7,9 +7,12 @@ package DAO;
 import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Cart;
 import model.OrderDetail;
+import model.item;
 
 /**
  *
@@ -55,18 +58,43 @@ public class OrderDetailDAO extends DBContext {
         }
         return od;
     }
-    
+
+    public void insertOrderDetail(Cart c, int id) {
+        List<item> product= c.getListItem();
+        String sql = "INSERT INTO [dbo].[Order_Detail]\n"
+                + "           ([Order_ID]\n"
+                + "           ,[ProductID]\n"
+                + "           ,[ProductName]\n"
+                + "           ,[ProductPrice]\n"
+                + "           ,[Quantity])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?)";
+        try {
+            PreparedStatement st= connection.prepareStatement(sql);
+            for (item i : product) {
+                st.setInt(1, id);
+                st.setInt(2, i.getItem_product().getProductID());
+                st.setString(3, i.getItem_product().getProductName());
+                st.setDouble(4, i.getItem_product().getSellPrice());
+                st.setInt(5, i.getNumO());
+                st.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
     public static void main(String[] args) {
         OrderDetailDAO od = new OrderDetailDAO();
-            List<OrderDetail> orderList = od.getOdByOrderId(5);
-            
-            int total=0;
-            for (OrderDetail o : orderList) {
-               total+=(o.getProductPrice()*o.getQuantity()); 
-            }
-            System.out.println(total);
-            for (OrderDetail orderDetail : orderList) {
-                System.out.println(orderDetail.getProductName());
+        List<OrderDetail> orderList = od.getOdByOrderId(5);
+
+        int total = 0;
+        for (OrderDetail o : orderList) {
+            total += (o.getProductPrice() * o.getQuantity());
+        }
+        System.out.println(total);
+        for (OrderDetail orderDetail : orderList) {
+            System.out.println(orderDetail.getProductName());
         }
     }
 

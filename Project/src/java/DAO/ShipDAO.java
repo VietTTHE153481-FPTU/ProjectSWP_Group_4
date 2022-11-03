@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Ship;
+import model.UserAddress;
 
 /**
  *
@@ -53,5 +54,29 @@ public class ShipDAO extends DBContext {
             System.out.println(e);
         }
         return null;
+    }
+
+    public void insertShipInfo(int id, String note ,UserAddress ud) {
+        String sql = "INSERT INTO [dbo].[ShipInfo]\n"
+                + "           ([Order_ID]\n"
+                + "           ,[CustomerName]\n"
+                + "           ,[ShippingAddress]\n"
+                + "           ,[ShipCityID]\n"
+                + "           ,[PhoneNum]\n"
+                + "           ,[Note])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?)";
+        try {
+            PreparedStatement st= connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.setString(2, ud.getShipName());
+            st.setString(3, ud.getNoteDetail());
+            st.setInt(4, ud.getShipCityID());
+            st.setString(5, ud.getPhoneNum());
+            st.setString(6, note);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }

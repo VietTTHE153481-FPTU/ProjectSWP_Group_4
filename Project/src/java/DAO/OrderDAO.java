@@ -142,9 +142,52 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
-    
-    public void createOrder(Order o){
-        
+
+    public void createOrder(Order o) {
+        String sql = "INSERT INTO [dbo].[Orders]\n"
+                + "           ([UserID]\n"
+                + "           ,[TotalPrice]\n"
+                + "           ,[Note]\n"
+                + "           ,[Status]\n"
+                + "           ,[Date])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,1,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, o.getUserId());
+            st.setDouble(2, o.getTotalPrice());
+            st.setString(3, o.getNote());
+            st.setString(4, o.getDate());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public Order getCheckOutOrder(int id) {
+        String sql = "SELECT TOP(1)   Order_Status.Name, Orders.ID, Orders.UserID, Orders.TotalPrice, Orders.Note, Orders.Date\n"
+                + "FROM            Order_Status INNER JOIN\n"
+                + "                         Orders ON Order_Status.ID = Orders.Status\n"
+                + "WHERE UserID=?\n"
+                + "  ORDER BY Date DESC";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Order(
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(1),
+                        rs.getDate(6)
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
     public static void main(String[] args) {

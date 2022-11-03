@@ -12,13 +12,13 @@ public class OrderDetail extends ProductDetailImg {
 
     int orderID;
     String productName;
-    int productPrice;
+    double productPrice;
     int quantity;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderID, int productID, String productName, int productPrice, int quantity) {
+    public OrderDetail(int orderID, int productID, String productName, double productPrice, int quantity) {
         this.orderID = orderID;
         this.productID = productID;
         this.productName = productName;
@@ -26,7 +26,7 @@ public class OrderDetail extends ProductDetailImg {
         this.quantity = quantity;
     }
 
-    public OrderDetail(int productId, String productName, String productImgURL, int ProductPrice, int quantity) {
+    public OrderDetail(int productId, String productName, String productImgURL, double ProductPrice, int quantity) {
         this.productID = productId;
         this.productName = productName;
         this.productImgURL = productImgURL;
@@ -54,7 +54,7 @@ public class OrderDetail extends ProductDetailImg {
         return productPrice;
     }
 
-    public void setProductPrice(int productPrice) {
+    public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
 

@@ -18,7 +18,7 @@ import model.Users;
  * @author trung
  */
 public class UserAddressDAO extends DBContext {
-
+    
     public List<UserAddress> getUserAddress(int id) {
         List<UserAddress> list = new ArrayList<>();
         String sql = "SELECT * FROM UserAddress WHERE UserID = ?";
@@ -41,7 +41,7 @@ public class UserAddressDAO extends DBContext {
         }
         return list;
     }
-
+    
     public void updateAddress(int addressid, int id, String fullname, String phone, int inputCity, String note) {
         String sql = "UPDATE [dbo].[UserAddress]\n"
                 + "   SET [UserID] = ?\n"
@@ -62,7 +62,7 @@ public class UserAddressDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
-
+    
     public void addAddress(int id, String fullname, String phone, int inputCity,
             String note) {
         String sql = "INSERT INTO [UserAddress] VALUES (?, ?, ?, ?, ?)";
@@ -77,7 +77,7 @@ public class UserAddressDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
-
+    
     public void delete(int id) {
         String sql = "DELETE FROM [UserAddress] WHERE ID = ?";
         try {
@@ -87,7 +87,30 @@ public class UserAddressDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
-
+    
+    public UserAddress getDefaultAddress(int id) {
+        String sql = "SELECT TOP(1)*\n"
+                + "  FROM [dbo].[UserAddress]\n"
+                + "  WHERE UserID = ?\n"
+                + "  ORDER BY ID DESC";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            return new UserAddress(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getInt(5),
+                    rs.getString(6)
+            );
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    
     public String getAddressByUser(Users u) {
         String sql = "SELECT TOP(1) *\n"
                 + "FROM            Ship INNER JOIN\n"
@@ -101,13 +124,13 @@ public class UserAddressDAO extends DBContext {
             if (rs.next()) {
                 return rs.getString("ShipName") + " " + rs.getString("PhoneNum") + " " + rs.getString("NoteDetail") + " " + rs.getString("CityName");
             }
-
+            
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
-
+    
     public int getShippingFee(Users u) {
         String sql = "SELECT       Ship.ShipPrice, UserAddress.ShipName, Ship.CityName\n"
                 + "FROM            Ship INNER JOIN\n"
@@ -119,13 +142,13 @@ public class UserAddressDAO extends DBContext {
             if (rs.next()) {
                 return rs.getInt("ShipPrice");
             }
-
+            
         } catch (SQLException e) {
             System.out.println(e);
         }
         return 0;
     }
-
+    
     public static void main(String[] args) {
         UserAddressDAO uad = new UserAddressDAO();
         AccountDAO ad = new AccountDAO();
@@ -133,5 +156,5 @@ public class UserAddressDAO extends DBContext {
         String address = uad.getAddressByUser(u);
         System.out.println(address);
     }
-
+    
 }

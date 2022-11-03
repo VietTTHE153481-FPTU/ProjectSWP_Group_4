@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 /**
@@ -15,7 +15,7 @@ public class Order extends OrderDetail {
 
     private int id;
     private int userId;
-    private int totalPrice;
+    private double totalPrice;
     private String note;
     private String status;
     private Date date;
@@ -23,13 +23,13 @@ public class Order extends OrderDetail {
     public Order() {
     }
 
-    public Order(int userId, int totalPrice, String note) {
+    public Order(int userId, double totalPrice, String note) {
         this.userId = userId;
         this.totalPrice = totalPrice;
         this.note = note;
     }
 
-    public Order(int id, int userId, int totalPrice, String note, String status, Date date) {
+    public Order(int id, int userId, double totalPrice, String note, String status, Date date) {
         this.id = id;
         this.userId = userId;
         this.totalPrice = totalPrice;
@@ -38,7 +38,7 @@ public class Order extends OrderDetail {
         this.date = date;
     }
 
-    public Order(int id, int userId, int totalPrice, String note, String status, Date date, int orderID, int productID, String productName, int productPrice, int quantity) {
+    public Order(int id, int userId, double totalPrice, String note, String status, Date date, int orderID, int productID, String productName, double productPrice, int quantity) {
         super(orderID, productID, productName, productPrice, quantity);
         this.id = id;
         this.userId = userId;
@@ -48,7 +48,7 @@ public class Order extends OrderDetail {
         this.date = date;
     }
 
-    public Order(int id, String status, int totalPrice, Date date) {
+    public Order(int id, String status, double totalPrice, Date date) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.status = status;
@@ -71,11 +71,11 @@ public class Order extends OrderDetail {
         this.userId = userId;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -96,7 +96,7 @@ public class Order extends OrderDetail {
     }
 
     public String getDate() {
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
         return df.format(date);
     }
 
@@ -132,7 +132,7 @@ public class Order extends OrderDetail {
         return productPrice;
     }
 
-    public void setProductPrice(int productPrice) {
+    public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
 
