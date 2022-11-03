@@ -110,6 +110,8 @@ public class AddNewProduct extends HttpServlet {
             p.setShopID(u.getShopId());
             p.setUrl(image);
             pd.insert(p);
+            Products pnew= pd.getInsertProduct(u.getShopId());
+            pd.insertProductImg(pnew.getProductID(), image);
             request.setAttribute("err","Add Succesfully!");
             request.getRequestDispatcher("newproduct.jsp").forward(request, response);
         }catch(NumberFormatException ex){

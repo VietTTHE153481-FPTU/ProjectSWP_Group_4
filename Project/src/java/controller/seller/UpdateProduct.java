@@ -101,27 +101,31 @@ public class UpdateProduct extends HttpServlet {
         String raw_sellprice= request.getParameter("sellprice");
         String raw_amount = request.getParameter("amount");
         String raw_subcategory= request.getParameter("subcategory");
+        String raw_id = request.getParameter("id");
+        String image= request.getParameter("image");
         
         try{
-            ProductDAO pd= new ProductDAO();            
+            ProductDAO pd= new ProductDAO();
+            int id = Integer.parseInt(raw_id);
+            Products p = pd.getProductById(id);
             double originalprice= Double.parseDouble(raw_originalprice);
             double sellprice= Double.parseDouble(raw_sellprice);
             int amount= Integer.parseInt(raw_amount);
             int subcategory= Integer.parseInt(raw_subcategory);
             String raw_salepercent= f.format(sellprice/originalprice*100);
             double salepercent= Double.parseDouble(raw_salepercent);
-            Products p= new Products();
             p.setProductName(name);
-            p.setOriginalPrice(originalprice);
             p.setDescription(description);
+            p.setOriginalPrice(originalprice);
             p.setSellPrice(sellprice);
             p.setSalePercent(salepercent);
             p.setAmount(amount);
             p.setSubCategoryID(subcategory);
             p.setShopID(u.getShopId());
-            pd.insert(p);
+            p.setUrl(image);
+            pd.update(p);
             request.setAttribute("err","Update Succesfully!");
-            request.getRequestDispatcher("newproduct.jsp").forward(request, response);
+            request.getRequestDispatcher("updateproduct.jsp").forward(request, response);
         }catch(NumberFormatException ex){
             System.out.println(ex);
         }

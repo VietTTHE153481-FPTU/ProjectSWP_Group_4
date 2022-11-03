@@ -42,7 +42,9 @@
                                         <center>
                                             <h4 style="color: red">${requestScope.err}</h4>
                                         </center>
-                                        
+                                        <div> Product ID
+                                            <input type="text" name="id" class="form-control validate" required readonly value="${p.getProductID()}"/>
+                                        </div>
                                         <div> Product name
                                             <input type="text" name="name" class="form-control validate" required value="${p.getProductName()}"/>
                                         </div>
