@@ -8,6 +8,7 @@ package controller.admin;
 import DAO.AccountDAO;
 import DAO.OrderDAO;
 import DAO.ProductDAO;
+import DAO.Tracking;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -62,7 +64,9 @@ public class DashboardServlet extends HttpServlet {
         AccountDAO ad = new AccountDAO();
         request.setAttribute("customercount", ad.getNoAcc());
         request.setAttribute("sellercount", ad.getSeller());
-        
+        Tracking t = new Tracking();
+        List<Integer> a = t.getALL();
+        request.setAttribute("graph", a);
         ProductDAO pd = new ProductDAO();
         request.setAttribute("productcount", pd.countProducts());
         request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);

@@ -5,8 +5,7 @@
 
 package controller.customer;
 
-import DAO.AdminDAO;
-import DAO.UserAddressDAO;
+import DAO.ShopDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,15 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.UserAddress;
-import model.Users;
+import model.Shop;
 
 /**
  *
- * @author Minhm
+ * @author trung
  */
-@WebServlet(name="addressUPServlet", urlPatterns={"/addressUP"})
-public class addressUPServlet extends HttpServlet {
+@WebServlet(name="ReportPageServlet", urlPatterns={"/report"})
+public class ReportPageServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class addressUPServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addressUPServlet</title>");  
+            out.println("<title>Servlet ReportPageServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addressUPServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ReportPageServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +58,11 @@ public class addressUPServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        ShopDAO sd = new ShopDAO();
+        List<Shop> list = sd.getAllShop();
+        
+        request.setAttribute("shop", list);
+        request.getRequestDispatcher("reportpage.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,21 +75,7 @@ public class addressUPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int address = Integer.parseInt(request.getParameter("addressID"));
-        int id = Integer.parseInt(request.getParameter("id"));
-        String fullname = request.getParameter("fullname");
-        String phone = request.getParameter("phone");
-        int inputCity = Integer.parseInt(request.getParameter("inputCity"));
-        String note = request.getParameter("note");
-        
-        UserAddressDAO uad = new UserAddressDAO();
-        AdminDAO ad = new AdminDAO();
-        Users u = ad.getUserByID(id);
-        uad.updateAddress(address, id, fullname, phone, inputCity, note);
-        List<UserAddress> list = uad.getUserAddress(u.getUserID());
-        request.setAttribute("address", list);
-        response.sendRedirect("address");
-        
+        request.getRequestDispatcher("reportpage.jsp").forward(request, response);
     }
 
     /** 

@@ -122,6 +122,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             CartDAO c = new CartDAO();
+            c.SaveAllItem(c.getAll(a.getUserID(),(Cart)session.getAttribute("cart")), a.getUserID());
             session.setAttribute("cart", c.getAll(a.getUserID(),(Cart)session.getAttribute("cart")));
             session.setAttribute("account", a);
             response.sendRedirect("home");

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : dashboard
-    Created on : Oct 26, 2022, 1:52:20 AM
-    Author     : trung
+Document   : dashboard
+Created on : Oct 26, 2022, 1:52:20 AM
+Author     : trung
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="plugins/bower_components/chartist/chartist.min.css">
         <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/chartist-plugin-tooltip.css">
         <link href="styles/css/style.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
     </head>
     <body>
         <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
@@ -148,19 +150,54 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                            <div class="white-box">
+                            <div class="white-box col-lg-8">
+                                <canvas id="myChart2" style="width:100%;max-width:100%"></canvas>
                                 <h3 class="box-title">Detailed statistics</h3>
-                                <div id="ct-visits" style="height: 405px;">
-                                    <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
-                                            class="chartist-tooltip-value">6</span>
-                                    </div>
+                                <div id="ct-visits" style="height: 100px">
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            var xValues2 = ["Today", "Yesterday", "2days ago", "3days ago", "4days ago", "5days ago", "6days ago"];
+            var yValues2 =
+                    [
+            ${requestScope.graph.get(0)}
+                        , ${requestScope.graph.get(1)}
+                        , ${requestScope.graph.get(2)}
+                        , ${requestScope.graph.get(3)}
+                        , ${requestScope.graph.get(4)}
+                        , ${requestScope.graph.get(5)}
+                        , ${requestScope.graph.get(6)}
+                    ];
+
+            new Chart("myChart2", {
+                type: "line",
+                data: {
+                    labels: xValues2,
+                    datasets: [{
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "rgba(0,0,255,1.0)",
+                            borderColor: "rgba(0,0,255,0.1)",
+                            data: yValues2
+                        }]
+                },
+                options: {
+                    legend: {display: false},
+                    scales: {
+                        yAxes: [{ticks: {min: 6, max: 16}}],
+                    }
+                }
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="plugins/bower_components/jquery/jquery.min.js"></script>
         <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
         <script src="styles/bootstrap4/bootstrap.bundle.min.js"></script>

@@ -24,8 +24,7 @@ public class CartDAO extends DBContext {
         String sql = "select * from cart where UserID = ?";
         Cart end = new Cart();
         if (lmao != null) {
-            for (item a : lmao.getListItem()) 
-            {
+            for (item a : lmao.getListItem()) {
                 end.addItem(a);
             }
         }
@@ -42,7 +41,69 @@ public class CartDAO extends DBContext {
         return end;
     }
 
-    public void SaveAllItem(Cart a) {
-        
+    public void makeEdit(int pid, int uid, int ammount) {
+        String sql = "UPDATE [dbo].[Cart]\n"
+                + "   SET [Amount] = ?\n"
+                + " WHERE UserID = ? and ProductID = ?";
+        if(ammount==0)delAnItem(pid, uid);
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ammount);
+            ps.setInt(2, uid);
+            ps.setInt(3, pid);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            
+        }
     }
+    public void delAnItem(int iid,int uid){
+        String sql = "DELETE FROM [dbo].[Cart]\n"
+                + "      WHERE UserID = ? and ProductID = ?";
+        try{
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, uid);
+            ps.setInt(2, iid);
+            ps.executeUpdate();
+        }catch(Exception ex){
+            
+        }
+    }
+    public void removeCart(int uid) { //xoa tk thi dung ham nay xoa cart truoc thay proc
+        String sql = "DELETE FROM [dbo].[Cart]\n"
+                + "      WHERE UserID = ?";
+        try{
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, uid);
+            ps.executeUpdate();
+        }catch(Exception ex){
+            
+        }
+    }
+
+    public void SaveAllItem(Cart a, int uid) {
+        removeCart(uid);
+        String sql = "INSERT INTO [dbo].[Cart]\n"
+                + "           ([UserID]\n"
+                + "           ,[ProductID]\n"
+                + "           ,[Amount])\n"
+                + "     VALUES\n"
+                + "           (?,?,?)";
+        try {
+            for (item t : a.getListItem()) {
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, uid);
+                ps.setInt(2, t.getItem_product().getProductID());
+                ps.setInt(3, t.getNumO());
+                ps.executeUpdate();
+            }
+
+        } catch (Exception ex) {
+
+        }
+    }
+    public static void main(String[] args) {
+        CartDAO test = new CartDAO();
+        test.makeEdit(2, 5, 10);
+    }
+
 }
