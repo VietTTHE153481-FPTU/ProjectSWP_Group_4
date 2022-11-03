@@ -1,7 +1,7 @@
 <%-- 
-    Document   : register
-    Created on : Jun 15, 2022, 11:22:11 PM
-    Author     : trung
+    Document   : register2
+    Created on : Nov 4, 2022, 2:22:57 AM
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
