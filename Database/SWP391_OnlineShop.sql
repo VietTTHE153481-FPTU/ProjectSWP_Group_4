@@ -467,14 +467,15 @@ CREATE TABLE Feedback_Replies (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	FeedbackID int,
 	UserID int,
+	ProductID int,
 	RepliesText nvarchar(2000),
 	constraint userID_in_user_4 FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint feedbackID_in_feedback FOREIGN KEY(FeedbackID) REFERENCES Feedback(ID),
 ) ON [PRIMARY]
 GO
-INSERT INTO Feedback_Replies VALUES (1, 5, N'Xin Cám Ơn!');
-INSERT INTO Feedback_Replies VALUES (2, 4, N'Xin Cám Ơn!');
-INSERT INTO Feedback_Replies VALUES (3, 6, N'Xin Cám Ơn!');
+INSERT INTO Feedback_Replies VALUES (1, 5, 1, N'Xin Cám Ơn!');
+INSERT INTO Feedback_Replies VALUES (2, 4, 2, N'Xin Cám Ơn!');
+INSERT INTO Feedback_Replies VALUES (3, 6, 1, N'Xin Cám Ơn!');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create TABLE Blog(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,

@@ -6,6 +6,7 @@
 package controller.customer;
 
 import DAO.ProductDAO;
+import DAO.UserAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.DecimalFormat;
 import model.Users;
 
 /**
@@ -61,7 +63,14 @@ public class CheckOutServlet extends HttpServlet {
         ProductDAO pd= new ProductDAO();
         HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("account");
-
+        UserAddressDAO uad= new UserAddressDAO();
+        String address= uad.getAddressByUser(u);
+        int shippingfee= uad.getShippingFee(u);
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        String format = formatter.format(shippingfee).toString();
+        
+        request.setAttribute("shippingfee", format);
+        request.setAttribute("address", address);
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     } 
 
