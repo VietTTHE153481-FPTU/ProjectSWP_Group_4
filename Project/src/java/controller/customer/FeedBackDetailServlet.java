@@ -97,6 +97,7 @@ public class FeedBackDetailServlet extends HttpServlet {
         response.sendRedirect("feedback");
         }
         else{
+            session.removeAttribute("cart");
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }
