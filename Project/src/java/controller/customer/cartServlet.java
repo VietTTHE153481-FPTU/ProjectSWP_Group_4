@@ -5,6 +5,7 @@
 
 package controller.customer;
 
+import DAO.CartDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Cart;
 import model.Products;
+import model.Users;
 import model.item;
 
 /**
@@ -61,7 +63,7 @@ public class cartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ProductDAO lmao = new ProductDAO();
-        
+        CartDAO dao2 = new CartDAO();
         int proID = Integer.parseInt(request.getParameter("id"));
         int numO = Integer.parseInt(request.getParameter("numO"));
         Products toAdd = lmao.getProductById(proID);
@@ -73,6 +75,10 @@ public class cartServlet extends HttpServlet {
         Cart a = (Cart)session.getAttribute("cart");
         item b = new item(toAdd, numO);
         a.addItem(b);
+        if (session.getAttribute("account") != null) {
+            Users hold = (Users) session.getAttribute("account");
+            dao2.SaveAllItem(a, hold.getUserID());
+        }
         session.setAttribute("test", numO);
         session.setAttribute("cart", a);
         response.sendRedirect("ViewCartServlet");

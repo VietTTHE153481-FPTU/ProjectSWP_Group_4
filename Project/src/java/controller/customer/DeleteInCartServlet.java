@@ -4,6 +4,7 @@
  */
 package controller.customer;
 
+import DAO.CartDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Cart;
 import model.Products;
+import model.Users;
 import model.item;
 
 /**
@@ -63,6 +65,7 @@ public class DeleteInCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
+        CartDAO dao2 = new CartDAO();
         HttpSession session = request.getSession();
         int mode = Integer.parseInt(request.getParameter("mode"));
         int id = Integer.parseInt(request.getParameter("id"));
@@ -70,14 +73,28 @@ public class DeleteInCartServlet extends HttpServlet {
 
         switch (mode) {
             case 1: {
+                if (session.getAttribute("account") != null) {
+                    Users hold = (Users) session.getAttribute("account");
+                    dao2.makeEdit(id, hold.getUserID(), b.search(id).getNumO() + 1);
+                }
                 b.addItem(new item(dao.getProductById(id), 1));
+
                 break;
             }
-            case 2: {             
+            case 2: {
+                if (session.getAttribute("account") != null) {
+                    Users hold = (Users) session.getAttribute("account");
+                    dao2.makeEdit(id, hold.getUserID(), b.search(id).getNumO() - 1);
+                }
                 b.addItem(new item(dao.getProductById(id), -1));
+
                 break;
             }
             case 3: {
+                if (session.getAttribute("account") != null) {
+                    Users hold = (Users) session.getAttribute("account");
+                    dao2.delAnItem(id, hold.getUserID());
+                }
                 b.remove(id);
                 break;
             }
@@ -85,6 +102,7 @@ public class DeleteInCartServlet extends HttpServlet {
                 break;
             }
         }
+
         session.setAttribute("cart", b);
         response.sendRedirect("ViewCartServlet");
 

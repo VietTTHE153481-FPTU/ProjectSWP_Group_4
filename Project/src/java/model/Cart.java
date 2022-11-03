@@ -21,9 +21,9 @@ public class Cart {
         this.hold = new ArrayList<>();
     }
 
-    private item search(item a) {
+    public item search(int a) {
         for (item i : hold) {
-            if (i.getItem_product().getProductID() == a.getItem_product().getProductID()) {
+            if (i.getItem_product().getProductID() == a) {
                 return i;
             }
         }
@@ -35,8 +35,8 @@ public class Cart {
     }
 
     public void addItem(item a) {
-        if (search(a) != null) {
-            item mid = search(a);
+        if (search(a.getItem_product().getProductID()) != null) {
+            item mid = search(a.getItem_product().getProductID());
             if (a.getNumO() == -1 && mid.getNumO() == 1) {
                 remove(mid.getItem_product().getProductID());
                 return;

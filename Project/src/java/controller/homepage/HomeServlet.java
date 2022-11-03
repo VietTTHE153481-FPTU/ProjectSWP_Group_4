@@ -91,6 +91,7 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("author", author);
         
         request.getRequestDispatcher("home.jsp").forward(request, response);
+        return;
     }
 
     /**

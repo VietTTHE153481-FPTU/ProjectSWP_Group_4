@@ -104,7 +104,9 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- Modal Header -->
-                                            <form action="address" method="post">
+                                            
+                                            
+                                            <form action="addressUP" method="post">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">New Address</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -114,6 +116,7 @@
                                                     <div class="row mt-3">
                                                         <div class="col-md-6">
                                                             <input type="text" name="id" hidden value="${sessionScope.account.getUserID()}"/>
+                                                            <input type="text" name="addressID" hidden value="${ad.getID()}"/>
                                                             <input value="${ad.getShipName()}" type="text" name="fullname" class="form-control" placeholder="Full name">
                                                         </div>
                                                         <div class="col-md-6">
@@ -125,9 +128,14 @@
                                                             <select id="inputCity" name="inputCity" class="form-control" required>
                                                                 <option value="${inputCity}" disabled selected>Choose a city</option>
                                                                 <c:forEach items="${city}" var="c">
-                                                                    <c:if test="${ad.getShipCityID() == c.id}">
-                                                                        <option value="${c.getId()}">${c.getCityName()}</option>
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${ad.getShipCityID() == c.id}">
+                                                                            <option value="${c.getId()}">${c.getCityName()} selected</option>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <option value="${c.getId()}">${c.getCityName()}</option>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>

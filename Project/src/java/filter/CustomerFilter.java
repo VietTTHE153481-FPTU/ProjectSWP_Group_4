@@ -4,6 +4,7 @@
  */
 package filter;
 
+import DAO.Tracking;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -24,37 +25,42 @@ import jakarta.servlet.http.HttpSession;
  * @author Minhm
  */
 public class CustomerFilter implements Filter {
-    
+
     private HttpServletRequest httpRequest;
-    
+    private int hitCount;
     private static final String[] loginRequiredURLs = {
-            "/userprofile", "/edit_profile", "/update_profile"
+        "/userprofile", "/edit_profile", "/update_profile"
     };
- 
+
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        Tracking a = new Tracking();
+        a.setTodayTracking(hitCount);
+        System.out.println(hitCount);
         httpRequest = (HttpServletRequest) request;
- 
+
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
- 
+        if (path.endsWith("/home")) {
+            hitCount = hitCount + 1;
+        }
         if (path.startsWith("/home/")) {
             chain.doFilter(request, response);
             return;
         }
- 
+
         HttpSession session = httpRequest.getSession(false);
- 
+
         boolean isLoggedIn = (session != null && session.getAttribute("account") != null);
- 
+
         String loginURI = httpRequest.getContextPath() + "/login";
         boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
         boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.jsp");
- 
+
         if (isLoggedIn && (isLoginRequest || isLoginPage)) {
             // the user is already logged in and he's trying to login again
             // then forward to the homepage
             httpRequest.getRequestDispatcher("/").forward(request, response);
- 
+
         } else if (!isLoggedIn && isLoginRequired()) {
             // the user is not logged in, and the requested page requires
             // authentication, then forward to the login page
@@ -67,27 +73,27 @@ public class CustomerFilter implements Filter {
             chain.doFilter(request, response);
         }
     }
- 
- 
+
     private boolean isLoginRequired() {
         String requestURL = httpRequest.getRequestURL().toString();
- 
+
         for (String loginRequiredURL : loginRequiredURLs) {
             if (requestURL.contains(loginRequiredURL)) {
                 return true;
             }
         }
- 
+
         return false;
     }
- 
+
     public CustomerFilter() {
     }
- 
+
     public void destroy() {
     }
- 
+
     public void init(FilterConfig fConfig) throws ServletException {
+        hitCount = 0;
     }
- 
+
 }

@@ -82,7 +82,7 @@ public class MessagesDAO extends DBContext {
     }
 
     public Messages_group getMessageByGroupID(int groupID, String toUser) {
-        String sql = "Select * from messsages where room_id = ?";
+        String sql = "Select * from messsages where room_id = ? order by Date desc,message_id desc";
         List<Messages> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

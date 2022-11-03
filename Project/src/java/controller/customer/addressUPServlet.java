@@ -5,6 +5,8 @@
 
 package controller.customer;
 
+import DAO.AdminDAO;
+import DAO.UserAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +14,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.UserAddress;
+import model.Users;
 
 /**
  *
@@ -68,7 +73,21 @@ public class addressUPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int address = Integer.parseInt(request.getParameter("addressID"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        int inputCity = Integer.parseInt(request.getParameter("inputCity"));
+        String note = request.getParameter("note");
+        
+        UserAddressDAO uad = new UserAddressDAO();
+        AdminDAO ad = new AdminDAO();
+        Users u = ad.getUserByID(id);
+        uad.updateAddress(address, id, fullname, phone, inputCity, note);
+        List<UserAddress> list = uad.getUserAddress(u.getUserID());
+        request.setAttribute("address", list);
+        response.sendRedirect("address");
+        
     }
 
     /** 
