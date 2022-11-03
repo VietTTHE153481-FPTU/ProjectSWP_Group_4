@@ -36,7 +36,7 @@
                         <i class="fa fa-lock" style="color: #ff3333" aria-hidden="true"></i> Register
                     </h1>
                 </div>
-                <h6 style="color: red; margin-bottom: 40px">${requestScope.mess}</h6>
+                <h6 style="color: red; margin-bottom: 40px">${sessionScope.mess}</h6>
                 <form action="register" method="post">
                     <div class="form-item">
                         <p class="formLabel">Username</p>
