@@ -65,83 +65,82 @@
                 <div class="pt-5 pb-5">
                     <div class="container">
                         <c:if test="${sessionScope.cart.Size() > 0}">
-                            <div class="row w-100">
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    <h2 class="display-5 mb-2 text-center">Check Out</h2>
-                                    <div class="mb-5 text-left">
-                                        <h4 style="color:orange;">Address</h4>
-                                        <br/>
-                                        <p>
-                                            
-                                            <span>${requestScope.address}</span>
-                                            &nbsp&nbsp&nbsp&nbsp
-                                            <a><a href="address">Change address</a>
-                                        </p>
-                                    </div>
-                                    <table id="shoppingCart" class="table table-condensed table-responsive">
-                                        <tr>
-                                            <th style="width:50%">Product</th>
-                                            <th style="width:12%">Price</th>
-                                            <th style="width:10%">Quantity</th>
-                                        </tr>
-                                        <c:forEach items="${sessionScope.cart.getListItem()}" var="i">
+                            <form action="CheckOut" method="post">
+                                <div class="row w-100">
+                                    <div class="col-lg-12 col-md-12 col-12">
+                                        <h2 class="display-5 mb-2 text-center">Check Out</h2>
+                                        <div class="mb-5 text-left">
+                                            <h4 style="color:orange;">Address</h4>
+                                            <br/>
+                                            <p>
+                                                <span>${requestScope.address}</span>
+                                                &nbsp&nbsp&nbsp&nbsp
+                                                <a><a href="address">Change address</a>
+                                            </p>
+                                        </div>
+                                        <table id="shoppingCart" class="table table-condensed table-responsive">
                                             <tr>
-                                                <td data-th="Product">
-                                                    <div class="row">
-                                                        <div class="col-md-3 text-left">
-                                                            <img src="resources/img/products/${i.item_product.url}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                                        </div>
-                                                        <div class="col-md-9 text-left mt-sm-2">
-                                                            <h4>${i.item_product.productName}</h4>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td data-th="Price">${i.item_product.FormatPrice(i.item_product.sellPrice)} ₫</td>
-                                                <td data-th="Quantity">${i.numO}</td>          
+                                                <th style="width:50%">Product</th>
+                                                <th style="width:12%">Price</th>
+                                                <th style="width:10%">Quantity</th>
                                             </tr>
-                                        </c:forEach>
-                                    </table>
-                                    <div class="notiship">
-                                        <div class="noti">
-                                            <div class="notibox">
-                                                <span>Notice: </span>
-                                                <div class="notiinputbox">
-                                                    <form name="checkout" method="post">
+                                            <c:forEach items="${sessionScope.cart.getListItem()}" var="i">
+                                                <tr>
+                                                    <td data-th="Product">
+                                                        <div class="row">
+                                                            <div class="col-md-3 text-left">
+                                                                <img src="resources/img/products/${i.item_product.url}" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                                            </div>
+                                                            <div class="col-md-9 text-left mt-sm-2">
+                                                                <h4>${i.item_product.productName}</h4>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-th="Price">${i.item_product.FormatPrice(i.item_product.sellPrice)} ₫</td>
+                                                    <td data-th="Quantity">${i.numO}</td>          
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
+                                        <div class="notiship">
+                                            <div class="noti">
+                                                <div class="notibox">
+                                                    <span>Notice: </span>
+                                                    <div class="notiinputbox">
                                                         <input class="notiinput" type="text" name="notice" placeholder="Notice for Seller"/>
-                                                    </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ship">
+                                                <span style="color: #008fa1">Shipping fees:</span>
+                                                <div>
+                                                    <h5>${requestScope.shippingfee} ₫</h5>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="ship">
-                                            <span style="color: #008fa1">Shipping fees:</span>
-                                            <div>
-                                                <h5>${requestScope.shippingfee} ₫</h5>
-                                            </div>
+                                        <div class="float-right text-right">
+                                            <h4>Total Amount:</h4>&nbsp;
+                                            <h4 style="color: #ff3333">${sessionScope.cart.FormatPrice(sessionScope.cart.totalmoney())} ₫</h4>
                                         </div>
                                     </div>
-                                            <div class="float-right text-right">
-                                                <h4>Total Amount:</h4>&nbsp;
-                                                <h4 style="color: #ff3333">${sessionScope.cart.FormatPrice(sessionScope.cart.totalmoney())} ₫</h4>
-                                            </div>
-                                </div>
-                                <div class="row mt-4 d-flex align-items-center">
-                                    <div class="col-sm-6 order-md-2 text-right">
-                                        <a href="#" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Check out</a>
+                                    <div class="row mt-4 d-flex align-items-center">
+                                        <div class="col-sm-6 order-md-2 text-right">
+                                            <button type="submit" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Check out</button>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                                            <a href="ViewCartServlet">
+                                                <i class="fa fa-arrow-left mr-2"></i>Go back Cart</a>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-                                        <a href="ViewCartServlet">
-                                            <i class="fa fa-arrow-left mr-2"></i>Go back Cart</a>
-                                    </div>
-                                </div>
-                            </c:if>
-                        </div>
+                            </form>
+                        </c:if>
                     </div>
                 </div>
             </div>
-            <%@include file="layout/Footer.jsp" %>
-            <script src="js/cart/jquery-3.3.1.slim.min.js"></script>
-            <script src="js/cart/popper.min.js"></script>
-            <script src="js/cart/bootstrap.min.js"></script>
+        </div>
+        <%@include file="layout/Footer.jsp" %>
+        <script src="js/cart/jquery-3.3.1.slim.min.js"></script>
+        <script src="js/cart/popper.min.js"></script>
+        <script src="js/cart/bootstrap.min.js"></script>
     </body>
 </html>
 
