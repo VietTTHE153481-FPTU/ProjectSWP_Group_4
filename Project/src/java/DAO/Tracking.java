@@ -45,7 +45,7 @@ public class Tracking extends DBContext {
                 + "      ,[lastUpdate] = ?\n"
                 + " WHERE no_day = 1";
         List<hold> Hold = isOK(num);
-
+        /*
         if (now.isAfter(LocalDate.parse(Hold.get(0).date, dtf))) {
             for (int i = Hold.size() - 1; i > 0; i--) {
                 Hold.set(i+1, Hold.get(i));
@@ -65,6 +65,7 @@ public class Tracking extends DBContext {
                 }
             }
         }
+         */
 //        switch (hold) {
 //            case 1: {
 //                try {

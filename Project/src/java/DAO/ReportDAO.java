@@ -14,11 +14,15 @@ import java.sql.SQLException;
  */
 public class ReportDAO extends DBContext {
 
-    public void addReport(int id) {
-        String sql = "INSERT INTO [dbo].[Favorite_Product] ([UserID], [ProductID]) VALUES(?, ?)";
+    public void addReport(int id, String title, int inputShop, String content) {
+        String sql = "INSERT INTO [dbo].[Report] ([UserID], [ReportTitle], [ShopID], [ReportContent], [Date])\n"
+                + "VALUES (?, ?, ?, ?, getDATE())";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
+            st.setString(2, title);
+            st.setInt(3, inputShop);
+            st.setString(4, content);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error" + e);

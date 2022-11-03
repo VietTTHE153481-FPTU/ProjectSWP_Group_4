@@ -38,7 +38,7 @@
                         </div>
                         <div class="container rounded bg-white mt-5">
                             <form method="post" method="report">
-                                <input type="hidden" name="userID" value="${sessionScope.account.userID }"/>
+                                <input type="hidden" name="userID" value="${account.userID }"/>
                                 <div class="row">
                                     <div class="col-lg-6 col-xs-12 col-md-12">
                                         <div class="image-area">
@@ -46,11 +46,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-xs-12 col-md-12">
-                                        <div class="col-md-12">Yout Name<input type="text" class="form-control" name="fullname"></div>
-                                        <div class="mt-3 col-md-12">Yout Phone<input type="text" class="form-control" name="phone"></div>
                                         <div class="mt-3 col-md-12">Title<input type="text" class="form-control" name="title"></div>
                                         <div class="mt-3 col-md-12">Shop
-                                            <select id="inputCity" name="inputCity" class="form-control" required>
+                                            <select id="inputShop" name="inputShop" class="form-control" required>
                                                 <option value="${inputShop}" disabled selected>Shop Name</option>
                                                 <c:forEach items="${shop}" var="s">
                                                     <option value="${s.getID()}">${s.getShopName()}</option>

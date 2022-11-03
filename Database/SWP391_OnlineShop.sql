@@ -423,12 +423,14 @@ CREATE TABLE [dbo].[Report](
 	[ReportID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[UserID] [int],
 	[ReportTitle] nvarchar(1000),
+	[ShopID] int,
 	[ReportContent] nvarchar(2000),
-	[Date] [DATETIME],
+	[Date] DATETIME,
 	constraint userID_in_repor FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	constraint ShopID_in_repor FOREIGN KEY(ShopID) REFERENCES Shop(ID),
 ) ON [PRIMARY]
 GO
-INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả', N'Shop LsThai có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
+INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả',2 , N'Shop LsThai có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ShipInfo (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
