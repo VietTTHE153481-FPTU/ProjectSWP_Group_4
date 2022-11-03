@@ -65,8 +65,8 @@ public class DashboardServlet extends HttpServlet {
         request.setAttribute("customercount", ad.getNoAcc());
         request.setAttribute("sellercount", ad.getSeller());
         Tracking t = new Tracking();
-//        List<Integer> a = t.getALL();
-//        request.setAttribute("graph", a);
+        List<Integer> a = t.getALL();
+        request.setAttribute("graph", a);
         ProductDAO pd = new ProductDAO();
         request.setAttribute("productcount", pd.countProducts());
         request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
