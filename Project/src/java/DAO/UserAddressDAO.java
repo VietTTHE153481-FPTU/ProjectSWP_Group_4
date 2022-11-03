@@ -97,14 +97,16 @@ public class UserAddressDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            return new UserAddress(
-                    rs.getInt(1),
-                    rs.getInt(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getInt(5),
-                    rs.getString(6)
-            );
+            if(rs.next()){
+                return new UserAddress(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6)
+                );     
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }

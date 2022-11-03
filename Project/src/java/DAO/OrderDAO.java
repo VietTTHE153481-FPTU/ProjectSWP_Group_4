@@ -174,15 +174,16 @@ public class OrderDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
+            if(rs.next()){
                 return new Order(
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getString(1),
-                        rs.getDate(6)
-                );
+                            rs.getInt(2),
+                            rs.getInt(3),
+                            rs.getInt(4),
+                            rs.getString(5),
+                            rs.getString(1),
+                            rs.getDate(6)
+                    );
+                
             }
         } catch (SQLException ex) {
             System.out.println(ex);

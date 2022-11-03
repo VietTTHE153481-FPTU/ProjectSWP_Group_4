@@ -82,6 +82,7 @@ public class ShipDAO extends DBContext {
     public static void main(String[] args) {
         UserAddressDAO uad= new UserAddressDAO();
         UserAddress ua= uad.getDefaultAddress(5);
-        System.out.println(ua.getShipName());
+        ShipDAO sd= new ShipDAO();
+        sd.insertShipInfo(1, "Uwu", ua);
     }
 }
