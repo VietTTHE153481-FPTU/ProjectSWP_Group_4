@@ -89,6 +89,7 @@ public class AddNewProduct extends HttpServlet {
         String raw_sellprice= request.getParameter("sellprice");
         String raw_amount = request.getParameter("amount");
         String raw_subcategory= request.getParameter("subcategory");
+        String image= request.getParameter("image");
         
         try{
             ProductDAO pd= new ProductDAO();            
@@ -107,12 +108,14 @@ public class AddNewProduct extends HttpServlet {
             p.setAmount(amount);
             p.setSubCategoryID(subcategory);
             p.setShopID(u.getShopId());
+            p.setUrl(image);
             pd.insert(p);
             request.setAttribute("err","Add Succesfully!");
             request.getRequestDispatcher("newproduct.jsp").forward(request, response);
         }catch(NumberFormatException ex){
             System.out.println(ex);
         }
+        
     }
 
     /** 

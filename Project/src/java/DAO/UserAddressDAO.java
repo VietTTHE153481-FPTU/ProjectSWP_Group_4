@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.UserAddress;
+import model.Users;
 
 /**
  *
@@ -86,11 +87,50 @@ public class UserAddressDAO extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
-        UserAddressDAO ad = new UserAddressDAO();
-        ad.addAddress(6, "Trung Việt", "0369147268", 52, "Sơn La");
+    public String getAddressByUser(Users u) {
+        String sql = "SELECT TOP(1) *\n"
+                + "FROM            Ship INNER JOIN\n"
+                + "                         UserAddress ON Ship.id = UserAddress.ShipCityID INNER JOIN\n"
+                + "                         Users ON UserAddress.UserID = Users.UserID\n"
+                + "Where Users.UserID= ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, u.getUserID());
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getString("ShipName") + " " + rs.getString("PhoneNum") + " " + rs.getString("NoteDetail") + " " + rs.getString("CityName");
+            }
 
-        System.out.println(ad);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public int getShippingFee(Users u) {
+        String sql = "SELECT       Ship.ShipPrice, UserAddress.ShipName, Ship.CityName\n"
+                + "FROM            Ship INNER JOIN\n"
+                + "                         UserAddress ON Ship.id = UserAddress.ShipCityID AND UserAddress.UserID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, u.getUserID());
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("ShipPrice");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        UserAddressDAO uad = new UserAddressDAO();
+        AccountDAO ad = new AccountDAO();
+        Users u = ad.getAccById(5);
+        String address = uad.getAddressByUser(u);
+        System.out.println(address);
     }
 
 }

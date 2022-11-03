@@ -241,6 +241,7 @@ public class AccountDAO extends DBContext {
         return hexString.toString();
     }
     
+    
     public static void main(String[] args) {
         AccountDAO ad = new AccountDAO();
         Users ul = ad.getSellerByShopID(2);

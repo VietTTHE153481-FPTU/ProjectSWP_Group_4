@@ -142,6 +142,10 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
+    
+    public void createOrder(Order o){
+        
+    }
 
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
