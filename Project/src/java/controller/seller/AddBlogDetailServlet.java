@@ -76,16 +76,15 @@ public class AddBlogDetailServlet extends HttpServlet {
     throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("BlogId"));
         String title = request.getParameter("title");
-        String image = request.getParameter("image");
+        String image = request.getParameter("imgBlogDetail");
         String content = request.getParameter("content");
         BlogDAO b = new BlogDAO();
-        b.addBlogDetail(content, title, id);
+        b.addBlogDetail(content, title, image, id);
         List<BlogDetail> bd = b.getBlogDetailById(id);
 
         Blog bg = b.getBlogs(id);
         int num = b.totalBlogDetail(id);
         int blogid = bg.getId();
-        
         
         request.setAttribute("blogdetail", bd);
         request.setAttribute("blog", bg);

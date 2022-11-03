@@ -67,12 +67,14 @@
                                                     <th>Product price</th>
                                                     <th>Status</th>
                                                     <th>Date</th>
+                                                    <th>Quantity</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <c:forEach var="o" items="${listOrder}">
                                                     <tr>
-                                                        <td>${o.id}</td>
+                                                        <td>${o.orderID}</td>
                                                         <td>${o.productName}</td>
                                                         <td>${o.productPrice}</td>
                                                         <c:if test="${o.status == 1}">
@@ -88,9 +90,10 @@
                                                             <td><span class="badge bg-danger">Canceled</span></td>
                                                         </c:if>
                                                         <c:if test="${o.status == 5}">
-                                                            <td><span class="badge bg-success">completed</span></td>
+                                                            <td><span class="badge bg-success">Completed</span></td>
                                                         </c:if>
                                                         <td>${o.date}</td>
+                                                        <td>${o.quantity}</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

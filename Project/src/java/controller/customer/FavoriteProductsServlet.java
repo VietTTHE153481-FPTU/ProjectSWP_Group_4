@@ -6,6 +6,7 @@
 package controller.customer;
 
 import DAO.ProductDAO;
+import DAO.ShopDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Favorite_Products;
 import model.Products;
+import model.Shop;
 import model.Users;
 
 /**
@@ -62,16 +64,20 @@ public class FavoriteProductsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ProductDAO pd = new ProductDAO();
+        ShopDAO sd = new ShopDAO();
         HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("account");
         
         List<Products> listP = pd.getAllProducts();
         List<Favorite_Products> list = pd.getMyWishlist(u.getUserID());
+        List<Shop> listS = sd.getAllShop();
         int num = pd.totalProductInWishlish(u.getUserID());
+        
         
         
         request.setAttribute("listP", listP);
         request.setAttribute("wishlish", list);
+        request.setAttribute("listS", listS);
         request.setAttribute("num", num);
         request.getRequestDispatcher("favorite.jsp").forward(request, response);
     } 

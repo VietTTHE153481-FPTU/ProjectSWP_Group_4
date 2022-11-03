@@ -59,7 +59,7 @@
                                                 <div class="media">
                                                     <div class="col-md-4">
                                                         <div class="media-left media-middle">
-                                                            <img src="resources/img/Blog/${bd.imgBlogDetail}" class="img-thumbnail align-self-center mr-3" style="width:300px">
+                                                            <img src="resources/img/Blog/${bd.imgBlogDetail}" class="img-thumbnail align-self-center mr-3" style="width:300px; height: 320px">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

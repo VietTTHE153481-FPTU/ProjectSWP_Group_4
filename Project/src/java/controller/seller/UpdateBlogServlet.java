@@ -83,9 +83,10 @@ public class UpdateBlogServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("BlogId"));
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        String image = request.getParameter("imageLink");
        
         BlogDAO bd = new BlogDAO();
-        bd.updateBlog(id, title, content);
+        bd.updateBlog(id, title, content, image);
         Blog blogs = bd.getBlogs(id);
 
         request.setAttribute("blog", blogs);

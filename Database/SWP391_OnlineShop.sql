@@ -155,9 +155,6 @@ CREATE TABLE UserAddress (
 	constraint UserID FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint ship_city_in_ship_address FOREIGN KEY(ShipCityID) REFERENCES Ship(id)
 ) ON [PRIMARY]
-GO
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (4, N'Trần Công Minh', '0147258369', 24, N'Đại Học FPT');
-INSERT INTO dbo.[UserAddress] ([UserID], [ShipName], [PhoneNum], [ShipCityID], [NoteDetail]) values (6, N'Trần Trung Việt', '0968819830', 24, N'Đại Học FPT');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Category (
 	CategoryID int PRIMARY KEY identity(1,1),
@@ -360,12 +357,6 @@ CREATE TABLE Favorite_Product (
 	constraint userID_in_favorite_product FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	constraint productID_in_favorite_product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
 ) ON [PRIMARY]
-GO
-INSERT INTO Favorite_Product VALUES (4,1);
-INSERT INTO Favorite_Product VALUES (4,15);
-INSERT INTO Favorite_Product VALUES (4,18);
-INSERT INTO Favorite_Product VALUES (4,8);
-INSERT INTO Favorite_Product VALUES (4,24);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Status](
 	[ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -658,4 +649,20 @@ create table [member](
 	[room_id] int foreign key references chat_room(room_id),
 	[UserID] int foreign key references Users(UserID)
 );
+go
+create table tracking(
+	no_day int,
+	num int,
+	lastUpdate Date
+)
+go
+insert into tracking
+values
+(1,0,'2000-11-11'),
+(2,0,'2000-11-11'),
+(3,0,'2000-11-11'),
+(4,0,'2000-11-11'),
+(5,0,'2000-11-11'),
+(6,0,'2000-11-11'),
+(7,0,'2000-11-11')
 go

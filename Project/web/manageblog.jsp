@@ -61,7 +61,7 @@
                                                         <div class="media">
                                                             <div class="col-md-4">
                                                                 <div class="media-left media-middle">
-                                                                    <a href="ManageBlogDetail?id=${lb.id}"><img src="resources/img/Blog/${lb.imageLink}" class="img-thumbnail align-self-center mr-3" style="width:300px"></a>
+                                                                    <a href="ManageBlogDetail?id=${lb.id}"><img src="resources/img/Blog/${lb.imageLink}" class="img-thumbnail align-self-center mr-3" style="width: 300px; height: 320px"></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -80,7 +80,6 @@
                                                                     <div class="mt-2 text-center">
                                                                         <a style="width: 120px" class="btn btn-info" href="deleteblog?BlogId=${lb.id}&AuthorId=${sessionScope.account.userID}">Delete Blog</a>                                         
                                                                     </div>
-                                  
                                                                 </div>
                                                             </div>
                                                         </div><hr>
