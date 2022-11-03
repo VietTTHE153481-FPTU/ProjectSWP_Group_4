@@ -1,0 +1,2 @@
+Cái tracking sửa xong rồi
+ai mà thấy lỗi thì chạy lại file sql là xong nhé

@@ -35,13 +35,14 @@ public class CustomerFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         Tracking a = new Tracking();
-        a.setTodayTracking(hitCount);
+        
         System.out.println(hitCount);
         httpRequest = (HttpServletRequest) request;
 
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
         if (path.endsWith("/home")) {
             hitCount = hitCount + 1;
+            a.setTodayTracking(hitCount);
         }
         if (path.startsWith("/home/")) {
             chain.doFilter(request, response);

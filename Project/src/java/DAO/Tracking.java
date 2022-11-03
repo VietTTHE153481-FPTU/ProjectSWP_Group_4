@@ -44,24 +44,27 @@ public class Tracking extends DBContext {
                 + "   SET [num] = ?\n"
                 + "      ,[lastUpdate] = ?\n"
                 + " WHERE no_day = 1";
-        List<hold> Hold = isOK(num);
+        List<hold> Hold = isOK();
 
         if (now.isAfter(LocalDate.parse(Hold.get(0).date, dtf))) {
-            for (int i = Hold.size() - 1; i > 0; i--) {
-                Hold.set(i+1, Hold.get(i));
+            for (int i = Hold.size() - 1; i >= 1; i--) {
+                Hold.set(i, Hold.get(i - 1));
             }
             Hold.set(0, new hold(1, num, now.format(dtf)));
+            for (int i = 1; i <= 7; i++) {
+                Hold.get(i-1).day_no = i;
+            }
             updateToday(Hold);
             return;
-        }else{
-            if(Hold.get(0).num<num){
+        } else {
+            if (Hold.get(0).num < num) {
                 try {
                     PreparedStatement ps = connection.prepareStatement(sql);
                     ps.setInt(1, num);
                     ps.setString(2, now.format(dtf));
                     ps.execute();
                 } catch (Exception ex) {
-
+                    System.out.println(ex.getLocalizedMessage());
                 }
             }
         }
@@ -108,7 +111,7 @@ public class Tracking extends DBContext {
 
     }
 
-    public List<hold> isOK(int num) {
+    public List<hold> isOK() {
         List<hold> a = new ArrayList<>();
         String sql = "select * from tracking";
         String olddate = "";
@@ -171,6 +174,9 @@ public class Tracking extends DBContext {
 
     public static void main(String[] args) {
         Tracking a = new Tracking();
-        System.out.println(a.isITOK(2));
+        List<hold> v = a.isOK();
+        for (hold t : v) {
+            System.out.println(t.date + "   ");
+        }
     }
 }
