@@ -65,7 +65,7 @@
                 <div class="pt-5 pb-5">
                     <div class="container">
                         <c:if test="${sessionScope.cart.Size() > 0}">
-                            <form name="checkout" method="post">
+                            <form action="CheckOut" method="post">
                                 <div class="row w-100">
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <h2 class="display-5 mb-2 text-center">Check Out</h2>
@@ -73,7 +73,6 @@
                                             <h4 style="color:orange;">Address</h4>
                                             <br/>
                                             <p>
-
                                                 <span>${requestScope.address}</span>
                                                 &nbsp&nbsp&nbsp&nbsp
                                                 <a><a href="address">Change address</a>
