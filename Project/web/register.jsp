@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="formWrapper" style="background-image: url(resources/img/background.jpg)">
+        <div id="formWrapper" style="background-image: url(resources/img/background.jpg); size: auto">
             <div id="form">
                 <div class="logo_container">
                     <i class="fa fa-shopping-bag" style="color: #ff3333" aria-hidden="true"></i>
@@ -36,50 +36,53 @@
                         <i class="fa fa-lock" style="color: #ff3333" aria-hidden="true"></i> Register
                     </h1>
                 </div>
-                <h6 style="color: red; margin-bottom: 40px">${sessionScope.mess}</h6>
+                <h6 style="color: red; margin-bottom: 25px">${sessionScope.mess}</h6>
                 <form action="register" method="post">
-                    <div class="form-item">
-                        <p class="formLabel">Username</p>
-                        <input type="text" name="user" id="user" class="form-style" 
-                               value="${username}"/>
-                    </div>
-                    <div class="form-item">
-                        <p class="formLabel">Password</p>
-                        <input type="password" name="pass" id="password" class="form-style"
-                               value="${password}"/>
-                    </div>
-                    <div class="form-item">
-                        <p class="formLabel">Repeat Password</p>
-                        <input type="password" name="cfpass" id="password" class="form-style"
-                               value="${repassword}"/>
-                    </div>
-                    <div class="form-item">
-                        <p class="formLabel">Fullname</p>
-                        <input type="text" name="fname" id="user" class="form-style" 
-                               value="${fullname}"/>
-                    </div>
-
-                    <div class="form-item">
-                        <p class="formLabel">Phone</p>
-                        <input type="text" name="phone" id="user" class="form-style" 
-                               value="${phone}"/>
-                    </div>
                     <center>
-                        <div class="form-check form-check-inline mb-0">
-                            <input class="form-check-input" type="radio" name="sex" checked value="0" />
-                            <label class="form-label">Male</label>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="form-check form-check-inline mb-0">
-                            <input class="form-check-input" type="radio" name="sex" value="1" />
-                            <label class="form-label">Female</label>
+                        <div class="form-item">
+                            <p class="formLabel">Username</p>
+                            <input type="text" name="user" id="user" class="form-style" 
+                                   value="${username}"/>
+                        </div>
+                        <div class="form-item">
+                            <p class="formLabel">Password</p>
+                            <input type="password" name="pass" id="password" class="form-style"
+                                   value="${password}"/>
+                        </div>
+                        <div class="form-item">
+                            <p class="formLabel">Repeat Password</p>
+                            <input type="password" name="cfpass" id="password" class="form-style"
+                                   value="${repassword}"/>
+                        </div>
+                        <div class="form-item">
+                            <p class="formLabel">Fullname</p>
+                            <input type="text" name="fname" id="user" class="form-style" 
+                                   value="${fullname}"/>
+                        </div>
+
+                        <div class="form-item">
+                            <p class="formLabel">Phone</p>
+                            <input type="text" name="phone" id="user" class="form-style" 
+                                   value="${phone}"/>
+                        </div>
+                        <center>
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="sex" checked value="0" />
+                                <label class="form-label">Male</label>
+                            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="form-check form-check-inline mb-0">
+                                <input class="form-check-input" type="radio" name="sex" value="1" />
+                                <label class="form-label">Female</label>
+                            </div>
+                        </center>
+                        <div class="form-item">
+                            <p class="formLabel">Email</p>
+                            <input type="text" name="mail" id="user" class="form-style" value="${email}"/>
                         </div>
                     </center>
-                    <div class="form-item">
-                        <p class="formLabel">Email</p>
-                        <input type="text" name="mail" id="user" class="form-style" 
-                               value="${email}"/>
+                    <div style="padding-left: 15px">
+                        <input type="submit" class="login button_login" value="REGISTER"><br/>
                     </div>
-                    <input type="submit" class="login button_login" value="REGISTER"><br/>
                 </form>
                 <a href="reset"><small>Forgot Password</small></a>
                 <div class="form-item">
