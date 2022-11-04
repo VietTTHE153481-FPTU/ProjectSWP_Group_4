@@ -40,10 +40,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>OrderID</th>
-                                                    <th>UserID</th>
+                                                    <th>Username</th>
                                                     <th>TotalPrice</th>
                                                     <th>Status</th>
-                                                    <th>Note&Option</th>
+                                                    <th>Note</th>
+                                                    <th>Options</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -51,10 +52,11 @@
 
 
 
-                                                    <tr>
+
+                                                    <tr >
 
                                                         <td>${o.getId()}</td>
-                                                        <td>${o.getUserId()}</td>
+                                                        <td>${o.getUsername()}</td>
                                                         <td>${o.getTotalPrice()}₫ </td>
                                                         <td>
                                                             <select name="hehe" id="demoSelect" >
@@ -98,11 +100,14 @@
                                                             </select>
                                                         </td>
                                                         <td>
+                                                            <div style="width: 330px">
+                                                                <textarea readonly="" name="note" cols="36" rows="5">${o.getNote()}</textarea>
+                                                            </div>
+                                                        </td>
+                                                        <td>
 
                                                             <form action="ManageOrder" method="post">
-                                                                <div style="width: 330px">
-                                                                    <textarea name="note" cols="36" rows="5">${o.getNote()}</textarea>
-                                                                </div>
+
                                                                 <input id="demoInput" type="text" name="status" hidden/>
                                                                 <input type="text" name="orderID" value="${o.getId()}" hidden>
                                                                 <!--                                                                <input name="lemao" type="text" hidden value="Up">-->
@@ -118,9 +123,17 @@
                                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                                     </svg>
                                                                 </button>
+                                                                <button id="lemao" style="background-color: none" class="border-0" onclick="func(${o.getId()})">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                                                    </svg>
+                                                                </button>
+
                                                             </form>   
                                                         </td>
-                                                    </tr>                
+                                                    </tr> 
+
+
                                                 </c:forEach>
                                             </tbody>
                                         </table>
@@ -139,28 +152,32 @@
 
         <script type="text/javascript">
 
-            $('#demoSelect').change(function () {
-                $('#demoInput').val($(this).val());
-            }).change();
+                                                                    function func(a) {
+                                                                        window.location = "orderdetails?id=" +a;
+                                                                    }
+
+                                                                    $('#demoSelect').change(function () {
+                                                                        $('#demoInput').val($(this).val());
+                                                                    }).change();
 
 
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
+                                                                    $(document).ready(function () {
+                                                                        $("#sidebar").mCustomScrollbar({
+                                                                            theme: "minimal"
+                                                                        });
 
-                $('#dismiss, .overlay').on('click', function () {
-                    $('#sidebar').removeClass('active');
-                    $('.overlay').fadeOut();
-                });
+                                                                        $('#dismiss, .overlay').on('click', function () {
+                                                                            $('#sidebar').removeClass('active');
+                                                                            $('.overlay').fadeOut();
+                                                                        });
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').addClass('active');
-                    $('.overlay').fadeIn();
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
-            });
+                                                                        $('#sidebarCollapse').on('click', function () {
+                                                                            $('#sidebar').addClass('active');
+                                                                            $('.overlay').fadeIn();
+                                                                            $('.collapse.in').toggleClass('in');
+                                                                            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                                                                        });
+                                                                    });
 
         </script>
         <script src="js/seller/jquery.dataTables.min.js"></script>

@@ -31,7 +31,7 @@
             <div class="container product_section_container">
                 <div class="pt-5 pb-5">
                     <div class="container">
-                        <c:if test="${sessionScope.cart.Size() == null}">
+                        <c:if test="${sessionScope.cart.Size() == null|| sessionScope.cart.Size()==0}">
                             <div class="text-center">
                                 <img src="resources/img/shopping.png" class="rounded" width="350" height="350">
                                 <p class="mb-5">Your shopping cart is empty</p>

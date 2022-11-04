@@ -44,21 +44,12 @@ public class Tracking extends DBContext {
                 + "   SET [num] = ?\n"
                 + "      ,[lastUpdate] = ?\n"
                 + " WHERE no_day = 1";
-<<<<<<< HEAD
-=======
-
-
->>>>>>> fedd87aa879cb82c162b4281011a7542d78a846f
-
         List<hold> Hold = isOK();
 
 
      
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fedd87aa879cb82c162b4281011a7542d78a846f
         if (now.isAfter(LocalDate.parse(Hold.get(0).date, dtf))) {
             for (int i = Hold.size() - 1; i >= 1; i--) {
                 Hold.set(i, Hold.get(i - 1));
@@ -81,34 +72,6 @@ public class Tracking extends DBContext {
                 }
             }
         }
-
-//        switch (hold) {
-//            case 1: {
-//                try {
-//                    PreparedStatement ps = connection.prepareStatement(sql);
-//                    ps.setInt(1, num);
-//                    ps.setString(2, now.format(dtf));
-//                    ps.execute();
-//                } catch (Exception ex) {
-//
-//                }
-//                break;
-//            }
-//            case 2: {
-//                try {
-//                    PreparedStatement ps = connection.prepareStatement(sql);
-//                    ps.setInt(1, num);
-//                    ps.setString(2, now.format(dtf));
-//                    ps.execute();
-//                } catch (Exception ex) {
-//
-//                }
-//                break;
-//            }
-//            case 3: {
-//                return;
-//            }
-//        }
     }
 
     class hold {
