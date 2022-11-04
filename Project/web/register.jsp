@@ -77,11 +77,12 @@
                         </center>
                         <div class="form-item">
                             <p class="formLabel">Email</p>
-                            <input type="text" name="mail" id="user" class="form-style" 
-                                   value="${email}"/>
+                            <input type="text" name="mail" id="user" class="form-style" value="${email}"/>
                         </div>
-                        <input type="submit" class="login button_login" value="REGISTER"><br/>
                     </center>
+                    <div style="padding-left: 15px">
+                        <input type="submit" class="login button_login" value="REGISTER"><br/>
+                    </div>
                 </form>
                 <a href="reset"><small>Forgot Password</small></a>
                 <div class="form-item">
