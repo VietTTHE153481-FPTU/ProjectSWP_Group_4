@@ -452,11 +452,6 @@ public class ProductDAO extends DBContext {
                 + "      ,[Amount] = ?\n"
                 + "      ,[StatusID] = 1\n"
                 + " WHERE ProductID =?";
-        String sql1 = "UPDATE [dbo].[ProductImg]\n"
-                + "   SET \n"
-                + "      [ProductImgURL] = ?\n"
-                + " WHERE [ProductID] = ?";
-
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, p.getProductName());
@@ -471,10 +466,23 @@ public class ProductDAO extends DBContext {
             st.setInt(10, p.getProductID());
             st.executeUpdate();
             
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateImg(Products p) {        
+        String sql1 = "UPDATE [dbo].[ProductImg]\n"
+                + "   SET \n"
+                + "      [ProductImgURL] = ?\n"
+                + " WHERE [ProductID] = ?";
+
+        try {
             PreparedStatement st1= connection.prepareStatement(sql1);
             st1.setString(1, p.getUrl());
             st1.setInt(2, p.getProductID());
             st1.executeUpdate();
+                       
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -516,6 +524,28 @@ public class ProductDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public Products getProductByFeedbackID(int id) {
+        String sql = "SELECT       Product.ProductID, Product.ProductName, Product.Description\n"
+                + "FROM            Feedback INNER JOIN\n"
+                + "                         Product ON Feedback.ProductID = Product.ProductID\n"
+                + "WHERE        Feedback.ID=?";
+        try{
+            PreparedStatement st= connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs= st.executeQuery();
+            if(rs.next()){
+                Products p= new Products();
+                p.setProductID(rs.getInt(1));
+                p.setProductName(rs.getString(1));
+                p.setDescription(rs.getString(2));
+                return p;
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
     }
 
     public static void main(String[] args) {

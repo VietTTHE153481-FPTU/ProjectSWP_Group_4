@@ -26,7 +26,7 @@
             <div id="content">
                 <%@include file="layout/sidebar.jsp"%>
                 <div class="container-fluid">
-                    
+
                     <hr>
                     <div class="row">
                         <div class="col-md-12 mb-3">
@@ -34,7 +34,7 @@
                                 <div class="card-header">
                                     <span><i class="fa fa-table me-2"></i></span> Feedback Dashboard
                                 </div>
-                                
+
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="example" class="table table-striped data-table" style="width: 100%">
@@ -45,34 +45,37 @@
                                                     <th>Description</th>
                                                     <th>Star</th>
                                                     <th>Feedback</th>
-
+                                                    <td>Reply</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                           
 
-                                                    <c:forEach var="f" items="${listfb}">
-                                                        <c:forEach var="o" items="${list}">
-                                                            <c:if test="${f.getProductID() == o.getProductID()}">
-                                                                <tr>
-                                                                    <td>${o.getProductName()}</td>
-                                                                    <td>
-                                                                        <div class="img-thumbnail">
-                                                                            <img src="resources/img/products/${o.getUrl()}" style="height: 200px; width: 200px"/>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div style="width: 330px">
-                                                                            ${o.getDescription()}
-                                                                        </div>
-                                                                    </td>
-                                                                    
-                                                                    <td>${f.getStar()}</td>
-                                                                    <td>${f.getFeedbackDetai()}</td>
-                                                                </tr>
-                                                            </c:if>
-                                                        </c:forEach>
+
+                                                <c:forEach var="f" items="${listfb}">
+                                                    <c:forEach var="o" items="${list}">
+                                                        <c:if test="${f.getProductID() == o.getProductID()}">
+                                                            <tr>
+                                                                <td>${o.getProductName()}</td>
+                                                                <td>
+                                                                    <div class="img-thumbnail">
+                                                                        <img src="resources/img/products/${o.getUrl()}" style="height: 200px; width: 200px"/>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div style="width: 330px">
+                                                                        ${o.getDescription()}
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>${f.getStar()}</td>
+                                                                <td>${f.getFeedbackDetai()}</td>
+                                                                <td>
+                                                                    <a href="ReplyFeedback?id=${f.getID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Reply FeedBack</a> 
+                                                                </td>
+                                                            </tr>
+                                                        </c:if>
                                                     </c:forEach>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
