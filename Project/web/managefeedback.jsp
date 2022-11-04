@@ -51,27 +51,29 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="o" items="${list}">
-                                                    <tr>
-                                                        <td>${o.getProductName()}</td>
-                                                        <td>
-                                                            <div class="img-thumbnail">
-                                                                <img src="resources/img/products/${o.getUrl()}" style="height: 200px; width: 200px"/>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div style="width: 330px">
-                                                                ${o.getDescription()}
-                                                            </div>
-                                                        </td>
-                                                        <c:forEach var="f" items="${listfb}">
+                           
+
+                                                    <c:forEach var="f" items="${listfb}">
+                                                        <c:forEach var="o" items="${list}">
                                                             <c:if test="${f.getProductID() == o.getProductID()}">
-                                                                <td>${f.getFeedbackDetai()}</td>
-                                                                <td>${f.getStar()}</td>
+                                                                <tr>
+                                                                    <td>${o.getProductName()}</td>
+                                                                    <td>
+                                                                        <div class="img-thumbnail">
+                                                                            <img src="resources/img/products/${o.getUrl()}" style="height: 200px; width: 200px"/>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div style="width: 330px">
+                                                                            ${o.getDescription()}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>${f.getFeedbackDetai()}</td>
+                                                                    <td>${f.getStar()}</td>
+                                                                </tr>
                                                             </c:if>
                                                         </c:forEach>
-                                                    </tr>
-                                                </c:forEach>
+                                                    </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
