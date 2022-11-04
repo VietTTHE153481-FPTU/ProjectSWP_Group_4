@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-        <link rel="stylesheet" href="styles/login_style.css" type="text/css"/>
+        <link rel="stylesheet" href="styles/register_style.css" type="text/css"/>
         <link rel="stylesheet" href="styles/bootstrap4/bootstrap.min.css" type="text/css">
         <script src="js/jquery-2.1.0.min.js"></script>
         <script src="js/jquery.min.js"></script>
@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <!--<div id="formWrapper" style="background-image: url(resources/img/background.jpg)">-->
+        <div id="formWrapper" style="background-image: url(resources/img/background.jpg)">
             <div id="form">
                 <div class="logo_container">
                     <i class="fa fa-shopping-bag" style="color: #ff3333" aria-hidden="true"></i>
@@ -58,23 +58,23 @@
                         <input type="text" name="fname" id="user" class="form-style" 
                                value="${fullname}"/>
                     </div>
-                    
-                       <div class="form-item">
+
+                    <div class="form-item">
                         <p class="formLabel">Phone</p>
                         <input type="text" name="phone" id="user" class="form-style" 
                                value="${phone}"/>
                     </div>
-                        <center>
+                    <center>
                         <div class="form-check form-check-inline mb-0">
                             <input class="form-check-input" type="radio" name="sex" checked value="0" />
-                            <label class="form-check-label">Male</label>
-                        </div>
-                        <div class="form-check form-check-inline mb-0 me-4">
+                            <label class="form-label">Male</label>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline mb-0">
                             <input class="form-check-input" type="radio" name="sex" value="1" />
-                            <label class="form-check-label">Female</label>
+                            <label class="form-label">Female</label>
                         </div>
                     </center>
-                       <div class="form-item">
+                    <div class="form-item">
                         <p class="formLabel">Email</p>
                         <input type="text" name="mail" id="user" class="form-style" 
                                value="${email}"/>
@@ -86,9 +86,8 @@
                     <p class="pull-left"><small>Have an account?</small>
                         <a href="login"><small>Login</small></a>
                     </p>
-                    <div class="clear-fix"></div>
                 </div>
-            <!--</div>-->
+            </div>
         </div>
     </body>
 </html>
