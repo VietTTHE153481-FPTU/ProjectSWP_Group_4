@@ -66,7 +66,7 @@ public class SellerDAO extends DBContext {
 
     public List<OrderSeller> getAllProductOrderBySeller(int id) {
         List<OrderSeller> list = new ArrayList<>();
-        String sql = "select distinct o.ID, od.ProductName,od.ProductPrice,o.Status, o.Date, od.Quantity from Orders o, Order_Detail od, Product p, Order_Status os where p.ShopID = ? and o.ID = od.Order_ID";
+        String sql = "select distinct o.ID, od.ProductName,od.ProductPrice,o.Status, o.Date, od.Quantity from Orders o, Order_Detail od, Product p, Order_Status os where p.ShopID = ? and o.ID = od.Order_ID and p.ProductID = od.ProductID";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);

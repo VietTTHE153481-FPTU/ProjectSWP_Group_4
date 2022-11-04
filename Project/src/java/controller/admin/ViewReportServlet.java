@@ -5,6 +5,8 @@
 
 package controller.admin;
 
+import DAO.AccountDAO;
+import DAO.ReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +14,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Report;
+import model.Users;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="ServiceManagementServlet", urlPatterns={"/service"})
-public class ServiceManagementServlet extends HttpServlet {
+@WebServlet(name="ViewReportServlet", urlPatterns={"/viewreport"})
+public class ViewReportServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +40,10 @@ public class ServiceManagementServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServiceManagementServlet</title>");  
+            out.println("<title>Servlet ViewReportServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServiceManagementServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewReportServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +60,16 @@ public class ServiceManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("admin/servicemanagement.jsp").forward(request, response);
+        ReportDAO rd = new ReportDAO();
+        AccountDAO ad = new AccountDAO();
+        List<Users> u = ad.getAllAccount();
+        List<Report> list = rd.getAllReport();
+        int num = rd.countReport();
+        
+        request.setAttribute("user", u);
+        request.setAttribute("report", list);
+        request.setAttribute("num", num);
+        request.getRequestDispatcher("admin/viewreport.jsp").forward(request, response);
     } 
 
     /** 

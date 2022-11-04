@@ -375,11 +375,6 @@ public class ProductDAO extends DBContext {
                     + "           ,[StatusID])\n"
                     + "     VALUES\n"
                     + "           (?,?,?,?,?,?,?,?,1)";
-            String sql1 = "INSERT INTO [dbo].[ProductImg]\n"
-                    + "           ([ProductID]\n"
-                    + "           ,[ProductImgURL])\n"
-                    + "     VALUES\n"
-                    + "           (?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, p.getProductName());
             st.setString(2, p.getDescription());
@@ -390,12 +385,59 @@ public class ProductDAO extends DBContext {
             st.setInt(7, p.getShopID());
             st.setInt(8, p.getAmount());
             st.executeUpdate();
-            PreparedStatement st1= connection.prepareStatement(sql1);
-            st1.setInt(1, p.getProductID());
-            st1.setString(2, p.getUrl());
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public void insertProductImg(int id, String image) {
+        try {
+            String sql1 = "INSERT INTO [dbo].[ProductImg]\n"
+                    + "           ([ProductID]\n"
+                    + "           ,[ProductImgURL])\n"
+                    + "     VALUES\n"
+                    + "           (?,?)";
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setInt(1, id);
+            st1.setString(2, image);
+            st1.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public Products getInsertProduct(int id) {
+        String sql = "SELECT  TOP(1)  Product.ProductID, Product.ProductName, Product.Description, Product.OriginalPrice, Product.SellPrice, Product.SalePercent, Product.SubCategoryID, Product.ShopID, Shop.ShopName, Product.Amount, Product.StatusID, \n"
+                + "                         SubCategory.CategoryID\n"
+                + "FROM            Product INNER JOIN\n"
+                + "                         SubCategory ON Product.SubCategoryID = SubCategory.SubCategoryID CROSS JOIN\n"
+                + "                         Shop\n"
+                + "WHERE Product.ShopID = ? order by Product.ProductID desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Products(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getDouble(5),
+                        rs.getDouble(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getInt(11),
+                        null,
+                        rs.getInt(12)
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
     public void update(Products p) {
@@ -420,8 +462,27 @@ public class ProductDAO extends DBContext {
             st.setInt(6, p.getSubCategoryID());
             st.setInt(7, p.getShopID());
             st.setInt(8, p.getAmount());
-            st.setInt(9, p.getProductID());
+            st.setInt(9, p.getStatusID());
+            st.setInt(10, p.getProductID());
             st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateImg(Products p) {        
+        String sql1 = "UPDATE [dbo].[ProductImg]\n"
+                + "   SET \n"
+                + "      [ProductImgURL] = ?\n"
+                + " WHERE [ProductID] = ?";
+
+        try {
+            PreparedStatement st1= connection.prepareStatement(sql1);
+            st1.setString(1, p.getUrl());
+            st1.setInt(2, p.getProductID());
+            st1.executeUpdate();
+                       
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -463,6 +524,28 @@ public class ProductDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public Products getProductByFeedbackID(int id) {
+        String sql = "SELECT       Product.ProductID, Product.ProductName, Product.Description\n"
+                + "FROM            Feedback INNER JOIN\n"
+                + "                         Product ON Feedback.ProductID = Product.ProductID\n"
+                + "WHERE        Feedback.ID=?";
+        try{
+            PreparedStatement st= connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs= st.executeQuery();
+            if(rs.next()){
+                Products p= new Products();
+                p.setProductID(rs.getInt(1));
+                p.setProductName(rs.getString(1));
+                p.setDescription(rs.getString(2));
+                return p;
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
     }
 
     public static void main(String[] args) {

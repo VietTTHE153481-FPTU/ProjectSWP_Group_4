@@ -24,6 +24,9 @@
         <link rel="stylesheet" type="text/css" href="styles/css/style.css">
         <link rel="stylesheet" type="text/css" href="styles/css/queries.css">
         <link rel="stylesheet" type="text/css" href="styles/css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="super_container">
@@ -50,7 +53,7 @@
                                             <h4 class="text-right">Your Profile</h4>
                                         </div>
                                         <h6 style="color: red; text-align: center">${mes}</h6>
-                                        <div class="row mt-3">
+                                        <div class="row mt-2">
                                             <div class="col-md-12">
                                                 <label class="labels">Full Name</label>
                                                 <input value="${account.fullname}" type="text" name="fullname" class="form-control">
@@ -65,15 +68,25 @@
                                             </div>
                                         </div>
                                         <div class="row mt-3">
-                                            <div class="col-md-12">
+                                            <div class="col-md-4">
                                                 <label class="labels">Gender</label>
-                                                <c:if test="${account.gender == false}">
+                                            </div>
+                                            <c:if test="${account.gender == false}">
+                                                <div class="col-md-4">
                                                     <input type="radio" name="gender" checked value="0"> Male
-                                                    <input type="radio" name="gender"  value="1"> Female
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="col-md-6">
+                                                        <input type="radio" name="gender"  value="1"> Female
+                                                    </div>
                                                 </c:if>
                                                 <c:if test="${account.gender == true}">
-                                                    <input type="radio" name="gender" value="0"> Male
-                                                    <input type="radio" name="gender" checked  value="1"> Female
+                                                    <div class="col-md-4">
+                                                        <input type="radio" name="gender" checked value="0"> Male
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="radio" name="gender"  value="1"> Female
+                                                    </div>
                                                 </c:if>
                                             </div>
                                         </div>

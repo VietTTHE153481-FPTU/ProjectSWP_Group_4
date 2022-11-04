@@ -4,12 +4,6 @@
  */
 package controller.customer;
 
-import DAO.CartDAO;
-import DAO.OrderDAO;
-import DAO.OrderDetailDAO;
-import DAO.ProductDAO;
-import DAO.ShipDAO;
-import DAO.UserAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,19 +12,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
-import java.text.DecimalFormat;
 import model.Cart;
-import model.Order;
-import model.UserAddress;
-import model.Users;
 
 /**
  *
- * @author Minhm
+ * @author Admin
  */
-@WebServlet(name = "checkout", urlPatterns = {"/CheckOut"})
-public class CheckOutServlet extends HttpServlet {
+@WebServlet(name = "FeedBackServlet", urlPatterns = {"/feedback"})
+public class FeedBackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,10 +38,10 @@ public class CheckOutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PlaceOrderServlet</title>");
+            out.println("<title>Servlet FeedBackServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PlaceOrderServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet FeedBackServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,20 +59,10 @@ public class CheckOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO pd = new ProductDAO();
         HttpSession session = request.getSession();
-        Users u = (Users) session.getAttribute("account");
-        UserAddressDAO uad = new UserAddressDAO();
-        String address = uad.getAddressByUser(u);
-        double shippingfee = uad.getShippingFee(u);
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        String format = formatter.format(shippingfee).toString();
         Cart c = (Cart) session.getAttribute("cart");
-
-        request.setAttribute("money", shippingfee);
-        request.setAttribute("shippingfee", format);
-        request.setAttribute("address", address);
-        request.getRequestDispatcher("checkout.jsp").forward(request, response);
+         
+        request.getRequestDispatcher("feedback.jsp").forward(request, response);
     }
 
     /**
@@ -97,34 +76,7 @@ public class CheckOutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Cart c = (Cart) session.getAttribute("cart");
-        Users u = (Users) session.getAttribute("account");
-        OrderDAO od = new OrderDAO();
-        OrderDetailDAO odd = new OrderDetailDAO();
-        UserAddressDAO uad = new UserAddressDAO();
-        ShipDAO sd = new ShipDAO();
-        Order o = new Order();
-        Date d = new Date();
-        CartDAO cd= new CartDAO();
-        double shippingfee = uad.getShippingFee(u);
-        
-        String noti = request.getParameter("notice");
-        o.setUserId(u.getUserID());
-        o.setTotalPrice(c.totalmoney()+shippingfee);
-        o.setNote(noti);
-        o.setDate(d);
-        od.createOrder(o);
-        Order co = od.getCheckOutOrder(u.getUserID());
-        odd.insertOrderDetail(c, co.getId());
-        UserAddress ud = uad.getDefaultAddress(u.getUserID());
-        sd.insertShipInfo(co.getId(), noti, ud);
-        cd.removeCart(u.getUserID());      
-        session.removeAttribute("cart");
-        request.setAttribute("mess", "Order Successfully");
-//        request.getRequestDispatcher("feedback.jsp").forward(request, response);
-        response.sendRedirect("feedback");
-        
+        processRequest(request, response);
     }
 
     /**

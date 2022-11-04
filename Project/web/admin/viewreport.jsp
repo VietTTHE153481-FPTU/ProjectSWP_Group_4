@@ -76,10 +76,10 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item pt-2">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="service"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="viewreport"
                                            aria-expanded="false">
                                             <i class="fa fa-server" aria-hidden="true"></i>
-                                            <span class="hide-menu">Service Management</span>
+                                            <span class="hide-menu">Reports From Users</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
@@ -99,20 +99,51 @@
                 <div class="page-breadcrumb bg-white">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <h4 class="page-title">Service Management</h4>
+                            <h4 class="page-title">Report</h4>
                         </div>
                     </div>
                 </div>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                            <div class="white-box">
-                                <h3 class="box-title">Detailed statistics</h3>
-                                <div id="ct-visits" style="height: 405px;">
-                                    <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
-                                            class="chartist-tooltip-value">6</span>
-                                    </div>
+                        <div class="white-box">
+                            <div id="ct-visits">
+                                <div class="box-title analytics-info">
+                                    <h3 class="box-title">Total Report: ${num}</h3>
                                 </div>
+                                <form method="get" action="viewreport">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>#</th>
+                                            <th><center>SENDER ACCOUNT</center></th>
+                                        <th>SENDER'S NAME</th>
+                                        <th>TITLE<th>
+                                        <th>CONTENT<th>
+                                        <th>REPORT SUBMISSION DATE<th>
+                                        <th>VIEW DETAIL</th>
+                                        </tr>
+                                        <c:forEach items="${report}" var="report">
+                                            <c:forEach items="${user}" var="u">
+                                                <c:if test="${report.getUserId() == u.getUserID()}">
+                                                    <tr>
+                                                        <td>${report.getReportId()}</td>
+                                                        <td><center>${u.username}</center></td>
+                                                    <td>${u.fullname}</td>
+                                                    <td>${report.getReportTitle()}</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>${report.getReportContent()}</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>${report.getDate()}</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <a href="shopdetail?id=${shop.ID}"><i class="fa fa-eye"></i></a>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </td>
+                                                    </tr>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>

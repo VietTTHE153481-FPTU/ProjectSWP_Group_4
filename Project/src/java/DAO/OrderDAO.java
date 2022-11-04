@@ -193,7 +193,31 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
-        od.upDateOrderStatus("byeeeeeeeeee", "2", 1);
+        od.CancelOrder(15);
 
     }
+    
+    public void CancelOrder(int id) {
+        String sql1 = "DELETE FROM Order_Detail\n"
+                + "      WHERE Order_ID = ?";
+        String sql2 = "DELETE FROM ShipInfo\n"
+                + "      WHERE Order_ID = ?";
+        String sql = "DELETE FROM Orders\n"
+                + "      WHERE ID = ?";
+        try {
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setInt(1, id);
+            st1.executeUpdate();
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+            st2.setInt(1, id);
+            st2.executeUpdate();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+
 }
