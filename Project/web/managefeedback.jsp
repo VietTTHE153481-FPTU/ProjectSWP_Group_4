@@ -68,8 +68,9 @@
                                                                             ${o.getDescription()}
                                                                         </div>
                                                                     </td>
-                                                                    <td>${f.getFeedbackDetai()}</td>
+                                                                    
                                                                     <td>${f.getStar()}</td>
+                                                                    <td>${f.getFeedbackDetai()}</td>
                                                                 </tr>
                                                             </c:if>
                                                         </c:forEach>
