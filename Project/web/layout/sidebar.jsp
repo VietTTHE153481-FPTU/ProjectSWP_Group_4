@@ -25,7 +25,7 @@
             <a href="ManageBlog">Manage Blog &nbsp;<i class="fa fa-newspaper-o"></i></a>
         </li>
         <li>
-            <a href="#">Manage Feedback &nbsp;<i class="fa fa-reply-all"></i></a>
+            <a href="ManageFeedback">Manage Feedback &nbsp;<i class="fa fa-reply-all"></i></a>
         </li>
     </ul>
     <ul class="list-unstyled CTAs">

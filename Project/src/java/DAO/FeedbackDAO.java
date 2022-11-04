@@ -8,6 +8,10 @@ import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Feedback;
+import model.Order;
 
 /**
  *
@@ -43,10 +47,47 @@ public class FeedbackDAO extends DBContext{
         return -1;
     }
     
+    public List<Feedback> getFeedbackbyProductID(int productId) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT * FROM Feedback WHERE ProductID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, productId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Feedback(rs.getInt(1), rs.getInt(2), rs.getInt(3),rs.getInt(4),rs.getInt(5), rs.getString(6)));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public List<Feedback> getAllFeedback() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT ID,UserID,ProductID,OrderID,Star,FeedbackDetail FROM Feedback";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback f = new Feedback();
+                f.setID(rs.getInt("ID"));
+                f.setUserID(rs.getInt("UserID"));
+                f.setProductID(rs.getInt("ProductID"));
+                f.setOrderID(rs.getInt("OrderID"));
+                f.setStar(rs.getInt("Star"));
+                f.setFeedbackDetai(rs.getString("FeedbackDetail"));
+                list.add(f);
+            }
+        } catch (SQLException e) {
+            System.out.println("error:" + e);
+        }
+        return list;
+    }
     
     public static void main(String[] args) {
         FeedbackDAO fb = new FeedbackDAO();
 //        fb.insertFeedback(1, 1, 2, 5, "good");
-           System.out.println(fb.findOrderIdByProductId(2));
+        List<Feedback> list = fb.getAllFeedback();
+        System.out.println(list.get(0));
     }
 }
