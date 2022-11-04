@@ -98,7 +98,8 @@ public class FeedBackDetailServlet extends HttpServlet {
         }
         else{
             session.removeAttribute("cart");
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+//            request.getRequestDispatcher("home.jsp").forward(request, response);
+             response.sendRedirect("ViewCartServlet");
         }
     }
 
