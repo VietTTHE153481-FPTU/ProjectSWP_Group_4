@@ -68,10 +68,10 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item pt-2">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="service"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="viewreport"
                                            aria-expanded="false">
                                             <i class="fa fa-server" aria-hidden="true"></i>
-                                            <span class="hide-menu">Service Management</span>
+                                            <span class="hide-menu">Reports from users</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">

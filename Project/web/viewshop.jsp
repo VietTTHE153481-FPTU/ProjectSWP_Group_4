@@ -36,7 +36,7 @@
                                 <div class="row card-body" style="padding-top: 25px">
                                     <div class="col-sm-4">
                                         <h4 class="card-title">${shop.getShopName()} Shop&nbsp;
-                                            <c:if test="${account.getShopId() != shop.getID()}">
+                                            <c:if test="${account.getShopId() != shop.getID() && account.getRoleId() != 1}">
                                                 <a href="report" style="color: #000000">
                                                     <i class="fa fa-exclamation-circle"></i>
                                                 </a>

@@ -78,10 +78,10 @@ Author     : trung
                                         </a>
                                     </li>
                                     <li class="sidebar-item pt-2">
-                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="service"
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="viewreport"
                                            aria-expanded="false">
                                             <i class="fa fa-server" aria-hidden="true"></i>
-                                            <span class="hide-menu">Service Management</span>
+                                            <span class="hide-menu">Reports from users</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item">
@@ -154,10 +154,7 @@ Author     : trung
                                 <canvas id="myChart2" style="width:100%;max-width:100%"></canvas>
                                 <h3 class="box-title">Detailed statistics</h3>
                                 <div id="ct-visits" style="height: 100px">
-
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
