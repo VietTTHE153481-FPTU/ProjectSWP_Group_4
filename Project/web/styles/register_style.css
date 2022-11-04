@@ -30,11 +30,11 @@ div.logo{
     text-align: center; 
 }
 .head{
-    padding:40px 0px 10px 0
+    padding:10px 0px 20px 0
 }
 #formWrapper{
-    background-size: inherit;
-    background-position: inherit;
+    background-size: cover;
+    background-position: bottom;
     width:100%;
     height:100%;
     position: absolute;
@@ -42,10 +42,10 @@ div.logo{
 
 div#form{
     position: absolute;
-    width:360px;
+    width:400px;
+    height: 310px;
     height:auto;
     background-color: #fff;
-    margin:auto;
     border-radius: 10px;
     padding:20px;
     left:50%;
@@ -55,7 +55,7 @@ div#form{
 
 div.form-item{
     position: relative;
-    display: block;
+    margin-left: -5px;
     margin-bottom: 20px;
 }
 input{
@@ -86,7 +86,7 @@ div.form-item .form-style:focus{
 }
 div.form-item p.formLabel {
     position: absolute;
-    left:26px;
+    left:50px;
     top:10px;
     transition:all .4s ease;
     color:#bbb;
@@ -137,7 +137,7 @@ input[type="submit"].login:focus{
 .logo_container a:first-of-type
 {
     text-decoration: none;
-    font-size: 24px;
+    font-size: 20px;
     color: #1e1e27;
     font-weight: 700;
     text-transform: uppercase;
