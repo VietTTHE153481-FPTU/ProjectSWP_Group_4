@@ -26,17 +26,15 @@
             <div id="content">
                 <%@include file="layout/sidebar.jsp"%>
                 <div class="container-fluid">
-                    <span>Number of products: ${num}&nbsp;<i class="fa fa-cart-plus" style="color: #ff0000"></i></span>
+                    
                     <hr>
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <span><i class="fa fa-table me-2"></i></span> Product Dashboard
+                                    <span><i class="fa fa-table me-2"></i></span> Feedback Dashboard
                                 </div>
-                                <div>
-                                    <a href="AddProduct" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Add New Product</a>
-                                </div>
+                                
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="example" class="table table-striped data-table" style="width: 100%">
@@ -46,7 +44,7 @@
                                                     <th>Image</th>
                                                     <th>Description</th>
                                                     <th>Star</th>
-                                                    <th>Feeback</th>
+                                                    <th>Feedback</th>
 
                                                 </tr>
                                             </thead>
@@ -90,13 +88,6 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/seller/scrollbar.concat.min.js"></script>
 
-        <script type="text/javascript">
-            function doDelete(id) {
-                if (confirm("Are you sure to delete product with id=" + id)) {
-                    window.location = "DeleteProduct?id=" + id;
-                }
-            }
-        </script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#sidebar").mCustomScrollbar({
