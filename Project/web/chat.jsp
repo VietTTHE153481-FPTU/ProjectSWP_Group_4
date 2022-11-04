@@ -73,6 +73,9 @@
             .border-top {
                 border-top: 1px solid #dee2e6!important;
             }
+            .chat-messages::-webkit-scrollbar {
+                display: none;
+            }
         </style>
     </head>
     <%@include file  = "layout/Header.jsp"%>
@@ -126,8 +129,8 @@
                             </div>
                         </div>
 
-                        <div class="position-relative">
-                            <div class="chat-messages p-4">
+                        <div class="position-relative" >
+                            <div class="chat-messages p-4" id="lemao">
 
                                 <c:forEach items="${requestScope.chatbox.getMessagesInGroup()}" var="box">
                                     <c:choose>
@@ -192,6 +195,7 @@
                 value = 0;
 
         $(function () {
+//            $('#lemao').scrollTop($('#lemao')[0].scrollHeight);
             if (timer !== null)
                 return;
             timer = setInterval(function () {
