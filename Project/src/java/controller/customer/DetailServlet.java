@@ -4,7 +4,9 @@
  */
 package controller.customer;
 
+import DAO.AccountDAO;
 import DAO.FavoriteProductDAO;
+import DAO.FeedbackDAO;
 import DAO.ProductDAO;
 import DAO.ShopDAO;
 import java.io.IOException;
@@ -16,8 +18,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import model.Feedback;
 import model.Products;
 import model.Shop;
+import model.Users;
 
 /**
  *
@@ -64,16 +68,25 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            AccountDAO ad = new AccountDAO();
+            ProductDAO pd = new ProductDAO();
+            FeedbackDAO fd = new FeedbackDAO();
+            FavoriteProductDAO fpd = new FavoriteProductDAO();
+            Products p = pd.getProductById(id);
+            int num = fpd.countFavoriteProduct(id);
+            List<Feedback> feedback = fd.getFeedbackbyProductID(id);
+            List<Users> user = ad.getAllAccount();
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        ProductDAO pd = new ProductDAO();
-        FavoriteProductDAO fpd = new FavoriteProductDAO();
-        Products p = pd.getProductById(id);
-        int num = fpd.countFavoriteProduct(id);
-        
-        request.setAttribute("detail", p);
-        request.setAttribute("num", num);
-        request.getRequestDispatcher("detail.jsp").forward(request, response);
+            request.setAttribute("user", user);
+            request.setAttribute("feedback", feedback);
+            request.setAttribute("detail", p);
+            request.setAttribute("num", num);
+            request.getRequestDispatcher("detail.jsp").forward(request, response);
+        } catch (NumberFormatException ex) {
+            System.out.println(ex);
+        }
 
     }
 
