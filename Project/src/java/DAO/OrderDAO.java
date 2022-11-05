@@ -196,6 +196,18 @@ public class OrderDAO extends DBContext {
         od.CancelOrder(15);
 
     }
+    public void ReqCancelOrder(int id){
+        String sql = "UPDATE [dbo].[Orders]\n"
+                + "   SET [Status] = 4\n"
+                + " WHERE ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     
     public void CancelOrder(int id) {
         String sql1 = "DELETE FROM Order_Detail\n"

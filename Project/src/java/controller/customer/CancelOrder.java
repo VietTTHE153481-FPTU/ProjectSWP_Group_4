@@ -58,7 +58,7 @@ public class CancelOrder extends HttpServlet {
     throws ServletException, IOException {
        int id = Integer.parseInt(request.getParameter("id"));
        OrderDAO or = new OrderDAO();
-       or.CancelOrder(id);
+       or.ReqCancelOrder(id);
        request.getRequestDispatcher("vieworders").forward(request, response);
     } 
 
