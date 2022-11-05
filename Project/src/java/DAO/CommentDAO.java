@@ -39,6 +39,24 @@ public class CommentDAO extends DBContext {
         return list;
     }
 
+    public Comment getCommentByID(int id) {
+        String sql = "SELECT * FROM [CommentBlogs] WHERE ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Comment(rs.getInt("ID"),
+                        rs.getInt("BlogID"),
+                        rs.getInt("UserID"),
+                        rs.getString("Comment"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public void addComment(int BlogID, int UserID, String Comment) {
         String sql = "INSERT INTO [dbo].[CommentBlogs] ([BlogID], [UserID], [Comment]) VALUES (?, ?, ?)";
         try {
@@ -50,5 +68,21 @@ public class CommentDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("error" + e);
         }
+    }
+
+    public void deleteComment(int id) {
+        String sql = "DELETE FROM CommentBlogs WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
+    public static void main(String[] args) {
+        CommentDAO cd = new CommentDAO();
+        Comment c = cd.getCommentByID(12);
+        System.out.println(c);
     }
 }

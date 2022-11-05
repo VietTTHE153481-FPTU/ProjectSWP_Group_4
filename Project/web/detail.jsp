@@ -145,7 +145,7 @@
                             </div>
                             <div id="tab_2" class="tab_container">
                                 <div class="row">
-                                    <div class="col-lg-6 reviews_col">
+                                    <div class="col-lg-12 reviews_col">
                                         <div class="tab_title reviews_title">
                                             <h4>Reviews</h4>
                                         </div>
@@ -167,31 +167,6 @@
                                                 <div class="user_name">Customer name</div>
                                                 <p>Customer reviews</p>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 add_review_col">
-                                        <div class="add_review">
-                                            <form id="review_form">
-                                                <div>
-                                                    <h1>Add Review</h1>
-                                                    <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                                    <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-                                                </div>
-                                                <div>
-                                                    <h1>Your Rating:</h1>
-                                                    <ul class="user_star_rating">
-                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                        <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                    </ul>
-                                                    <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-                                                </div>
-                                                <div class="text-left text-sm-right">
-                                                    <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
