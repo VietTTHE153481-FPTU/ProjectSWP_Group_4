@@ -112,7 +112,7 @@
                                                                     <div class="dropdown-menu">
                                                                         <c:if test="${account.getUserID() == c.getUserID()}">
                                                                             <a class="dropdown-item" href="#">Edit</a>
-                                                                            <a class="dropdown-item" href="#">Delete</a>
+                                                                            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">Delete</button>
                                                                         </c:if>
                                                                         <c:if test="${account.getUserID() != c.getUserID()}">
                                                                             <a class="dropdown-item" href="#">Hide</a>
@@ -125,10 +125,29 @@
                                                     </c:if>
                                                 </c:forEach>
                                             </li>
+                                            <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Delete comments?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to delete this comment?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                            <a type="button" class="btn btn-primary" href="DeleteComment?ID=${cmid}&BlogID=${c.getBlogID()}">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <br>
                                         </c:forEach>
                                     </ul>
-                                </div>   
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -137,9 +156,6 @@
                     <h5 class="mtext-113 cl2 p-b-12">
                         Leave a Comment
                     </h5>
-                    <p class="stext-109 cl6 p-b-40">
-                        Your email address will not be published. Required fields are marked *
-                    </p>
                     <form action="blogdetail" method="post">
                         <input type="hidden" name="BlogID" value="${blog.id}"/>
                         <input type="hidden" name="UserID" value="${account.userID}"/>

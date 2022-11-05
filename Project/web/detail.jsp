@@ -222,6 +222,7 @@
                                                             </div>
                                                         </div>-->
                             <div id="tab_2" class="tab_container">
+<<<<<<< HEAD
                                 <div class="feedback_list">
                                     <c:forEach var="f" items="${requestScope.feedback}">                                       
                                         <div>
@@ -266,31 +267,94 @@
                                                 </div>
                                             </div>
                                         </c:forEach>
+=======
+                                <div class="row">
+                                    <div class="col-lg-12 reviews_col">
+                                        <div class="tab_title reviews_title">
+                                            <h4>Reviews</h4>
+                                        </div>
+                                        <div class="user_review_container d-flex flex-column flex-sm-row">
+                                            <div class="user">
+                                                <div class="user_pic"></div>
+                                                <div class="user_rating">
+                                                    <ul class="star_rating">
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review">
+                                                <div class="review_date">19 Oct 2022</div>
+                                                <div class="user_name">Customer name</div>
+                                                <p>Customer reviews</p>
+                                            </div>
+                                        </div>
+                                        <div class="feedback_list">
+                                            <c:forEach var="f" items="${requestScope.feedback}">                                       
+                                                <div class="feedback_box container">
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-lg-2">
+>>>>>>> 02e074f9ec6dbd9c67c003963c9c2618cc7403e1
 
+                                                        </div>
+                                                        <div class="col-md-10 col-lg-10">
+                                                            <div class="feedback_box_main">
+                                                                <div class="feedback_box_authorname">
+                                                                    <c:forEach var="u" items="${requestScope.user}">
+                                                                        <c:if test="${f.getUserID() == u.getUserID()}">
+                                                                            ${u.getUsername()}
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </div>
+                                                                <div class="feedback_box_rating">
+                                                                    <!--                                                        <ul class="star_rating">
+                                                                                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                                                                            </ul>-->
+                                                                </div>
+                                                                <div class="feedback_box_detail">
+                                                                    ${f.getFeedbackDetai()}
+                                                                </div>
+                                                                <div class="feedback_box_replybox">
+                                                                    <p style="padding-top: 5px; padding-bottom: 5px; color: #664e2c;">Phản Hồi Của Người Bán</p>
+                                                                    <div class="feedback_box_replybox_detail">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>     
                 </div>
-            </div>     
-        </div>
-        <%@include file="layout/Footer.jsp" %>
-    </div>
-        <script type="text/javascript"><!--
-            function func() {
-                var numO = document.getElementById('quantity_value').innerHTML;
-                //href="cart?id=${detail.getProductID()}&numO=(int)document.getElementById('quantity_value').innerHTML"
-                window.location.href = "cart?id=${detail.getProductID()}&numO=" + numO;
-            }
-        </script>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="styles/bootstrap4/popper.js"></script>
-        <script src="styles/bootstrap4/bootstrap.min.js"></script>
-        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-        <script src="plugins/easing/easing.js"></script>
-        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-        <script src="js/detail_custom.js"></script>
-    </body>
-</html>
+                <%@include file="layout/Footer.jsp" %>
+            </div>
+                <script type="text/javascript"><!--
+                    function func() {
+                        var numO = document.getElementById('quantity_value').innerHTML;
+                        //href="cart?id=${detail.getProductID()}&numO=(int)document.getElementById('quantity_value').innerHTML"
+                        window.location.href = "cart?id=${detail.getProductID()}&numO=" + numO;
+                    }
+                </script>
+                <script src="js/jquery-3.2.1.min.js"></script>
+                <script src="styles/bootstrap4/popper.js"></script>
+                <script src="styles/bootstrap4/bootstrap.min.js"></script>
+                <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+                <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+                <script src="plugins/easing/easing.js"></script>
+                <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+                <script src="js/detail_custom.js"></script>
+        </body>
+    </html>

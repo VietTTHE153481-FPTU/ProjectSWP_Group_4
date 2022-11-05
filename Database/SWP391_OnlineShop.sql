@@ -430,7 +430,7 @@ CREATE TABLE [dbo].[Report](
 	constraint ShopID_in_repor FOREIGN KEY(ShopID) REFERENCES Shop(ID),
 ) ON [PRIMARY]
 GO
-INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả',2 , N'Shop LsThai có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
+INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả',2 , N'Shop có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
 INSERT INTO Report VALUES (6, N'Lấy hình ảnh đã có bản quyền',4 , N'Shop này đã có hành vi lấy hình ảnh bản quyền của chúng tôi mà không được sự cho phép', '2022/11/04 13:21');
 INSERT INTO Report VALUES (4, N'Có hành vi sao chép bản quyền',4 , N'Cố ý lấy hình ảnh mà không xin phép', '2022/11/04 13:23');
 INSERT INTO Report VALUES (7, N'Đăng những sản phẩm có hình ảnh nhạy cảm',1 , N'Có những hình ảnh không phù hợp với nội dung sản phẩm, liên quan đến các vấn đề nhạy cảm', '2022/11/04 13:27');
