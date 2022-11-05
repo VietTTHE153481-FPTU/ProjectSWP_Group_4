@@ -60,7 +60,7 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        OrderDAO dao = new OrderDAO();
         AccountDAO ad = new AccountDAO();
         request.setAttribute("customercount", ad.getNoAcc());
         request.setAttribute("sellercount", ad.getSeller());
@@ -68,6 +68,19 @@ public class DashboardServlet extends HttpServlet {
         List<Integer> a = t.getALL();
         request.setAttribute("graph", a);
         ProductDAO pd = new ProductDAO();
+        int[] hold = dao.getStatis();
+        if(hold!=null){
+            int num_confirm = hold[0];
+            int num_pack = hold[1];
+            int num_deli = hold[2];
+            int num_can = hold[3];
+            int num_com = hold[4];
+            request.setAttribute("num_confirm", num_confirm);
+            request.setAttribute("num_pack", num_pack);
+            request.setAttribute("num_deli", num_deli);
+            request.setAttribute("num_can", num_can);
+            request.setAttribute("num_com", num_com);
+        }
         request.setAttribute("productcount", pd.countProducts());
         request.getRequestDispatcher("admin/dashboard.jsp").forward(request, response);
     } 

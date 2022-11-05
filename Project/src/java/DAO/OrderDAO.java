@@ -125,6 +125,33 @@ public class OrderDAO extends DBContext {
         }
     }
 
+    public int[] getStatis() {
+        int[] endarr = {0, 0, 0, 0, 0};
+        String sql = "select distinct a.ID as OrderID, a.UserID,a.TotalPrice,a.Note,d.Name as StatusName,a.Date as Date\n"
+                + "                from Orders as a,Order_Detail as b, Product as c, Order_Status as d\n"
+                + "                where a.ID = b.Order_ID and b.ProductID = c.ProductID  and d.ID = a.Status";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("StatusName").equalsIgnoreCase("Waiting for Confirmation")) {
+                    endarr[0] += 1;
+                } else if (rs.getString("StatusName").equalsIgnoreCase("Packaging")) {
+                    endarr[1] += 1;
+                } else if (rs.getString("StatusName").equalsIgnoreCase("Delivering")) {
+                    endarr[2] += 1;
+                } else if (rs.getString("StatusName").equalsIgnoreCase("Canceled")) {
+                    endarr[3] += 1;
+                } else {
+                    endarr[4] += 1;
+                }
+            }
+        } catch (Exception ex) {
+
+        }
+        return endarr;
+    }
+
     public List<Order> getAllByShopID(int id) {
         String sql = "select distinct a.ID as OrderID, a.UserID,a.TotalPrice,a.Note,d.Name as StatusName,a.Date as Date\n"
                 + "from Orders as a,Order_Detail as b, Product as c, Order_Status as d\n"
@@ -191,7 +218,22 @@ public class OrderDAO extends DBContext {
         return null;
     }
 
+<<<<<<< HEAD
+=======
 
+    public void ReqCancelOrder(int id){
+        String sql = "UPDATE [dbo].[Orders]\n"
+                + "   SET [Status] = 4\n"
+                + " WHERE ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+>>>>>>> 2f9889432acac690c165ab8c762ab3eecff22071
     public void CancelOrder(int id) {
         String sql1 = "DELETE FROM Order_Detail\n"
                 + "      WHERE Order_ID = ?";
@@ -213,10 +255,11 @@ public class OrderDAO extends DBContext {
             System.out.println(e);
         }
     }
+
     public static void main(String[] args) {
         OrderDAO dao = new OrderDAO();
         List<Order> a = dao.getAllByShopID(1);
-        for(Order b:a){
+        for (Order b : a) {
             System.out.println(b.getStatus());
         }
     }
