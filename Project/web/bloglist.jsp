@@ -53,9 +53,10 @@
                                             </div>
                                             <div class="p-t-32">
                                                 <h4 class="p-b-15">
-                                                    <a href="blogdetail?id=${bl.id}&key=" class="ltext-108 cl2 hov-cl1 trans-04">
+                                                    <input type="hidden" name="id" value="${blog.id}"/>
+                                                    <span class="ltext-108 cl2 hov-cl1 trans-04">
                                                         ${bl.getTitle()}
-                                                    </a>
+                                                    </span>
                                                 </h4>
                                                 <p class="stext-117 cl6">${bl.getContent()}</p>
                                                 <div class="flex-w flex-sb-m p-t-18">
@@ -66,7 +67,7 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </span>
-                                                    <a href="blogdetail?id=${bl.id}&key=" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                                    <a href="blogdetail?BlogID=${bl.id}&key=" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                                         Continue Reading
                                                         <i class="fa fa-long-arrow-right m-l-9"></i>
                                                     </a>
@@ -78,7 +79,7 @@
                             </div>
                             <div class="col-md-4 col-lg-3 p-b-80">
                                 <div class="side-menu">
-                                    <form action="bloglist">
+                                    <form action="bloglist" method="post">
                                         <div class="bor17 of-hidden pos-relative">
                                             <input value="${search}" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="key" placeholder="Search"/>
                                             <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">

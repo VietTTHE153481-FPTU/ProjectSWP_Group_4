@@ -65,20 +65,13 @@ public class BlogListServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         BlogDAO bd = new BlogDAO();
-        String key = request.getParameter("key");
-        List<Blog> blogs = new ArrayList<>();
-        if (key.equals("")) {
-            blogs = bd.getAllBlogs();
-        } else {
-            blogs = bd.getBlogBySearch(key);
-        }
-        
+        List<Blog> blogs = bd.getAllBlogs();
+
         AccountDAO ad = new AccountDAO();
         List<Users> users = ad.getAllAccount();
-        
+
         request.setAttribute("author", users);
         request.setAttribute("bloglist", blogs);
-        request.setAttribute("search", key);
         request.getRequestDispatcher("bloglist.jsp").forward(request, response);
     }
 
@@ -93,6 +86,22 @@ public class BlogListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        BlogDAO bd = new BlogDAO();
+        String key = request.getParameter("key");
+        List<Blog> blogs = new ArrayList<>();
+        if (key.equals("")) {
+            blogs = bd.getAllBlogs();
+        } else {
+            blogs = bd.getBlogBySearch(key);
+        }
+
+        AccountDAO ad = new AccountDAO();
+        List<Users> users = ad.getAllAccount();
+
+        request.setAttribute("author", users);
+        request.setAttribute("bloglist", blogs);
+        request.setAttribute("search", key);
         request.getRequestDispatcher("bloglist.jsp").forward(request, response);
     }
 

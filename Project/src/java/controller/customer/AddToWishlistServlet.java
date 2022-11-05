@@ -74,7 +74,7 @@ public class AddToWishlistServlet extends HttpServlet {
         fpd.addProductToWishlish(u.getUserID(), id);
 
         request.setAttribute("detail", p);
-        request.getRequestDispatcher("detail.jsp").forward(request, response);
+        response.sendRedirect("detail?id=" + p.getProductID());
     }
 
     /**

@@ -6,6 +6,7 @@ package controller.homepage;
 
 import DAO.AccountDAO;
 import DAO.BlogDAO;
+import DAO.CommentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,10 +14,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
 import model.BlogDetail;
+import model.Comment;
 import model.Users;
 
 /**
@@ -65,20 +68,25 @@ public class BlogDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BlogDAO b = new BlogDAO();
-        int id = Integer.parseInt(request.getParameter("id"));
+        CommentDAO cd = new CommentDAO();
+        AccountDAO ad = new AccountDAO();
+        int id = Integer.parseInt(request.getParameter("BlogID"));
         String key = request.getParameter("key");
         List<BlogDetail> bd = new ArrayList<>();
-        if(key.equals("")){
-         bd = b.getBlogDetailById(id);
-        }
-        else{
+        if (key.equals("")) {
+            bd = b.getBlogDetailById(id);
+        } else {
             bd = b.getBlogDetailBySearch(key, id);
         }
         Blog bg = b.getBlogs(id);
-        
+        List<Comment> listcm = cd.getCommentByBlogID(id);
+        List<Users> user = ad.getAllAccount();
+
         request.setAttribute("key", key);
         request.setAttribute("blogdetail", bd);
         request.setAttribute("blog", bg);
+        request.setAttribute("comment", listcm);
+        request.setAttribute("user", user);
         request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
     }
 
@@ -93,7 +101,18 @@ public class BlogDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
+        BlogDAO b = new BlogDAO();
+        CommentDAO cd = new CommentDAO();
+        int BlogID = Integer.parseInt(request.getParameter("BlogID"));
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
+        String Comment = request.getParameter("Comment");
+        
+        Blog bg = b.getBlogs(BlogID);
+        cd.addComment(BlogID, u.getUserID(), Comment);
+        
+        request.setAttribute("blog", bg);
+        response.sendRedirect("blogdetail?BlogID="+ bg.getId() +"&key=");
     }
 
     /**

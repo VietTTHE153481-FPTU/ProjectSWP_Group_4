@@ -32,8 +32,8 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a href="home">Home</a></li>
-                        <li><a href="bloglist?key="><i class="fa fa-angle-right" aria-hidden="true"></i>Blogs</a></li>
-                        <li class="active"><a href="blogdetail"><i class="fa fa-angle-right" aria-hidden="true"></i>${blog.title}</a></li>
+                        <li><a href="bloglist"><i class="fa fa-angle-right" aria-hidden="true"></i>Blogs</a></li>
+                        <li class="active"><a href="blogdetail?BlogID=${blog.id}&key="><i class="fa fa-angle-right" aria-hidden="true"></i>${blog.title}</a></li>
                     </ul>
                 </div>
                 <section class="bg0 p-t-1 p-b-20">
@@ -41,6 +41,7 @@
                         <div class="row">
                             <div class="col-md-8 col-lg-9 p-b-80">
                                 <div class="p-r-45 p-r-0-lg">
+                                    <input type="hidden" name="id" value="${blog.id}"/>
                                     <h6 class="ltext-109 cl2 p-b-28">
                                         ${blog.title}
                                     </h6>
@@ -79,21 +80,55 @@
                                                 ${bd.content}
                                             </p>
                                         </c:forEach>
-                                    </div>
+                                    </div>      
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-3 p-b-80">
                                 <div class="side-menu">
                                     <form action="blogdetail" method="get">
                                         <div class="bor17 of-hidden pos-relative">
+                                            <input type="hidden" name="BlogID" value="${blog.id}"/>
                                             <input value="${key}" class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="key" placeholder="Search"/>
-                                            <input type="hidden" name="id" value="${blog.id}"/>
                                             <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
                                                 <i class="fa fa-search"></i>
                                             </button>
                                         </div>
                                     </form> 
                                 </div>
+                                <div class="p-t-55">
+                                    <h3 class="cl2 p-b-33">
+                                        Comment
+                                    </h3>
+                                    <ul>
+                                        <c:forEach items="${comment}" var="c">
+                                            <li class="p-b-8">
+                                                <c:forEach items="${user}" var="u">
+                                                    <c:if test="${u.getUserID() == c.getUserID()}">
+                                                        <div class="flex-w flex-sb-m stext-115 cl6 hov-cl1">
+                                                            <h5>${u.getFullname()}</h5>
+                                                            <div class="flex-w flex-sb-m stext-115 cl6 hov-cl1">
+                                                                <div class="dropdown">
+                                                                    <button type="button" data-toggle="dropdown" aria-expanded="false">&nbsp;<i class="fa fa-ellipsis-h"></i></button>
+                                                                    <div class="dropdown-menu">
+                                                                        <c:if test="${account.getUserID() == c.getUserID()}">
+                                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                                            <a class="dropdown-item" href="#">Delete</a>
+                                                                        </c:if>
+                                                                        <c:if test="${account.getUserID() != c.getUserID()}">
+                                                                            <a class="dropdown-item" href="#">Hide</a>
+                                                                        </c:if>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">${c.getComment()}</span>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </li>
+                                            <br>
+                                        </c:forEach>
+                                    </ul>
+                                </div>   
                             </div>
                         </div>
                     </div>
@@ -102,18 +137,14 @@
                     <h5 class="mtext-113 cl2 p-b-12">
                         Leave a Comment
                     </h5>
-                    <p class="stext-107 cl6 p-b-40">
+                    <p class="stext-109 cl6 p-b-40">
                         Your email address will not be published. Required fields are marked *
                     </p>
-                    <form>
+                    <form action="blogdetail" method="post">
+                        <input type="hidden" name="BlogID" value="${blog.id}"/>
+                        <input type="hidden" name="UserID" value="${account.userID}"/>
                         <div class="bor19 m-b-20">
-                            <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
-                        </div>
-                        <div class="bor19 size-218 m-b-20">
-                            <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Enter your name">
-                        </div>
-                        <div class="bor19 size-218 m-b-20">
-                            <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Enter your email">
+                            <textarea name="Comment" class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" placeholder="Comment..."></textarea>
                         </div>
                         <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
                             Post Comment

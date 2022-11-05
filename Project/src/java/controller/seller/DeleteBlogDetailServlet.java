@@ -74,7 +74,7 @@ public class DeleteBlogDetailServlet extends HttpServlet {
         request.setAttribute("blog", bg);
         request.setAttribute("num", num);
         request.setAttribute("blogid", blogid);
-        request.getRequestDispatcher("manageblogdetail.jsp").forward(request, response);
+        response.sendRedirect("ManageBlogDetail?id="+ bg.getId());
         
     } 
 
