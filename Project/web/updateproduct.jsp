@@ -95,16 +95,13 @@
                                 <div class="col-lg-6 col-xs-12 col-md-12">
                                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                         <input accept="image/*" 
-                                               id="upload" name="image" type="file" onchange="readURL(this);" class="form-control border-0">
+                                               id="upload" name="imgBlogDetail" type="file" onchange="readURL(this);" class="form-control border-0">
                                         <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose File</label>
                                         <div>
                                             <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>&nbsp;<small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                                         </div>
                                     </div>
-                                    <div class="image-area" style="display: none;"><img id="imageResult" src="#" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-                                    <div id="image_div" style="display: none">
-                                        <img src="resources/img/products/${p.getUrl()}" class="img-fluid rounded shadow-sm mx-auto d-block">
-                                    </div>
+                                    <div class="image-area"><img id="imageResult" src="resources/img/products/${p.getUrl()}" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
                                 </div>
                             </div>
                         </form>
@@ -112,71 +109,66 @@
                 </div>
             </div>
         </div>
-        <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
+    </div>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        $('#imageResult')
-                                .attr('src', e.target.result);
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
+                reader.onload = function (e) {
+                    $('#imageResult')
+                            .attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
             }
-            $(function () {
-                $('#upload').on('change', function () {
-                    readURL(input);
-                });
+        }
+        $(function () {
+            $('#upload').on('change', function () {
+                readURL(input);
             });
-            var input = document.getElementById('upload');
-            var infoArea = document.getElementById('upload-label');
+        });
+        var input = document.getElementById('upload');
+        var infoArea = document.getElementById('upload-label');
 
-            input.addEventListener('change', showFileName);
-            function showFileName(event) {
+        input.addEventListener('change', showFileName);
+        function showFileName(event) {
+            var input = event.srcElement;
+            var fileName = input.files[0].name;
+            infoArea.textContent = 'File name: ' + fileName;
+        }
+    </script>
+    <script src="plugins/bower_components/jquery/jquery.min.js"></script>
+    <script src="styles/bootstrap4/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboards/custom_admin.js"></script>
+    <script src="js/dashboards/app-style-switcher.js"></script>
+    <script src="js/dashboards/waves.js"></script>
+    <script src="js/dashboards/sidebarmenu.js"></script>
+    <div class="overlay"></div>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/seller/scrollbar.concat.min.js"></script>
 
-                var input = event.srcElement;
-                var fileName = input.files[0].name;
-                infoArea.textContent = 'File name: ' + fileName;
-            }
-        </script>
-        <script src="plugins/bower_components/jquery/jquery.min.js"></script>
-        <script src="styles/bootstrap4/bootstrap.bundle.min.js"></script>
-        <script src="js/dashboards/custom_admin.js"></script>
-        <script src="js/dashboards/app-style-switcher.js"></script>
-        <script src="js/dashboards/waves.js"></script>
-        <script src="js/dashboards/sidebarmenu.js"></script>
-        <div class="overlay"></div>
-        <script src="js/jquery-2.1.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/seller/scrollbar.concat.min.js"></script>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
-
-                $('#image_div').css("display", "block");
-                $('#image-area').on('change', function () {
-                    $('#image_div').css("display", "none");
-                    $(this).css('display', "block");
-                });
-                $('#dismiss, .overlay').on('click', function () {
-                    $('#sidebar').removeClass('active');
-                    $('.overlay').fadeOut();
-                });
-
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').addClass('active');
-                    $('.overlay').fadeIn();
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
             });
-        </script>
-        <script src="js/seller/jquery.dataTables.min.js"></script>
-        <script src="js/seller/dataTables.bootstrap5.min.js"></script>
-        <script src="js/seller/script1.js"></script>
-    </body>
+
+            $('#dismiss, .overlay').on('click', function () {
+                $('#sidebar').removeClass('active');
+                $('.overlay').fadeOut();
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').addClass('active');
+                $('.overlay').fadeIn();
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+    <script src="js/seller/jquery.dataTables.min.js"></script>
+    <script src="js/seller/dataTables.bootstrap5.min.js"></script>
+    <script src="js/seller/script1.js"></script>
+</body>
 </html>

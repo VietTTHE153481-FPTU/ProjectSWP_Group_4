@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Feedback;
+import model.FeedbackReply;
 import model.Products;
 import model.Users;
 
@@ -70,7 +71,9 @@ public class ManageFeedbackServlet extends HttpServlet {
         List<Feedback> feedback = fb.getAllFeedback();
         int num= pd.getNumProductByShopId(u.getShopId());
         Products product= pd.getProductByShopId(u.getShopId());
+        List<FeedbackReply> reply= fb.getAllFeedbackReply();
         
+        request.setAttribute("reply", reply);
         request.setAttribute("num", num);
         request.setAttribute("detail", product);
         request.setAttribute("list", products);

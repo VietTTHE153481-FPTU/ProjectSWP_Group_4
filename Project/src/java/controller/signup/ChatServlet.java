@@ -68,6 +68,8 @@ public class ChatServlet extends HttpServlet {
         HttpSession session = request.getSession();
         MessagesDAO dao = new MessagesDAO();
         AccountDAO dao2 = new AccountDAO();
+        String error = request.getParameter("error");
+        request.setAttribute("error", error);
         Users a = (Users) session.getAttribute("account");
         int id1 = a.getUserID();
         List<Messages_group> lmao = new ArrayList<>();
@@ -140,11 +142,18 @@ public class ChatServlet extends HttpServlet {
         AccountDAO dao2 = new AccountDAO();
         HttpSession session = request.getSession();
         String message = request.getParameter("text");
+        
         int room = Integer.parseInt(request.getParameter("room"));
         Users a = (Users) session.getAttribute("account");
         int uID = a.getUserID();
-        dao.SaveNewMessage(room, message, uID);
+        
         int id2 = dao.getOp(room, uID);
+        if (message.isEmpty() || message.equals("")) {
+            request.setAttribute("error", "Message can not be empty!!");
+            response.sendRedirect("ChatServlet?uid=" + id2);
+            return;
+        }
+        dao.SaveNewMessage(room, message, uID);
         response.sendRedirect("ChatServlet?uid=" + id2);
         return;
 

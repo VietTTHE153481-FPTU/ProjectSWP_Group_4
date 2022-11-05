@@ -430,7 +430,10 @@ CREATE TABLE [dbo].[Report](
 	constraint ShopID_in_repor FOREIGN KEY(ShopID) REFERENCES Shop(ID),
 ) ON [PRIMARY]
 GO
-INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả',2 , N'Shop LsThai có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
+INSERT INTO Report VALUES (4, N'Đăng bán sản phẩm giả',2 , N'Shop có đăng bán những sản phẩm không rõ nguồn gốc, ngoài ra còn ăn cắp hình ảnh của Shop tôi', '2022/11/03 11:06');
+INSERT INTO Report VALUES (6, N'Lấy hình ảnh đã có bản quyền',4 , N'Shop này đã có hành vi lấy hình ảnh bản quyền của chúng tôi mà không được sự cho phép', '2022/11/04 13:21');
+INSERT INTO Report VALUES (4, N'Có hành vi sao chép bản quyền',4 , N'Cố ý lấy hình ảnh mà không xin phép', '2022/11/04 13:23');
+INSERT INTO Report VALUES (7, N'Đăng những sản phẩm có hình ảnh nhạy cảm',1 , N'Có những hình ảnh không phù hợp với nội dung sản phẩm, liên quan đến các vấn đề nhạy cảm', '2022/11/04 13:27');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ShipInfo (
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
@@ -498,6 +501,26 @@ Không thể phủ nhận ngành công nghiệp thời trang đang phát triển
 INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('01',N'Sep','2022', N'Mix đồ cho nàng ngày hè',N'Bạn có thể chọn những gam màu sáng như trắng, cam, be,.. để tạo sự trẻ trung, tươi mới hoặc những gam màu trầm tối như đen, nâu, xanh rêu,... vừa đem đến sự tinh tế vừa phong cách, thời trang.',N'4.jpg', 5)
 INSERT INTO dbo.Blog([Day], [Month], [Year], BlogTitle, BlogContent, imageLink, AuthorID)VALUES('24',N'Sep','2022', N'Áo sơ mi cho nàng cực trẻ trung và cá tính',N'Áo sơ mi vốn là một item must-have trong tủ đồ của phái nữ bởi sự đơn giản, tinh tế; dễ phối đồ và có thể mặc trong hầu hết mọi tình huống như đi học, đi làm,đi chơi, đi phỏng vấn,...Thông dụng - dễ phối - chưa bao giờ lỗi mốt là những từ có thể dùng để miêu tả về áo sơ mi trắng.
 Là một item quốc dân luôn có sẵn trong tủ đồ của tất cả mọi người, những chiếc áo sơ mi trắng luôn khiến người mặc ngây ngất bởi hiệu quả thời trang mà nó mang lại: sự trẻ trung, lịch thiệp và phong cách.',N'5.jpg', 6)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE CommentBlogs (
+	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	BlogID int,
+	UserID int,
+	Comment nvarchar(2000),
+	constraint BlogID_in_blog FOREIGN KEY(BlogID) REFERENCES Blog(ID),
+	constraint userID_in_user FOREIGN KEY(UserID) REFERENCES Users(UserID),
+) ON [PRIMARY]
+GO
+INSERT INTO CommentBlogs VALUES (1, 9, N'Bài viết rất hay!');
+INSERT INTO CommentBlogs VALUES (1, 11, N'Quá tuyệt vời');
+INSERT INTO CommentBlogs VALUES (1, 15, N'Một bài viết rất chi tiết, quá hay');
+INSERT INTO CommentBlogs VALUES (2, 9, N'Bài viết rất hay!');
+INSERT INTO CommentBlogs VALUES (3, 11, N'Quá tuyệt vời');
+INSERT INTO CommentBlogs VALUES (3, 17, N'Một bài viết rất chi tiết, quá hay');
+INSERT INTO CommentBlogs VALUES (4, 9, N'Một bài viết rất chi tiết, quá hay');
+INSERT INTO CommentBlogs VALUES (4, 13, N'Một bài viết rất chi tiết, quá hay');
+INSERT INTO CommentBlogs VALUES (5, 14, N'Một bài viết rất chi tiết, quá hay');
+INSERT INTO CommentBlogs VALUES (5, 17, N'Một bài viết rất chi tiết, quá hay');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Create Table BlogDetail (
 	BlogDetailID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,

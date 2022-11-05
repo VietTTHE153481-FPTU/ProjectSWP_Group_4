@@ -8,6 +8,7 @@ import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
@@ -111,21 +112,25 @@ public class FeedbackDAO extends DBContext {
         return null;
     }
 
-    public String getFeedbackReply(int id) {
-        String sql = "SELECT RepliesText\n"
-                + "  FROM [dbo].[Feedback_Replies]\n"
-                + "  WHERE FeedbackID = ?";
+    public List<FeedbackReply> getAllFeedbackReply() {
+        List<FeedbackReply> list= new ArrayList<>();
+        String sql = "select * from Feedback_Replies";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
+            PreparedStatement st = connection.prepareStatement(sql);            
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return rs.getString(1);
+                FeedbackReply fr= new FeedbackReply();
+                fr.setId(rs.getInt(1));
+                fr.setFeedbackID(rs.getInt(2));
+                fr.setUserID(rs.getInt(3));
+                fr.setProductID(rs.getInt(4));
+                fr.setRepliesText(rs.getString(5));
+                list.add(fr);
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        return null;
+        return list;
     }
 
     public void insertReply(FeedbackReply fr) {

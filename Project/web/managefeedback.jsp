@@ -69,8 +69,9 @@
 
                                                                 <td>${f.getStar()}</td>
                                                                 <td>${f.getFeedbackDetai()}</td>
+
                                                                 <td>
-                                                                    <a href="ReplyFeedback?id=${f.getID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Reply FeedBack</a> 
+                                                                    <a href="ReplyFeedback?id=${f.getID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Reply FeedBack</a>                                                                    
                                                                 </td>
                                                             </tr>
                                                         </c:if>

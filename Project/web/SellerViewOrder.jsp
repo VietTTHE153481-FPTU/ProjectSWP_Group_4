@@ -42,9 +42,9 @@
                                                     <th>OrderID</th>
                                                     <th>Username</th>
                                                     <th>TotalPrice</th>
-                                                    <th>Status</th>
+                                                    
                                                     <th>Note</th>
-                                                    <th>Options</th>
+                                                    <th><span>Status</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="left-top-bar">Options</span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -59,47 +59,6 @@
                                                         <td>${o.getUsername()}</td>
                                                         <td>${o.getTotalPrice()}₫ </td>
                                                         <td>
-                                                            <select name="hehe" id="demoSelect" >
-                                                                <c:choose>
-                                                                    <c:when test="${o.getStatus() eq 'Waiting for Confirmation'}">
-                                                                        <option value="1" selected>Waiting for Confirmation</option>
-                                                                        <option value="2">Packaging</option>
-                                                                        <option value="3">Delivering</option>
-                                                                        <option value="4">Canceled</option>
-                                                                        <option value="5">Completed</option>
-                                                                    </c:when>
-                                                                    <c:when test="${o.getStatus() eq 'Packaging'}">
-                                                                        <option value="1">Waiting for Confirmation</option>
-                                                                        <option value="2" selected>Packaging</option>
-                                                                        <option value="3">Delivering</option>
-                                                                        <option value="4">Canceled</option>
-                                                                        <option value="5">Completed</option>
-                                                                    </c:when>
-                                                                    <c:when test="${o.getStatus() eq 'Delivering'}">
-                                                                        <option value="1">Waiting for Confirmation</option>
-                                                                        <option value="2">Packaging</option>
-                                                                        <option value="3" selected>Delivering</option>
-                                                                        <option value="4">Canceled</option>
-                                                                        <option value="5">Completed</option>
-                                                                    </c:when>
-                                                                    <c:when test="${o.getStatus() eq 'Canceled'}">
-                                                                        <option value="1">Waiting for Confirmation</option>
-                                                                        <option value="2">Packaging</option>
-                                                                        <option value="3">Delivering</option>
-                                                                        <option value="4" selected>Canceled</option>
-                                                                        <option value="5">Completed</option>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <option value="1">Waiting for Confirmation</option>
-                                                                        <option value="2">Packaging</option>
-                                                                        <option value="3">Delivering</option>
-                                                                        <option value="4">Canceled</option>
-                                                                        <option value="5" selected>Completed</option>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </select>
-                                                        </td>
-                                                        <td>
                                                             <div style="width: 330px">
                                                                 <textarea readonly="" name="note" cols="36" rows="5">${o.getNote()}</textarea>
                                                             </div>
@@ -107,33 +66,74 @@
                                                         <td>
 
                                                             <form action="ManageOrder" method="post">
-
-                                                                <input id="demoInput" type="text" name="status" hidden/>
+                                                                <select name="status" id="demoSelect${o.getId()}">
+                                                                    <c:choose>
+                                                                        <c:when test="${o.getStatus() eq 'Waiting for Confirmation'}">
+                                                                            <option value="1" selected>Waiting for Confirmation</option>
+                                                                            <option value="2">Packaging</option>
+                                                                            <option value="3">Delivering</option>
+                                                                            <option value="4">Canceled</option>
+                                                                            <option value="5">Completed</option>
+                                                                        </c:when>
+                                                                        <c:when test="${o.getStatus() eq 'Packaging'}">
+                                                                            <option value="1">Waiting for Confirmation</option>
+                                                                            <option value="2" selected>Packaging</option>
+                                                                            <option value="3">Delivering</option>
+                                                                            <option value="4">Canceled</option>
+                                                                            <option value="5">Completed</option>
+                                                                        </c:when>
+                                                                        <c:when test="${o.getStatus() eq 'Delivering'}">
+                                                                            <option value="1">Waiting for Confirmation</option>
+                                                                            <option value="2">Packaging</option>
+                                                                            <option value="3" selected>Delivering</option>
+                                                                            <option value="4">Canceled</option>
+                                                                            <option value="5">Completed</option>
+                                                                        </c:when>
+                                                                        <c:when test="${o.getStatus() eq 'Canceled'}">
+                                                                            <option value="1">Waiting for Confirmation</option>
+                                                                            <option value="2">Packaging</option>
+                                                                            <option value="3">Delivering</option>
+                                                                            <option value="4" selected>Canceled</option>
+                                                                            <option value="5">Completed</option>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <option value="1">Waiting for Confirmation</option>
+                                                                            <option value="2">Packaging</option>
+                                                                            <option value="3">Delivering</option>
+                                                                            <option value="4">Canceled</option>
+                                                                            <option value="5" selected>Completed</option>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </select>
+                                                                <input id="demoInput${o.getId()}" type="text" name="#" hidden/>
                                                                 <input type="text" name="orderID" value="${o.getId()}" hidden>
                                                                 <!--                                                                <input name="lemao" type="text" hidden value="Up">-->
-                                                                <button name="bu" type="submit" class="border-0" style="background-color: none" value="Up">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-                                                                    <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
-                                                                    </svg>
-                                                                </button>
-                                                                <button name="bu" type="submit" class="border-0" style="background-color: none" value="Del">
+
+                                                                <button name="bu" type="submit" class="border-0" style="background-color: #17a2b8;border-radius: 4px" value="Del">
                                                                     <input name="lemao" type="submit" hidden value="Del">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                                     </svg>
                                                                 </button>
-                                                                <button id="lemao" style="background-color: none" class="border-0" onclick="func(${o.getId()})">
+                                                                <button name="bu" type="submit" class="border-0" style="background-color: #17a2b8;border-radius: 4px" value="Up">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                                                                    </svg>
+                                                                </button>
+                                                                <button type='button' id="lemao" style="background-color: #17a2b8;border-radius: 4px" class="border-0" onclick="func(${o.getId()})">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                                                     </svg>
                                                                 </button>
 
+
                                                             </form>   
+                                                            <div class="">
+                                                                
+                                                            </div>
                                                         </td>
                                                     </tr> 
-
-
                                                 </c:forEach>
                                             </tbody>
                                         </table>
@@ -151,16 +151,9 @@
         <script src="js/seller/scrollbar.concat.min.js"></script>
 
         <script type="text/javascript">
-
                                                                     function func(a) {
-                                                                        window.location = "orderdetails?id=" +a;
+                                                                        window.location = "orderdetails?id=" + a;
                                                                     }
-
-                                                                    $('#demoSelect').change(function () {
-                                                                        $('#demoInput').val($(this).val());
-                                                                    }).change();
-
-
                                                                     $(document).ready(function () {
                                                                         $("#sidebar").mCustomScrollbar({
                                                                             theme: "minimal"

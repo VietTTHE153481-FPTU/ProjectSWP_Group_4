@@ -56,7 +56,7 @@
                                             </select>
                                         </div>
                                         <div class="mt-3 col-md-12">Reason for reporting!
-                                            <textarea type="text" class="form-control" name="content" rows="8"></textarea>
+                                            <textarea class="form-control" name="content" rows="8"></textarea>
                                         </div>
                                     </div>
                                     <div class="mt-5"><button class="btn btn-primary profile-button" type="submit">Submit</button></div>
