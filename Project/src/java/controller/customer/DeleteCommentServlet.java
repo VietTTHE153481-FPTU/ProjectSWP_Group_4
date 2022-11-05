@@ -2,65 +2,55 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller.customer;
 
-import DAO.AccountDAO;
-import DAO.FavoriteProductDAO;
-import DAO.FeedbackDAO;
-import DAO.ProductDAO;
-import DAO.ShopDAO;
+import DAO.BlogDAO;
+import DAO.CommentDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import model.Feedback;
-import model.FeedbackReply;
-import model.Products;
-import model.Shop;
-import model.Users;
+import model.Blog;
+import model.Comment;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "DetailServlet", urlPatterns = {"/detail"})
-public class DetailServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="DeleteCommentServlet", urlPatterns={"/DeleteComment"})
+public class DeleteCommentServlet extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DetailServlet</title>");
+            out.println("<title>Servlet DeleteCommentServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteCommentServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -68,34 +58,25 @@ public class DetailServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            AccountDAO ad = new AccountDAO();
-            ProductDAO pd = new ProductDAO();
-            FeedbackDAO fd = new FeedbackDAO();
-            FavoriteProductDAO fpd = new FavoriteProductDAO();
-            Products p = pd.getProductById(id);
-            int num = fpd.countFavoriteProduct(id);
-            List<Feedback> feedback = fd.getFeedbackbyProductID(id);
-            List<FeedbackReply> reply= fd.getAllFeedbackReply();
-            List<Users> user = ad.getAllAccount();
-            
-            request.setAttribute("reply", reply);
-            request.setAttribute("user", user);
-            request.setAttribute("feedback", feedback);
-            request.setAttribute("detail", p);
-            request.setAttribute("num", num);
-            request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch (NumberFormatException ex) {
-            System.out.println(ex);
-        }
+    throws ServletException, IOException {
+        int id1 = Integer.parseInt(request.getParameter("ID"));
+        int id = Integer.parseInt(request.getParameter("BlogID"));
+        
+        CommentDAO cd = new CommentDAO();
+        BlogDAO b = new BlogDAO();
+        
+        cd.deleteComment(id1);
+        Blog bg = b.getBlogs(id);
+        
+        Comment c = cd.getCommentByID(id1);
+        int commentid = c.getID();
+        
+        request.setAttribute("cmid", commentid);
+        response.sendRedirect("blogdetail?BlogID="+ bg.getId() +"&key=");
+    } 
 
-    }
-
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -103,13 +84,12 @@ public class DetailServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override
