@@ -22,6 +22,64 @@ Author     : trung
         <link href="styles/css/style.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+        <style type="text/css">
+            .pie-chart {
+                background:
+                    radial-gradient(
+                    circle closest-side,
+                    transparent 66%,
+                    white 0
+                    ),
+                    conic-gradient(
+                    from 13deg,
+                    #4e79a7 0,
+                    #4e79a7 38%,
+                    #f28e2c 0,
+                    #f28e2c 61%,
+                    #e15759 0,
+                    #e15759 77%,
+                    #76b7b2 0,
+                    #76b7b2 87%,
+                    #59a14f 0,
+                    #59a14f 93%,
+                    #edc949 0,
+                    #edc949 100%
+                    );
+                position: relative;
+                width: 500px;
+                min-height: 350px;
+                margin: 0;
+                outline: 1px solid #ccc;
+            }
+            .pie-chart h2 {
+                position: absolute;
+                margin: 1rem;
+            }
+            .pie-chart cite {
+                position: absolute;
+                bottom: 0;
+                font-size: 80%;
+                padding: 1rem;
+                color: gray;
+            }
+            .pie-chart figcaption {
+                position: absolute;
+                bottom: 1em;
+                right: 1em;
+                font-size: smaller;
+                text-align: right;
+            }
+            .pie-chart span:after {
+                display: inline-block;
+                content: "";
+                width: 0.8em;
+                height: 0.8em;
+                margin-left: 0.4em;
+                height: 0.8em;
+                border-radius: 0.2em;
+                background: currentColor;
+            }
+        </style>
     </head>
     <body>
         <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
@@ -150,81 +208,105 @@ Author     : trung
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                            <div class="white-box col-lg-8">
-                                <canvas id="myChart2" style="width:100%;max-width:100%"></canvas>
-                                <h3 class="box-title">Clicks tracker</h3>
-                                <div id="ct-visits" style="height: 100px">
+                            <div class="row">
+                                <div class="white-box col-lg-8">
+                                    <canvas id="myChart2" style="width:100%;max-width:100%"></canvas>
+                                    <h3 class="box-title">Clicks tracker</h3>
+                                    <div id="ct-visits" style="height: 80px">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="white-box col-lg-4">
-                                
+                                <div class="white-box col-lg-3" style="margin-left: auto;margin-right: auto">                        
+                                    
+                                    <div style="padding-top: 40px">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                    <div id="ct-visits" style="height: 80px">
+                                    </div>
+                                    <h3 class="box-title">Orders report</h3>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script type="text/javascript">
-            
-            
-            
-            
-            var xValues2 = ["Today", "Yesterday", "2days ago", "3days ago", "4days ago", "5days ago", "6days ago"];
-            var yValues2 =
-                    [
-            ${requestScope.graph.get(0)}
-                        , ${requestScope.graph.get(1)}
-                        , ${requestScope.graph.get(2)}
-                        , ${requestScope.graph.get(3)}
-                        , ${requestScope.graph.get(4)}
-                        , ${requestScope.graph.get(5)}
-                        , ${requestScope.graph.get(6)}
-                    ];
-
-            new Chart("myChart2", {
-                type: "line",
-                data: {
-                    labels: xValues2,
-                    datasets: [{
-                            fill: false,
-                            lineTension: 0,
-                            backgroundColor: "rgba(0,0,255,1.0)",
-                            borderColor: "rgba(0,0,255,0.1)",
-                            data: yValues2
-                        }]
-                },
-                options: {
-                    legend: {display: false},
-                    scales: {
-                        yAxes: [{ticks: {min: 6, max: 16}}],
+            <script type="text/javascript">
+                var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["Waiting for confirmation", "packaging", "Delivering", "Canceled", "Completed"],
+                        datasets: [{
+                                backgroundColor: [
+                                    "#95a5a6",
+                                    "#9b59b6",
+                                    "#f1c40f",
+                                    "#e74c3c",
+                                    "#34495e"
+                                ],
+                                data: [${requestScope.num_confirm}, ${requestScope.num_pack}, ${requestScope.num_deli}, ${requestScope.num_can}, ${requestScope.num_com}]
+                            }]
                     }
-                }
-            });
+                });
 
-//            var myCanvas1 = document.getElementById("myCanvas1");
-//            myCanvas1.width = 300;
-//            myCanvas1.height = 300;
-//
-//            var ctx = myCanvas1.getContext("2d");
-//            function drawLine(ctx, startX, startY, endX, endY, color) {
-//                ctx.save();
-//                ctx.strokeStyle = color;
-//                ctx.beginPath();
-//                ctx.moveTo(startX, startY);
-//                ctx.lineTo(endX, endY);
-//                ctx.stroke();
-//                ctx.restore();
-//            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="plugins/bower_components/jquery/jquery.min.js"></script>
-        <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <script src="styles/bootstrap4/bootstrap.bundle.min.js"></script>
-        <script src="js/dashboards/custom.js"></script>
-        <script src="js/dashboards/app-style-switcher.js"></script>
-        <script src="js/dashboards/waves.js"></script>
-        <script src="js/dashboards/sidebarmenu.js"></script>
-        <script src="plugins/bower_components/chartist/chartist.min.js"></script>
-        <script src="plugins/bower_components/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+
+
+                var xValues2 = ["Today", "Yesterday", "2days ago", "3days ago", "4days ago", "5days ago", "6days ago"];
+                var yValues2 =
+                        [
+                ${requestScope.graph.get(0)}
+                            , ${requestScope.graph.get(1)}
+                            , ${requestScope.graph.get(2)}
+                            , ${requestScope.graph.get(3)}
+                            , ${requestScope.graph.get(4)}
+                            , ${requestScope.graph.get(5)}
+                            , ${requestScope.graph.get(6)}
+                        ];
+
+                new Chart("myChart2", {
+                    type: "line",
+                    data: {
+                        labels: xValues2,
+                        datasets: [{
+                                fill: false,
+                                lineTension: 0,
+                                backgroundColor: "rgba(0,0,255,1.0)",
+                                borderColor: "rgba(0,0,255,0.1)",
+                                data: yValues2
+                            }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        scales: {
+                            yAxes: [{ticks: {min: 6, max: 16}}],
+                        }
+                    }
+                });
+
+                //            var myCanvas1 = document.getElementById("myCanvas1");
+                //            myCanvas1.width = 300;
+                //            myCanvas1.height = 300;
+                //
+                //            var ctx = myCanvas1.getContext("2d");
+                //            function drawLine(ctx, startX, startY, endX, endY, color) {
+                //                ctx.save();
+                //                ctx.strokeStyle = color;
+                //                ctx.beginPath();
+                //                ctx.moveTo(startX, startY);
+                //                ctx.lineTo(endX, endY);
+                //                ctx.stroke();
+                //                ctx.restore();
+                //            }
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="plugins/bower_components/jquery/jquery.min.js"></script>
+            <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+            <script src="styles/bootstrap4/bootstrap.bundle.min.js"></script>
+            <script src="js/dashboards/custom.js"></script>
+            <script src="js/dashboards/app-style-switcher.js"></script>
+            <script src="js/dashboards/waves.js"></script>
+            <script src="js/dashboards/sidebarmenu.js"></script>
+            <script src="plugins/bower_components/chartist/chartist.min.js"></script>
+            <script src="plugins/bower_components/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
     </body>
 </html>
