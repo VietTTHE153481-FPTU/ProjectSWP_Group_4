@@ -32,6 +32,30 @@
                 font-size: 15px;
                 text-align: center;
             }
+            .feedback_box{
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px dashed #b7b7b7;
+            }
+            .feedback_box_authorname{
+                font-size: 16px;
+                font-weight: 600;
+            }
+            .feedback_box_main{
+                padding-top: 10px;
+            }
+            .feedback_box_detail{
+                padding: 5px;
+                font-weight: 300;
+            }
+            .feedback_box_replybox{
+                box-shadow: 1px 2px #cccccc;
+                background-color: #e6e6e6;
+            }
+            .feedback_box_replybox_detail{
+                padding: 0 0 10px 20px;              
+            }
+
         </style>
     </head>
     <body>
@@ -200,42 +224,48 @@
                             <div id="tab_2" class="tab_container">
                                 <div class="feedback_list">
                                     <c:forEach var="f" items="${requestScope.feedback}">                                       
-                                    <div class="feedback_box container">
-                                        <div class="row">
-                                            <div class="col-md-2 col-lg-2">
-                                                
-                                            </div>
-                                            <div class="col-md-10 col-lg-10">
-                                                <div class="feedback_box_main">
-                                                    <div class="feedback_box_authorname">
-                                                        <c:forEach var="u" items="${requestScope.user}">
-                                                            <c:if test="${f.getUserID() == u.getUserID()}">
-                                                                ${u.getUsername()}
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>
-                                                    <div class="feedback_box_rating">
-<!--                                                        <ul class="star_rating">
-                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                        </ul>-->
-                                                    </div>
-                                                    <div class="feedback_box_detail">
-                                                        ${f.getFeedbackDetai()}
-                                                    </div>
-                                                    <div class="feedback_box_replybox">
-                                                        <p style="padding-top: 5px; padding-bottom: 5px; color: #664e2c;">Phản Hồi Của Người Bán</p>
-                                                        <div class="feedback_box_replybox_detail">
-                                                            
+                                        <div>
+                                            <div class="row feedback_box">
+                                                <div class="col-md-1 col-lg-1">
+
+                                                </div>
+                                                <div class="col-md-10 col-lg-10">
+                                                    <div class="feedback_box_main">
+                                                        <div class="feedback_box_authorname">
+                                                            <c:forEach var="u" items="${requestScope.user}">
+                                                                <c:if test="${f.getUserID() == u.getUserID()}">
+                                                                    ${u.getUsername()}
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </div>
+                                                        <div class="feedback_box_rating">
+                                                            <ul class="star_rating">
+                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="feedback_box_detail">
+                                                            ${f.getFeedbackDetai()}
+                                                        </div>
+                                                        <c:forEach var="rep" items="${reply}">
+                                                            <c:if test="${f.getID() == rep.getFeedbackID()}">
+                                                                
+                                                            <div class="feedback_box_replybox">
+                                                                <p style="padding: 10px; margin: 0;color: #664e2c;">Phản Hồi Của Người Bán</p>
+                                                                <div class="feedback_box_replybox_detail">
+                                                                    ${rep.getRepliesText()}
+                                                                </div>
+                                                            </div>
+                                                            </c:if>
+
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </c:forEach>
+                                        </c:forEach>
 
                                     </div>
                                 </div>

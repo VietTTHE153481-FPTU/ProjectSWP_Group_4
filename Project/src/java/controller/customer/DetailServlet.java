@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
+import model.FeedbackReply;
 import model.Products;
 import model.Shop;
 import model.Users;
@@ -77,8 +78,10 @@ public class DetailServlet extends HttpServlet {
             Products p = pd.getProductById(id);
             int num = fpd.countFavoriteProduct(id);
             List<Feedback> feedback = fd.getFeedbackbyProductID(id);
+            List<FeedbackReply> reply= fd.getAllFeedbackReply();
             List<Users> user = ad.getAllAccount();
-
+            
+            request.setAttribute("reply", reply);
             request.setAttribute("user", user);
             request.setAttribute("feedback", feedback);
             request.setAttribute("detail", p);
