@@ -5,6 +5,7 @@
 
 package controller.seller;
 
+import DAO.AccountDAO;
 import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,9 +62,13 @@ public class ManageOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
+        AccountDAO dao = new AccountDAO();
         OrderDAO or = new OrderDAO();
         Users hold = (Users)session.getAttribute("account");
         List<Order> a = or.getAllByShopID(hold.getShopId());
+        for(Order end:a){
+            end.setUsername(dao.getUserByID(end.getUserId()));
+        }
         request.setAttribute("data", a);
         request.getRequestDispatcher("SellerViewOrder.jsp").forward(request, response);
     } 

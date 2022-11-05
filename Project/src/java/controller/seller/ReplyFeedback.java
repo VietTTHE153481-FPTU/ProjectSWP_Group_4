@@ -2,14 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.customer;
+package controller.seller;
 
-import DAO.CartDAO;
-import DAO.OrderDAO;
-import DAO.OrderDetailDAO;
+import DAO.FeedbackDAO;
 import DAO.ProductDAO;
-import DAO.ShipDAO;
-import DAO.UserAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,19 +14,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
-import java.text.DecimalFormat;
-import model.Cart;
-import model.Order;
-import model.UserAddress;
+import model.Feedback;
+import model.FeedbackReply;
+import model.Products;
 import model.Users;
 
 /**
  *
- * @author Minhm
+ * @author admin
  */
-@WebServlet(name = "checkout", urlPatterns = {"/CheckOut"})
-public class CheckOutServlet extends HttpServlet {
+@WebServlet(name = "ReplyFeedback", urlPatterns = {"/ReplyFeedback"})
+public class ReplyFeedback extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,10 +43,10 @@ public class CheckOutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PlaceOrderServlet</title>");
+            out.println("<title>Servlet ReplyFeedback</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PlaceOrderServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ReplyFeedback at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,20 +64,21 @@ public class CheckOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id_raw= request.getParameter("id");
         ProductDAO pd = new ProductDAO();
-        HttpSession session = request.getSession();
-        Users u = (Users) session.getAttribute("account");
-        UserAddressDAO uad = new UserAddressDAO();
-        String address = uad.getAddressByUser(u);
-        double shippingfee = uad.getShippingFee(u);
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        String format = formatter.format(shippingfee).toString();
-        Cart c = (Cart) session.getAttribute("cart");
+        FeedbackDAO fd = new FeedbackDAO();
 
-        request.setAttribute("money", shippingfee);
-        request.setAttribute("shippingfee", format);
-        request.setAttribute("address", address);
-        request.getRequestDispatcher("checkout.jsp").forward(request, response);
+        try {
+            int id= Integer.parseInt(id_raw);
+            Products p = pd.getProductByFeedbackID(id);
+            Feedback f = fd.getFeedbackByID(id);
+            
+            request.setAttribute("product", p);
+            request.setAttribute("feedback", f);
+            request.getRequestDispatcher("replyfeedback.jsp").forward(request, response);
+        } catch (NumberFormatException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -97,34 +92,28 @@ public class CheckOutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id_raw= request.getParameter("id");
+        String pid_raw= request.getParameter("pid");
+        String reply= request.getParameter("reply");
         HttpSession session = request.getSession();
-        Cart c = (Cart) session.getAttribute("cart");
-        Users u = (Users) session.getAttribute("account");
-        OrderDAO od = new OrderDAO();
-        OrderDetailDAO odd = new OrderDetailDAO();
-        UserAddressDAO uad = new UserAddressDAO();
-        ShipDAO sd = new ShipDAO();
-        Order o = new Order();
-        Date d = new Date();
-        CartDAO cd= new CartDAO();
-        double shippingfee = uad.getShippingFee(u);
-        
-        String noti = request.getParameter("notice");
-        o.setUserId(u.getUserID());
-        o.setTotalPrice(c.totalmoney()+shippingfee);
-        o.setNote(noti);
-        o.setDate(d);
-        od.createOrder(o);
-        Order co = od.getCheckOutOrder(u.getUserID());
-        odd.insertOrderDetail(c, co.getId());
-        UserAddress ud = uad.getDefaultAddress(u.getUserID());
-        sd.insertShipInfo(co.getId(), noti, ud);
-        cd.removeCart(u.getUserID());      
-        session.removeAttribute("cart");
-        request.setAttribute("mess", "Order Successfully");
-//        request.getRequestDispatcher("feedback.jsp").forward(request, response);
-        response.sendRedirect("feedback");
-        
+        Users u= (Users) session.getAttribute("account");
+        FeedbackDAO fd= new FeedbackDAO();
+
+        try {
+            int id= Integer.parseInt(id_raw);
+            int pid= Integer.parseInt(pid_raw);
+            FeedbackReply fr= new FeedbackReply();
+            fr.setFeedbackID(id);
+            fr.setProductID(pid);
+            fr.setUserID(u.getUserID());
+            fr.setRepliesText(reply);           
+            fd.insertReply(fr);
+
+            request.setAttribute("err", "Reply succesfully!!!!");
+            request.getRequestDispatcher("replyfeedback.jsp").forward(request, response);
+        } catch (NumberFormatException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**

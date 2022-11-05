@@ -152,9 +152,12 @@ Author     : trung
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="white-box col-lg-8">
                                 <canvas id="myChart2" style="width:100%;max-width:100%"></canvas>
-                                <h3 class="box-title">Detailed statistics</h3>
+                                <h3 class="box-title">Clicks tracker</h3>
                                 <div id="ct-visits" style="height: 100px">
                                 </div>
+                            </div>
+                            <div class="white-box col-lg-4">
+                                
                             </div>
                         </div>
                     </div>
@@ -162,6 +165,10 @@ Author     : trung
             </div>
         </div>
         <script type="text/javascript">
+            
+            
+            
+            
             var xValues2 = ["Today", "Yesterday", "2days ago", "3days ago", "4days ago", "5days ago", "6days ago"];
             var yValues2 =
                     [
@@ -193,6 +200,21 @@ Author     : trung
                     }
                 }
             });
+
+//            var myCanvas1 = document.getElementById("myCanvas1");
+//            myCanvas1.width = 300;
+//            myCanvas1.height = 300;
+//
+//            var ctx = myCanvas1.getContext("2d");
+//            function drawLine(ctx, startX, startY, endX, endY, color) {
+//                ctx.save();
+//                ctx.strokeStyle = color;
+//                ctx.beginPath();
+//                ctx.moveTo(startX, startY);
+//                ctx.lineTo(endX, endY);
+//                ctx.stroke();
+//                ctx.restore();
+//            }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="plugins/bower_components/jquery/jquery.min.js"></script>

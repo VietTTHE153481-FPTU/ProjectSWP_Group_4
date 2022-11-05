@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="float-right text-right">
                                             <h4>Total Amount:</h4>&nbsp;
-                                            <h4 style="color: #ff3333">${sessionScope.cart.FormatPrice(sessionScope.cart.totalmoney())} ₫</h4>
+                                            <h4 style="color: #ff3333">${sessionScope.cart.FormatPrice(sessionScope.cart.totalmoney()+requestScope.money)} ₫</h4>
                                         </div>
                                     </div>
                                     <div class="row mt-4 d-flex align-items-center">

@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import model.Cart;
 import model.item;
-import model.Products;
 import DAO.ProductDAO;
 
 /**
