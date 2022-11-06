@@ -68,6 +68,7 @@ public class OrderDetailServlet extends HttpServlet {
                total+=(o.getProductPrice()*o.getQuantity()); 
             }
 
+            request.setAttribute("oid", id);
             request.setAttribute("Total", total);
             request.setAttribute("listO", orderList);
         request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
