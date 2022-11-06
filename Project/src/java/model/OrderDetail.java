@@ -11,6 +11,7 @@ package model;
 public class OrderDetail extends ProductDetailImg {
 
     int orderID;
+    int productID;
     String productName;
     double productPrice;
     int quantity;
@@ -34,6 +35,15 @@ public class OrderDetail extends ProductDetailImg {
         this.quantity = quantity;
     }
 
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    
     public int getOrderID() {
         return orderID;
     }

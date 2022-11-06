@@ -155,8 +155,8 @@ public class FeedbackDAO extends DBContext {
 
     public static void main(String[] args) {
         FeedbackDAO fb = new FeedbackDAO();
-//        fb.insertFeedback(1, 1, 2, 5, "good");
-        List<Feedback> list = fb.getAllFeedback();
-        System.out.println(list.get(0));
+        fb.insertFeedback(1, 1, 2, 5, "good");
+//        List<Feedback> list = fb.getAllFeedback();
+//        System.out.println(list.get(0));
     }
 }

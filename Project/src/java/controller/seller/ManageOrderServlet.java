@@ -102,12 +102,12 @@ public class ManageOrderServlet extends HttpServlet {
         lmao.add("Canceled");
         lmao.add("Completed");
         if (type.equals("Up")) {
-            dao2.newNoti(new noti(1, dao.getUserByOrderID(OID), "The status of the rder with ID: " + OID + " had been changed to " + lmao.get(Integer.parseInt(status)), OID));
+            dao2.newNoti(new noti(1, dao.getUserByOrderID(OID), "The status of the rder with ID: " + OID + " had been changed to " + lmao.get(Integer.parseInt(status)-1), OID));
             dao.upDateOrderStatus(note, status, OID);
             response.sendRedirect("ManageOrder");
             return;
         } else {
-            dao2.newNoti(new noti(1, dao.getUserByOrderID(OID), "The Order with ID: " + OID + " had been deleted to " + lmao.get(Integer.parseInt(status)), OID));
+            dao2.newNoti(new noti(1, dao.getUserByOrderID(OID), "The Order with ID: " + OID + " had been deleted to " + lmao.get(Integer.parseInt(status)-1), OID));
             dao.DelOrder(OID);
             response.sendRedirect("ManageOrder");
         }

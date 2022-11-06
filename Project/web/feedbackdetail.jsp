@@ -205,8 +205,8 @@
                                         <label for="feedback-text" class="form-label">Your Feedback: </label>
                                         <textarea name="feedback-text" class="form-control" id="feedback-text" rows="5" placeholder="Write your Feedback here"></textarea>
                                         <input type="hidden" id="star-value" name="star-value">
-                                        <input type="hidden" id="productId" name="productId" value="${requestScope.product.productID}">
-                                        <input type="hidden" id="orderId" name="orderId" value="${requestScope.orderId}">
+                                        <input type="hidden" id="productId" name="productid" value="${pid}">
+                                        <input type="hidden" id="orderId" name="orderid" value="${oid}">
                                         <input type="submit" class="btn btn-success mt-5" value="Submit">                                   
                                     </form>
                                 </div>

@@ -125,6 +125,7 @@ public class LoginServlet extends HttpServlet {
             c.SaveAllItem(c.getAll(a.getUserID(),(Cart)session.getAttribute("cart")), a.getUserID());
             session.setAttribute("cart", c.getAll(a.getUserID(),(Cart)session.getAttribute("cart")));
             session.setAttribute("account", a);
+            session.setMaxInactiveInterval(3600);
             response.sendRedirect("home");
         }
     }

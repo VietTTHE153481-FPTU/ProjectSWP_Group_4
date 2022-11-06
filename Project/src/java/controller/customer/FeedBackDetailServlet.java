@@ -5,6 +5,7 @@
 package controller.customer;
 
 import DAO.FeedbackDAO;
+import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Cart;
+import model.OrderDetail;
 import model.Products;
 import model.Users;
 
@@ -65,9 +68,12 @@ public class FeedBackDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         ProductDAO pd = new ProductDAO();
         String pid = request.getParameter("productid");
+        String oid = request.getParameter(("oid"));
         Products p = pd.getProductById(Integer.parseInt(pid));
 
+        request.setAttribute("pid", pid);
         request.setAttribute("product", p);
+        request.setAttribute("oid", oid);
         request.getRequestDispatcher("feedbackdetail.jsp").forward(request, response);
     }
 
@@ -83,24 +89,28 @@ public class FeedBackDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FeedbackDAO fb = new FeedbackDAO();
-        String pid = request.getParameter("productId");
+        String pid = request.getParameter("productid");
         String star = request.getParameter("star-value");
         String review = request.getParameter("feedback-text");
-        int oid = fb.findOrderIdByProductId(Integer.parseInt(pid));
+        String oid = request.getParameter("orderid");
         HttpSession session = request.getSession();
-        Users u =(Users) session.getAttribute("account");
-        fb.insertFeedback(u.getUserID(), Integer.parseInt(pid), oid, Integer.parseInt(star), review);
+        Users u = (Users) session.getAttribute("account");
 
-        Cart c = (Cart) session.getAttribute("cart");
-        c.remove(Integer.parseInt(pid));
-        if(c.Size() >0){
-        response.sendRedirect("feedback");
+        fb.insertFeedback(u.getUserID(), Integer.parseInt(pid), Integer.parseInt(oid), Integer.parseInt(star), review);
+
+        int id = Integer.parseInt(oid);
+        OrderDetailDAO od = new OrderDetailDAO();
+        List<OrderDetail> orderList = od.getOdByOrderId(id);
+        int total = 0;
+        for (OrderDetail o : orderList) {
+            total += (o.getProductPrice() * o.getQuantity());
         }
-        else{
-            session.removeAttribute("cart");
-//            request.getRequestDispatcher("home.jsp").forward(request, response);
-             response.sendRedirect("ViewCartServlet");
-        }
+
+        request.setAttribute("oid", id);
+        request.setAttribute("Total", total);
+        request.setAttribute("listO", orderList);
+//        request.getRequestDispatcher("orderdetail.jsp").forward(request, response);
+        response.sendRedirect("orderdetails?id=" + oid);
     }
 
     /**

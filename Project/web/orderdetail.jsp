@@ -45,6 +45,8 @@
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
+                                                <th scope="col">Feedback</th>
+
                                             </tr>
                                         </thead>
                                         <tbody class="customtable">
@@ -56,6 +58,9 @@
                                                              style="width: 100px; height: 100px"></td>
                                                     <td>₫ ${od.productPrice}</td>
                                                     <td>${od.quantity}</td>
+                                                    <td class="" data-th="">
+                                                        <a class="btn btn-success btn-green" href="feedbackdetail?productid=${od.productID}&oid=${oid}" id="open-review-box">Leave a Review</a>
+                                                    </td>     
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
