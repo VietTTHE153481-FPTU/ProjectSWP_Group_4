@@ -19,6 +19,21 @@ import model.Users;
  */
 public class OrderDAO extends DBContext {
 
+    public int getUserByOrderID(int ID) {
+        String sql = "select UserID from Orders\n"
+                + "where ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("UserID");
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+
     public List<Order> getOrderByUserID(int userId) {
         List<Order> list = new ArrayList<>();
         String sql = "SELECT o.ID, os.Name, o.TotalPrice, o.Date\n"

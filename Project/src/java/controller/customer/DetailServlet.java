@@ -12,6 +12,7 @@ import DAO.ShopDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -80,6 +81,9 @@ public class DetailServlet extends HttpServlet {
             List<Feedback> feedback = fd.getFeedbackbyProductID(id);
             List<FeedbackReply> reply= fd.getAllFeedbackReply();
             List<Users> user = ad.getAllAccount();
+            Cookie coo= new Cookie("ckid", request.getParameter("id"));
+            coo.setMaxAge(365 * 24 * 60 * 60);
+            response.addCookie(coo);
             
             request.setAttribute("reply", reply);
             request.setAttribute("user", user);

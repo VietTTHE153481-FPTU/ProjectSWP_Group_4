@@ -206,16 +206,16 @@ Author     : trung
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 justify-content-center">
                             <div class="row">
-                                <div class="white-box col-lg-8">
+                                <div class="white-box col-md-8" style="margin-right: 2%">
                                     <canvas id="myChart2" style="width:100%;max-width:100%"></canvas>
                                     <h3 class="box-title">Clicks tracker</h3>
                                     <div id="ct-visits" style="height: 80px">
                                     </div>
                                 </div>
-                                <div class="white-box col-lg-3" style="margin-left: auto;margin-right: auto">                        
+                                <div class="white-box col-md-3" style="margin-left: 2%">                        
                                     
                                     <div style="padding-top: 40px">
                                         <canvas id="myChart"></canvas>
@@ -270,7 +270,7 @@ Author     : trung
                         datasets: [{
                                 fill: false,
                                 lineTension: 0,
-                                backgroundColor: "rgba(0,0,255,1.0)",
+                                backgroundColor: "rgba(0,100,255,1.0)",
                                 borderColor: "rgba(0,0,255,0.1)",
                                 data: yValues2
                             }]

@@ -13,6 +13,7 @@
                 <div class="col-md-6"></div>
                 <div class="col-md-6 text-right">
                     <div class="top_nav_right">
+
                         <ul class="top_nav_menu">
                             <c:if test="${sessionScope.account.roleId != 1 && sessionScope.account.roleId != 2}">
                                 <li class="account">
@@ -38,8 +39,8 @@
                                         <c:when test="${sessionScope.account != null}">
                                             <!-- Default -->
                                             <li><a href="userprofile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>View Profile</a></li>
-                                            <li><a href="viewChat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-inbox" viewBox="0 0 16 16">
-                                                        <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438L14.933 9zM3.809 3.563A1.5 1.5 0 0 1 4.981 3h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z"/>
+                                            <li><a href="viewChat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-paper-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M6.5 9.5 3 7.5v-6A1.5 1.5 0 0 1 4.5 0h7A1.5 1.5 0 0 1 13 1.5v6l-3.5 2L8 8.75l-1.5.75ZM1.059 3.635 2 3.133v3.753L0 5.713V5.4a2 2 0 0 1 1.059-1.765ZM16 5.713l-2 1.173V3.133l.941.502A2 2 0 0 1 16 5.4v.313Zm0 1.16-5.693 3.337L16 13.372v-6.5Zm-8 3.199 7.941 4.412A2 2 0 0 1 14 16H2a2 2 0 0 1-1.941-1.516L8 10.072Zm-8 3.3 5.693-3.162L0 6.873v6.5Z"/>
                                                     </svg> Chat</a></li>
                                             <li style="display: none"><a href="History"><i class="fa fa-history" aria-hidden="true"></i>Product History</a></li>
                                             <!-- Admin -->
@@ -84,9 +85,18 @@
                     </div>
                     <nav class="navbar">
                         <ul class="navbar_user">
+
+
                             <li class="checkout">
                                 <a href="ViewCartServlet">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="UserNoti">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                                    </svg>
                                 </a>
                             </li>
                         </ul>&nbsp;&nbsp;&nbsp;

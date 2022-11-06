@@ -60,7 +60,7 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id").trim());
             OrderDetailDAO od = new OrderDetailDAO();
             List<OrderDetail> orderList = od.getOdByOrderId(id);           
             int total=0;
