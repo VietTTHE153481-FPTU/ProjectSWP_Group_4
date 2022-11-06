@@ -233,7 +233,11 @@ public class OrderDAO extends DBContext {
         return null;
     }
 
+<<<<<<< HEAD
     public void ReqCancelOrder(int id) {
+=======
+    public void ReqCancelOrder(int id){
+>>>>>>> 7e6b7185a9577689fae92849c3a3cc83db768318
         String sql = "UPDATE [dbo].[Orders]\n"
                 + "   SET [Status] = 4\n"
                 + " WHERE ID = ?";
@@ -245,7 +249,10 @@ public class OrderDAO extends DBContext {
             System.out.println(ex.getMessage());
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7e6b7185a9577689fae92849c3a3cc83db768318
     public void CancelOrder(int id) {
         String sql1 = "DELETE FROM Order_Detail\n"
                 + "      WHERE Order_ID = ?";
