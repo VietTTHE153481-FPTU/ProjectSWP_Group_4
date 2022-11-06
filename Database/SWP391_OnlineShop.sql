@@ -358,6 +358,14 @@ CREATE TABLE Favorite_Product (
 	constraint productID_in_favorite_product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
 ) ON [PRIMARY]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE [dbo].[Recent_Product] (
+	[UserID] [int],
+	[ProductID] [int],
+	[Date] [DATETIME]  
+	constraint userID_in_recent_product FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	constraint productID_in_recent_product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
+) ON [PRIMARY]
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE [dbo].[Order_Status](
 	[ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Name] [nvarchar](50) NOT NULL,

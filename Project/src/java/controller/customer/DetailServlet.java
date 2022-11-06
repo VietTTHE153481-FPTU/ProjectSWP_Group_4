@@ -16,8 +16,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Feedback;
 import model.FeedbackReply;
@@ -72,18 +75,28 @@ public class DetailServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
+            Date d = new Date();
+            SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-MM-dd");
             AccountDAO ad = new AccountDAO();
             ProductDAO pd = new ProductDAO();
             FeedbackDAO fd = new FeedbackDAO();
             FavoriteProductDAO fpd = new FavoriteProductDAO();
             Products p = pd.getProductById(id);
+            HttpSession session= request.getSession();
+            Users u = (Users) session.getAttribute("account");
             int num = fpd.countFavoriteProduct(id);
             List<Feedback> feedback = fd.getFeedbackbyProductID(id);
             List<FeedbackReply> reply= fd.getAllFeedbackReply();
             List<Users> user = ad.getAllAccount();
-            Cookie coo= new Cookie("ckid", request.getParameter("id"));
-            coo.setMaxAge(365 * 24 * 60 * 60);
-            response.addCookie(coo);
+            if(u != null){
+                Products pro= pd.getRecentProduct(u.getUserID(), id);
+                if(pro==null){
+                    pd.recentproduct(u.getUserID(), id, dt1.format(d));
+                }else{
+                    pd.deleteRecentProduct(u.getUserID(), pro.getProductID());
+                    pd.recentproduct(u.getUserID(), pro.getProductID(), dt1.format(d));
+                }    
+            }
             
             request.setAttribute("reply", reply);
             request.setAttribute("user", user);

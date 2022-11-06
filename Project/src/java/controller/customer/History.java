@@ -5,13 +5,19 @@
 
 package controller.customer;
 
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Products;
+import model.Users;
 
 /**
  *
@@ -55,6 +61,12 @@ public class History extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        ProductDAO pd= new ProductDAO();
+        HttpSession session= request.getSession();
+        Users u = (Users) session.getAttribute("account");
+        List<Products> list= pd.getAllRecentProduct(u.getUserID());
+        
+        request.setAttribute("list", list);
         request.getRequestDispatcher("producthistory.jsp").forward(request, response);
     } 
 
