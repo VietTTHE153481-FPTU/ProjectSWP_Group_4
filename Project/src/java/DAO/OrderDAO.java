@@ -19,6 +19,21 @@ import model.Users;
  */
 public class OrderDAO extends DBContext {
 
+    public int getUserByOrderID(int ID) {
+        String sql = "select UserID from Orders\n"
+                + "where ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("UserID");
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+
     public List<Order> getOrderByUserID(int userId) {
         List<Order> list = new ArrayList<>();
         String sql = "SELECT o.ID, os.Name, o.TotalPrice, o.Date\n"
@@ -218,10 +233,7 @@ public class OrderDAO extends DBContext {
         return null;
     }
 
-<<<<<<< HEAD
-=======
-
-    public void ReqCancelOrder(int id){
+    public void ReqCancelOrder(int id) {
         String sql = "UPDATE [dbo].[Orders]\n"
                 + "   SET [Status] = 4\n"
                 + " WHERE ID = ?";
@@ -233,7 +245,7 @@ public class OrderDAO extends DBContext {
             System.out.println(ex.getMessage());
         }
     }
->>>>>>> 2f9889432acac690c165ab8c762ab3eecff22071
+
     public void CancelOrder(int id) {
         String sql1 = "DELETE FROM Order_Detail\n"
                 + "      WHERE Order_ID = ?";
