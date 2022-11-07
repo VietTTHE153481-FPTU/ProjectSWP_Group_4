@@ -59,7 +59,7 @@ public class DeleteCommentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id1 = Integer.parseInt(request.getParameter("ID"));
+        int id1 = Integer.parseInt(request.getParameter("cmID"));
         int id = Integer.parseInt(request.getParameter("BlogID"));
         
         CommentDAO cd = new CommentDAO();
@@ -67,11 +67,7 @@ public class DeleteCommentServlet extends HttpServlet {
         
         cd.deleteComment(id1);
         Blog bg = b.getBlogs(id);
-        
-        Comment c = cd.getCommentByID(id1);
-        int commentid = c.getID();
-        
-        request.setAttribute("cmid", commentid);
+               
         response.sendRedirect("blogdetail?BlogID="+ bg.getId() +"&key=");
     } 
 
