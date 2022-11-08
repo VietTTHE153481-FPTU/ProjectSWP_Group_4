@@ -139,7 +139,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                            <a type="button" class="btn btn-primary" href="DeleteComment?ID=${cmid}&BlogID=${c.getBlogID()}">Delete</a>
+                                                            <a type="button" class="btn btn-primary" href="DeleteComment?ID=${c.getID()}&BlogID=${c.getBlogID()}">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>

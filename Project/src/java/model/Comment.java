@@ -57,4 +57,9 @@ public class Comment {
         this.Comment = Comment;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" + "ID=" + ID + ", BlogID=" + BlogID + ", UserID=" + UserID + ", Comment=" + Comment + '}';
+    }
+    
 }

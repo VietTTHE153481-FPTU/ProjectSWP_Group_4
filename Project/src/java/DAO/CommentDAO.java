@@ -82,7 +82,8 @@ public class CommentDAO extends DBContext {
     
     public static void main(String[] args) {
         CommentDAO cd = new CommentDAO();
-        Comment c = cd.getCommentByID(12);
-        System.out.println(c);
+        Comment c = cd.getCommentByID(13);
+        int commentid = c.getID();
+        System.out.println(commentid);
     }
 }
