@@ -114,11 +114,11 @@ public class FeedbackDAO extends DBContext {
 
     public List<FeedbackReply> getAllFeedbackReply() {
         List<FeedbackReply> list= new ArrayList<>();
-        String sql = "select * from Feedback_Replies";
+        String sql = "SELECT * FROM [SWP391_OnlineShop].[dbo].[Feedback_Replies]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);            
             ResultSet rs = st.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 FeedbackReply fr= new FeedbackReply();
                 fr.setId(rs.getInt(1));
                 fr.setFeedbackID(rs.getInt(2));
@@ -155,8 +155,9 @@ public class FeedbackDAO extends DBContext {
 
     public static void main(String[] args) {
         FeedbackDAO fb = new FeedbackDAO();
-        fb.insertFeedback(1, 1, 2, 5, "good");
-//        List<Feedback> list = fb.getAllFeedback();
-//        System.out.println(list.get(0));
+        List<FeedbackReply> list = fb.getAllFeedbackReply();
+        for (FeedbackReply feedbackReply : list) {
+            System.out.println(feedbackReply);
+        }
     }
 }

@@ -41,42 +41,42 @@
                                         <center>
                                             <h4 style="color: red">${requestScope.err}</h4>
                                         </center>
-                                        
+
                                         <div> Product name
-                                            <input type="text" name="name" class="form-control validate" required/>
+                                            <input type="text" name="productName" class="form-control validate" required/>
                                         </div>
                                         <div>Description
-                                            <textarea name="description" class="form-control validate" rows="3"></textarea>
+                                            <textarea name="Description" class="form-control validate" rows="3"></textarea>
                                         </div>
                                         <br/>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Original Price
-                                                <input name="originalprice" type="text" class="form-control validate"/>
+                                                <input name="OriginalPrice" type="text" class="form-control validate"/>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Sell Price
-                                                <input name="sellprice" type="text" class="form-control validate"/>
-                                            </div>
-                                        </div>                     
-                                        <div class="row">
-                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                                Amount:
-                                                <input type="number" name="amount" class="form-control validate"/>
+                                                <input name="SellPrice" type="text" class="form-control validate"/>
                                             </div>
                                         </div>
-                                        <br/>
                                         <div class="form-group mb-3 subcate">
                                             SubCategory:
-                                            <select name="subcategory" class="form-select-sm">
+                                            <select name="SubCategoryID" class="form-select-sm">
                                                 <option>Select a SubCategory</option>
                                                 <c:forEach items="${requestScope.subcategories}" var="subcate">
                                                     <option value="${subcate.getSubCateID()}">${subcate.getSubCateName()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                Amount:
+                                                <input type="number" name="Amount" class="form-control validate"/>
+                                            </div>
+                                        </div>
+                                        <br/>
                                         <center>
                                             <input type="submit" value="Add new Product Now!" 
                                                    class="btn btn-primary btn-block text-uppercase mb-3"/>

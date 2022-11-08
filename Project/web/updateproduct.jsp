@@ -43,37 +43,30 @@
                                             <h4 style="color: red">${requestScope.err}</h4>
                                         </center>
                                         <div> Product ID
-                                            <input type="text" name="id" class="form-control validate" required readonly value="${p.getProductID()}"/>
+                                            <input type="text" name="productID" class="form-control validate" required readonly value="${p.getProductID()}"/>
                                         </div>
                                         <div> Product name
-                                            <input type="text" name="name" class="form-control validate" required value="${p.getProductName()}"/>
+                                            <input type="text" name="productName" class="form-control validate" required value="${p.getProductName()}"/>
                                         </div>
                                         <div>Description
-                                            <textarea name="description" class="form-control validate" rows="3" >${p.getDescription()}</textarea>
+                                            <textarea name="Description" class="form-control validate" rows="3" >${p.getDescription()}</textarea>
                                         </div>
                                         <br/>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Original Price
-                                                <input name="originalprice" type="text" class="form-control validate" value="${p.FormatPrice(p.getOriginalPrice())}"/>
+                                                <input name="OriginalPrice" type="text" class="form-control validate" value="${p.FormatPrice(p.getOriginalPrice())}"/>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                 Sell Price
-                                                <input name="sellprice" type="text" class="form-control validate" value="${p.FormatPrice(p.getSellPrice())}"/>
-                                            </div>
-                                        </div>                     
-                                        <div class="row">
-                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                                Amount:
-                                                <input name="amount" type="text" class="form-control validate" value="${p.getAmount()}"/>
+                                                <input name="SellPrice" type="text" class="form-control validate" value="${p.FormatPrice(p.getSellPrice())}"/>
                                             </div>
                                         </div>
-                                        <br/>
                                         <div class="form-group mb-3">
                                             SubCategory:
-                                            <select name="subcategory" class="form-select-sm">
+                                            <select name="SubCategoryID" class="form-select-sm">
                                                 <option value="0">Select a subcategory</option>
                                                 <c:forEach items="${requestScope.subcategories}" var="subcate">
                                                     <c:if test="${subcate.getSubCateID() == p.getSubCategoryID()}">
@@ -83,7 +76,13 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                Amount:
+                                                <input name="Amount" type="text" class="form-control validate" value="${p.getAmount()}"/>
+                                            </div>
+                                        </div>
+                                        <br/>
                                         <center>
                                             <input type="submit" value="Update Product" 
                                                    class="btn btn-primary btn-block text-uppercase mb-3"/>
@@ -94,7 +93,7 @@
                                 <div class="col-lg-6 col-xs-12 col-md-12">
                                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                         <input accept="image/*" 
-                                               id="upload" name="image" type="file" onchange="readURL(this);" class="form-control border-0"/>
+                                               id="upload" name="productImgURL" type="file" onchange="readURL(this);" class="form-control border-0"/>
                                         <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose File</label>
                                         <div>
                                             <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>&nbsp;<small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>

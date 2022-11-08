@@ -67,7 +67,10 @@ public class OrderDetailServlet extends HttpServlet {
             for (OrderDetail o : orderList) {
                total+=(o.getProductPrice()*o.getQuantity()); 
             }
-
+            OrderDAO ord = new OrderDAO();
+            Order o = ord.getOrderByOrderID(id);
+            
+            request.setAttribute("ord", o);
             request.setAttribute("oid", id);
             request.setAttribute("Total", total);
             request.setAttribute("listO", orderList);
