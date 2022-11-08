@@ -71,7 +71,7 @@ public class CommentDAO extends DBContext {
     }
 
     public void deleteComment(int id) {
-        String sql = "DELETE FROM CommentBlogs WHERE ID = ?";
+        String sql = "DELETE FROM [CommentBlogs] WHERE ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -85,5 +85,6 @@ public class CommentDAO extends DBContext {
         Comment c = cd.getCommentByID(13);
         int commentid = c.getID();
         System.out.println(commentid);
+        cd.deleteComment(21);
     }
 }
