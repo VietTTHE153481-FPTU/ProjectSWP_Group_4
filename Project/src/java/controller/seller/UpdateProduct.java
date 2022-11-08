@@ -126,7 +126,9 @@ public class UpdateProduct extends HttpServlet {
             pd.update(p);
             pd.updateImg(p);
             request.setAttribute("err","Update Succesfully!");
-            request.getRequestDispatcher("updateproduct.jsp").forward(request, response);
+            request.setAttribute("id", id);
+            response.sendRedirect("UpdateProduct");
+            return;
         }catch(NumberFormatException ex){
             System.out.println(ex);
         }

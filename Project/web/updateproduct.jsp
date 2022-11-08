@@ -86,8 +86,7 @@
 
                                         <center>
                                             <input type="submit" value="Update Product" 
-                                                   class="btn btn-primary btn-block text-uppercase mb-3">
-                                            </a>
+                                                   class="btn btn-primary btn-block text-uppercase mb-3"/>
                                         </center>
                                         <a href="ManageProduct" class="fa fa-angle-double-left">&nbsp; Back</a>
                                     </div>
@@ -95,7 +94,7 @@
                                 <div class="col-lg-6 col-xs-12 col-md-12">
                                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                                         <input accept="image/*" 
-                                               id="upload" name="imgBlogDetail" type="file" onchange="readURL(this);" class="form-control border-0">
+                                               id="upload" name="image" type="file" onchange="readURL(this);" class="form-control border-0"/>
                                         <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose File</label>
                                         <div>
                                             <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>&nbsp;<small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>

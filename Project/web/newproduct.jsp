@@ -79,8 +79,7 @@
                                         </div>
                                         <center>
                                             <input type="submit" value="Add new Product Now!" 
-                                                   class="btn btn-primary btn-block text-uppercase mb-3">
-                                            </a>
+                                                   class="btn btn-primary btn-block text-uppercase mb-3"/>
                                         </center>
                                         <a href="ManageProduct" class="fa fa-angle-double-left">&nbsp; Back</a>
                                     </div>
