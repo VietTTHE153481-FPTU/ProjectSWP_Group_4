@@ -637,6 +637,39 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
+    public List<Products> getProductsByListId(Integer[] id) {
+        List<Products> list = new ArrayList<>();
+        try {
+            for (int i = 0; i < id.length; i++) {
+                String sql = "SELECT       Product.*, ProductImg.ProductImgURL\n"
+                        + "FROM            Product INNER JOIN\n"
+                        + "                         ProductImg ON Product.ProductID = ProductImg.ProductID"
+                        + " where Product.ProductID = ?";
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, id[i]);
+                ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    Products p = new Products();
+                    p.setID(rs.getInt(1));
+                    p.setProductName(rs.getString(2));
+                    p.setDescription(rs.getString(3));
+                    p.setOriginalPrice(rs.getDouble(4));
+                    p.setSellPrice(rs.getDouble(5));
+                    p.setSalePercent(rs.getDouble(6));
+                    p.setSubCategoryID(rs.getInt(7));
+                    p.setShopID(rs.getInt(8));
+                    p.setAmount(rs.getInt(9));
+                    p.setStatusID(rs.getInt(10));
+                    p.setUrl(rs.getString(11));
+                    list.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
 
     }

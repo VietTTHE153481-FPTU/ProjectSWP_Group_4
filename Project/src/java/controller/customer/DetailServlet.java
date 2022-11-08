@@ -82,22 +82,26 @@ public class DetailServlet extends HttpServlet {
             FeedbackDAO fd = new FeedbackDAO();
             FavoriteProductDAO fpd = new FavoriteProductDAO();
             Products p = pd.getProductById(id);
-            HttpSession session= request.getSession();
+            HttpSession session = request.getSession();
             Users u = (Users) session.getAttribute("account");
             int num = fpd.countFavoriteProduct(id);
             List<Feedback> feedback = fd.getFeedbackbyProductID(id);
-            List<FeedbackReply> reply= fd.getAllFeedbackReply();
+            List<FeedbackReply> reply = fd.getAllFeedbackReply();
             List<Users> user = ad.getAllAccount();
-            if(u != null){
-                Products pro= pd.getRecentProduct(u.getUserID(), id);
-                if(pro==null){
-                    pd.recentproduct(u.getUserID(), id, dt1.format(d));
-                }else{
-                    pd.deleteRecentProduct(u.getUserID(), pro.getProductID());
-                    pd.recentproduct(u.getUserID(), pro.getProductID(), dt1.format(d));
-                }    
+            if (u != null) {
+                String id_raw = request.getParameter("id");
+                String list = "";
+                Cookie[] hold = request.getCookies();
+                for (Cookie item : hold) {
+                    if (item.getName().equalsIgnoreCase("list")) {
+                        list = item.getValue() + "!" + id_raw;
+                    }
+                }
+                Cookie end = new Cookie("list", list);
+                end.setMaxAge(3600*24*30);
+                response.addCookie(end);
             }
-            
+
             request.setAttribute("reply", reply);
             request.setAttribute("user", user);
             request.setAttribute("feedback", feedback);
