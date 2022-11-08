@@ -123,7 +123,7 @@ public class CheckOutServlet extends HttpServlet {
         session.removeAttribute("cart");
         request.setAttribute("mess", "Order Successfully");
 //        request.getRequestDispatcher("feedback.jsp").forward(request, response);
-        response.sendRedirect("History");
+        response.sendRedirect("Done");
         
     }
 

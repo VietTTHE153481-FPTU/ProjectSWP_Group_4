@@ -61,22 +61,14 @@
             margin: 0 auto;
         }
     </style>
-    <body>
-        <div class="success">
-            <div class="card">
-                <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-                    <i class="checkmark">✓</i>
-                </div>
-                <h1>Success</h1> 
-                <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
-            </div>
-        </div>
+    <body>           
+        
         <div class="super_container">
             <%@include file = "layout/Header.jsp" %>
             <div class="container product_section_container">
                 <div class="product-grid">
                     <ul>
-                        <c:forEach items="${listPdByCid}" var="pd">
+                        <c:forEach items="${products}" var="pd">
                             <div class="product-item">
                                 <div class="product discount product_filter">
                                     <div class="product_image">
