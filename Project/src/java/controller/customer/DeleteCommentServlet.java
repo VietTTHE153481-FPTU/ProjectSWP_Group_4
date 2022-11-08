@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Blog;
 import model.Comment;
 
@@ -61,14 +62,13 @@ public class DeleteCommentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id1 = Integer.parseInt(request.getParameter("cmID"));
-        int id = Integer.parseInt(request.getParameter("BlogID"));
+        int id = Integer.parseInt(request.getParameter("cmID"));
+        int id1 = Integer.parseInt(request.getParameter("BlogID"));
 
         CommentDAO cd = new CommentDAO();
+        cd.deleteComment(id);
         BlogDAO b = new BlogDAO();
-
-        cd.deleteComment(id1);
-        Blog bg = b.getBlogs(id);
+        Blog bg = b.getBlogs(id1);
         response.sendRedirect("blogdetail?BlogID=" + bg.getId() + "&key=");
     }
 

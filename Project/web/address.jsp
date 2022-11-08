@@ -83,18 +83,6 @@
                                         </div> 
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
                             </div>
                         </div>
                         <div class="col-md-12 border-right">
@@ -104,8 +92,6 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- Modal Header -->
-                                            
-                                            
                                             <form action="addressUP" method="post">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">New Address</h4>
@@ -154,30 +140,6 @@
                                         </div> 
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 <div class="row card-body" style="border-top: 1px dotted #cccccc">
                                     <div class="col-sm-10" style="border-right: 1px dotted #cccccc">
                                         <h5 class="card-title">${ad.getShipName()} <span style="color: #999999">| ${ad.getPhoneNum()}</span></h5>
@@ -190,12 +152,9 @@
                                     </div>
                                     <div class="col-sm-2 text-center">
                                         <div class="row">
-
                                             <a class="col-sm-6" >
                                                 <button type="button" class="btn btn-primary text-right" data-toggle="modal" data-target="#myModal2"> Edit</button>
                                             </a>
-
-
                                             <a onclick="doDelete('${ad.getID()}')" class="col-sm-6">
                                                 <button type="button" class="btn btn-primary text-right"> Delete</button>
                                             </a>
@@ -203,7 +162,6 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                            <!--                            </form>-->
                         </div>
                     </div>
                 </div>

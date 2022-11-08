@@ -106,64 +106,25 @@
                                                     <c:if test="${u.getUserID() == c.getUserID()}">
                                                         <div class="flex-w flex-sb-m stext-115 cl6 hov-cl1">
                                                             <h5>${u.getFullname()}</h5>
-                                                            <div class="flex-w flex-sb-m stext-115 cl6 hov-cl1">
-                                                                <div class="dropdown">
-                                                                    <button type="button" data-toggle="dropdown" aria-expanded="false">&nbsp;<i class="fa fa-ellipsis-h"></i></button>
-                                                                    <div class="dropdown-menu">
-                                                                        <c:if test="${account.getUserID() == c.getUserID()}">
-                                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                            <div class="dropdown">
+                                                                <button type="button" data-toggle="dropdown" aria-expanded="false">&nbsp;<i class="fa fa-ellipsis-h"></i></button>
+                                                                <div class="dropdown-menu">
+                                                                    <c:if test="${account.getUserID() == c.getUserID()}">
+                                                                        <a class="dropdown-item" href="#">Edit</a>
+                                                                        <a href="DeleteComment?cmID=${c.getID()}&BlogID=${c.getBlogID()}">
                                                                             <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">Delete</button>
-                                                                        </c:if>
-                                                                        <c:if test="${account.getUserID() != c.getUserID()}">
-                                                                            <a class="dropdown-item" href="#">Hide</a>
-                                                                        </c:if>
-                                                                    </div>
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${account.getUserID() != c.getUserID()}">
+                                                                        <a class="dropdown-item" href="#">Hide</a>
+                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <span class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">${c.getComment()}</span>
-                                                        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Delete comments?</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p>Are you sure you want to delete this comment?</p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                                        <a type="button" class="btn btn-primary" href="DeleteComment?cmID=${c.getID()}&BlogID=${c.getBlogID()}">Delete</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <div class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">${c.getComment()}</div>
                                                     </c:if>
-
                                                 </c:forEach>
                                             </li>
-                                            <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Delete comments?</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Are you sure you want to delete this comment?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                            <a type="button" class="btn btn-primary" href="DeleteComment?ID=${c.getID()}&BlogID=${c.getBlogID()}">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <br>
                                         </c:forEach>
                                     </ul>
