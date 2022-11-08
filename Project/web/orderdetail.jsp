@@ -45,7 +45,9 @@
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
+                                                <c:if test="${ord.status == 5}">
                                                 <th scope="col">Feedback</th>
+                                                </c:if>
 
                                             </tr>
                                         </thead>
@@ -58,9 +60,11 @@
                                                              style="width: 100px; height: 100px"></td>
                                                     <td>₫ ${od.productPrice}</td>
                                                     <td>${od.quantity}</td>
+                                                    <c:if test="${ord.status == 5}">
                                                     <td class="" data-th="">
                                                         <a class="btn btn-success btn-green" href="feedbackdetail?productid=${od.productID}&oid=${oid}" id="open-review-box">Leave a Review</a>
                                                     </td>     
+                                                    </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
