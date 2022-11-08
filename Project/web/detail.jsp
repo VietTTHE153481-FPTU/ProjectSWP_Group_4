@@ -53,7 +53,7 @@
                 background-color: #e6e6e6;
             }
             .feedback_box_replybox_detail{
-                padding: 0 0 10px 20px;              
+                padding: 0 0 10px 20px;
             }
 
         </style>
@@ -168,128 +168,116 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--                            <div id="tab_2" class="tab_container">
-                                                            <div class="row">
-                                                                <div class="col-lg-6 reviews_col">
-                                                                    <div class="tab_title reviews_title">
-                                                                        <h4>Reviews</h4>
-                                                                    </div>
-                                                                    <div class="user_review_container d-flex flex-column flex-sm-row">
-                                                                        <div class="user">
-                                                                            <div class="user_pic"></div>
-                                                                            <div class="user_rating">
-                                                                                <ul class="star_rating">
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="review">
-                                                                            <div class="review_date">19 Oct 2022</div>
-                                                                            <div class="user_name">Customer name</div>
-                                                                            <p>Customer reviews</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 add_review_col">
-                                                                    <div class="add_review">
-                                                                        <form id="review_form">
-                                                                            <div>
-                                                                                <h1>Add Review</h1>
-                                                                                <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                                                                <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-                                                                            </div>
-                                                                            <div>
-                                                                                <h1>Your Rating:</h1>
-                                                                                <ul class="user_star_rating">
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                                                </ul>
-                                                                                <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-                                                                            </div>
-                                                                            <div class="text-left text-sm-right">
-                                                                                <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
                             <div id="tab_2" class="tab_container">
                                 <div class="feedback_list">
-                                    <c:forEach var="f" items="${requestScope.feedback}">                                       
-                                        <div>
-                                            <div class="row feedback_box">
-                                                <div class="col-md-1 col-lg-1">
-
-                                                </div>
-                                                <div class="col-md-10 col-lg-10">
-                                                    <div class="feedback_box_main">
-                                                        <div class="feedback_box_authorname">
-                                                            <c:forEach var="u" items="${requestScope.user}">
-                                                                <c:if test="${f.getUserID() == u.getUserID()}">
-                                                                    ${u.getUsername()}
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </div>
-                                                        <div class="feedback_box_rating">
-                                                            <ul class="star_rating">
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="feedback_box_detail">
-                                                            ${f.getFeedbackDetai()}
-                                                        </div>
-                                                        <c:forEach var="rep" items="${reply}">
-                                                            <c:if test="${f.getID() == rep.getFeedbackID()}">
-                                                                
-                                                            <div class="feedback_box_replybox">
-                                                                <p style="padding: 10px; margin: 0;color: #664e2c;">Phản Hồi Của Người Bán</p>
-                                                                <div class="feedback_box_replybox_detail">
-                                                                    ${rep.getRepliesText()}
-                                                                </div>
+                                    <c:forEach var="f" items="${requestScope.feedback}">
+                                        <div class="row feedback_box">
+                                            <div class="col-md-1 col-lg-1"></div>
+                                            <div class="col-md-10 col-lg-10">
+                                                <div class="feedback_box_main">
+                                                    <c:forEach var="u" items="${requestScope.user}">
+                                                        <c:if test="${f.getUserID() == u.getUserID()}">
+                                                            <div class="feedback_box_authorname">
+                                                                ${u.getUsername()}
                                                             </div>
-                                                            </c:if>
-
-                                                        </c:forEach>
+                                                            <div class="feedback_box_rating">
+                                                                <ul class="star_rating">
+                                                                    <c:if test="${f.getStar() == 1}">
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                    </c:if>
+                                                                    <c:if test="${f.getStar() == 2}">
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                    </c:if>
+                                                                    <c:if test="${f.getStar() == 3}">
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                    </c:if>
+                                                                    <c:if test="${f.getStar() == 4}">
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                    </c:if>
+                                                                    <c:if test="${f.getStar() == 5}">
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </li>
+                                                                    </c:if>
+                                                                </ul>
+                                                            </div>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    <div class="feedback_box_detail">
+                                                        ${f.getFeedbackDetai()}
                                                     </div>
                                                 </div>
+                                                <div class="feedback_box_replybox">
+                                                    <c:forEach items="${reply}" var="rep">
+                                                        <c:if test="${rep.feedbackID == f.getID()}">
+                                                            <p style="padding: 10px; margin: 0;color: #664e2c;">Phản Hồi Của Người Bán</p>
+                                                            <div class="feedback_box_replybox_detail">${rep.getRepliesText()}</div>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </div>
                                             </div>
-                                
                                         </div>
-                                        </c:forEach>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
-                    </div>     
-                </div>
-                <%@include file="layout/Footer.jsp" %>
+                    </div>
+                </div>     
             </div>
-                <script type="text/javascript"><!--
-                    function func() {
-                        var numO = document.getElementById('quantity_value').innerHTML;
-                        //href="cart?id=${detail.getProductID()}&numO=(int)document.getElementById('quantity_value').innerHTML"
-                        window.location.href = "cart?id=${detail.getProductID()}&numO=" + numO;
-                    }
-                </script>
-                <script src="js/jquery-3.2.1.min.js"></script>
-                <script src="styles/bootstrap4/popper.js"></script>
-                <script src="styles/bootstrap4/bootstrap.min.js"></script>
-                <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-                <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-                <script src="plugins/easing/easing.js"></script>
-                <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-                <script src="js/detail_custom.js"></script>
-        </body>
-    </html>
+            <%@include file="layout/Footer.jsp" %>
+        </div>
+        <script type="text/javascript">
+            function func() {
+                var numO = document.getElementById('quantity_value').innerHTML;
+                //href="cart?id=${detail.getProductID()}&numO=(int)document.getElementById('quantity_value').innerHTML"
+                window.location.href = "cart?id=${detail.getProductID()}&numO=" + numO;
+            }
+        </script>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="styles/bootstrap4/popper.js"></script>
+        <script src="styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+        <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="plugins/easing/easing.js"></script>
+        <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script src="js/detail_custom.js"></script>
+    </body>
+</html>

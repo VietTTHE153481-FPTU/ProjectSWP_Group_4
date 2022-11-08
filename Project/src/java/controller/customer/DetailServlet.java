@@ -73,40 +73,35 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Date d = new Date();
-            SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-MM-dd");
-            AccountDAO ad = new AccountDAO();
-            ProductDAO pd = new ProductDAO();
-            FeedbackDAO fd = new FeedbackDAO();
-            FavoriteProductDAO fpd = new FavoriteProductDAO();
-            Products p = pd.getProductById(id);
-            HttpSession session= request.getSession();
-            Users u = (Users) session.getAttribute("account");
-            int num = fpd.countFavoriteProduct(id);
-            List<Feedback> feedback = fd.getFeedbackbyProductID(id);
-            List<FeedbackReply> reply= fd.getAllFeedbackReply();
-            List<Users> user = ad.getAllAccount();
-            if(u != null){
-                Products pro= pd.getRecentProduct(u.getUserID(), id);
-                if(pro==null){
-                    pd.recentproduct(u.getUserID(), id, dt1.format(d));
-                }else{
-                    pd.deleteRecentProduct(u.getUserID(), pro.getProductID());
-                    pd.recentproduct(u.getUserID(), pro.getProductID(), dt1.format(d));
-                }    
+        int id = Integer.parseInt(request.getParameter("id"));
+        Date d = new Date();
+        SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-MM-dd");
+        AccountDAO ad = new AccountDAO();
+        ProductDAO pd = new ProductDAO();
+        FeedbackDAO fd = new FeedbackDAO();
+        FavoriteProductDAO fpd = new FavoriteProductDAO();
+        Products p = pd.getProductById(id);
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("account");
+        int num = fpd.countFavoriteProduct(id);
+        List<Feedback> feedback = fd.getFeedbackbyProductID(id);
+        List<FeedbackReply> reply = fd.getAllFeedbackReply();
+        List<Users> user = ad.getAllAccount();
+        if (u != null) {
+            Products pro = pd.getRecentProduct(u.getUserID(), id);
+            if (pro == null) {
+                pd.recentproduct(u.getUserID(), id, dt1.format(d));
+            } else {
+                pd.deleteRecentProduct(u.getUserID(), pro.getProductID());
+                pd.recentproduct(u.getUserID(), pro.getProductID(), dt1.format(d));
             }
-            
-            request.setAttribute("reply", reply);
-            request.setAttribute("user", user);
-            request.setAttribute("feedback", feedback);
-            request.setAttribute("detail", p);
-            request.setAttribute("num", num);
-            request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch (NumberFormatException ex) {
-            System.out.println(ex);
         }
+        request.setAttribute("reply", reply);
+        request.setAttribute("user", user);
+        request.setAttribute("feedback", feedback);
+        request.setAttribute("detail", p);
+        request.setAttribute("num", num);
+        request.getRequestDispatcher("detail.jsp").forward(request, response);
 
     }
 
