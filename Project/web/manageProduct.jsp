@@ -71,7 +71,7 @@
                                                         <td>${o.FormatPrice(o.getSalePercent())} %</td>
                                                         <td>${o.getAmount()}</td>
                                                         <td>
-                                                            <a href="UpdateProduct?id=${o.getProductID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Update</a>
+                                                            <a href="UpdateProduct?productID=${o.getProductID()}" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Update</a>
                                                             <a href="#" onclick="doDelete('${o.getProductID()}')" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Delete</a>
                                                         </td>
                                                     </tr>

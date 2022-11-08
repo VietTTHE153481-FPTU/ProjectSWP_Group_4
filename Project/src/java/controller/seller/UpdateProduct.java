@@ -69,16 +69,11 @@ public class UpdateProduct extends HttpServlet {
         ProductDAO pd = new ProductDAO();
         SubCategoryDAO sd = new SubCategoryDAO();
         List<SubCategory> subcategories = sd.getAllSubCategory();
-        String raw_id = request.getParameter("id");
-        try {
-            int id = Integer.parseInt(raw_id);
-            Products p = pd.getProductById(id);
-            request.setAttribute("product", p);
-            request.setAttribute("subcategories", subcategories);
-            request.getRequestDispatcher("updateproduct.jsp").forward(request, response);
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+        int id = Integer.parseInt(request.getParameter("productID"));
+        Products p = pd.getProductById(id);
+        request.setAttribute("product", p);
+        request.setAttribute("subcategories", subcategories);
+        request.getRequestDispatcher("updateproduct.jsp").forward(request, response);
     }
 
     /**
@@ -92,46 +87,20 @@ public class UpdateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Users u= (Users) session.getAttribute("account");
-        DecimalFormat f = new DecimalFormat("##.0");
-        String name= request.getParameter("name");
-        String description = request.getParameter("description");
-        String raw_originalprice= request.getParameter("originalprice");
-        String raw_sellprice= request.getParameter("sellprice");
-        String raw_amount = request.getParameter("amount");
-        String raw_subcategory= request.getParameter("subcategory");
-        String raw_id = request.getParameter("id");
-        String image= request.getParameter("image");
-        
-        try{
-            ProductDAO pd= new ProductDAO();
-            int id = Integer.parseInt(raw_id);
-            Products p = pd.getProductById(id);
-            double originalprice= Double.parseDouble(raw_originalprice);
-            double sellprice= Double.parseDouble(raw_sellprice);
-            int amount= Integer.parseInt(raw_amount);
-            int subcategory= Integer.parseInt(raw_subcategory);
-            String raw_salepercent= f.format(sellprice/originalprice*100);
-            double salepercent= Double.parseDouble(raw_salepercent);
-            p.setProductName(name);
-            p.setDescription(description);
-            p.setOriginalPrice(originalprice);
-            p.setSellPrice(sellprice);
-            p.setSalePercent(salepercent);
-            p.setAmount(amount);
-            p.setSubCategoryID(subcategory);
-            p.setShopID(u.getShopId());
-            p.setUrl(image);
-            pd.update(p);
-            pd.updateImg(p);
-            request.setAttribute("err","Update Succesfully!");
-            request.setAttribute("id", id);
-            response.sendRedirect("UpdateProduct");
-            return;
-        }catch(NumberFormatException ex){
-            System.out.println(ex);
-        }
+        int id = Integer.parseInt(request.getParameter("productID"));
+        String productName = request.getParameter("productName");
+        String Description = request.getParameter("Description");
+        double OriginalPrice = Double.parseDouble(request.getParameter("OriginalPrice"));
+        double SellPrice = Double.parseDouble(request.getParameter("SellPrice"));
+        int SubCategoryID = Integer.parseInt(request.getParameter("SubCategoryID"));
+        int Amount = Integer.parseInt(request.getParameter("Amount"));
+        String productImgURL = request.getParameter("productImgURL");
+
+        ProductDAO pd = new ProductDAO();
+        pd.update(id, productName, Description, OriginalPrice, SellPrice, 100 - (SellPrice / OriginalPrice * 100), SubCategoryID, Amount);
+        pd.updateImg(id, productImgURL);
+        request.setAttribute("err", "Update Succesfully!");
+        request.getRequestDispatcher("updateproduct.jsp").forward(request, response);
     }
 
     /**

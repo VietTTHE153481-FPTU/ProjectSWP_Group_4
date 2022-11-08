@@ -361,29 +361,21 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    public void insert(Products p) {
+    public void insert(String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent,
+            int SubCategoryID, int ShopID, int Amount) {
+        String sql = "INSERT INTO [dbo].[Product]([ProductName], [Description], [OriginalPrice],\n"
+                + "[SellPrice], [SalePercent],[SubCategoryID], [ShopID], [Amount], [StatusID])\n"
+                + "VALUES (?,?,?,?,?,?,?,?,1)";
         try {
-            String sql = "INSERT INTO [dbo].[Product]\n"
-                    + "           ([ProductName]\n"
-                    + "           ,[Description]\n"
-                    + "           ,[OriginalPrice]\n"
-                    + "           ,[SellPrice]\n"
-                    + "           ,[SalePercent]\n"
-                    + "           ,[SubCategoryID]\n"
-                    + "           ,[ShopID]\n"
-                    + "           ,[Amount]\n"
-                    + "           ,[StatusID])\n"
-                    + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?,?,1)";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, p.getProductName());
-            st.setString(2, p.getDescription());
-            st.setDouble(3, p.getOriginalPrice());
-            st.setDouble(4, p.getSellPrice());
-            st.setDouble(5, p.getSalePercent());
-            st.setInt(6, p.getSubCategoryID());
-            st.setInt(7, p.getShopID());
-            st.setInt(8, p.getAmount());
+            st.setString(1, productName);
+            st.setString(2, Description);
+            st.setDouble(3, OriginalPrice);
+            st.setDouble(4, SellPrice);
+            st.setDouble(5, SalePercent);
+            st.setInt(6, SubCategoryID);
+            st.setInt(7, ShopID);
+            st.setInt(8, Amount);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -440,30 +432,21 @@ public class ProductDAO extends DBContext {
         return null;
     }
 
-    public void update(Products p) {
-        String sql = "UPDATE [dbo].[Product]\n"
-                + "   SET [ProductName] = ?\n"
-                + "      ,[Description] = ?\n"
-                + "      ,[OriginalPrice] = ?\n"
-                + "      ,[SellPrice] = ?\n"
-                + "      ,[SalePercent] = ?\n"
-                + "      ,[SubCategoryID] = ?\n"
-                + "      ,[ShopID] = ?\n"
-                + "      ,[Amount] = ?\n"
-                + "      ,[StatusID] = 1\n"
-                + " WHERE ProductID =?";
+    public void update(int productID, String productName, String Description, double OriginalPrice, double SellPrice, double SalePercent,
+            int SubCategoryID, int Amount) {
+        String sql = "UPDATE [dbo].[Product] SET [ProductName] = ?, [Description] = ?, [OriginalPrice] = ?,\n"
+                + "[SellPrice] = ?, [SalePercent] = ?, [SubCategoryID] = ?, [Amount] = ?, [StatusID] = 1\n"
+                + " WHERE [ProductID] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, p.getProductName());
-            st.setString(2, p.getDescription());
-            st.setDouble(3, p.getOriginalPrice());
-            st.setDouble(4, p.getSellPrice());
-            st.setDouble(5, p.getSalePercent());
-            st.setInt(6, p.getSubCategoryID());
-            st.setInt(7, p.getShopID());
-            st.setInt(8, p.getAmount());
-            st.setInt(9, p.getStatusID());
-            st.setInt(10, p.getProductID());
+            st.setString(1, productName);
+            st.setString(2, Description);
+            st.setDouble(3, OriginalPrice);
+            st.setDouble(4, SellPrice);
+            st.setDouble(5, SalePercent);
+            st.setInt(6, SubCategoryID);
+            st.setInt(7, Amount);
+            st.setInt(8, productID);
             st.executeUpdate();
 
         } catch (SQLException e) {
@@ -471,16 +454,15 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    public void updateImg(Products p) {
+    public void updateImg(int productID, String productImgURL) {
         String sql1 = "UPDATE [dbo].[ProductImg]\n"
                 + "   SET \n"
                 + "      [ProductImgURL] = ?\n"
                 + " WHERE [ProductID] = ?";
-
         try {
             PreparedStatement st1 = connection.prepareStatement(sql1);
-            st1.setString(1, p.getUrl());
-            st1.setInt(2, p.getProductID());
+            st1.setString(1, productImgURL);
+            st1.setInt(2, productID);
             st1.executeUpdate();
 
         } catch (SQLException e) {
